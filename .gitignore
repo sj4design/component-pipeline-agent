@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code — personal data (never commit)
+.claude/projects/
+.claude/settings.local.json
+.claude/launch.json
+
+# Temp outputs
+outputs/*.tmp.json
+outputs/_legacy/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log

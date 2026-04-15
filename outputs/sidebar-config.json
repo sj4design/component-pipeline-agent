@@ -1,0 +1,365 @@
+{
+  "version": "1.0",
+  "component": "Sidebar",
+  "archetype": "nav-content",
+  "language": "es",
+  "buildOrder": [
+    ".SidebarItem",
+    "Sidebar"
+  ],
+  "family": [
+    {
+      "name": ".SidebarItem",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "icon",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "badge",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "chevron",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "active",
+          "disabled"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 40,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 8,
+          "px": 12,
+          "gap": 8,
+          "radius": 6
+        }
+      },
+      "colors": {
+        "bgSurface": null,
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "bgActive": {
+          "r": 0.93,
+          "g": 0.95,
+          "b": 1
+        },
+        "bgDisabled": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.98
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "fgActive": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "badgeBg": {
+          "r": 0.93,
+          "g": 0.95,
+          "b": 1
+        },
+        "badgeFg": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        }
+      },
+      "variantStyles": {
+        "active": {
+          "bg": {
+            "r": 0.93,
+            "g": 0.95,
+            "b": 1
+          },
+          "fg": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "indicator": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "indicatorWidth": 3
+        },
+        "disabled": {
+          "fg": {
+            "r": 0.72,
+            "g": 0.72,
+            "b": 0.75
+          },
+          "bg": null
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Label",
+          "layerName": "label",
+          "default": "Menu Item"
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "hasIcon",
+          "swapName": "↳ Icon",
+          "layerName": "icon",
+          "defaultVisible": true
+        }
+      ],
+      "booleanLayers": [
+        {
+          "boolName": "hasChevron",
+          "layerName": "chevron",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "isActive",
+          "layerName": "active-indicator",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasBadge",
+          "textPropName": "✏️ Badge",
+          "layerName": "badge",
+          "defaultVisible": false,
+          "default": "3"
+        }
+      ],
+      "frameCount": {
+        "gross": 6,
+        "exclusions": 0,
+        "net": 6
+      },
+      "grid": {
+        "maxCols": 6,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "Sidebar",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "header",
+          "type": "container",
+          "required": false,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "nav-items",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "slot",
+          "buildingBlock": ".SidebarItem"
+        },
+        {
+          "name": "footer",
+          "type": "container",
+          "required": false,
+          "figmaBinding": "none"
+        }
+      ],
+      "properties": {
+        "SidebarState": [
+          "expanded",
+          "collapsed"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "expanded": {
+          "w": 260,
+          "h": 800,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 16,
+          "px": 12,
+          "gap": 4,
+          "radius": 0
+        },
+        "collapsed": {
+          "w": 64,
+          "h": 800,
+          "fontSize": 0,
+          "iconSize": 20,
+          "py": 16,
+          "px": 12,
+          "gap": 4,
+          "radius": 0
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "border": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "divider": {
+          "r": 0.92,
+          "g": 0.92,
+          "b": 0.94
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        }
+      },
+      "variantStyles": {},
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "hasHeader",
+          "layerName": "header",
+          "defaultVisible": true
+        },
+        {
+          "boolName": "hasFooter",
+          "layerName": "footer",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "hasSearch",
+          "layerName": "search",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 2,
+        "exclusions": 0,
+        "net": 2
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "navigation",
+    "role": "navigation",
+    "keyboardNav": [
+      "Tab",
+      "ArrowDown/Up",
+      "Enter"
+    ],
+    "focusTechnique": "roving",
+    "wcagLevel": "AA",
+    "wcagCriteria": [
+      "2.1.1",
+      "2.4.3",
+      "2.4.5",
+      "2.4.7",
+      "4.1.2"
+    ]
+  },
+  "tokens": {
+    "total": 28,
+    "prefix": "sdb",
+    "mode": "C",
+    "layers": 3
+  },
+  "componentDescriptions": {
+    ".SidebarItem": "Item de navegacion vertical dentro del Sidebar.\nAlto fijo 40px, fontSize 14, radius 6.\nStates: default, hover (bg sutil), focus (2px ring), pressed, active (bg azul + fg azul + indicador lateral), disabled (opacity 0.5).\n\n🔑 ARIA:\n• role=\"link\" o role=\"treeitem\" segun contexto\n• Active: aria-current=\"page\"\n• Chevron: indica submenu expandible\n\n⌨️ Keyboard:\n• ArrowDown/Up: navegar entre items (roving tabindex)\n• Enter: activar item\n• ArrowRight: expandir submenu (si hasChevron)\n\n🎯 Focus:\n• Focus ring 2px (WCAG 2.4.7)\n• Active indicator 3px left border azul\n\nBooleans: hasIcon, hasBadge, hasChevron, isActive.\n✏️ Label + ✏️ Badge (text editables).\n\nTokens: 14, prefijo sdb-.\nWCAG 2.2 AA.",
+    "Sidebar": "Panel de navegacion vertical lateral.\nSidebarState: expanded (260px) y collapsed (64px, solo iconos).\n\n🔑 ARIA:\n• role=\"navigation\" con aria-label=\"Sidebar navigation\"\n• Collapsed: items muestran solo icono con tooltip\n\n⌨️ Keyboard:\n• Tab: entra al sidebar, luego roving entre items\n• Toggle expand/collapse via boton dedicado\n\n🎯 Focus:\n• Focus gestionado por .SidebarItem\n• Al colapsar, foco se mantiene en item activo\n\nBooleans: hasHeader, hasFooter, hasSearch.\nBorder right 1px como separador.\n\nTokens: 14, prefijo sdb-.\nWCAG 2.2 AA."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype: nav-content",
+      "why": "Sidebar es un panel de navegacion vertical con items, header y footer. Patron universal en aplicaciones web.",
+      "source": "research"
+    },
+    {
+      "what": "SidebarState: expanded/collapsed",
+      "why": "Expanded muestra iconos + labels (260px). Collapsed muestra solo iconos (64px). 16/24 sistemas soportan ambos modos.",
+      "source": "research"
+    },
+    {
+      "what": "SidebarItem 6 states sin Size variant",
+      "why": "Items tienen alto fijo 40px dentro del sidebar. No necesitan sizes independientes.",
+      "source": "research+spec"
+    },
+    {
+      "what": "2 frames netos para Sidebar",
+      "why": "Expanded y collapsed. Booleans (header/footer/search) NO multiplican frames.",
+      "source": "spec"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,172 @@
+{
+  "component": "Menu",
+  "archetype": "composite-overlay",
+  "buildOrder": [
+    ".MenuItem",
+    ".MenuGroup",
+    "Menu"
+  ],
+  "family": [
+    {
+      "name": ".MenuItem",
+      "isSubComponent": true,
+      "chromeless": true,
+      "slots": [
+        "item-icon:icon",
+        "item-label*:text",
+        "item-shortcut:text",
+        "submenu-arrow:icon"
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "disabled"
+        ],
+        "ItemType": [
+          "default",
+          "danger"
+        ]
+      },
+      "booleans": [
+        "hasSubmenuArrow",
+        "hasIcon(swap)",
+        "hasShortcut(text)"
+      ],
+      "exclusions": [
+        null
+      ],
+      "frameCount": 24
+    },
+    {
+      "name": ".MenuGroup",
+      "isSubComponent": true,
+      "chromeless": true,
+      "slots": [
+        "group-label:text",
+        "items*:container",
+        "divider:divider"
+      ],
+      "properties": {},
+      "booleans": [
+        "hasDivider",
+        "hasGroupLabel",
+        "hasGroupLabel(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 1
+    },
+    {
+      "name": "Menu",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "trigger*:slot",
+        "panel*:container"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "State": [
+          "default",
+          "open"
+        ]
+      },
+      "booleans": [
+        "hasTrigger(swap)"
+      ],
+      "exclusions": [],
+      "frameCount": 6
+    }
+  ],
+  "a11y": {},
+  "tokens": {
+    "total": 30,
+    "prefix": "mnu"
+  },
+  "questions": [
+    {
+      "id": "item-types",
+      "text": "¿Qué tipos de items necesita el menú?",
+      "options": [
+        { "value": "basic", "label": "Solo items simples — texto clickeable" },
+        { "value": "with-icons", "label": "Items con ícono — ícono + label" },
+        { "value": "with-shortcuts", "label": "Items con shortcuts — ícono + label + atajo de teclado" },
+        { "value": "mixed", "label": "Todo — items simples, con íconos, shortcuts y danger" }
+      ],
+      "impact": "Booleans hasIcon, hasShortcut en .MenuItem",
+      "tags": ["icons", "shortcuts", "keyboard-shortcuts", "danger", "destructive"]
+    },
+    {
+      "id": "grouping",
+      "text": "¿Los items del menú se organizan en grupos?",
+      "options": [
+        { "value": "flat", "label": "Lista plana — sin agrupaciones" },
+        { "value": "dividers", "label": "Con divisores — separadores entre secciones" },
+        { "value": "labeled-groups", "label": "Grupos con título — label de grupo + divider" }
+      ],
+      "impact": ".MenuGroup sub-componente, hasDivider y hasGroupLabel booleans",
+      "tags": ["groups", "sections", "dividers", "categories", "organized"]
+    },
+    {
+      "id": "submenus",
+      "text": "¿El menú necesita submenús (menús anidados)?",
+      "options": [
+        { "value": "yes", "label": "Sí — items que abren un submenú al hover" },
+        { "value": "no", "label": "No — menú de un solo nivel" }
+      ],
+      "impact": "hasSubmenuArrow boolean y patrón de submenu",
+      "tags": ["submenu", "nested", "cascading", "multi-level", "deep-menu"]
+    },
+    {
+      "id": "danger-items",
+      "text": "¿Necesitas items de tipo 'danger' (destructivo)?",
+      "options": [
+        { "value": "yes", "label": "Sí — items como 'Eliminar', 'Desconectar' en rojo" },
+        { "value": "no", "label": "No — todos los items son del mismo tipo" }
+      ],
+      "impact": "ItemType=danger en .MenuItem",
+      "tags": ["danger", "destructive", "delete", "remove", "critical"]
+    },
+    {
+      "id": "trigger",
+      "text": "¿Qué dispara la apertura del menú?",
+      "options": [
+        { "value": "button", "label": "Botón — dropdown button o icon button" },
+        { "value": "right-click", "label": "Click derecho — menú contextual" },
+        { "value": "avatar", "label": "Avatar — menú de usuario" },
+        { "value": "various", "label": "Variable — cualquier elemento puede ser trigger" }
+      ],
+      "impact": "hasTrigger slot behavior",
+      "tags": ["dropdown", "context-menu", "right-click", "user-menu", "overflow"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de menú necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño (md)" },
+        { "value": "sm-md", "label": "Small + Medium — contextuales y principales" },
+        { "value": "all", "label": "Todos (sm, md, lg)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["compact", "dense", "large", "context-menu", "mobile"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el menú?",
+      "options": [
+        { "value": "actions", "label": "Acciones — overflow menu, more options ('...')" },
+        { "value": "navigation", "label": "Navegación — dropdown de nav, user menu" },
+        { "value": "context", "label": "Contextual — right-click menu" },
+        { "value": "general", "label": "Uso general — múltiples contextos" }
+      ],
+      "impact": "Priorización de features y trigger patterns",
+      "tags": ["overflow", "actions", "navigation", "context-menu", "enterprise", "admin"]
+    }
+  ]
+}

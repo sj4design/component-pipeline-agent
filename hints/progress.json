@@ -1,0 +1,122 @@
+{
+  "component": "Progress",
+  "archetype": "inline-action",
+  "buildOrder": [
+    "Progress"
+  ],
+  "family": [
+    {
+      "name": "Progress",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "track*:container",
+        "fill*:container",
+        "label:text",
+        "percentage:text"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "bar",
+          "circular"
+        ],
+        "Status": [
+          "default",
+          "success",
+          "error"
+        ]
+      },
+      "booleans": [
+        "hasLabel",
+        "hasPercentage",
+        "isIndeterminate",
+        "hasLabel(text)",
+        "hasPercentage(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 18
+    }
+  ],
+  "a11y": {
+    "role": "progressbar",
+    "keyboard": []
+  },
+  "tokens": {
+    "total": 18,
+    "prefix": "prg"
+  },
+  "questions": [
+    {
+      "id": "variant",
+      "text": "¿Qué tipo de indicador de progreso necesitas?",
+      "options": [
+        { "value": "bar", "label": "Barra — indicador lineal horizontal" },
+        { "value": "circular", "label": "Circular — spinner/ring de progreso" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "Variant property values (bar, circular)",
+      "tags": ["bar", "linear", "circular", "spinner", "ring"]
+    },
+    {
+      "id": "determinate",
+      "text": "¿El progreso tiene valor conocido o es indeterminado?",
+      "options": [
+        { "value": "determinate", "label": "Determinado — porcentaje conocido (60%, 80%)" },
+        { "value": "indeterminate", "label": "Indeterminado — cargando sin porcentaje conocido" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "isIndeterminate boolean",
+      "tags": ["determinate", "indeterminate", "loading", "unknown-duration"]
+    },
+    {
+      "id": "labels",
+      "text": "¿El progress muestra texto adicional?",
+      "options": [
+        { "value": "none", "label": "Sin texto — solo la barra/círculo visual" },
+        { "value": "percentage", "label": "Porcentaje — '75%' junto al indicador" },
+        { "value": "label", "label": "Label descriptivo — 'Subiendo archivo...' o 'Paso 2 de 5'" },
+        { "value": "both", "label": "Label + porcentaje" }
+      ],
+      "impact": "hasLabel y hasPercentage booleans",
+      "tags": ["percentage", "label", "text", "description", "steps"]
+    },
+    {
+      "id": "status",
+      "text": "¿El progress indica estados de resultado?",
+      "options": [
+        { "value": "default-only", "label": "No — solo progreso en curso" },
+        { "value": "with-status", "label": "Sí — success (completado) y error (falló)" }
+      ],
+      "impact": "Status property values (success, error)",
+      "tags": ["success", "error", "completed", "failed", "upload"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de progress necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño (md)" },
+        { "value": "sm-md", "label": "Small + Medium — inline y prominente" },
+        { "value": "all", "label": "Todos (sm, md, lg)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["compact", "thin", "large", "prominent"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto se usará el progress?",
+      "options": [
+        { "value": "upload", "label": "Uploads — progreso de archivos, media" },
+        { "value": "steps", "label": "Pasos — progreso de un wizard/onboarding" },
+        { "value": "loading", "label": "Carga — loading general de la app" },
+        { "value": "general", "label": "Uso general — múltiples contextos" }
+      ],
+      "impact": "Priorización de variantes y labels",
+      "tags": ["upload", "wizard", "onboarding", "loading", "download", "processing"]
+    }
+  ]
+}

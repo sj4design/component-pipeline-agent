@@ -1,0 +1,153 @@
+{
+  "component": "Textarea",
+  "archetype": "form-control",
+  "buildOrder": [
+    "Textarea"
+  ],
+  "family": [
+    {
+      "name": "Textarea",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "label:text",
+        "textarea-field*:text",
+        "helper-text:text",
+        "character-count:text"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "outlined",
+          "filled",
+          "borderless"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "disabled",
+          "readonly"
+        ],
+        "Status": [
+          "none",
+          "error",
+          "warning"
+        ]
+      },
+      "booleans": [
+        "Label(text)",
+        "Helper Text(text)",
+        "Character Count(text)"
+      ],
+      "exclusions": [
+        "disabled x hover",
+        "disabled x focus",
+        "disabled x error",
+        "disabled x warning",
+        "readonly x error",
+        "readonly x warning",
+        "readonly x hover"
+      ],
+      "frameCount": 72
+    }
+  ],
+  "a11y": {
+    "role": "textbox (native <textarea>)",
+    "keyboard": [
+      "Tab (enter field)",
+      "Tab (exit field)",
+      "Typing (input text)",
+      "Ctrl+A (select all)",
+      "Shift+Arrow (text selection)"
+    ],
+    "focus": "linear"
+  },
+  "tokens": {
+    "total": 52,
+    "prefix": "txta"
+  },
+  "questions": [
+    {
+      "id": "variants",
+      "text": "¿Qué variantes visuales del textarea necesitas?",
+      "options": [
+        { "value": "outlined-only", "label": "Solo outlined — borde visible" },
+        { "value": "outlined-filled", "label": "Outlined + filled" },
+        { "value": "all", "label": "Todas (outlined, filled, borderless)" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["outlined", "filled", "borderless", "flat", "material"]
+    },
+    {
+      "id": "resize",
+      "text": "¿El textarea permite redimensionar?",
+      "options": [
+        { "value": "vertical", "label": "Solo vertical — el usuario ajusta la altura" },
+        { "value": "both", "label": "Ambas direcciones — altura y ancho" },
+        { "value": "auto", "label": "Auto-grow — crece automáticamente con el contenido" },
+        { "value": "none", "label": "Fijo — tamaño no ajustable" }
+      ],
+      "impact": "Resize behavior y auto-grow pattern",
+      "tags": ["resize", "auto-grow", "auto-resize", "expandable", "fixed-height"]
+    },
+    {
+      "id": "character-count",
+      "text": "¿Necesitas contador de caracteres?",
+      "options": [
+        { "value": "yes", "label": "Sí — mostrar caracteres usados/máximo" },
+        { "value": "no", "label": "No — sin contador" }
+      ],
+      "impact": "Character Count boolean",
+      "tags": ["character-count", "max-length", "counter", "limit"]
+    },
+    {
+      "id": "validation",
+      "text": "¿Qué niveles de validación visual necesitas?",
+      "options": [
+        { "value": "error-only", "label": "Solo error — borde rojo + mensaje" },
+        { "value": "error-warning", "label": "Error + warning — dos niveles" },
+        { "value": "none", "label": "Sin validación visual" }
+      ],
+      "impact": "Status property values",
+      "tags": ["validation", "error", "warning", "form-validation"]
+    },
+    {
+      "id": "readonly",
+      "text": "¿Necesitas estado readonly (solo lectura)?",
+      "options": [
+        { "value": "yes", "label": "Sí — texto visible pero no editable" },
+        { "value": "no", "label": "No — siempre editable o deshabilitado" }
+      ],
+      "impact": "State=readonly",
+      "tags": ["readonly", "view-mode", "non-editable", "display"]
+    },
+    {
+      "id": "helper-text",
+      "text": "¿El textarea necesita texto de ayuda?",
+      "options": [
+        { "value": "yes", "label": "Sí — instrucciones o hint debajo del campo" },
+        { "value": "error-only", "label": "Solo para errores" },
+        { "value": "no", "label": "No — sin texto adicional" }
+      ],
+      "impact": "Helper Text boolean",
+      "tags": ["helper-text", "hint", "instructions", "error-message"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el textarea?",
+      "options": [
+        { "value": "forms", "label": "Formularios — comentarios, descripciones, notas" },
+        { "value": "editor", "label": "Editor — bloques de texto largo, contenido" },
+        { "value": "chat", "label": "Chat/Messaging — input de mensajes" },
+        { "value": "general", "label": "Uso general" }
+      ],
+      "impact": "Priorización de features (auto-grow para chat, etc.)",
+      "tags": ["forms", "editor", "chat", "messaging", "comments", "notes"]
+    }
+  ]
+}

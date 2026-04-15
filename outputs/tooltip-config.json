@@ -1,0 +1,163 @@
+{
+  "version": "1.0",
+  "component": "Tooltip",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": [
+    "Tooltip"
+  ],
+  "family": [
+    {
+      "name": "Tooltip",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        {
+          "name": "content",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "arrow",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "Placement": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "State": [
+          "default"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "default": {
+          "h": "hug",
+          "fontSize": 12,
+          "lineHeight": 16,
+          "py": 6,
+          "px": 8,
+          "gap": 4,
+          "radius": 6,
+          "maxWidth": 240,
+          "arrowSize": 6,
+          "offset": 4
+        }
+      },
+      "colors": {},
+      "variantStyles": {},
+      "textProperties": [
+        {
+          "propName": "Content",
+          "layerName": "content",
+          "default": "Tooltip text"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "Arrow",
+          "layerName": "arrow",
+          "defaultVisible": true
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "Has Title",
+          "textPropName": "Title",
+          "textLayerName": "title",
+          "defaultVisible": false,
+          "defaultText": "Title"
+        }
+      ],
+      "frameCount": {
+        "gross": 4,
+        "exclusions": 0,
+        "net": 4
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "tooltip",
+    "role": "tooltip",
+    "ariaAttributes": [
+      "aria-describedby on trigger (pointing to tooltip ID)",
+      "role=\"tooltip\" on tooltip element"
+    ],
+    "keyboardNav": [
+      "Focus trigger (appears)",
+      "Escape (dismiss)",
+      "Hover trigger (appears)"
+    ],
+    "focusTechnique": "none (tooltip is not focusable itself)",
+    "edgeCases": 2,
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 12,
+    "prefix": "tip",
+    "mode": "C"
+  },
+  "componentDescriptions": {
+    "Tooltip": "Info contextual que aparece al hover/focus del trigger.\nPlacement: top, bottom, left, right.\n\n🔑 ARIA:\n• role=\"tooltip\"\n• aria-describedby en trigger → tooltip ID\n\n⌨️ Keyboard:\n• Focus en trigger: aparece tooltip\n• Escape: cierra tooltip\n• Mouse out / blur: cierra\n\n🎯 Focus:\n• Tooltip NO es focusable\n• Contenido solo informativo\n• delay 300ms antes de mostrar\n\nTokens: 12, prefijo tip-.\nWCAG 2.2 AA · Tooltip Pattern."
+  },
+  "variableBindings": {
+    "tooltip/bg": "bg/inverse/default",
+    "tooltip/fg": "text/inverse",
+    "tooltip/border": "border/inverse",
+    "tooltip/radius": "radius/sm",
+    "arrow/bg": "bg/inverse/default"
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Single size (no sm/md/lg)",
+      "why": "22/24 systems use a single tooltip size. Tooltip is supplementary info — no need for size hierarchy. Fixed 12px font, 6px py, 8px px matches spacing-layout.md 1.7.2 Tooltip row.",
+      "source": "research"
+    },
+    {
+      "what": "Placement as variant (top/bottom/left/right), 4 values",
+      "why": "22/24 consensus on 4 basic positions. Ant's 12 positions are excessive. Auto/mostSpace = runtime behavior, not visual variant.",
+      "source": "research"
+    },
+    {
+      "what": "Arrow as boolean, not variant",
+      "why": "18/24 systems use boolean toggle for arrow/caret. Does NOT multiply frames — just shows/hides arrow layer. Global-property-rules.md: binary on/off = boolean.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "hasTitle as booleanTextPair, default false",
+      "why": "4/24 systems support optional title (M3 Rich, Ant). Low consensus but useful for structured context. Boolean + text pair avoids frame multiplication.",
+      "source": "research"
+    },
+    {
+      "what": "No Type variant (dark only); light mode via Figma Variables",
+      "why": "20/24 systems only have dark tooltip. Light variant changes only colors, not structure — perfect use case for Figma Variable modes per global-property-rules.md section 4.",
+      "source": "global-property-rules"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

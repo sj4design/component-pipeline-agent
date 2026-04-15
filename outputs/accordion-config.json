@@ -1,0 +1,329 @@
+{
+  "version": "1.0",
+  "component": "Accordion",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": [
+    ".AccordionItem",
+    "Accordion"
+  ],
+  "family": [
+    {
+      "name": ".AccordionItem",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "chevron",
+          "type": "icon",
+          "required": true,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "content",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "default",
+          "bordered",
+          "ghost"
+        ],
+        "State": [
+          "collapsed",
+          "expanded",
+          "disabled"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": 40,
+          "fontSize": 14,
+          "iconSize": 16,
+          "py": 8,
+          "px": 12,
+          "gap": 8,
+          "radius": 0
+        },
+        "md": {
+          "h": 48,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 12,
+          "px": 16,
+          "gap": 8,
+          "radius": 0
+        },
+        "lg": {
+          "h": 56,
+          "fontSize": 16,
+          "iconSize": 20,
+          "py": 16,
+          "px": 16,
+          "gap": 8,
+          "radius": 0
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgDisabled": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.98
+        },
+        "border": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "borderHover": {
+          "r": 0.65,
+          "g": 0.65,
+          "b": 0.7
+        },
+        "borderFocus": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "borderDisabled": {
+          "r": 0.88,
+          "g": 0.88,
+          "b": 0.9
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        }
+      },
+      "variantStyles": {
+        "default": {
+          "bg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "border": {
+            "r": 0.82,
+            "g": 0.82,
+            "b": 0.85
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "bordered": {
+          "bg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "border": {
+            "r": 0.82,
+            "g": 0.82,
+            "b": 0.85
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "borderWidth": 1
+        },
+        "ghost": {
+          "bg": null,
+          "border": null,
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Title",
+          "layerName": "title",
+          "default": "Accordion Item"
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "Icon",
+          "swapName": "↳ Icon",
+          "layerName": "chevron",
+          "defaultVisible": true
+        }
+      ],
+      "booleanLayers": [
+        {
+          "boolName": "hasIcon",
+          "layerName": "icon-leading",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 27,
+        "exclusions": 0,
+        "net": 27
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "Accordion",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "items",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "slot",
+          "buildingBlock": ".AccordionItem"
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": "hug",
+          "fontSize": 14,
+          "py": 0,
+          "px": 0,
+          "gap": 0,
+          "radius": 0
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        }
+      },
+      "variantStyles": {},
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "allowMultiple",
+          "layerName": "allow-multiple",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "accordion",
+    "role": "button (trigger) + region (panel)",
+    "keyboardNav": [
+      "Enter/Space",
+      "Tab",
+      "ArrowDown/Up"
+    ],
+    "focusTechnique": "roving",
+    "wcagLevel": "AA",
+    "wcagCriteria": [
+      "1.3.1",
+      "2.1.1",
+      "2.4.3",
+      "2.4.7",
+      "4.1.2"
+    ]
+  },
+  "tokens": {
+    "total": 30,
+    "prefix": "acc",
+    "mode": "C",
+    "layers": 3
+  },
+  "componentDescriptions": {
+    ".AccordionItem": "Item individual de acordeon con trigger + panel colapsable.\nSizes: sm(40) md(48) lg(56). Variants: default (divider lines), bordered (border completo), ghost (sin bordes).\nStates: collapsed, expanded (panel visible), disabled (opacity 0.5).\n\n🔑 ARIA:\n• Trigger: role=\"button\", aria-expanded, aria-controls\n• Panel: role=\"region\", aria-labelledby\n• Chevron rota 180° en expanded\n\n⌨️ Keyboard:\n• Enter/Space: toggle expanded/collapsed\n• ArrowDown/Up: navegar entre items\n• Home/End: primer/ultimo item\n\n🎯 Focus:\n• Focus ring 2px en trigger (WCAG 2.4.7)\n• Roving tabindex entre triggers\n\nBooleans: hasIcon (icono antes del titulo).\n✏️ Title (text editable).\n\nTokens: 15, prefijo acc-.\nWCAG 2.2 AA · APG Accordion Pattern.",
+    "Accordion": "Contenedor wrapper que agrupa .AccordionItem instances.\nPermite expansion simple o multiple via boolean allowMultiple.\nNo tiene variants propios — es un shell de composicion.\n\n🔑 ARIA:\n• Wrapper no necesita role explicito\n• Cada item gestiona su propia accesibilidad\n\n⌨️ Keyboard:\n• Tab: navega entre triggers de items\n• ArrowDown/Up: roving entre items\n\n🎯 Focus:\n• Focus gestionado por .AccordionItem\n\nTokens: 15, prefijo acc-.\nWCAG 2.2 AA."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype: container",
+      "why": "Accordion es un contenedor con items colapsables, cada uno con trigger + panel. Patron universal en 22/24 sistemas.",
+      "source": "research"
+    },
+    {
+      "what": "3 Variants: default/bordered/ghost",
+      "why": "Default usa dividers, bordered agrega border completo, ghost elimina todos los bordes. Cubre 95%+ de casos de uso.",
+      "source": "research"
+    },
+    {
+      "what": "3 States: collapsed/expanded/disabled",
+      "why": "Estados fundamentales del accordion. Expanded muestra panel, collapsed lo oculta, disabled bloquea interaccion.",
+      "source": "research+spec"
+    },
+    {
+      "what": "27 frames netos (3x3x3)",
+      "why": "3 sizes x 3 variants x 3 states. Sin exclusiones porque todos los combos son validos.",
+      "source": "spec"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,313 @@
+{
+  "version": "1.0",
+  "component": "Avatar",
+  "archetype": "inline-action",
+  "buildOrder": [
+    ".Avatar",
+    "AvatarGroup"
+  ],
+  "family": [
+    {
+      "name": ".Avatar",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "image",
+          "type": "media",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "initials",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "fallback-icon",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "none"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "Content": [
+          "image",
+          "initials",
+          "fallback"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "xs": {
+          "h": 24,
+          "fontSize": 10,
+          "iconSize": 12,
+          "px": 0,
+          "gap": 0,
+          "radius": 9999,
+          "width": 24
+        },
+        "sm": {
+          "h": 32,
+          "fontSize": 12,
+          "iconSize": 16,
+          "px": 0,
+          "gap": 0,
+          "radius": 9999,
+          "width": 32
+        },
+        "md": {
+          "h": 40,
+          "fontSize": 14,
+          "iconSize": 20,
+          "px": 0,
+          "gap": 0,
+          "radius": 9999,
+          "width": 40
+        },
+        "lg": {
+          "h": 48,
+          "fontSize": 16,
+          "iconSize": 24,
+          "px": 0,
+          "gap": 0,
+          "radius": 9999,
+          "width": 48
+        },
+        "xl": {
+          "h": 64,
+          "fontSize": 20,
+          "iconSize": 32,
+          "px": 0,
+          "gap": 0,
+          "radius": 9999,
+          "width": 64
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 0.88,
+          "g": 0.9,
+          "b": 0.95
+        },
+        "fgPrimary": {
+          "r": 0.25,
+          "g": 0.3,
+          "b": 0.45
+        },
+        "border": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        }
+      },
+      "variantStyles": {},
+      "textProperties": [
+        {
+          "propName": "✏️ Initials",
+          "layerName": "initials",
+          "default": "AB"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 15,
+        "exclusions": 0,
+        "net": 15
+      },
+      "grid": {
+        "maxCols": 5,
+        "gap": 16,
+        "pad": 24
+      }
+    },
+    {
+      "name": "AvatarGroup",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "avatar-1",
+          "type": "instance",
+          "required": true,
+          "figmaBinding": null,
+          "ref": ".Avatar"
+        },
+        {
+          "name": "avatar-2",
+          "type": "instance",
+          "required": true,
+          "figmaBinding": null,
+          "ref": ".Avatar"
+        },
+        {
+          "name": "avatar-3",
+          "type": "instance",
+          "required": true,
+          "figmaBinding": null,
+          "ref": ".Avatar"
+        },
+        {
+          "name": "overflow",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": 32,
+          "fontSize": 12,
+          "iconSize": 16,
+          "px": 0,
+          "gap": -8,
+          "radius": 9999,
+          "width": 120
+        },
+        "md": {
+          "h": 40,
+          "fontSize": 12,
+          "iconSize": 20,
+          "px": 0,
+          "gap": -10,
+          "radius": 9999,
+          "width": 140
+        },
+        "lg": {
+          "h": 48,
+          "fontSize": 14,
+          "iconSize": 24,
+          "px": 0,
+          "gap": -12,
+          "radius": 9999,
+          "width": 160
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 0.92,
+          "g": 0.92,
+          "b": 0.95
+        },
+        "fgPrimary": {
+          "r": 0.35,
+          "g": 0.35,
+          "b": 0.4
+        },
+        "border": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "focusRing": null,
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasOverflow",
+          "textName": "✏️ Overflow",
+          "layerName": "overflow",
+          "defaultVisible": true,
+          "defaultText": "+3"
+        }
+      ],
+      "frameCount": {
+        "gross": 3,
+        "exclusions": 0,
+        "net": 3
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "image",
+    "role": "img (with aria-label from name) or presentation (decorative)",
+    "fallbackChain": "image → initials (from name) → default icon",
+    "groupRole": "group with aria-label describing the set",
+    "overflowAnnouncement": "aria-label on overflow badge: 'and N more'",
+    "edgeCases": 2,
+    "wcagLevel": "AA",
+    "wcagCriteria": [
+      "1.1.1",
+      "4.1.2"
+    ]
+  },
+  "tokens": {
+    "total": 14,
+    "prefixes": {
+      "avatar": "avt",
+      "group": "avg"
+    },
+    "mode": "C",
+    "layers": 3
+  },
+  "componentDescriptions": {
+    ".Avatar": "Representación visual de un usuario.\nSizes: xs(24) sm(32) md(40) lg(48) xl(64). Circular.\nContent: image, initials, fallback icon.\n\n🔑 ARIA:\n• role=\"img\" con aria-label=\"[nombre]\" si informativo\n• Decorativo: role=\"presentation\" o aria-hidden\n• Fallback chain: image → initials → icon (automático)\n\nNo interactivo por defecto (no focusable).\nTokens: 10, prefijo avt-.\nWCAG 2.2 AA.",
+    "AvatarGroup": "Grupo de avatars con overlap y overflow.\nSizes: sm, md, lg.\n\n🔑 ARIA:\n• role=\"group\" con aria-label descriptivo\n• Overflow badge: aria-label=\"y N más\"\n\nTokens: 4, prefijo avg-.\nWCAG 2.2 AA."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-02T22:08:33.239Z",
+    "mode": "max"
+  },
+  "_foundationsRef": "foundations.json"
+}

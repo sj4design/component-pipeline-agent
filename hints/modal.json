@@ -1,0 +1,137 @@
+{
+  "component": "Modal",
+  "archetype": "container",
+  "buildOrder": [
+    "Modal"
+  ],
+  "family": [
+    {
+      "name": "Modal",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "title*:text",
+        "description:text",
+        "body*:container",
+        "footer:container",
+        "close-button*:icon-action",
+        "danger-icon:icon"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg",
+          "fullscreen"
+        ],
+        "Variant": [
+          "default",
+          "danger"
+        ]
+      },
+      "booleans": [
+        "Has Footer",
+        "Has Dividers",
+        "Has Dividers",
+        "Has Description(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 8
+    }
+  ],
+  "a11y": {
+    "role": "dialog",
+    "keyboard": [
+      "Tab",
+      "Shift+Tab",
+      "Escape",
+      "Enter",
+      "Space"
+    ]
+  },
+  "tokens": {
+    "total": 30,
+    "prefix": "mdl"
+  },
+  "questions": [
+    {
+      "id": "purpose",
+      "text": "¿Para qué se usa el modal en tu caso?",
+      "options": [
+        { "value": "confirmation", "label": "Confirmación simple — '¿Estás seguro?' + 2 botones" },
+        { "value": "form", "label": "Formulario — crear/editar datos dentro del modal" },
+        { "value": "content", "label": "Contenido rico — imágenes, listas, detalles expandidos" },
+        { "value": "wizard", "label": "Flujo paso a paso — proceso multi-step" },
+        { "value": "multiple", "label": "Varios propósitos según contexto" }
+      ],
+      "impact": "Anatomía del body y slots necesarios",
+      "tags": ["confirmation", "form", "wizard", "multi-step", "detail-view"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de modal necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño es suficiente (md)" },
+        { "value": "sm-md-lg", "label": "Small, Medium, Large" },
+        { "value": "all", "label": "Todos incluyendo fullscreen" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "large", "fullscreen", "responsive", "mobile"]
+    },
+    {
+      "id": "close-behavior",
+      "text": "¿Cómo puede cerrarse el modal?",
+      "options": [
+        { "value": "all", "label": "Botón X + overlay click + Escape — todo" },
+        { "value": "button-escape", "label": "Botón X + Escape — sin cerrar con overlay" },
+        { "value": "blocking", "label": "Solo con acción explícita — modal bloqueante" }
+      ],
+      "impact": "Close button behavior y overlay dismiss",
+      "tags": ["dismiss", "escape", "overlay", "blocking", "unsaved-changes"]
+    },
+    {
+      "id": "footer-actions",
+      "text": "¿Cómo se estructuran las acciones del modal?",
+      "options": [
+        { "value": "primary-cancel", "label": "Acción primaria + cancelar — 2 botones estándar" },
+        { "value": "close-only", "label": "Solo cerrar — modales informativos" },
+        { "value": "multiple", "label": "3+ acciones — guardar borrador, publicar, cancelar" },
+        { "value": "variable", "label": "Variable — configurable según caso" }
+      ],
+      "impact": "Has Footer boolean y estructura del footer",
+      "tags": ["actions", "footer", "confirm", "cancel", "save", "multiple-actions"]
+    },
+    {
+      "id": "danger-variant",
+      "text": "¿Necesitas variante de modal 'danger' (acciones destructivas)?",
+      "options": [
+        { "value": "yes", "label": "Sí — confirmaciones de eliminación, acciones irreversibles" },
+        { "value": "no", "label": "No — solo el estilo default" }
+      ],
+      "impact": "Variant=danger y danger-icon slot",
+      "tags": ["danger", "destructive", "delete", "confirmation", "critical"]
+    },
+    {
+      "id": "dividers",
+      "text": "¿El modal usa divisores entre header, body y footer?",
+      "options": [
+        { "value": "yes", "label": "Sí — separación visual clara" },
+        { "value": "no", "label": "No — flujo continuo" },
+        { "value": "configurable", "label": "Configurable por instancia" }
+      ],
+      "impact": "Has Dividers boolean",
+      "tags": ["dividers", "separators", "clean", "minimal"]
+    },
+    {
+      "id": "body-content",
+      "text": "¿El contenido del body es predecible o libre?",
+      "options": [
+        { "value": "structured", "label": "Predecible — building blocks reutilizables" },
+        { "value": "free", "label": "Libre — contenedor vacío para cualquier contenido" },
+        { "value": "both", "label": "Building blocks por defecto pero reemplazables" }
+      ],
+      "impact": "Sub-componentes de body como building blocks",
+      "tags": ["building-blocks", "slots", "structured", "free-content", "flexible"]
+    }
+  ]
+}

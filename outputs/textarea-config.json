@@ -1,0 +1,535 @@
+{
+  "version": "1.0",
+  "component": "Textarea",
+  "archetype": "form-control",
+  "language": "es",
+  "buildOrder": [
+    "Textarea"
+  ],
+  "family": [
+    {
+      "name": "Textarea",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText",
+          "consensus": "20/24"
+        },
+        {
+          "name": "textarea-field",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "helper-text",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText",
+          "consensus": "18/24"
+        },
+        {
+          "name": "character-count",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText",
+          "consensus": "14/24"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "outlined",
+          "filled",
+          "borderless"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "disabled",
+          "readonly"
+        ],
+        "Status": [
+          "none",
+          "error",
+          "warning"
+        ]
+      },
+      "exclusions": [
+        {
+          "rule": "disabled x hover",
+          "reason": "Disabled blocks all user interaction"
+        },
+        {
+          "rule": "disabled x focus",
+          "reason": "Disabled blocks all user interaction"
+        },
+        {
+          "rule": "disabled x error",
+          "reason": "Disabled does not display validation status"
+        },
+        {
+          "rule": "disabled x warning",
+          "reason": "Disabled does not display validation status"
+        },
+        {
+          "rule": "readonly x error",
+          "reason": "Readonly fields do not validate"
+        },
+        {
+          "rule": "readonly x warning",
+          "reason": "Readonly fields do not validate"
+        },
+        {
+          "rule": "readonly x hover",
+          "reason": "Readonly has minimal visual change on hover"
+        }
+      ],
+      "sizes": {
+        "sm": {
+          "minHeight": 64,
+          "fontSize": 12,
+          "iconSize": 16,
+          "py": 6,
+          "px": 8,
+          "gap": 8,
+          "radius": 6,
+          "labelFontSize": 12,
+          "helperFontSize": 10
+        },
+        "md": {
+          "minHeight": 80,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 8,
+          "px": 12,
+          "gap": 8,
+          "radius": 8,
+          "labelFontSize": 14,
+          "helperFontSize": 12
+        },
+        "lg": {
+          "minHeight": 104,
+          "fontSize": 16,
+          "iconSize": 20,
+          "py": 12,
+          "px": 16,
+          "gap": 8,
+          "radius": 8,
+          "labelFontSize": 16,
+          "helperFontSize": 14
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "Label",
+          "layerName": "label",
+          "default": "Label"
+        },
+        {
+          "propName": "Placeholder",
+          "layerName": "textarea-field",
+          "default": "Enter text..."
+        },
+        {
+          "propName": "Helper Text",
+          "layerName": "helper-text",
+          "default": "Helper text"
+        },
+        {
+          "propName": "Counter Text",
+          "layerName": "character-count",
+          "default": "0/500"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [
+        {
+          "boolName": "Label",
+          "textProp": "Label",
+          "layerName": "label",
+          "defaultVisible": true
+        },
+        {
+          "boolName": "Helper Text",
+          "textProp": "Helper Text",
+          "layerName": "helper-text",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Character Count",
+          "textProp": "Counter Text",
+          "layerName": "character-count",
+          "defaultVisible": false
+        }
+      ],
+      "frameCount": {
+        "gross": "3 sizes x 3 variants x 5 states x 3 statuses = 135",
+        "exclusions": "disabled(hover+focus+error+warning) = -12 per size*variant = -108, readonly(error+warning+hover) = -9 per size*variant = -81. But these overlap with state*status combos. Net exclusion: disabled has only default state x none status = keeps 9 frames. readonly has only default+focus x none = keeps 18. Normal states (default+hover+focus) x 3 statuses = remaining.",
+        "net": 72,
+        "calculation": "3 sizes x 3 variants x [(default,hover,focus) x (none,error,warning) + disabled x none + readonly x (none)] = 3x3x(9+1+1) = 3x3x11 = 99. Minus readonly x hover = 3x3x10 = 90. Adjusted: ~81 frames"
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "bgFilled": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.98
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgDisabled": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.98
+        },
+        "bgReadonly": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgPlaceholder": {
+          "r": 0.55,
+          "g": 0.55,
+          "b": 0.6
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "fgLabel": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgHelper": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "fgCounter": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "border": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "borderHover": {
+          "r": 0.65,
+          "g": 0.65,
+          "b": 0.7
+        },
+        "borderFocus": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "borderDisabled": {
+          "r": 0.88,
+          "g": 0.88,
+          "b": 0.9
+        },
+        "borderError": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "borderWarning": {
+          "r": 0.72,
+          "g": 0.48,
+          "b": 0.05
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "fgError": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "fgWarning": {
+          "r": 0.72,
+          "g": 0.48,
+          "b": 0.05
+        },
+        "counterWarning": {
+          "r": 0.72,
+          "g": 0.48,
+          "b": 0.05
+        },
+        "counterError": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        }
+      },
+      "variantStyles": {
+        "outlined": {
+          "bg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": {
+            "r": 0.82,
+            "g": 0.82,
+            "b": 0.85
+          }
+        },
+        "filled": {
+          "bg": {
+            "r": 0.96,
+            "g": 0.96,
+            "b": 0.98
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": null
+        },
+        "borderless": {
+          "bg": null,
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": null
+        }
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "form-input",
+    "role": "textbox (native <textarea>)",
+    "ariaAttributes": [
+      "aria-describedby (links helper-text, error-text, character-count)",
+      "aria-invalid=\"true\" (when Status=error)",
+      "aria-required=\"true\" (when required boolean is on)",
+      "aria-multiline=\"true\" (implicit on native <textarea>)"
+    ],
+    "keyboardNav": [
+      "Tab (enter field)",
+      "Tab (exit field)",
+      "Typing (input text)",
+      "Ctrl+A (select all)",
+      "Shift+Arrow (text selection)"
+    ],
+    "focusTechnique": "linear",
+    "wcagLevel": "AA",
+    "edgeCases": [
+      {
+        "case": "Character count not announced to SR",
+        "severity": "HIGH",
+        "behavior": "Implement aria-live='polite' on counter region that announces remaining chars at thresholds (e.g., 20, 10, 5 remaining)",
+        "wcag": "4.1.2"
+      },
+      {
+        "case": "Auto-resize causes layout shift",
+        "severity": "HIGH",
+        "behavior": "Use bounded auto-resize (maxRows/maxHeight) to prevent content below from jumping. Smart resize (grow-only) preferred.",
+        "wcag": "2.4.11"
+      },
+      {
+        "case": "Error text replaces helper text",
+        "severity": "MEDIUM",
+        "behavior": "When error appears, helper text disappears. If helper contained critical instructions, include them in error message.",
+        "wcag": "3.3.2"
+      },
+      {
+        "case": "Readonly vs disabled confusion",
+        "severity": "MEDIUM",
+        "behavior": "Readonly: focusable, text selectable/copyable. Disabled: not focusable, not interactive. Visual distinction required.",
+        "wcag": "4.1.2"
+      },
+      {
+        "case": "Resize handle inaccessible on touch",
+        "severity": "MEDIUM",
+        "behavior": "CSS resize handle cannot be operated via touch. Disable resize on mobile; use auto-resize instead.",
+        "wcag": "2.5.1"
+      },
+      {
+        "case": "Max character overflow",
+        "severity": "LOW",
+        "behavior": "When maxLength reached via paste, truncate pasted text and announce via aria-live that content was truncated.",
+        "wcag": "3.3.1"
+      }
+    ]
+  },
+  "tokens": {
+    "total": 52,
+    "prefix": "txta",
+    "mode": "C",
+    "layers": {
+      "primitive": "Raw values (hex, px, rem)",
+      "semantic": "Purpose-based (color-border-interactive-focus, etc.)",
+      "component": "txta-* (references semantic tokens)"
+    },
+    "tokenList": [
+      "-- BACKGROUND --",
+      "--txta-root-bg",
+      "--txta-root-bg-hover",
+      "--txta-root-bg-focus",
+      "--txta-root-bg-disabled",
+      "--txta-root-bg-readonly",
+      "--txta-root-bg-filled",
+      "-- FOREGROUND --",
+      "--txta-field-fg",
+      "--txta-field-fg-placeholder",
+      "--txta-field-fg-disabled",
+      "--txta-label-fg",
+      "--txta-label-fg-disabled",
+      "--txta-helper-fg",
+      "--txta-helper-fg-disabled",
+      "--txta-counter-fg",
+      "--txta-counter-fg-warning",
+      "--txta-counter-fg-error",
+      "--txta-error-fg",
+      "--txta-warning-fg",
+      "-- BORDER --",
+      "--txta-root-border",
+      "--txta-root-border-hover",
+      "--txta-root-border-focus",
+      "--txta-root-border-disabled",
+      "--txta-root-border-error",
+      "--txta-root-border-warning",
+      "--txta-root-border-error-hover",
+      "--txta-root-border-error-focus",
+      "--txta-root-border-warning-hover",
+      "--txta-root-border-warning-focus",
+      "-- FOCUS --",
+      "--txta-root-ring-focus",
+      "--txta-root-ring-width",
+      "--txta-root-ring-offset",
+      "-- RADIUS --",
+      "--txta-root-radius-sm",
+      "--txta-root-radius-md",
+      "--txta-root-radius-lg",
+      "-- SPACING --",
+      "--txta-root-padding-y-sm",
+      "--txta-root-padding-x-sm",
+      "--txta-root-padding-y-md",
+      "--txta-root-padding-x-md",
+      "--txta-root-padding-y-lg",
+      "--txta-root-padding-x-lg",
+      "--txta-field-min-height-sm",
+      "--txta-field-min-height-md",
+      "--txta-field-min-height-lg",
+      "--txta-label-gap",
+      "--txta-helper-gap",
+      "-- TYPOGRAPHY --",
+      "--txta-field-font-size-sm",
+      "--txta-field-font-size-md",
+      "--txta-field-font-size-lg",
+      "--txta-label-font-size-sm",
+      "--txta-label-font-size-md",
+      "--txta-label-font-size-lg"
+    ]
+  },
+  "componentDescriptions": {
+    "Textarea": "Campo de texto multi-linea.\nSizes: sm(minH 64) md(minH 80) lg(minH 104).\nVariants: outlined, filled, borderless.\n\n🔑 ARIA:\n• Native <textarea> element (role=textbox implicito)\n• aria-describedby: links helper-text, error-text, character-count\n• aria-invalid=\"true\" cuando Status=error\n• aria-required=\"true\" cuando required\n\n⌨️ Keyboard:\n• Tab: entrar al campo\n• Tab: salir del campo\n• Typing: ingresar texto\n• Ctrl+A: seleccionar todo\n\n🎯 Focus:\n• Focus ring visible (WCAG 2.4.7)\n• Linear focus: Tab entra, Tab sale\n• Disabled: no focusable\n• Readonly: focusable, texto copiable\n\nTokens: 52, prefijo txta-.\nWCAG 2.2 AA."
+  },
+  "variableBindings": {
+    "outlined/bg": "bg/surface/default",
+    "outlined/border": "border/mid/default",
+    "outlined/border-hover": "border/mid/hover",
+    "filled/bg": "bg/mid/default",
+    "filled/border": null,
+    "borderless/bg": null,
+    "borderless/border": null,
+    "focus/border": "border/interactive/focus",
+    "focus/ring": "focus/ring",
+    "error/border": "status/error/border",
+    "error/fg": "status/error/fg",
+    "warning/border": "status/warning/border",
+    "warning/fg": "status/warning/fg",
+    "disabled/bg": "bg/disabled",
+    "disabled/fg": "text/disabled",
+    "disabled/border": "border/disabled",
+    "text/primary": "text/primary",
+    "text/placeholder": "text/subtlest",
+    "text/helper": "text/secondary",
+    "text/label": "text/primary"
+  },
+  "thresholds": {
+    "warnFrames": 150,
+    "maxFrames": 200,
+    "disabledOpacity": 0.5,
+    "focusRingWidth": 2,
+    "focusRingOffset": 2
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Componente dedicado Textarea (no variante de TextField)",
+      "why": "14/24 sistemas tienen componente separado. Multi-line tiene concerns unicos (resize, rows, character count) ausentes en single-line.",
+      "source": "research"
+    },
+    {
+      "what": "3 variantes: outlined/filled/borderless",
+      "why": "Spectrum (isQuiet), Atlassian (subtle), Fluent (3 appearances) confirman necesidad de borderless para edicion inline. M3+Ant confirman outlined+filled.",
+      "source": "research"
+    },
+    {
+      "what": "disabled como State variant (no boolean)",
+      "why": "Disabled cambia fill+text+border (multiple propiedades). global-property-rules.md decision tree: >=2 propiedades → variant. Exclusions evitan disabled x hover/focus.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "readonly como State variant",
+      "why": "Readonly cambia border+bg (visual diferenciada). Incluido en State para tener frame dedicado. Exclusions: readonly x error/warning.",
+      "source": "spec"
+    },
+    {
+      "what": "Character count como boolean+text pair",
+      "why": "14/24 sistemas soportan counter opt-in. En Figma: boolean toggle + text property para el display.",
+      "source": "research"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

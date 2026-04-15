@@ -1,0 +1,34 @@
+---
+system: Atlassian Design System
+component: CreatableSelect (from @atlaskit/select)
+url: https://atlassian.design/components/select/creatable-select/examples
+last_verified: 2026-03-28
+---
+
+# Combobox / CreatableSelect
+
+## Approach
+Atlassian's approach to the Combobox pattern is implemented through `CreatableSelect`, a variant of the `@atlaskit/select` component family powered by React Select. Rather than building a separate Combobox component, Atlassian extends their Select component with creatability — the ability to type a new value and have it added to the options list. This architectural approach reflects Atlassian's product context: in Jira, Confluence, and Bitbucket, the most common "combobox-like" use case is adding labels, components, fix versions, and sprints — all of which are drawn from an existing taxonomy but can be extended with new values created in context. The "create new option" affordance is the defining feature, and `CreatableSelect` makes it explicit: as the user types a value not in the list, a "Create [value]" option appears at the top or bottom of the filtered listbox. This create affordance is the mechanism through which Jira's label taxonomy grows — users create new labels in the label picker rather than navigating to an admin screen.
+
+## Key Decisions
+1. **CreatableSelect as an extension of Select, not a new component** (HIGH) — Atlassian's decision to implement Combobox capability as a Select variant rather than a separate component has significant architectural implications. It means CreatableSelect inherits all of Select's API: multi-value support, option grouping, custom option rendering, async option loading, clearable state, and the full accessibility model. Teams get Combobox-like behavior with the full richness of a mature Select implementation. The tradeoff is that the mental model is "Select that creates new options" rather than "free-text input with suggestions," which may be confusing for use cases where the text-input nature of the interaction is primary.
+2. **`onCreateOption` callback for persistence** (HIGH) — When the user selects the "Create [value]" option from the listbox, `onCreateOption` is called with the typed string. The application is responsible for persisting the new option (e.g., via an API call to create a new Jira label) and adding it to the options array. This separation of creation concern from selection concern is clean: the component handles the UI flow of prompting for creation, the application handles the actual data mutation. The pattern supports optimistic updates (adding the new option to the UI immediately while the API call is in flight).
+3. **`formatCreateLabel` for customizing the "create" affordance text** (MEDIUM) — The "Create [value]" option text can be customized via `formatCreateLabel`: `(inputValue) => string`. This is important for context-appropriate messaging: "Create label 'backend'" reads differently from "Add new component 'login-module'" and should be customized for each Jira field type. The function signature receiving `inputValue` allows dynamic messaging that includes the exact typed value, making the create option explicit and unambiguous.
+4. **`isValidNewOption` for creation validation** (MEDIUM) — The `isValidNewOption` function receives the current input value and the existing options, and returns a boolean indicating whether the "Create" option should appear. This allows preventing creation of options that already exist (exact match), options that fail validation (e.g., too short, invalid characters), or options in certain system-reserved namespaces. In Jira's label system, this prevents creating duplicate labels or labels that conflict with system-reserved names.
+5. **Async CreatableSelect for large taxonomies** (MEDIUM) — `AsyncCreatableSelect` combines async option loading (filtering options from a server API as the user types) with creation capability. This is how Jira's component and label pickers work in practice: the initial option load returns the most recently used values, and as the user types, the API is queried for matches, while the "Create [value]" option is offered for any value not found in the server results. This combination is more complex than most Tier 1 Combobox implementations.
+
+## Notable Props
+- `onCreateOption`: `(inputValue: string) => void` — Called when the user selects the "Create [value]" option. The application manages persistence.
+- `formatCreateLabel`: `(inputValue: string) => ReactNode` — Customizes the "Create [value]" option's display text and appearance.
+- `isValidNewOption`: `(inputValue, value, options) => boolean` — Controls when the "Create" option appears. Essential for preventing duplicate or invalid creations.
+- `createOptionPosition`: `'first' | 'last'` — Whether the "Create" option appears at the top or bottom of the filtered list. First is generally preferred as it prevents the option from scrolling out of view when many matches exist.
+- All standard `@atlaskit/select` props are inherited: `isMulti`, `isClearable`, `isSearchable`, `loadOptions` (async), `defaultOptions`, custom `Option` rendering, etc.
+
+## A11y Highlights
+- **Keyboard**: Inherits React Select's keyboard model: Arrow Down/Up navigate options, Enter selects the highlighted option (including the "Create" option), Escape closes the dropdown, Backspace removes the last selected value in multi-select mode. The "Create [value]" option is navigable via Arrow keys like any other option.
+- **Screen reader**: React Select's underlying ARIA implementation announces option count, current highlighted option, and selected values. The "Create [value]" option is announced with its full formatted label (e.g., "Create option: backend"). In multi-select mode, selected values are listed in the input's accessible description.
+- **ARIA**: `role="combobox"` on the input, `role="listbox"` on the dropdown, `role="option"` on each option including the "Create" option. The implementation follows React Select's ARIA approach which is generally compliant with the ARIA Combobox pattern, though some edge cases in the ARIA 1.2 pattern may not be fully implemented.
+
+## Strengths & Gaps
+- **Best at**: The create-new-option pattern with `isValidNewOption` validation and `AsyncCreatableSelect` for server-side taxonomies — the most complete implementation of "searchable select with in-context creation" in Tier 1, well-matched to Jira's label and component selection workflows.
+- **Missing**: Clear documentation on when to use CreatableSelect (create a value from the list) vs. when to use a plain text TextField (free-form input with no relationship to a predefined vocabulary) — the Combobox/AutoComplete/CreatableSelect distinction can be unclear in Atlassian's docs for use cases that don't map neatly to Jira's taxonomy management model.

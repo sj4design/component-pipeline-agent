@@ -1,0 +1,249 @@
+{
+  "version": "1.0",
+  "component": "Progress",
+  "archetype": "inline-action",
+  "language": "es",
+  "buildOrder": [
+    "Progress"
+  ],
+  "family": [
+    {
+      "name": "Progress",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        {
+          "name": "track",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "fill",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "percentage",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "bar",
+          "circular"
+        ],
+        "Status": [
+          "default",
+          "success",
+          "error"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": 4,
+          "fontSize": 10,
+          "trackRadius": 9999,
+          "circularSize": 32
+        },
+        "md": {
+          "h": 8,
+          "fontSize": 12,
+          "trackRadius": 9999,
+          "circularSize": 48
+        },
+        "lg": {
+          "h": 12,
+          "fontSize": 14,
+          "trackRadius": 9999,
+          "circularSize": 64
+        }
+      },
+      "colors": {
+        "trackBg": {
+          "r": 0.92,
+          "g": 0.92,
+          "b": 0.94
+        },
+        "fillDefault": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "fillSuccess": {
+          "r": 0.08,
+          "g": 0.55,
+          "b": 0.22
+        },
+        "fillError": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        }
+      },
+      "variantStyles": {
+        "default": {
+          "fill": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "success": {
+          "fill": {
+            "r": 0.08,
+            "g": 0.55,
+            "b": 0.22
+          },
+          "fg": {
+            "r": 0.08,
+            "g": 0.55,
+            "b": 0.22
+          }
+        },
+        "error": {
+          "fill": {
+            "r": 0.86,
+            "g": 0.15,
+            "b": 0.15
+          },
+          "fg": {
+            "r": 0.86,
+            "g": 0.15,
+            "b": 0.15
+          }
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "hasLabel",
+          "layerName": "label",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "hasPercentage",
+          "layerName": "percentage",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "isIndeterminate",
+          "layerName": "indeterminate",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasLabel",
+          "textPropName": "✏️ Label",
+          "layerName": "label",
+          "defaultVisible": false,
+          "default": "Loading..."
+        },
+        {
+          "boolName": "hasPercentage",
+          "textPropName": "✏️ Percentage",
+          "layerName": "percentage",
+          "defaultVisible": false,
+          "default": "50%"
+        }
+      ],
+      "frameCount": {
+        "gross": 18,
+        "exclusions": 0,
+        "net": 18
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "progressbar",
+    "role": "progressbar",
+    "keyboardNav": [],
+    "ariaAttributes": [
+      "aria-valuenow",
+      "aria-valuemin",
+      "aria-valuemax",
+      "aria-label"
+    ],
+    "indeterminate": "omit aria-valuenow when indeterminate",
+    "wcagLevel": "AA",
+    "wcagCriteria": [
+      "1.3.1",
+      "4.1.2"
+    ]
+  },
+  "tokens": {
+    "total": 18,
+    "prefix": "prg",
+    "mode": "C",
+    "layers": 2
+  },
+  "componentDescriptions": {
+    "Progress": "Indicador de progreso visual con dos variantes: barra lineal y circular.\nSizes: sm(4px track) md(8px track) lg(12px track). Circular: sm(32) md(48) lg(64).\nStatus: default (azul), success (verde), error (rojo).\n\n🔑 ARIA:\n• role=\"progressbar\"\n• aria-valuenow, aria-valuemin=\"0\", aria-valuemax=\"100\"\n• Indeterminate: omitir aria-valuenow\n• aria-label obligatorio cuando no hay label visible\n\n⌨️ Keyboard:\n• No interactivo — sin keyboard nav\n\n🎯 Focus:\n• No recibe foco (elemento presentacional)\n• Status comunicado via color + texto, no solo color\n\nBooleans: hasLabel, hasPercentage, isIndeterminate.\nTrack radius: 9999 (pill shape).\n\nTokens: 18, prefijo prg-.\nWCAG 2.2 AA."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype: inline-action",
+      "why": "Progress es un elemento inline que muestra estado de carga. No es contenedor ni overlay.",
+      "source": "research"
+    },
+    {
+      "what": "2 Variants: bar/circular",
+      "why": "Bar es la forma lineal horizontal. Circular es el spinner determinado. 18/24 sistemas ofrecen ambas variantes.",
+      "source": "research"
+    },
+    {
+      "what": "3 Status: default/success/error",
+      "why": "Default muestra progreso en curso (azul). Success indica completado (verde). Error indica fallo (rojo).",
+      "source": "research+spec"
+    },
+    {
+      "what": "18 frames netos (3x2x3)",
+      "why": "3 sizes x 2 variants x 3 statuses. Sin exclusiones porque todos los combos son validos.",
+      "source": "spec"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

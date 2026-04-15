@@ -1,0 +1,35 @@
+---
+system: Ant Design
+component: AutoComplete (distinct from Select)
+url: https://ant.design/components/auto-complete/
+last_verified: 2026-03-28
+---
+
+# Combobox / AutoComplete
+
+## Approach
+Ant Design's equivalent to the Combobox pattern is the AutoComplete component, and the naming reveals Ant Design's view of what this component fundamentally is: text input that auto-completes suggestions, not a selection component with typing capability. This framing matters architecturally. Where Polaris's Combobox and Atlassian's CreatableSelect are built on top of their Select components, Ant Design's AutoComplete is built on top of Select internally but exposed with an input-forward API. The user is always in control of what they type — suggestions appear as assistance, not as constraints. This is a meaningful philosophical difference: Ant Design's AutoComplete defaults to treating the input as free text with optional suggestions, while many other systems treat Combobox as constrained-select with optional free text. Ant Design's primary use case for AutoComplete is search inputs, email address suggestion fields, URL inputs, and any context where the user is fundamentally writing, not selecting.
+
+## Key Decisions
+1. **AutoComplete as a text-input enhancement, not a select enhancement** (HIGH) — Ant Design builds AutoComplete as a customizable input component where the suggestions list is an enhancement layer, not the primary interaction surface. This means the component does not have a `value` that must come from the options list — the value is whatever the user typed, full stop. Suggestions are shown to assist the user's typing, not to constrain it. This contrasts with Carbon's ComboBox (which starts from a selection mental model and adds free-text capability) and aligns with a search-autocomplete use case more than a taxonomy management use case.
+2. **Fully custom option rendering through `options` array** (HIGH) — AutoComplete accepts `options` as an array of objects with `value` and `label` fields, where `label` can be any React node. This means each suggestion in the dropdown can have rich content: a user avatar + name for a people picker, a file icon + filename for a file search, or a colored square + color name for a recent colors list. This flexibility in option rendering is a deliberate Ant Design feature for building contextual search experiences, not just value-list selection.
+3. **`filterOption` function or boolean for filtering control** (MEDIUM) — AutoComplete has a `filterOption` prop that can be set to `false` (disable filtering — show all options regardless of input, used for server-driven suggestions), a custom filter function, or left at the default (case-insensitive substring match). Setting `filterOption={false}` is the correct mode for server-side autocomplete where the server returns already-filtered results based on the query. This explicit three-mode filtering control covers both client-side and server-side use cases cleanly.
+4. **`backfill` prop for inline completion** (LOW) — The `backfill` prop enables a behavior where the highlighted option's value appears in the input field as you arrow-key through options (like URL bar autocomplete in browsers). The unconfirmed portion is shown as selected text, so pressing any key replaces it while pressing Enter confirms it. This "inline completion" behavior (as distinct from "list completion") is a distinct interaction model that other Tier 1 systems do not document explicitly.
+5. **AutoComplete vs. Select distinction is explicit in Ant's docs** (MEDIUM) — Ant Design's documentation states the difference directly: "AutoComplete is an input box with auto-complete function. The differences with Select are: AutoComplete is an input box, so the `value` can be any string, not limited to the option list. AutoComplete accepts as options a React node list, not just string/number." This explicit documentation of the difference is more helpful than systems that leave the distinction implicit.
+
+## Notable Props
+- `options`: `Array<{value: string, label: ReactNode}>` — Rich option rendering with custom React node labels. The same options shape as Select, reflecting the shared underlying implementation.
+- `filterOption`: `boolean | function` — False disables filtering (server-side mode); a function provides custom filtering; true uses default substring match.
+- `backfill`: `boolean` — Enables inline completion where the highlighted option fills the input as selection moves.
+- `onSearch`: Called on input change with the current input value — the primary hook for triggering server-side suggestion fetches.
+- `onSelect`: Called when the user selects a suggestion from the list — separate from `onChange`, which fires on every input change. This separation allows handling "user picked from list" differently from "user is typing."
+- `defaultActiveFirstOption`: `boolean` — Whether the first suggestion is auto-highlighted. Relevant for keyboard users who want to be able to press Enter immediately to accept the top suggestion.
+
+## A11y Highlights
+- **Keyboard**: Arrow Down opens the suggestions list and moves virtual focus to the first option (actual DOM focus stays in the input). Arrow Up/Down moves virtual focus through options via `aria-activedescendant`. Enter accepts the virtually-focused option or the current input value. Escape closes the suggestions list without changing the input value.
+- **Screen reader**: `role="combobox"` on the input with `aria-expanded`, `aria-autocomplete="list"` (or `"both"` when `backfill` is true), and `aria-controls` pointing to the listbox. Each option announcement includes the option's accessible text. Ant Design inherits its ARIA implementation from the underlying Select component, which is generally sound but the quality of announcements for rich React node labels (non-text options) depends on whether the `value` string provides meaningful accessible text.
+- **ARIA**: Implements the ARIA Combobox pattern via the underlying Select ARIA implementation. `role="listbox"` on the suggestions panel with `role="option"` items. The `backfill` behavior adds `aria-autocomplete="both"` for inline completion. Accessible names for rich option labels require that the option `value` be a meaningful string, as screen readers will use it for announcement when the label is non-textual.
+
+## Strengths & Gaps
+- **Best at**: Search-style autocomplete with rich option rendering, explicit `filterOption={false}` mode for server-side suggestions, and the `backfill` inline completion behavior — the best implementation in Tier 1 for URL-bar-style or search-box-style autocomplete interactions where the user is fundamentally writing text with suggestions as a convenience layer.
+- **Missing**: A first-class "create new option" affordance — unlike Polaris's `Listbox.Action` or Atlassian's `onCreateOption`, Ant Design's AutoComplete has no built-in mechanism for the "add this new value to the option list" pattern. Teams must manually add a "create" item to the options array and handle the creation logic, with no standardized UI treatment for the create affordance.

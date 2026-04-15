@@ -1,0 +1,129 @@
+{
+  "component": "Tooltip",
+  "archetype": "container",
+  "buildOrder": [
+    "Tooltip"
+  ],
+  "family": [
+    {
+      "name": "Tooltip",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "content*:text",
+        "title:text",
+        "arrow:icon"
+      ],
+      "properties": {
+        "Placement": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "State": [
+          "default"
+        ]
+      },
+      "booleans": [
+        "Arrow",
+        "Has Title(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 4
+    }
+  ],
+  "a11y": {
+    "role": "tooltip",
+    "keyboard": [
+      "Focus trigger (appears)",
+      "Escape (dismiss)",
+      "Hover trigger (appears)"
+    ],
+    "focus": "none (tooltip is not focusable itself)"
+  },
+  "tokens": {
+    "total": 12,
+    "prefix": "tip"
+  },
+  "questions": [
+    {
+      "id": "content-type",
+      "text": "¿Qué tipo de contenido muestra el tooltip?",
+      "options": [
+        { "value": "simple", "label": "Texto simple — una línea que describe el elemento" },
+        { "value": "formatted", "label": "Texto con formato — varias líneas, negrita, código" },
+        { "value": "rich", "label": "Contenido rico — imágenes, links, botones (es un Popover)" }
+      ],
+      "impact": "Slots de contenido y distincion tooltip vs popover",
+      "tags": ["simple", "formatted", "rich", "popover", "multiline"]
+    },
+    {
+      "id": "arrow",
+      "text": "¿El tooltip necesita flecha apuntando al trigger?",
+      "options": [
+        { "value": "yes", "label": "Sí — flecha que conecta tooltip con el elemento" },
+        { "value": "no", "label": "No — tooltip sin flecha, flotante" },
+        { "value": "configurable", "label": "Configurable — a veces con flecha, a veces sin" }
+      ],
+      "impact": "Arrow boolean",
+      "tags": ["arrow", "pointer", "caret", "no-arrow"]
+    },
+    {
+      "id": "placement",
+      "text": "¿Dónde se posiciona el tooltip?",
+      "options": [
+        { "value": "top-only", "label": "Solo arriba — posición fija" },
+        { "value": "top-bottom", "label": "Arriba y abajo" },
+        { "value": "all-four", "label": "Las 4 direcciones (top, bottom, left, right)" },
+        { "value": "auto", "label": "Auto-detección — flip automático según espacio" }
+      ],
+      "impact": "Placement property values",
+      "tags": ["placement", "position", "auto-flip", "top", "bottom", "left", "right"]
+    },
+    {
+      "id": "title",
+      "text": "¿El tooltip puede tener título además del contenido?",
+      "options": [
+        { "value": "yes", "label": "Sí — título en bold + descripción" },
+        { "value": "no", "label": "No — solo una línea de texto" }
+      ],
+      "impact": "Has Title boolean",
+      "tags": ["title", "heading", "structured", "two-line"]
+    },
+    {
+      "id": "trigger",
+      "text": "¿Qué interacciones hacen aparecer el tooltip?",
+      "options": [
+        { "value": "hover-focus", "label": "Hover + focus — comportamiento estándar accesible" },
+        { "value": "hover-only", "label": "Solo hover — desktop only (no accesible)" },
+        { "value": "click", "label": "Click/tap — persistente hasta cerrar" }
+      ],
+      "impact": "Trigger behavior y accesibilidad",
+      "tags": ["hover", "focus", "click", "touch", "mobile", "persistent"]
+    },
+    {
+      "id": "delay",
+      "text": "¿El tooltip aparece con retraso o inmediatamente?",
+      "options": [
+        { "value": "instant", "label": "Instantáneo — sin delay" },
+        { "value": "short-delay", "label": "Delay corto (200-400ms) — evita tooltips accidentales" },
+        { "value": "configurable", "label": "Configurable — delay ajustable" }
+      ],
+      "impact": "Token de delay y comportamiento temporal",
+      "tags": ["delay", "instant", "timing", "hover-delay"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el tooltip?",
+      "options": [
+        { "value": "icon-labels", "label": "Labels de íconos — describir icon buttons y acciones" },
+        { "value": "truncated", "label": "Texto truncado — mostrar texto completo al hover" },
+        { "value": "help", "label": "Ayuda contextual — explicaciones de campos o features" },
+        { "value": "general", "label": "Uso general" }
+      ],
+      "impact": "Priorización de features y contenido",
+      "tags": ["icon-label", "truncated-text", "help", "contextual", "toolbar"]
+    }
+  ]
+}

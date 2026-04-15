@@ -1,0 +1,423 @@
+{
+  "version": "1.0",
+  "component": "Switch",
+  "archetype": "form-control",
+  "language": "es",
+  "buildOrder": [
+    "Switch"
+  ],
+  "family": [
+    {
+      "name": "Switch",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        {
+          "name": "track",
+          "type": "shape",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "thumb",
+          "type": "shape",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "disabled"
+        ]
+      },
+      "exclusions": [
+        {
+          "rule": "disabled x hover",
+          "reason": "Disabled bloquea toda interaccion",
+          "saved": 3
+        },
+        {
+          "rule": "disabled x focus",
+          "reason": "Disabled bloquea toda interaccion",
+          "saved": 3
+        }
+      ],
+      "sizes": {
+        "sm": {
+          "h": 16,
+          "trackW": 32,
+          "trackH": 16,
+          "thumbSize": 12,
+          "fontSize": 12,
+          "lineHeight": 16,
+          "gap": 8,
+          "radius": 9999,
+          "thumbRadius": 9999,
+          "py": 0,
+          "px": 0,
+          "trackPadding": 2
+        },
+        "md": {
+          "h": 20,
+          "trackW": 40,
+          "trackH": 20,
+          "thumbSize": 16,
+          "fontSize": 14,
+          "lineHeight": 20,
+          "gap": 8,
+          "radius": 9999,
+          "thumbRadius": 9999,
+          "py": 0,
+          "px": 0,
+          "trackPadding": 2
+        },
+        "lg": {
+          "h": 24,
+          "trackW": 48,
+          "trackH": 24,
+          "thumbSize": 20,
+          "fontSize": 16,
+          "lineHeight": 24,
+          "gap": 8,
+          "radius": 9999,
+          "thumbRadius": 9999,
+          "py": 0,
+          "px": 0,
+          "trackPadding": 2
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "Label",
+          "layerName": "label",
+          "default": "Toggle label"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "Loading",
+          "layerName": "loading-spinner",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "Label",
+          "textProp": "Label",
+          "layerName": "label",
+          "defaultVisible": true
+        }
+      ],
+      "frameCount": {
+        "gross": 24,
+        "exclusions": 6,
+        "net": 18,
+        "detail": "3 sizes x (4 states x 2 isChecked) = 24 gross. Exclusions: disabled x hover (3) + disabled x focus (3) = 6. Net: 18 frames."
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      },
+      "colors": {
+        "trackOn": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "trackOff": {
+          "r": 0.55,
+          "g": 0.55,
+          "b": 0.6
+        },
+        "trackOnHover": {
+          "r": 0.12,
+          "g": 0.3,
+          "b": 0.82
+        },
+        "trackOffHover": {
+          "r": 0.48,
+          "g": 0.48,
+          "b": 0.53
+        },
+        "trackDisabled": {
+          "r": 0.91,
+          "g": 0.91,
+          "b": 0.92
+        },
+        "thumbDefault": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "thumbDisabled": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.97
+        },
+        "labelDefault": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "labelDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        }
+      },
+      "variantStyles": {
+        "default-off": {
+          "trackBg": {
+            "r": 0.55,
+            "g": 0.55,
+            "b": 0.6
+          },
+          "thumbBg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "labelFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "default-on": {
+          "trackBg": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "thumbBg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "labelFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "hover-off": {
+          "trackBg": {
+            "r": 0.48,
+            "g": 0.48,
+            "b": 0.53
+          },
+          "thumbBg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "labelFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "hover-on": {
+          "trackBg": {
+            "r": 0.12,
+            "g": 0.3,
+            "b": 0.82
+          },
+          "thumbBg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "labelFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "focus-off": {
+          "trackBg": {
+            "r": 0.55,
+            "g": 0.55,
+            "b": 0.6
+          },
+          "thumbBg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "labelFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "ring": {
+            "r": 0.25,
+            "g": 0.39,
+            "b": 0.95
+          }
+        },
+        "focus-on": {
+          "trackBg": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "thumbBg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "labelFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "ring": {
+            "r": 0.25,
+            "g": 0.39,
+            "b": 0.95
+          }
+        },
+        "disabled-off": {
+          "trackBg": {
+            "r": 0.91,
+            "g": 0.91,
+            "b": 0.92
+          },
+          "thumbBg": {
+            "r": 0.96,
+            "g": 0.96,
+            "b": 0.97
+          },
+          "labelFg": {
+            "r": 0.72,
+            "g": 0.72,
+            "b": 0.75
+          }
+        },
+        "disabled-on": {
+          "trackBg": {
+            "r": 0.8,
+            "g": 0.85,
+            "b": 0.97
+          },
+          "thumbBg": {
+            "r": 0.96,
+            "g": 0.96,
+            "b": 0.97
+          },
+          "labelFg": {
+            "r": 0.72,
+            "g": 0.72,
+            "b": 0.75
+          }
+        }
+      }
+    }
+  ],
+  "thresholds": {
+    "warnFrames": 150,
+    "maxFrames": 200,
+    "maxDescriptionChars": 800,
+    "disabledOpacity": 0.5,
+    "focusRingWidth": 2,
+    "focusRingOffset": 2
+  },
+  "a11y": {
+    "pattern": "switch",
+    "role": "switch",
+    "keyboardNav": [
+      "Space",
+      "Tab"
+    ],
+    "ariaAttributes": [
+      "aria-checked",
+      "aria-label",
+      "aria-labelledby",
+      "aria-busy"
+    ],
+    "focusTechnique": "linear",
+    "edgeCases": 6,
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 28,
+    "prefix": "swt",
+    "mode": "C"
+  },
+  "componentDescriptions": {
+    "Switch": "Control binario on/off de efecto inmediato.\nSizes: sm(16) md(20) lg(24) — track dimensions.\nStates: default, hover, focus, disabled.\nBooleans: isChecked (track color), Label, Loading.\n\n🔑 ARIA:\n• role=\"switch\"\n• aria-checked=\"true\"|\"false\"\n• aria-label o aria-labelledby OBLIGATORIO\n• aria-busy=\"true\" cuando loading\n\n⌨️ Keyboard:\n• Space: toggle on/off\n• Tab: navegar al siguiente control\n• Enter NO togglea (correcto per APG)\n\n🎯 Focus:\n• Focus ring 2px visible (WCAG 2.4.7)\n• Disabled: no recibe foco\n• Loading: mantiene foco, bloquea interaccion\n\nTokens: 28, prefijo swt-.\nWCAG 2.2 AA · APG Switch Pattern."
+  },
+  "variableBindings": {
+    "track/on": "brand/900",
+    "track/on-hover": "brand/1000",
+    "track/off": "bg/mid/default",
+    "track/off-hover": "bg/mid/hover",
+    "track/disabled": "bg/disabled",
+    "thumb/default": "bg/surface/default",
+    "thumb/disabled": "bg/surface/disabled",
+    "label/default": "text/label",
+    "label/disabled": "text/disabled",
+    "focus/ring": "border/focus"
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10T00:00:00Z",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype: form-control",
+      "why": "Switch es un control binario atomico sin sub-componentes ni contenedores. 19/19 sistemas lo implementan como control simple.",
+      "source": "research"
+    },
+    {
+      "what": "isChecked como boolean de Figma, NO como variante State",
+      "why": "isChecked controla track color y thumb position pero es un toggle binario. Como boolean en Figma no multiplica frames (18 vs 36). global-property-rules.md Rule 3.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "3 sizes (sm/md/lg) con track dimensions 32x16, 40x20, 48x24",
+      "why": "12/19 sistemas ofrecen multiples tamanos. Track ratio 2:1 (ancho:alto) es consenso. Thumb = trackH - 4px (2px padding cada lado).",
+      "source": "research"
+    },
+    {
+      "what": "Loading como boolean overlay, no como State variant",
+      "why": "Solo 3/19 sistemas tienen loading. Boolean no multiplica frames. Loading implica disabled — no necesita combinarse con otros states.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "State=disabled como variant (no boolean) — cambia fill+text, no solo opacity",
+      "why": "Disabled en switch cambia track color a gris + thumb color + opacity. >= 2 propiedades visuales cambian. global-property-rules.md decision tree: >= 2 properties = VARIANT.",
+      "source": "global-property-rules"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,33 @@
+{
+  "systems": [
+    { "name": "Material Design 3", "org": "Google", "url": "https://m3.material.io/components", "industries": ["general","enterprise","saas"], "strengths": ["Exhaustive docs","Motion specs","Theming system"] },
+    { "name": "Spectrum", "org": "Adobe", "url": "https://spectrum.adobe.com", "industries": ["enterprise","saas","productivity"], "strengths": ["A11y gold standard","Cross-platform","React Aria"] },
+    { "name": "Carbon", "org": "IBM", "url": "https://carbondesignsystem.com/components", "industries": ["enterprise","saas","healthcare"], "strengths": ["Data viz patterns","Token architecture","Enterprise-grade"] },
+    { "name": "Polaris", "org": "Shopify", "url": "https://polaris.shopify.com/components", "industries": ["ecommerce","saas","retail"], "strengths": ["UX guidelines","Content guidelines","E-commerce patterns"] },
+    { "name": "Atlassian DS", "org": "Atlassian", "url": "https://atlassian.design/components", "industries": ["productivity","enterprise","saas"], "strengths": ["Productivity patterns","Semantic tokens","Collaborative UIs"] },
+    { "name": "Ant Design", "org": "Ant Group", "url": "https://ant.design/components", "industries": ["enterprise","fintech","saas"], "strengths": ["60+ components","Consistent API","i18n native"] },
+    { "name": "Paste", "org": "Twilio", "url": "https://paste.twilio.design/components", "industries": ["saas","enterprise","devtools"], "strengths": ["A11y obsessive","Composability","Advanced tokens"] },
+    { "name": "Lightning", "org": "Salesforce", "url": "https://lightningdesignsystem.com", "industries": ["enterprise","saas","fintech"], "strengths": ["Enterprise patterns","Density variants","Page blueprints"] },
+    { "name": "Primer", "org": "GitHub", "url": "https://primer.style", "industries": ["devtools","saas","productivity"], "strengths": ["Dev tool patterns","ViewComponents (Ruby)","Action-based"] },
+    { "name": "shadcn/ui", "org": "Community", "url": "https://ui.shadcn.com", "industries": ["general","saas","devtools"], "strengths": ["Copy-paste model","Tailwind-native","Radix-based"] },
+    { "name": "Playbook", "org": "eBay", "url": "https://playbook.ebay.com/design-system", "industries": ["ecommerce","retail","enterprise"], "strengths": ["Marketplace patterns","Massive scale","Listing UIs"] },
+    { "name": "Cedar", "org": "REI", "url": "https://cedar.rei.com", "industries": ["retail","ecommerce"], "strengths": ["Web Components","Mature tokens","Sustainability-conscious"] },
+    { "name": "Wise Design", "org": "Wise", "url": "https://wise.design/components", "industries": ["fintech","saas"], "strengths": ["Fintech patterns","Multi-currency UIs","Trust patterns"] },
+    { "name": "Dell DS", "org": "Dell", "url": "https://www.delldesignsystem.com", "industries": ["enterprise","retail","ecommerce"], "strengths": ["Hardware ecosystem","B2B commerce","Configurator UIs"] },
+    { "name": "Radix", "org": "WorkOS", "url": "https://radix-ui.com", "industries": ["devtools","saas","general"], "strengths": ["Headless/unstyled","Radical composability","A11y by default"] },
+    { "name": "Chakra UI", "org": "Community", "url": "https://chakra-ui.com", "industries": ["general","saas","devtools"], "strengths": ["Style props","Theme customization","DX"] },
+    { "name": "GOV.UK", "org": "UK Government", "url": "https://design-system.service.gov.uk", "industries": ["government"], "strengths": ["Extreme a11y","Plain language","Research-backed"] },
+    { "name": "Base Web", "org": "Uber", "url": "https://baseweb.design", "industries": ["saas","enterprise","travel"], "strengths": ["Overrides system","Map components","Performance"] },
+    { "name": "Fluent 2", "org": "Microsoft", "url": "https://fluent2.microsoft.design", "industries": ["enterprise","productivity","general"], "strengths": ["Cross-platform native","Density modes","Office patterns"] },
+    { "name": "Gestalt", "org": "Pinterest", "url": "https://gestalt.pinterest.systems", "industries": ["social","ecommerce","retail"], "strengths": ["Masonry layouts","Image-centric","Mobile-first"] },
+    { "name": "Mantine", "org": "Community", "url": "https://mantine.dev", "industries": ["general","saas","devtools"], "strengths": ["140+ components","Hooks library","Form management"] },
+    { "name": "Orbit", "org": "Kiwi.com", "url": "https://orbit.kiwi", "industries": ["travel","ecommerce"], "strengths": ["Travel patterns","Integrated illustrations","Mobile patterns"] },
+    { "name": "Evergreen", "org": "Segment", "url": "https://evergreen.segment.com", "industries": ["saas","enterprise","devtools"], "strengths": ["Flexibility-first","Analytics UI","Minimal opinions"] },
+    { "name": "Nord", "org": "Nordhealth", "url": "https://nordhealth.design", "industries": ["healthcare","saas"], "strengths": ["Native Web Components","Framework-agnostic","Healthcare patterns"] }
+  ],
+  "_meta": {
+    "version": "3.0",
+    "updated": "2026-04-06",
+    "changes": "Unified all 24 systems into single flat list. No tiers — all systems are always loaded."
+  }
+}

@@ -1,0 +1,460 @@
+{
+  "version": "1.0",
+  "component": "DatePicker",
+  "archetype": "composite-overlay",
+  "buildOrder": [
+    ".DayCell",
+    ".MonthGrid",
+    "DatePicker"
+  ],
+  "family": [
+    {
+      "name": ".DayCell",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "day-number",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        }
+      ],
+      "properties": {
+        "DayState": [
+          "default",
+          "today",
+          "selected",
+          "range-middle",
+          "disabled",
+          "outside-month"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "disabled"
+        ]
+      },
+      "exclusions": [
+        {
+          "combo": "DayState=disabled + State=hover",
+          "reason": "Disabled blocks interaction"
+        },
+        {
+          "combo": "DayState=outside-month + State=hover",
+          "reason": "Outside month not interactive"
+        }
+      ],
+      "sizes": {
+        "_default": {
+          "h": 36,
+          "fontSize": 14,
+          "iconSize": 0,
+          "px": 0,
+          "gap": 0,
+          "radius": 9999,
+          "width": 36
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "bgSelected": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "bgRangeMiddle": {
+          "r": 0.93,
+          "g": 0.95,
+          "b": 1
+        },
+        "bgHover": {
+          "r": 0.95,
+          "g": 0.96,
+          "b": 0.99
+        },
+        "bgToday": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSelected": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "fgToday": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "fgDisabled": {
+          "r": 0.78,
+          "g": 0.78,
+          "b": 0.8
+        },
+        "fgOutside": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "borderToday": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "border": null,
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Day",
+          "layerName": "day-number",
+          "default": "15"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 18,
+        "exclusions": 4,
+        "net": 14
+      },
+      "grid": {
+        "maxCols": 7,
+        "gap": 2,
+        "pad": 12
+      }
+    },
+    {
+      "name": ".MonthGrid",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "month-label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "nav-prev",
+          "type": "icon-action",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "nav-next",
+          "type": "icon-action",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "weekday-headers",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "day-grid",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none"
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 300,
+          "fontSize": 14,
+          "titleSize": 14,
+          "titleWeight": 600,
+          "iconSize": 20,
+          "px": 12,
+          "py": 12,
+          "gap": 4,
+          "radius": 8,
+          "width": 280,
+          "padding": 12,
+          "bodyPad": 4
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "border": {
+          "r": 0.92,
+          "g": 0.92,
+          "b": 0.94
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Month",
+          "layerName": "month-label",
+          "default": "March 2026"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 1,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "DatePicker",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "icon-calendar",
+          "type": "icon",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "calendar-panel",
+          "type": "instance",
+          "required": true,
+          "figmaBinding": null,
+          "ref": ".MonthGrid"
+        },
+        {
+          "name": "helper-text",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {
+        "Type": [
+          "single",
+          "range"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "open",
+          "error",
+          "disabled"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "md": {
+          "h": 40,
+          "triggerH": 40,
+          "fontSize": 14,
+          "labelSize": 12,
+          "iconSize": 20,
+          "px": 12,
+          "gap": 4,
+          "radius": 8,
+          "width": 280,
+          "contentPad": 0
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "border": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "borderFocus": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "borderError": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.55,
+          "g": 0.55,
+          "b": 0.6
+        },
+        "fgError": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Label",
+          "layerName": "label",
+          "default": "Date"
+        },
+        {
+          "propName": "✏️ Value",
+          "layerName": "value",
+          "default": "Select date"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasHelper",
+          "textName": "✏️ Helper",
+          "layerName": "helper-text",
+          "defaultVisible": false,
+          "defaultText": "MM/DD/YYYY"
+        }
+      ],
+      "frameCount": {
+        "gross": 6,
+        "exclusions": 0,
+        "net": 6
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 30,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "datepicker",
+    "calendarRole": "grid with role=gridcell per day",
+    "triggerRole": "combobox or button",
+    "keyboardNav": [
+      "↑↓←→ (navigate days)",
+      "Page Up/Down (months)",
+      "Shift+Page (years)",
+      "Enter/Space (select)",
+      "Escape (close)",
+      "Home/End (start/end of week)"
+    ],
+    "todayMarker": "aria-current=date",
+    "selectedMarker": "aria-selected=true",
+    "unavailable": "aria-disabled=true on cells",
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 32,
+    "prefixes": {
+      "day": "dc",
+      "grid": "mg",
+      "picker": "dp"
+    },
+    "mode": "C",
+    "layers": 3
+  },
+  "componentDescriptions": {
+    ".DayCell": "Celda de día individual en el grid del calendario.\nDayState: default, today, selected, range-middle, disabled, outside-month.\n\n🔑 ARIA:\n• role=\"gridcell\" + aria-selected\n• Today: aria-current=\"date\"\n• Disabled: aria-disabled\n\n⌨️ Keyboard:\n• ←→↑↓: navegar días\n• Enter/Space: seleccionar\n\nTokens: 12, prefijo dc-.\nWCAG 2.2 AA.",
+    ".MonthGrid": "Grid de calendario mensual con navegación.\n\n🔑 ARIA:\n• role=\"grid\" con heading (month label)\n• Nav buttons: aria-label descriptivo\n• Weekday headers: role=\"columnheader\"\n\nTokens: 8, prefijo mg-.\nWCAG 2.2 AA.",
+    "DatePicker": "Selector de fecha con input + calendario dropdown.\nStates: default, hover, focus, open, error, disabled.\n\n🔑 ARIA:\n• Trigger: role=\"combobox\" o button\n• Calendar: role=\"grid\" + dialog\n• aria-expanded, aria-haspopup\n• Segment model (Spectrum): cada unidad de fecha es spinbutton independiente\n\n⌨️ Keyboard:\n• Arrows: navegar días\n• Page Up/Down: meses\n• Shift+Page: años\n• Escape: cerrar\n\nTokens: 12, prefijo dp-.\nWCAG 2.2 AA · APG Date Picker Pattern."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-02T22:08:33.239Z",
+    "mode": "max"
+  },
+  "_foundationsRef": "foundations.json"
+}

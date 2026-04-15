@@ -1,0 +1,51 @@
+{
+  "spacingScale": [0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80],
+  "typeScale": { "xs": 10, "sm": 12, "md": 14, "lg": 16, "xl": 20 },
+  "lineHeights": { "xs": 14, "sm": 16, "md": 20, "lg": 24, "xl": 28 },
+  "radiusScale": [0, 2, 4, 6, 8, 12, 16, 28, 9999],
+  "controlHeights": { "xs": 24, "sm": 32, "md": 40, "lg": 48, "xl": 56 },
+  "iconSizes": { "xs": 12, "sm": 16, "md": 20, "lg": 24, "xl": 32 },
+  "colorRoles": ["background", "foreground", "border", "brand", "interactive", "error", "warning", "success", "info", "overlay", "inverse"],
+  "elevationLevels": [0, 1, 2, 3, 4],
+  "densityModes": ["compact", "default", "comfortable"],
+  "semanticPalette": {
+    "interactive": {
+      "default": { "r": 0.15, "g": 0.35, "b": 0.92 },
+      "hover": { "r": 0.12, "g": 0.30, "b": 0.82 },
+      "pressed": { "r": 0.10, "g": 0.25, "b": 0.72 },
+      "visited": { "r": 0.45, "g": 0.22, "b": 0.75 }
+    },
+    "text": {
+      "primary": { "r": 0.07, "g": 0.07, "b": 0.07 },
+      "secondary": { "r": 0.42, "g": 0.45, "b": 0.50 },
+      "subtlest": { "r": 0.55, "g": 0.55, "b": 0.60 },
+      "disabled": { "r": 0.72, "g": 0.72, "b": 0.75 },
+      "inverse": { "r": 1, "g": 1, "b": 1 }
+    },
+    "surface": {
+      "default": { "r": 1, "g": 1, "b": 1 },
+      "hover": { "r": 0.97, "g": 0.97, "b": 0.98 },
+      "pressed": { "r": 0.95, "g": 0.95, "b": 0.97 },
+      "selected": { "r": 0.93, "g": 0.95, "b": 1.0 },
+      "disabled": { "r": 0.96, "g": 0.96, "b": 0.98 }
+    },
+    "border": {
+      "default": { "r": 0.82, "g": 0.82, "b": 0.85 },
+      "hover": { "r": 0.65, "g": 0.65, "b": 0.70 },
+      "focus": { "r": 0.15, "g": 0.35, "b": 0.92 },
+      "disabled": { "r": 0.88, "g": 0.88, "b": 0.90 },
+      "error": { "r": 0.86, "g": 0.15, "b": 0.15 }
+    },
+    "focus": {
+      "ring": { "r": 0.25, "g": 0.39, "b": 0.95 },
+      "ringWidth": 2,
+      "ringOffset": 2
+    },
+    "status": {
+      "error": { "bg": { "r": 1.0, "g": 0.94, "b": 0.94 }, "fg": { "r": 0.86, "g": 0.15, "b": 0.15 }, "border": { "r": 0.96, "g": 0.62, "b": 0.62 } },
+      "warning": { "bg": { "r": 1.0, "g": 0.97, "b": 0.92 }, "fg": { "r": 0.72, "g": 0.48, "b": 0.05 }, "border": { "r": 0.96, "g": 0.82, "b": 0.52 } },
+      "success": { "bg": { "r": 0.93, "g": 0.99, "b": 0.95 }, "fg": { "r": 0.08, "g": 0.55, "b": 0.22 }, "border": { "r": 0.60, "g": 0.90, "b": 0.68 } },
+      "info": { "bg": { "r": 0.93, "g": 0.95, "b": 1.0 }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "border": { "r": 0.72, "g": 0.80, "b": 0.96 } }
+    }
+  }
+}

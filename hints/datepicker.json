@@ -1,0 +1,179 @@
+{
+  "component": "DatePicker",
+  "archetype": "composite-overlay",
+  "buildOrder": [
+    ".DayCell",
+    ".MonthGrid",
+    "DatePicker"
+  ],
+  "family": [
+    {
+      "name": ".DayCell",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "day-number*:text"
+      ],
+      "properties": {
+        "DayState": [
+          "default",
+          "today",
+          "selected",
+          "range-middle",
+          "disabled",
+          "outside-month"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "disabled"
+        ]
+      },
+      "booleans": [],
+      "exclusions": [
+        null,
+        null
+      ],
+      "frameCount": 14
+    },
+    {
+      "name": ".MonthGrid",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "month-label*:text",
+        "nav-prev*:icon-action",
+        "nav-next*:icon-action",
+        "weekday-headers*:container",
+        "day-grid*:container"
+      ],
+      "properties": {},
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 1
+    },
+    {
+      "name": "DatePicker",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "label*:text",
+        "icon-calendar*:icon",
+        "value*:text",
+        "calendar-panel*:instance",
+        "helper-text:text"
+      ],
+      "properties": {
+        "Type": [
+          "single",
+          "range"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "open",
+          "error",
+          "disabled"
+        ]
+      },
+      "booleans": [
+        "hasHelper(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 6
+    }
+  ],
+  "a11y": {
+    "keyboard": [
+      "↑↓←→ (navigate days)",
+      "Page Up/Down (months)",
+      "Shift+Page (years)",
+      "Enter/Space (select)",
+      "Escape (close)",
+      "Home/End (start/end of week)"
+    ]
+  },
+  "tokens": {
+    "total": 32
+  },
+  "questions": [
+    {
+      "id": "selection-type",
+      "text": "¿Qué necesita seleccionar el usuario?",
+      "options": [
+        { "value": "single", "label": "Una fecha específica — nacimiento, entrega, vencimiento" },
+        { "value": "range", "label": "Un rango de fechas — filtros, reservas, reportes" },
+        { "value": "both", "label": "Ambos en distintos contextos" }
+      ],
+      "impact": "Type property (single vs range)",
+      "tags": ["single-date", "range", "booking", "filters", "reports"]
+    },
+    {
+      "id": "presentation",
+      "text": "¿Cómo se presenta el datepicker en la interfaz?",
+      "options": [
+        { "value": "popover", "label": "Popover sobre un input — formularios, filtros" },
+        { "value": "inline", "label": "Inline en la página — siempre visible" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "State=open y layout del calendar-panel",
+      "tags": ["popover", "dropdown", "inline", "always-visible", "embedded"]
+    },
+    {
+      "id": "time",
+      "text": "¿Además de la fecha, el usuario necesita seleccionar hora?",
+      "options": [
+        { "value": "date-only", "label": "Solo fecha — sin hora" },
+        { "value": "date-time", "label": "Fecha + hora — agendar citas, eventos" },
+        { "value": "time-only", "label": "Solo hora — timepicker independiente" }
+      ],
+      "impact": "Slots adicionales para time input en el panel",
+      "tags": ["time", "datetime", "timepicker", "scheduling", "events", "calendar"]
+    },
+    {
+      "id": "restrictions",
+      "text": "¿Qué restricciones de fechas necesitas?",
+      "options": [
+        { "value": "min-max", "label": "Fecha mínima/máxima — limitar rango seleccionable" },
+        { "value": "disabled-dates", "label": "Fechas deshabilitadas — feriados, domingos, reservados" },
+        { "value": "presets", "label": "Presets — 'Hoy', 'Esta semana', 'Último mes'" },
+        { "value": "none", "label": "Sin restricciones especiales" },
+        { "value": "all", "label": "Todas las anteriores" }
+      ],
+      "impact": "DayState=disabled y slots para presets",
+      "tags": ["min-date", "max-date", "disabled-dates", "presets", "shortcuts"]
+    },
+    {
+      "id": "i18n",
+      "text": "¿Necesitas internacionalización (idiomas, formatos de fecha)?",
+      "options": [
+        { "value": "yes", "label": "Sí — múltiples idiomas y formatos (DD/MM vs MM/DD)" },
+        { "value": "single-locale", "label": "No — un solo idioma/formato" }
+      ],
+      "impact": "Formato de weekday-headers y month-label, tokens de texto",
+      "tags": ["i18n", "localization", "locale", "international", "global"]
+    },
+    {
+      "id": "two-months",
+      "text": "¿El calendario necesita mostrar dos meses simultáneamente?",
+      "options": [
+        { "value": "yes", "label": "Sí — útil para selección de rangos" },
+        { "value": "no", "label": "No — un mes a la vez es suficiente" }
+      ],
+      "impact": "Layout de .MonthGrid y calendar-panel",
+      "tags": ["dual-calendar", "two-months", "range-view", "booking"]
+    },
+    {
+      "id": "manual-input",
+      "text": "¿El usuario puede escribir la fecha manualmente en el input?",
+      "options": [
+        { "value": "yes", "label": "Sí — input editable con validación de formato" },
+        { "value": "no", "label": "No — solo selección visual en el calendario" }
+      ],
+      "impact": "Input field editabilidad y validación",
+      "tags": ["manual-input", "typed", "keyboard-entry", "power-user"]
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "component": "Select",
+  "archetype": "composite-overlay",
+  "buildOrder": [
+    ".SelectOption",
+    "Select"
+  ],
+  "family": [
+    {
+      "name": ".SelectOption",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "option-icon:icon",
+        "label*:text",
+        "description:text",
+        "checkmark:icon"
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "selected",
+          "disabled"
+        ]
+      },
+      "booleans": [
+        "showCheckmark",
+        "isSelected",
+        "showIcon(swap)",
+        "showDescription(text)"
+      ],
+      "exclusions": [
+        "disabled x hover/focus/pressed"
+      ],
+      "frameCount": 6
+    },
+    {
+      "name": "Select",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "label:text",
+        "icon-leading:icon",
+        "value-text*:text",
+        "clear-button:icon-action",
+        "chevron*:icon",
+        "helper-text:text",
+        "error-text:text"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "outlined",
+          "filled",
+          "borderless"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "open",
+          "disabled",
+          "readonly"
+        ],
+        "Status": [
+          "none",
+          "error",
+          "warning"
+        ]
+      },
+      "booleans": [
+        "isClearable",
+        "isSearchable",
+        "hasLeadingIcon(swap)",
+        "hasLabel(text)",
+        "hasHelperText(text)",
+        "hasErrorText(text)"
+      ],
+      "exclusions": [
+        "disabled x hover/focus/open",
+        "disabled x error/warning",
+        "readonly x open",
+        "readonly x hover",
+        "borderless x error/warning"
+      ],
+      "frameCount": 106
+    }
+  ],
+  "a11y": {
+    "role": "combobox (trigger) + listbox (dropdown)",
+    "keyboard": [
+      "Tab (focus trigger)",
+      "Enter/Space (open)",
+      "ArrowDown/Up (navigate options)",
+      "Enter (select)",
+      "Escape (close)",
+      "Type-ahead (filter)"
+    ],
+    "focus": "aria-activedescendant"
+  },
+  "tokens": {
+    "total": 40,
+    "prefix": "sel"
+  },
+  "questions": [
+    {
+      "id": "multi-select",
+      "text": "¿Cuántas opciones puede seleccionar el usuario?",
+      "options": [
+        { "value": "single", "label": "Una sola opción — dropdown estándar" },
+        { "value": "multi-tags", "label": "Múltiples con tags — chips dentro del campo" },
+        { "value": "multi-checkboxes", "label": "Múltiples con checkboxes — en el dropdown" },
+        { "value": "both", "label": "Single y multi según campo" }
+      ],
+      "impact": "isMulti boolean, tags/chips sub-componente",
+      "tags": ["multi-select", "tags", "chips", "checkboxes", "single", "multiple"]
+    },
+    {
+      "id": "search",
+      "text": "¿El usuario puede buscar/filtrar dentro de las opciones?",
+      "options": [
+        { "value": "no", "label": "No — dropdown puro, solo scroll" },
+        { "value": "search", "label": "Sí, con búsqueda — filtrar opciones" },
+        { "value": "create", "label": "Sí, con creación — buscar y crear nuevas opciones" }
+      ],
+      "impact": "isSearchable boolean",
+      "tags": ["search", "filter", "autocomplete", "combobox", "creatable", "large-list"]
+    },
+    {
+      "id": "option-structure",
+      "text": "¿Las opciones tienen estructura visual especial?",
+      "options": [
+        { "value": "simple", "label": "Lista plana simple — solo texto" },
+        { "value": "grouped", "label": "Agrupadas por categoría — con headers de grupo" },
+        { "value": "with-icons", "label": "Con ícono o avatar — elemento visual por opción" },
+        { "value": "with-description", "label": "Con descripción — subtexto bajo el label" },
+        { "value": "rich", "label": "Completas — íconos, descripciones, badges" }
+      ],
+      "impact": "Booleans showIcon, showDescription en .SelectOption",
+      "tags": ["icons", "avatars", "grouped", "categories", "description", "rich-options"]
+    },
+    {
+      "id": "variants",
+      "text": "¿Qué variantes visuales del select necesitas?",
+      "options": [
+        { "value": "outlined-only", "label": "Solo outlined — lo más estándar" },
+        { "value": "outlined-filled", "label": "Outlined + filled" },
+        { "value": "all", "label": "Todas (outlined, filled, borderless)" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["outlined", "filled", "borderless", "material", "flat"]
+    },
+    {
+      "id": "clearable",
+      "text": "¿El select necesita botón de limpiar?",
+      "options": [
+        { "value": "yes", "label": "Sí — para vaciar la selección" },
+        { "value": "no", "label": "No — siempre debe haber una opción seleccionada" }
+      ],
+      "impact": "isClearable boolean y clear-button slot",
+      "tags": ["clearable", "clear", "reset", "optional-field"]
+    },
+    {
+      "id": "async",
+      "text": "¿Las opciones se cargan de forma dinámica (async)?",
+      "options": [
+        { "value": "static", "label": "Estáticas — siempre las mismas opciones" },
+        { "value": "async", "label": "Dinámicas — se cargan al escribir desde API" },
+        { "value": "paginated", "label": "Paginadas — infinite scroll en el dropdown" }
+      ],
+      "impact": "Loading state en el dropdown y comportamiento de búsqueda",
+      "tags": ["async", "API", "dynamic", "paginated", "infinite-scroll", "remote"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el select?",
+      "options": [
+        { "value": "forms", "label": "Formularios — campos de selección en forms" },
+        { "value": "filters", "label": "Filtros — sidebar de filtros, toolbar" },
+        { "value": "tables", "label": "Tablas — edición inline en celdas" },
+        { "value": "general", "label": "Uso general" }
+      ],
+      "impact": "Priorización de features y tamaños",
+      "tags": ["forms", "filters", "tables", "inline-edit", "enterprise", "dashboard"]
+    }
+  ]
+}

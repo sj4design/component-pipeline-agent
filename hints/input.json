@@ -1,0 +1,170 @@
+{
+  "component": "Input",
+  "archetype": "form-control",
+  "buildOrder": [
+    "Input"
+  ],
+  "family": [
+    {
+      "name": "Input",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "label*:text",
+        "required-indicator:text",
+        "prefix-icon:icon",
+        "prefix-text:text",
+        "input-field*:text-input",
+        "suffix-icon:icon",
+        "suffix-text:text",
+        "clear-button:icon-action",
+        "status-icon:icon",
+        "supporting-text:text",
+        "character-count:text"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "outlined",
+          "filled",
+          "borderless"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "disabled"
+        ],
+        "Status": [
+          "none",
+          "error",
+          "warning"
+        ]
+      },
+      "booleans": [
+        "Clear Button",
+        "Required",
+        "Status Icon",
+        "Prefix Icon(swap)",
+        "Suffix Icon(swap)",
+        "Supporting Text(text)",
+        "Prefix Text(text)",
+        "Suffix Text(text)",
+        "Character Count(text)"
+      ],
+      "exclusions": [
+        "disabled × error",
+        "disabled × warning"
+      ],
+      "frameCount": 90
+    }
+  ],
+  "a11y": {
+    "role": "textbox",
+    "keyboard": [
+      "Tab",
+      "Shift+Tab",
+      "Escape"
+    ],
+    "focus": "linear"
+  },
+  "tokens": {
+    "total": 62,
+    "prefix": "inp"
+  },
+  "questions": [
+    {
+      "id": "variants",
+      "text": "¿Qué variantes visuales del input necesitas?",
+      "options": [
+        { "value": "outlined-only", "label": "Solo outlined — borde visible, lo más estándar" },
+        { "value": "outlined-filled", "label": "Outlined + filled — dos estilos según contexto" },
+        { "value": "all", "label": "Todas (outlined, filled, borderless)" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["outlined", "filled", "borderless", "flat", "material"]
+    },
+    {
+      "id": "addons",
+      "text": "¿El input necesita prefijos/sufijos (íconos o texto)?",
+      "options": [
+        { "value": "none", "label": "No — input limpio sin addons" },
+        { "value": "icons", "label": "Solo íconos — búsqueda, email, password toggle" },
+        { "value": "text", "label": "Solo texto — '$', 'https://', '.com'" },
+        { "value": "both", "label": "Íconos y texto según el campo" }
+      ],
+      "impact": "Booleans Prefix Icon, Suffix Icon, Prefix Text, Suffix Text",
+      "tags": ["prefix", "suffix", "addon", "icon", "currency", "url", "search"]
+    },
+    {
+      "id": "clearable",
+      "text": "¿El input necesita botón de limpiar (clear)?",
+      "options": [
+        { "value": "yes", "label": "Sí — botón X para vaciar el campo" },
+        { "value": "no", "label": "No — el usuario borra manualmente" }
+      ],
+      "impact": "Clear Button boolean",
+      "tags": ["clear", "clearable", "reset", "search"]
+    },
+    {
+      "id": "validation",
+      "text": "¿Qué niveles de validación visual necesitas?",
+      "options": [
+        { "value": "error-only", "label": "Solo error — rojo con mensaje" },
+        { "value": "error-warning", "label": "Error + warning — dos niveles de severidad" },
+        { "value": "error-success", "label": "Error + success — validación positiva también" },
+        { "value": "none", "label": "Sin validación visual en el input" }
+      ],
+      "impact": "Status property values y Status Icon boolean",
+      "tags": ["validation", "error", "warning", "success", "form-validation"]
+    },
+    {
+      "id": "supporting-text",
+      "text": "¿El input necesita texto de soporte (helper text)?",
+      "options": [
+        { "value": "yes", "label": "Sí — descripción o instrucción debajo del campo" },
+        { "value": "error-only", "label": "Solo para errores — texto de error debajo" },
+        { "value": "no", "label": "No — sin texto adicional" }
+      ],
+      "impact": "Supporting Text boolean",
+      "tags": ["helper-text", "hint", "instructions", "error-message"]
+    },
+    {
+      "id": "character-count",
+      "text": "¿Necesitas contador de caracteres?",
+      "options": [
+        { "value": "yes", "label": "Sí — mostrar caracteres usados/máximo" },
+        { "value": "no", "label": "No — sin contador" }
+      ],
+      "impact": "Character Count boolean",
+      "tags": ["character-count", "max-length", "counter", "limit"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de input necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño (md)" },
+        { "value": "sm-md", "label": "Small + Medium — tablas densas y formularios" },
+        { "value": "all", "label": "Todos (sm, md, lg)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["compact", "dense", "large", "table-edit", "mobile"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el input?",
+      "options": [
+        { "value": "forms", "label": "Formularios — registro, edición, checkout" },
+        { "value": "search", "label": "Búsqueda — search bars, filtros" },
+        { "value": "tables", "label": "Tablas — edición inline en celdas" },
+        { "value": "general", "label": "Uso general — todos los contextos" }
+      ],
+      "impact": "Priorización de addons y features",
+      "tags": ["forms", "search", "tables", "inline-edit", "enterprise"]
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "component": "Button",
+  "archetype": "inline-action",
+  "buildOrder": [
+    ".IconButton",
+    "Button"
+  ],
+  "family": [
+    {
+      "name": ".IconButton",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "icon*:icon"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "primary",
+          "secondary",
+          "ghost"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "disabled"
+        ]
+      },
+      "booleans": [
+        "hasIcon(swap)"
+      ],
+      "exclusions": [],
+      "frameCount": 39
+    },
+    {
+      "name": "Button",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "icon-leading:icon",
+        "label*:text",
+        "icon-trailing:icon"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "primary",
+          "secondary",
+          "outline",
+          "ghost",
+          "danger"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "disabled"
+        ]
+      },
+      "booleans": [
+        "hasIconBefore(swap)",
+        "hasIconAfter(swap)"
+      ],
+      "exclusions": [],
+      "frameCount": 65
+    }
+  ],
+  "a11y": {
+    "role": "button",
+    "keyboard": [
+      "Enter (activate)",
+      "Space (activate)",
+      "Tab (navigate)"
+    ],
+    "focus": "linear"
+  },
+  "tokens": {
+    "total": 48
+  },
+  "questions": [
+    {
+      "id": "variants",
+      "text": "¿Qué jerarquías de botón necesitas en tu sistema?",
+      "options": [
+        { "value": "basic", "label": "Primary + Secondary — lo mínimo" },
+        { "value": "standard", "label": "Primary, Secondary, Outline, Ghost — set estándar" },
+        { "value": "full", "label": "Todas + Danger — sistema completo" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["primary", "secondary", "ghost", "outline", "danger", "destructive", "hierarchy"]
+    },
+    {
+      "id": "icon-usage",
+      "text": "¿Cómo se usan los íconos en los botones?",
+      "options": [
+        { "value": "text-only", "label": "Solo texto — sin íconos" },
+        { "value": "icon-text", "label": "Ícono + texto — refuerzan el significado" },
+        { "value": "icon-only", "label": "Solo ícono — toolbars, acciones compactas" },
+        { "value": "both", "label": "Ambos — icon+text y icon-only según contexto" }
+      ],
+      "impact": "Incluir .IconButton y booleans hasIconBefore/After",
+      "tags": ["icon", "icon-only", "toolbar", "FAB", "icon-button"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de botón necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño (md)" },
+        { "value": "sm-md", "label": "Small + Medium — interfaces densas y normales" },
+        { "value": "all", "label": "Small, Medium, Large — todos" },
+        { "value": "full-width", "label": "Todos + full-width para mobile" }
+      ],
+      "impact": "Size property values",
+      "tags": ["compact", "dense", "large", "CTA", "mobile", "full-width"]
+    },
+    {
+      "id": "loading",
+      "text": "¿El botón necesita estado de carga (loading/spinner)?",
+      "options": [
+        { "value": "yes", "label": "Sí — para acciones async (submit, guardar)" },
+        { "value": "no", "label": "No — estados estándar son suficientes" }
+      ],
+      "impact": "Boolean isLoading y spinner slot",
+      "tags": ["loading", "spinner", "async", "submit", "processing"]
+    },
+    {
+      "id": "toggle",
+      "text": "¿Necesitas botones con estado activo/toggle?",
+      "options": [
+        { "value": "yes", "label": "Sí — botones que mantienen estado activo (filtros, favoritos)" },
+        { "value": "no", "label": "No — botones de acción simple sin estado persistente" }
+      ],
+      "impact": "State=selected y posible ToggleButton sub-componente",
+      "tags": ["toggle", "active", "selected", "filter", "favorite", "bookmark"]
+    },
+    {
+      "id": "icon-button-variants",
+      "text": "¿El IconButton comparte las mismas variantes que el Button?",
+      "options": [
+        { "value": "same", "label": "Sí — mismas variantes (primary, secondary, ghost, etc.)" },
+        { "value": "reduced", "label": "No — solo un subset (ghost, secondary)" },
+        { "value": "no-icon-button", "label": "No necesito IconButton separado" }
+      ],
+      "impact": "Variant property en .IconButton",
+      "tags": ["icon-button", "toolbar", "actions", "compact"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usarán los botones?",
+      "options": [
+        { "value": "forms", "label": "Formularios — submit, cancel, acciones de form" },
+        { "value": "navigation", "label": "Navegación — CTAs, links de navegación" },
+        { "value": "toolbars", "label": "Toolbars — barras de acciones, editores" },
+        { "value": "general", "label": "Uso general — todos los contextos" }
+      ],
+      "impact": "Priorización de variantes y estados",
+      "tags": ["forms", "CTA", "toolbar", "editor", "landing", "enterprise"]
+    }
+  ]
+}

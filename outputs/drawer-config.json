@@ -1,0 +1,418 @@
+{
+  "version": "1.0",
+  "component": "Drawer",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": [
+    ".DrawerHeader",
+    ".DrawerBody",
+    ".DrawerFooter",
+    "Drawer"
+  ],
+  "a11y": {
+    "pattern": "dialog",
+    "role": "dialog (modal) | complementary (persistent)",
+    "ariaAttributes": [
+      "aria-modal=true",
+      "aria-labelledby"
+    ],
+    "keyboard": {
+      "Escape": "closes drawer",
+      "Tab": "trapped within drawer (focus trap)",
+      "focusOnOpen": "first focusable element",
+      "focusOnClose": "returns to trigger element"
+    },
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 25,
+    "prefix": "drw",
+    "mode": "C"
+  },
+  "componentDescriptions": {
+    "Drawer": "Panel deslizable que aparece desde el borde de la pantalla.\n\n🔑 role=dialog, aria-modal=true, aria-labelledby vinculado al titulo.\n⌨️ Escape cierra. Tab atrapado (focus trap). Focus al primer elemento focusable al abrir; regresa al trigger al cerrar.\n🎯 Contenedor lateral para formularios, detalles y filtros sin perder contexto de la pagina principal."
+  },
+  "variableBindings": {
+    "bg": "surface/default",
+    "border": "border/mid/default",
+    "overlay": "overlay/default",
+    "text": "text/label"
+  },
+  "family": [
+    {
+      "name": ".DrawerHeader",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentSlot": "header",
+      "slots": [
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "close-button",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "header-actions",
+          "type": "container",
+          "required": false,
+          "figmaBinding": "none"
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": null,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 12,
+          "px": 16,
+          "gap": 8,
+          "radius": 0
+        },
+        "md": {
+          "h": null,
+          "fontSize": 16,
+          "iconSize": 20,
+          "py": 16,
+          "px": 24,
+          "gap": 8,
+          "radius": 0
+        },
+        "lg": {
+          "h": null,
+          "fontSize": 20,
+          "iconSize": 24,
+          "py": 16,
+          "px": 24,
+          "gap": 8,
+          "radius": 0
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "Title",
+          "layerName": "title",
+          "default": "Drawer Title"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "Close Button",
+          "layerName": "close-button",
+          "defaultVisible": true
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": ".DrawerBody",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentSlot": "body",
+      "slots": [
+        {
+          "name": "content",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none"
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": null,
+          "fontSize": 14,
+          "iconSize": null,
+          "py": 16,
+          "px": 16,
+          "gap": 12,
+          "radius": 0
+        },
+        "md": {
+          "h": null,
+          "fontSize": 14,
+          "iconSize": null,
+          "py": 16,
+          "px": 24,
+          "gap": 16,
+          "radius": 0
+        },
+        "lg": {
+          "h": null,
+          "fontSize": 14,
+          "iconSize": null,
+          "py": 24,
+          "px": 24,
+          "gap": 16,
+          "radius": 0
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": ".DrawerFooter",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentSlot": "footer",
+      "slots": [
+        {
+          "name": "actions",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none"
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": null,
+          "fontSize": 14,
+          "iconSize": null,
+          "py": 12,
+          "px": 16,
+          "gap": 12,
+          "radius": 0
+        },
+        "md": {
+          "h": null,
+          "fontSize": 14,
+          "iconSize": null,
+          "py": 16,
+          "px": 24,
+          "gap": 12,
+          "radius": 0
+        },
+        "lg": {
+          "h": null,
+          "fontSize": 14,
+          "iconSize": null,
+          "py": 16,
+          "px": 24,
+          "gap": 12,
+          "radius": 0
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "Drawer",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "overlay",
+          "type": "visual",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "header",
+          "type": "container",
+          "required": false,
+          "figmaBinding": "slot",
+          "buildingBlock": ".DrawerHeader"
+        },
+        {
+          "name": "divider-header",
+          "type": "divider",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "body",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "slot",
+          "buildingBlock": ".DrawerBody"
+        },
+        {
+          "name": "divider-footer",
+          "type": "divider",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "footer",
+          "type": "container",
+          "required": false,
+          "figmaBinding": "slot",
+          "buildingBlock": ".DrawerFooter"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Position": [
+          "left",
+          "right"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "w": 320,
+          "h": "fill",
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 0,
+          "px": 0,
+          "gap": 0,
+          "radius": 0,
+          "sectionPadding": 0,
+          "itemsGap": 0
+        },
+        "md": {
+          "w": 480,
+          "h": "fill",
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 0,
+          "px": 0,
+          "gap": 0,
+          "radius": 0,
+          "sectionPadding": 0,
+          "itemsGap": 0
+        },
+        "lg": {
+          "w": 640,
+          "h": "fill",
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 0,
+          "px": 0,
+          "gap": 0,
+          "radius": 0,
+          "sectionPadding": 0,
+          "itemsGap": 0
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [
+        {
+          "boolName": "Header",
+          "swapName": "Header Content",
+          "layerName": "header",
+          "defaultVisible": true,
+          "preferredRef": ".DrawerHeader"
+        },
+        {
+          "boolName": "Footer",
+          "swapName": "Footer Content",
+          "layerName": "footer",
+          "defaultVisible": false,
+          "preferredRef": ".DrawerFooter"
+        }
+      ],
+      "booleanLayers": [
+        {
+          "boolName": "Overlay",
+          "layerName": "overlay",
+          "defaultVisible": true
+        },
+        {
+          "boolName": "Divider Header",
+          "layerName": "divider-header",
+          "defaultVisible": true
+        },
+        {
+          "boolName": "Divider Footer",
+          "layerName": "divider-footer",
+          "defaultVisible": true
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 6,
+        "exclusions": 0,
+        "net": 6
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 40,
+        "pad": 30
+      }
+    }
+  ],
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10T00:00:00Z",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype: container",
+      "why": "Drawer es un panel con regiones estructuradas (header/body/footer) como Modal y Card. 22/24 sistemas tratan drawers como contenedores con slots fijos.",
+      "source": "research"
+    },
+    {
+      "what": "Position: left/right (no top/bottom)",
+      "why": "Solo 14/24 sistemas soportan 4 direcciones. Top/bottom cambian el eje del Size (ancho vs alto) y son casos raros. Left/right cubren 95%+ de los usos.",
+      "source": "research"
+    },
+    {
+      "what": "Size: sm(320)/md(480)/lg(640) con anchos fijos en px",
+      "why": "Chakra define xs=256, sm=320, md=480, lg=640. Anchos fijos evitan inconsistencia. 3 sizes cubren narrow filters, standard detail, wide editor.",
+      "source": "research"
+    },
+    {
+      "what": "3 building blocks (.DrawerHeader, .DrawerBody, .DrawerFooter)",
+      "why": "18/24 tienen header estructurado, 22/24 body scrollable, 14/24 footer con acciones. Building blocks permiten swap e intercambio.",
+      "source": "research"
+    },
+    {
+      "what": "6 frames netos (3 sizes x 2 positions)",
+      "why": "El drawer no tiene estados interactivos propios. Booleans (header/footer/overlay/close-button/dividers) NO multiplican frames. Bien dentro del budget.",
+      "source": "spec"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

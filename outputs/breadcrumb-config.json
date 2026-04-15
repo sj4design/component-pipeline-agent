@@ -1,0 +1,339 @@
+{
+  "version": "1.0",
+  "component": "Breadcrumb",
+  "archetype": "inline-action",
+  "chromeless": true,
+  "language": "es",
+  "buildOrder": [
+    ".BreadcrumbItem",
+    "Breadcrumb"
+  ],
+  "family": [
+    {
+      "name": ".BreadcrumbItem",
+      "isSubComponent": true,
+      "isBuildingBlock": false,
+      "slots": [
+        {
+          "name": "icon",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        }
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed"
+        ]
+      },
+      "booleanProperties": {
+        "IsCurrent": {
+          "default": false,
+          "description": "Marca el item como pagina actual — non-interactive, bold, aria-current=\"page\""
+        }
+      },
+      "exclusions": [
+        {
+          "rule": "IsCurrent=true excludes State=hover/focus/pressed",
+          "reason": "Current page item is non-interactive text, not a link — no interaction states"
+        },
+        {
+          "rule": "disabled items skip tab order",
+          "reason": "Breadcrumb items are independent links — disabled items are not focusable"
+        }
+      ],
+      "sizes": {
+        "md": {
+          "h": 20,
+          "fontSize": 14,
+          "iconSize": 16,
+          "py": 0,
+          "px": 0,
+          "gap": 6,
+          "radius": 0
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "Label",
+          "layerName": "label",
+          "default": "Page"
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "hasIcon",
+          "swapName": "Icon",
+          "layerName": "icon",
+          "defaultVisible": false
+        }
+      ],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "colors": {
+        "fgDefault": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "fgHover": {
+          "r": 0.12,
+          "g": 0.3,
+          "b": 0.82
+        },
+        "fgFocus": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "fgPressed": {
+          "r": 0.1,
+          "g": 0.25,
+          "b": 0.72
+        },
+        "fgCurrent": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        }
+      },
+      "variantStyles": {
+        "default": {
+          "bg": null,
+          "fg": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "border": null,
+          "underline": false
+        },
+        "hover": {
+          "bg": null,
+          "fg": {
+            "r": 0.12,
+            "g": 0.3,
+            "b": 0.82
+          },
+          "border": null,
+          "underline": true
+        },
+        "focus": {
+          "bg": null,
+          "fg": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "border": {
+            "r": 0.25,
+            "g": 0.39,
+            "b": 0.95
+          },
+          "underline": false
+        },
+        "pressed": {
+          "bg": null,
+          "fg": {
+            "r": 0.1,
+            "g": 0.25,
+            "b": 0.72
+          },
+          "border": null,
+          "underline": true
+        }
+      },
+      "currentStyles": {
+        "fg": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fontWeight": 600,
+        "underline": false,
+        "isLink": false
+      },
+      "frameCount": {
+        "gross": 4,
+        "exclusions": 0,
+        "net": 4
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "Breadcrumb",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        {
+          "name": "items",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none",
+          "description": "Container holding BreadcrumbItem instances with separators between them"
+        },
+        {
+          "name": "separator",
+          "type": "internal",
+          "required": true,
+          "figmaBinding": "none",
+          "description": "Visual separator between items — '/' or '>' — aria-hidden"
+        },
+        {
+          "name": "ellipsis",
+          "type": "internal",
+          "required": false,
+          "figmaBinding": "none",
+          "description": "Truncation indicator '...' for collapsed paths"
+        }
+      ],
+      "properties": {},
+      "booleanProperties": {
+        "hasEllipsis": {
+          "default": false,
+          "description": "Muestra indicador de truncation '...' para paths colapsados"
+        }
+      },
+      "exclusions": [],
+      "sizes": {
+        "md": {
+          "h": "hug",
+          "fontSize": 14,
+          "py": 0,
+          "px": 0,
+          "gap": 8,
+          "separatorGap": 8,
+          "radius": 0
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "hasEllipsis",
+          "layerName": "ellipsis",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [],
+      "colors": {
+        "separatorFg": {
+          "r": 0.55,
+          "g": 0.55,
+          "b": 0.6
+        }
+      },
+      "variantStyles": {},
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 1,
+        "gap": 20,
+        "pad": 30
+      },
+      "autoLayout": {
+        "direction": "HORIZONTAL",
+        "primaryAxisSizing": "HUG",
+        "counterAxisSizing": "HUG",
+        "itemSpacing": 8,
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "breadcrumb",
+    "role": "navigation",
+    "ariaLabel": "Breadcrumb",
+    "itemRole": "link",
+    "structure": "nav > ol > li > a",
+    "keyboardNav": [
+      "Tab",
+      "Shift+Tab",
+      "Enter"
+    ],
+    "focusStrategy": "linear",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 18,
+    "prefix": "brc",
+    "mode": "C"
+  },
+  "componentDescriptions": {
+    "Breadcrumb": "Navegacion jerarquica de path.\nChromeless: sin bg, sin border, sin shadow.\n\n🔑 ARIA:\n• <nav aria-label=\"Breadcrumb\">\n• <ol> con <li> para cada item\n• Separadores aria-hidden=\"true\"\n• aria-current=\"page\" en item actual\n\n⌨️ Keyboard:\n• Tab: navegar entre items link\n• Enter: activar link\n• Shift+Tab: navegar hacia atras\n\n🎯 Focus:\n• Cada item es tab stop independiente\n• Focus ring visible (WCAG 2.4.7)\n• IsCurrent=true: no focusable (texto)\n\nTokens: 18, prefijo brc-.\nWCAG 2.2 AA · APG Breadcrumb Pattern.",
+    ".BreadcrumbItem": "Item individual de breadcrumb.\nStates: default, hover, focus, pressed.\nIsCurrent: pagina actual (non-interactive).\n\n🔑 ARIA:\n• <a> con href para navegacion\n• aria-current=\"page\" cuando IsCurrent\n• IsCurrent: render como <span>, no <a>\n\n⌨️ Keyboard:\n• Tab: recibe focus (si es link)\n• Enter: navegar al destino\n• IsCurrent: skip en tab order\n\n🎯 Focus:\n• Focus ring 2px offset 2px\n• IsCurrent: no focusable\n\nTokens: 12, prefijo brc-item-.\nWCAG 2.2 AA."
+  },
+  "variableBindings": {
+    "item/default": "interactive/default",
+    "item/hover": "interactive/hover",
+    "item/pressed": "interactive/pressed",
+    "item/current/fg": "text/label",
+    "separator/fg": "text/subtlest",
+    "disabled/fg": "text/disabled",
+    "focus/ring": "border/focus"
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype inline-action, chromeless",
+      "why": "Breadcrumb es lista horizontal de links sin chrome (sin bg/border/shadow). 21/21 sistemas lo implementan asi.",
+      "source": "research"
+    },
+    {
+      "what": "Family: Breadcrumb + .BreadcrumbItem sub-component",
+      "why": "21/21 sistemas tienen un named child component. BreadcrumbItem tiene sus propios estados (hover/focus/pressed) e IsCurrent boolean.",
+      "source": "research"
+    },
+    {
+      "what": "IsCurrent como boolean, no State variant",
+      "why": "Current page es configuracion binaria que excluye todos los estados de interaccion. global-property-rules.md: binary condition toggled by parent = boolean.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "Sin Size variant (solo md)",
+      "why": "Mayoria de sistemas (17/21) solo tienen un tamano de breadcrumb. Size agrega complejidad sin beneficio para la mayoria de apps.",
+      "source": "research"
+    },
+    {
+      "what": "Separator como internal region, no slot ni prop",
+      "why": "Separadores son decoracion visual aria-hidden. No son intercambiables via API — se definen en el builder. 21/21 sistemas los ocultan de AT.",
+      "source": "research"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

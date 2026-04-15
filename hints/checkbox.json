@@ -1,0 +1,198 @@
+{
+  "component": "Checkbox",
+  "archetype": "form-control",
+  "buildOrder": [
+    ".CheckboxControl",
+    "Checkbox",
+    "CheckboxGroup"
+  ],
+  "family": [
+    {
+      "name": ".CheckboxControl",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "box*:visual",
+        "icon-check*:icon"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Selected": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed"
+        ],
+        "Status": [
+          "none",
+          "error"
+        ]
+      },
+      "booleans": [],
+      "exclusions": [
+        null
+      ],
+      "frameCount": 69
+    },
+    {
+      "name": "Checkbox",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "control*:instance",
+        "label*:text",
+        "help-text:text"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Selected": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed"
+        ],
+        "Status": [
+          "none",
+          "error"
+        ]
+      },
+      "booleans": [
+        "isDisabled",
+        "hasHelpText(text)"
+      ],
+      "exclusions": [
+        null
+      ],
+      "frameCount": 69
+    },
+    {
+      "name": "CheckboxGroup",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "legend*:text",
+        "items*:children",
+        "error-message:text"
+      ],
+      "properties": {
+        "Orientation": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "booleans": [
+        "hasError(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 2
+    }
+  ],
+  "a11y": {
+    "role": "checkbox",
+    "keyboard": [
+      "Space (toggle checked)",
+      "Tab (navigate between checkboxes)"
+    ],
+    "focus": "linear"
+  },
+  "tokens": {
+    "total": 42
+  },
+  "questions": [
+    {
+      "id": "indeterminate",
+      "text": "¿Necesitas el estado indeterminado (parcialmente seleccionado)?",
+      "options": [
+        { "value": "yes", "label": "Sí — para 'seleccionar todos' en listas/tablas" },
+        { "value": "no", "label": "No — solo checked y unchecked" }
+      ],
+      "impact": "Selected=indeterminate en las properties",
+      "tags": ["indeterminate", "select-all", "partial", "tree", "table", "bulk-actions"]
+    },
+    {
+      "id": "group",
+      "text": "¿Los checkboxes se usan en grupo con legend y validación?",
+      "options": [
+        { "value": "yes", "label": "Sí — grupos con título, validación de error, orientación" },
+        { "value": "standalone", "label": "No — checkboxes individuales (términos, toggles)" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "Incluir CheckboxGroup en el build",
+      "tags": ["group", "fieldset", "legend", "form", "validation"]
+    },
+    {
+      "id": "help-text",
+      "text": "¿Los checkboxes necesitan texto de ayuda debajo del label?",
+      "options": [
+        { "value": "yes", "label": "Sí — descripciones bajo cada opción" },
+        { "value": "no", "label": "No — solo label es suficiente" }
+      ],
+      "impact": "hasHelpText boolean",
+      "tags": ["help-text", "description", "explanation", "detailed-options"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de checkbox necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño (md)" },
+        { "value": "sm-md", "label": "Small + Medium — tablas densas y formularios" },
+        { "value": "all", "label": "Todos (sm, md, lg)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["compact", "dense", "large", "table", "mobile"]
+    },
+    {
+      "id": "orientation",
+      "text": "¿Cómo se disponen los checkboxes en grupo?",
+      "options": [
+        { "value": "vertical", "label": "Vertical — lista apilada (lo más común)" },
+        { "value": "horizontal", "label": "Horizontal — en fila" },
+        { "value": "both", "label": "Ambas orientaciones según contexto" }
+      ],
+      "impact": "Orientation property en CheckboxGroup",
+      "tags": ["vertical", "horizontal", "inline", "layout", "row"]
+    },
+    {
+      "id": "validation",
+      "text": "¿Necesitas validación de error en el checkbox?",
+      "options": [
+        { "value": "individual", "label": "Sí, por checkbox individual — borde rojo en el control" },
+        { "value": "group", "label": "Sí, a nivel de grupo — mensaje de error bajo el grupo" },
+        { "value": "both", "label": "Ambos niveles" },
+        { "value": "none", "label": "No necesito validación visual" }
+      ],
+      "impact": "Status=error y hasError boolean en CheckboxGroup",
+      "tags": ["validation", "error", "required", "form-validation"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el checkbox?",
+      "options": [
+        { "value": "forms", "label": "Formularios — opciones múltiples, preferencias" },
+        { "value": "tables", "label": "Tablas — selección de filas, bulk actions" },
+        { "value": "filters", "label": "Filtros — sidebar de filtros, faceted search" },
+        { "value": "general", "label": "Uso general — múltiples contextos" }
+      ],
+      "impact": "Priorización de features (indeterminate para tablas, etc.)",
+      "tags": ["forms", "tables", "filters", "settings", "enterprise", "permissions"]
+    }
+  ]
+}

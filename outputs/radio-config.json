@@ -1,0 +1,357 @@
+{
+  "version": "1.0",
+  "component": "Radio",
+  "archetype": "form-control",
+  "buildOrder": [
+    ".RadioItem",
+    ".RadioCard",
+    "RadioGroup"
+  ],
+  "family": [
+    {
+      "name": ".RadioItem",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        }
+      ],
+      "properties": {
+        "Selected": [
+          "false",
+          "true"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed"
+        ],
+        "Disabled": [
+          "false",
+          "true"
+        ]
+      },
+      "exclusions": [
+        {
+          "combo": "Disabled=true + State=hover",
+          "reason": "Disabled blocks interaction"
+        },
+        {
+          "combo": "Disabled=true + State=focus",
+          "reason": "Disabled blocks focus"
+        },
+        {
+          "combo": "Disabled=true + State=pressed",
+          "reason": "Disabled blocks click"
+        }
+      ],
+      "sizes": {},
+      "textProperties": [
+        {
+          "propName": "✏️ Label",
+          "layerName": "label",
+          "default": "Option"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 10,
+        "exclusions": 0,
+        "net": 10
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": ".RadioCard",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "content",
+          "type": "container",
+          "required": true,
+          "figmaBinding": null
+        },
+        {
+          "name": "addon",
+          "type": "slot",
+          "required": false,
+          "figmaBinding": "swap"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Selected": [
+          "false",
+          "true"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus"
+        ],
+        "Disabled": [
+          "false",
+          "true"
+        ]
+      },
+      "exclusions": [
+        {
+          "combo": "Disabled=true + State=hover",
+          "reason": "Disabled blocks interaction"
+        },
+        {
+          "combo": "Disabled=true + State=focus",
+          "reason": "Disabled blocks focus"
+        }
+      ],
+      "sizes": {
+        "sm": {
+          "h": 48,
+          "fontSize": 14,
+          "fontSizeDesc": 12,
+          "iconSize": 16,
+          "px": 12,
+          "py": 8,
+          "gap": 8,
+          "radius": 6,
+          "controlSize": 16
+        },
+        "md": {
+          "h": 64,
+          "fontSize": 14,
+          "fontSizeDesc": 14,
+          "iconSize": 16,
+          "px": 16,
+          "py": 12,
+          "gap": 8,
+          "radius": 8,
+          "controlSize": 16
+        },
+        "lg": {
+          "h": 80,
+          "fontSize": 16,
+          "fontSizeDesc": 14,
+          "iconSize": 20,
+          "px": 20,
+          "py": 16,
+          "gap": 12,
+          "radius": 12,
+          "controlSize": 20
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Label",
+          "layerName": "label",
+          "default": "Option title"
+        },
+        {
+          "propName": "✏️ Description",
+          "layerName": "description",
+          "default": "Description text"
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "hasAddon",
+          "swapName": "Addon",
+          "layerName": "addon",
+          "defaultVisible": false
+        }
+      ],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 24,
+        "exclusions": 0,
+        "net": 24
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "RadioGroup",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "legend",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "error-message",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "items",
+          "type": "children",
+          "required": true,
+          "figmaBinding": null
+        }
+      ],
+      "properties": {
+        "Orientation": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {},
+      "textProperties": [
+        {
+          "propName": "✏️ Legend",
+          "layerName": "legend",
+          "default": "Select an option"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasError",
+          "textName": "✏️ Error",
+          "layerName": "error-message",
+          "default": "Please select an option"
+        }
+      ],
+      "frameCount": {
+        "gross": 2,
+        "exclusions": 0,
+        "net": 2
+      },
+      "grid": {
+        "maxCols": 2,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "radiogroup",
+    "role": "radiogroup",
+    "childRole": "radio",
+    "keyboardNav": [
+      "Tab (enter/exit group)",
+      "↑↓←→ (navigate + select)",
+      "Space (select when none)"
+    ],
+    "focusTechnique": "roving-tabindex",
+    "wrapAround": true,
+    "edgeCases": 7,
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 48,
+    "prefixes": {
+      "item": "rdi",
+      "card": "rdc",
+      "group": "rdg"
+    },
+    "mode": "C",
+    "layers": 3
+  },
+  "colors": {
+    "controlBorder": {
+      "r": 0.55,
+      "g": 0.55,
+      "b": 0.58
+    },
+    "controlBorderHover": {
+      "r": 0.35,
+      "g": 0.35,
+      "b": 0.4
+    },
+    "controlBorderFocus": {
+      "r": 0.15,
+      "g": 0.35,
+      "b": 0.92
+    },
+    "dotBg": {
+      "r": 0.15,
+      "g": 0.35,
+      "b": 0.92
+    },
+    "dotBgHover": {
+      "r": 0.12,
+      "g": 0.3,
+      "b": 0.82
+    },
+    "focusRing": {
+      "r": 0.25,
+      "g": 0.39,
+      "b": 0.95
+    },
+    "labelFg": {
+      "r": 0.07,
+      "g": 0.07,
+      "b": 0.07
+    },
+    "labelFgDisabled": {
+      "r": 0.62,
+      "g": 0.62,
+      "b": 0.65
+    },
+    "cardBg": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "cardBgHover": {
+      "r": 0.97,
+      "g": 0.97,
+      "b": 0.98
+    },
+    "cardBgSelected": {
+      "r": 0.93,
+      "g": 0.95,
+      "b": 1
+    },
+    "cardBorder": {
+      "r": 0.82,
+      "g": 0.82,
+      "b": 0.85
+    },
+    "cardBorderSelected": {
+      "r": 0.15,
+      "g": 0.35,
+      "b": 0.92
+    },
+    "errorFg": {
+      "r": 0.86,
+      "g": 0.15,
+      "b": 0.15
+    }
+  },
+  "componentDescriptions": {
+    ".RadioItem": "Control de selección radio clásico.\n\n🔑 ARIA:\n• role=\"radio\", aria-checked=\"true/false\"\n• Dentro de radiogroup con roving tabindex\n\n⌨️ Keyboard:\n• Tab: entra/sale del grupo\n• ↑↓←→: navegar + seleccionar (roving tabindex)\n• Space: seleccionar cuando ninguno seleccionado\n\n🎯 Focus:\n• Focus visible en el control radio (ring)\n• Disabled: no focusable, aria-disabled=\"true\" en composites\n\nTokens: 16, prefijo rdi-.\nWCAG 2.2 AA · APG Radio Group Pattern.",
+    ".RadioCard": "Radio tipo card con título, descripción y addon opcional.\nSizes: sm(48) md(64) lg(80).\n\n🔑 ARIA:\n• role=\"radio\", aria-checked, aria-describedby → description\n• Misma navegación que RadioItem dentro del grupo\n\n⌨️ Keyboard:\n• Tab: entra/sale del grupo\n• ↑↓←→: navegar + seleccionar\n\n🎯 Focus:\n• Focus ring en el card completo\n• Selected: borde azul + bg tinted\n\nTokens: 24, prefijo rdc-.\nWCAG 2.2 AA · APG Radio Group Pattern.",
+    "RadioGroup": "Contenedor de opciones radio (vertical u horizontal).\n\n🔑 ARIA:\n• role=\"radiogroup\"\n• aria-labelledby → legend\n• aria-required cuando aplique\n• aria-describedby → error-message (cuando hasError)\n\n⌨️ Keyboard:\n• Maneja roving tabindex de hijos\n• wrapAround: true (último → primero)\n\n🎯 Focus:\n• Tab entra al primer/seleccionado radio, Tab sale\n• Flechas mueven entre opciones sin Tab\n\nTokens: 8, prefijo rdg-.\nWCAG 2.2 AA · APG Radio Group Pattern."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-02T22:08:33.239Z",
+    "mode": "max"
+  },
+  "_foundationsRef": "foundations.json"
+}

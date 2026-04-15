@@ -1,0 +1,100 @@
+{
+  "component": "Skeleton",
+  "archetype": "inline-action",
+  "buildOrder": [
+    "Skeleton"
+  ],
+  "family": [
+    {
+      "name": "Skeleton",
+      "isSubComponent": false,
+      "chromeless": true,
+      "slots": [],
+      "properties": {
+        "Variant": [
+          "text",
+          "circular",
+          "rectangular"
+        ]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 3
+    }
+  ],
+  "a11y": {
+    "role": "none (aria-hidden)",
+    "keyboard": []
+  },
+  "tokens": {
+    "total": 8,
+    "prefix": "skl"
+  },
+  "questions": [
+    {
+      "id": "variants",
+      "text": "¿Qué formas de skeleton necesitas?",
+      "options": [
+        { "value": "text-only", "label": "Solo texto — líneas de placeholder para párrafos" },
+        { "value": "text-rect", "label": "Texto + rectangular — líneas y bloques (cards, imágenes)" },
+        { "value": "all", "label": "Todas (text, circular, rectangular)" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["text", "circular", "rectangular", "avatar", "image", "card"]
+    },
+    {
+      "id": "animation",
+      "text": "¿El skeleton tiene animación (shimmer/pulse)?",
+      "options": [
+        { "value": "shimmer", "label": "Shimmer — brillo que se desplaza horizontalmente" },
+        { "value": "pulse", "label": "Pulse — parpadeo de opacidad" },
+        { "value": "none", "label": "Sin animación — estático" },
+        { "value": "configurable", "label": "Configurable — elegir tipo de animación" }
+      ],
+      "impact": "Token de animación y comportamiento visual",
+      "tags": ["shimmer", "pulse", "animation", "loading", "wave"]
+    },
+    {
+      "id": "composable",
+      "text": "¿Necesitas skeletons compuestos pre-armados (card skeleton, list skeleton)?",
+      "options": [
+        { "value": "primitives", "label": "Solo primitivos — el diseñador arma la composición" },
+        { "value": "presets", "label": "Con presets — card skeleton, table skeleton, list skeleton pre-armados" }
+      ],
+      "impact": "Sub-componentes skeleton compuestos adicionales",
+      "tags": ["presets", "card-skeleton", "table-skeleton", "list-skeleton", "composed"]
+    },
+    {
+      "id": "sizing",
+      "text": "¿El tamaño del skeleton es fijo o flexible?",
+      "options": [
+        { "value": "fixed-presets", "label": "Presets fijos — tamaños predefinidos (avatar, heading, body)" },
+        { "value": "flexible", "label": "Flexible — ancho y alto configurables por instancia" }
+      ],
+      "impact": "Width/height como props configurables o presets fijos",
+      "tags": ["flexible", "fixed", "responsive", "custom-size"]
+    },
+    {
+      "id": "color",
+      "text": "¿El skeleton necesita adaptarse a fondos claros y oscuros?",
+      "options": [
+        { "value": "single", "label": "Un solo tema — color fijo" },
+        { "value": "themed", "label": "Multi-tema — se adapta a light/dark mode" }
+      ],
+      "impact": "Tokens de color para light/dark",
+      "tags": ["dark-mode", "light-mode", "themed", "contrast"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el skeleton?",
+      "options": [
+        { "value": "cards", "label": "Cards — placeholders de contenido de cards" },
+        { "value": "tables", "label": "Tablas — filas placeholder mientras carga datos" },
+        { "value": "pages", "label": "Páginas completas — skeleton de layout completo" },
+        { "value": "general", "label": "Uso general — múltiples contextos" }
+      ],
+      "impact": "Priorización de variantes y presets",
+      "tags": ["cards", "tables", "pages", "lists", "dashboard", "loading"]
+    }
+  ]
+}

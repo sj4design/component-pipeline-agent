@@ -1,0 +1,122 @@
+{
+  "component": "Switch",
+  "archetype": "form-control",
+  "buildOrder": [
+    "Switch"
+  ],
+  "family": [
+    {
+      "name": "Switch",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "track*:shape",
+        "thumb*:shape",
+        "label:text"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "disabled"
+        ]
+      },
+      "booleans": [
+        "Loading",
+        "Label(text)"
+      ],
+      "exclusions": [
+        "disabled x hover",
+        "disabled x focus"
+      ],
+      "frameCount": 18
+    }
+  ],
+  "a11y": {
+    "role": "switch",
+    "keyboard": [
+      "Space",
+      "Tab"
+    ],
+    "focus": "linear"
+  },
+  "tokens": {
+    "total": 28,
+    "prefix": "swt"
+  },
+  "questions": [
+    {
+      "id": "label-position",
+      "text": "¿Dónde se ubica el label del switch?",
+      "options": [
+        { "value": "right", "label": "A la derecha — patrón más común" },
+        { "value": "left", "label": "A la izquierda — label primero, switch después" },
+        { "value": "configurable", "label": "Configurable — ambas posiciones" },
+        { "value": "no-label", "label": "Sin label visible — solo el toggle" }
+      ],
+      "impact": "Layout direction y Label boolean",
+      "tags": ["label-position", "left", "right", "no-label"]
+    },
+    {
+      "id": "label-content",
+      "text": "¿El switch necesita texto descriptivo además del label?",
+      "options": [
+        { "value": "label-only", "label": "Solo label — una línea" },
+        { "value": "label-description", "label": "Label + descripción — explicación debajo" },
+        { "value": "on-off-text", "label": "Texto on/off dentro del track — 'SI'/'NO'" }
+      ],
+      "impact": "Slots de texto y contenido del track",
+      "tags": ["description", "help-text", "on-off", "inner-text"]
+    },
+    {
+      "id": "loading",
+      "text": "¿El switch necesita estado de carga (loading)?",
+      "options": [
+        { "value": "yes", "label": "Sí — spinner mientras se aplica el cambio" },
+        { "value": "no", "label": "No — cambio instantáneo sin loading" }
+      ],
+      "impact": "Loading boolean",
+      "tags": ["loading", "async", "spinner", "processing", "API-call"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de switch necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño (md)" },
+        { "value": "sm-md", "label": "Small + Medium — settings compactos y normales" },
+        { "value": "all", "label": "Todos (sm, md, lg)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["compact", "dense", "large", "mobile"]
+    },
+    {
+      "id": "color",
+      "text": "¿El switch usa color semántico cuando está activo?",
+      "options": [
+        { "value": "brand", "label": "Color de marca — primary color cuando está on" },
+        { "value": "success", "label": "Verde/success — indica estado activo positivo" },
+        { "value": "neutral", "label": "Neutral — sin color semántico" }
+      ],
+      "impact": "Tokens de color para el track en estado on",
+      "tags": ["color", "brand", "success", "green", "semantic"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el switch?",
+      "options": [
+        { "value": "settings", "label": "Configuración — activar/desactivar features" },
+        { "value": "forms", "label": "Formularios — campos booleanos en forms" },
+        { "value": "tables", "label": "Tablas — toggle en filas de datos" },
+        { "value": "general", "label": "Uso general" }
+      ],
+      "impact": "Priorización de features y tamaños",
+      "tags": ["settings", "forms", "tables", "preferences", "toggles", "enterprise"]
+    }
+  ]
+}

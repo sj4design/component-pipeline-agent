@@ -1,0 +1,134 @@
+{
+  "component": "Breadcrumb",
+  "archetype": "inline-action",
+  "buildOrder": [
+    ".BreadcrumbItem",
+    "Breadcrumb"
+  ],
+  "family": [
+    {
+      "name": ".BreadcrumbItem",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "icon:icon",
+        "label*:text"
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed"
+        ]
+      },
+      "booleans": [
+        "hasIcon(swap)"
+      ],
+      "exclusions": [
+        "IsCurrent=true excludes State=hover/focus/pressed",
+        "disabled items skip tab order"
+      ],
+      "frameCount": 4
+    },
+    {
+      "name": "Breadcrumb",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "items*:container",
+        "separator*:internal",
+        "ellipsis:internal"
+      ],
+      "properties": {},
+      "booleans": [
+        "hasEllipsis"
+      ],
+      "exclusions": [],
+      "frameCount": 1
+    }
+  ],
+  "a11y": {
+    "role": "navigation",
+    "keyboard": [
+      "Tab",
+      "Shift+Tab",
+      "Enter"
+    ]
+  },
+  "tokens": {
+    "total": 18,
+    "prefix": "brc"
+  },
+  "questions": [
+    {
+      "id": "overflow",
+      "text": "¿Qué pasa cuando hay muchos niveles de breadcrumb?",
+      "options": [
+        { "value": "ellipsis", "label": "Ellipsis — se colapsan los niveles intermedios con '...'" },
+        { "value": "scroll", "label": "Scroll horizontal — todos visibles con scroll" },
+        { "value": "truncate", "label": "Truncar texto — labels largos se acortan" },
+        { "value": "fixed", "label": "Cantidad fija — nunca hay más de 3-4 niveles" }
+      ],
+      "impact": "hasEllipsis boolean y comportamiento de overflow",
+      "tags": ["overflow", "ellipsis", "truncate", "deep-hierarchy", "many-levels"]
+    },
+    {
+      "id": "icons",
+      "text": "¿Los items del breadcrumb llevan íconos?",
+      "options": [
+        { "value": "none", "label": "No — solo texto" },
+        { "value": "home-only", "label": "Solo el primer item — ícono de home" },
+        { "value": "all", "label": "Todos los items — ícono + texto" },
+        { "value": "optional", "label": "Configurable por item" }
+      ],
+      "impact": "hasIcon boolean en .BreadcrumbItem",
+      "tags": ["icons", "home", "folder", "navigation-icons"]
+    },
+    {
+      "id": "separator",
+      "text": "¿Qué separador se usa entre los items?",
+      "options": [
+        { "value": "slash", "label": "Slash (/) — el más común" },
+        { "value": "chevron", "label": "Chevron (>) — patrón alternativo" },
+        { "value": "custom", "label": "Personalizable — cualquier ícono o carácter" }
+      ],
+      "impact": "Separator slot content y token",
+      "tags": ["separator", "slash", "chevron", "arrow", "custom-separator"]
+    },
+    {
+      "id": "current-page",
+      "text": "¿Cómo se muestra el último item (página actual)?",
+      "options": [
+        { "value": "text-only", "label": "Texto no clickeable — solo indica la ubicación" },
+        { "value": "highlighted", "label": "Texto resaltado — bold o color distinto" },
+        { "value": "hidden", "label": "No se muestra — el breadcrumb termina en el padre" }
+      ],
+      "impact": "IsCurrent state y estilos del último item",
+      "tags": ["current-page", "active", "last-item", "non-interactive"]
+    },
+    {
+      "id": "dropdown",
+      "text": "¿El ellipsis abre un dropdown con los items ocultos?",
+      "options": [
+        { "value": "yes", "label": "Sí — al hacer click en '...' se ven los niveles ocultos" },
+        { "value": "no", "label": "No — el ellipsis es solo visual, sin interacción" },
+        { "value": "not-needed", "label": "No aplica — no uso ellipsis" }
+      ],
+      "impact": "Interactividad del ellipsis y sub-componente dropdown",
+      "tags": ["dropdown", "expandable", "interactive-ellipsis", "deep-navigation"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto se usará el breadcrumb?",
+      "options": [
+        { "value": "page-nav", "label": "Navegación de páginas — sitios con jerarquía de contenido" },
+        { "value": "file-system", "label": "Explorador de archivos — rutas de carpetas" },
+        { "value": "wizard", "label": "Flujos paso a paso — indicar progreso en un wizard" },
+        { "value": "general", "label": "Uso general" }
+      ],
+      "impact": "Priorización de features y profundidad máxima",
+      "tags": ["page-navigation", "file-explorer", "wizard", "steps", "hierarchy", "CMS"]
+    }
+  ]
+}

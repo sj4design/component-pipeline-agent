@@ -1,0 +1,166 @@
+{
+  "component": "Accordion",
+  "archetype": "container",
+  "buildOrder": [
+    ".AccordionItem",
+    "Accordion"
+  ],
+  "family": [
+    {
+      "name": ".AccordionItem",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "chevron*:icon",
+        "title*:text",
+        "content*:container"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "default",
+          "bordered",
+          "ghost"
+        ],
+        "State": [
+          "collapsed",
+          "expanded",
+          "disabled"
+        ]
+      },
+      "booleans": [
+        "hasIcon",
+        "Icon(swap)"
+      ],
+      "exclusions": [],
+      "frameCount": 27
+    },
+    {
+      "name": "Accordion",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "items*:container"
+      ],
+      "properties": {},
+      "booleans": [
+        "allowMultiple"
+      ],
+      "exclusions": [],
+      "frameCount": 1
+    }
+  ],
+  "a11y": {
+    "role": "button (trigger) + region (panel)",
+    "keyboard": [
+      "Enter/Space",
+      "Tab",
+      "ArrowDown/Up"
+    ],
+    "focus": "roving"
+  },
+  "tokens": {
+    "total": 30,
+    "prefix": "acc"
+  },
+  "questions": [
+    {
+      "id": "content-type",
+      "text": "¿Qué tipo de contenido va dentro de cada panel del accordion?",
+      "options": [
+        { "value": "text-only", "label": "Solo texto — párrafos, FAQ, descripciones" },
+        { "value": "mixed-media", "label": "Texto + imágenes — documentación, guías" },
+        { "value": "forms", "label": "Formularios — inputs, selects dentro del panel" },
+        { "value": "complex", "label": "Componentes complejos — tabs, tablas, accordions anidados" },
+        { "value": "any", "label": "Cualquier contenido — slot libre" }
+      ],
+      "impact": "Define profundidad del slot content y si necesita scroll interno",
+      "tags": ["content", "forms", "nested", "rich-content", "FAQ", "documentation"]
+    },
+    {
+      "id": "open-behavior",
+      "text": "¿Cuántos paneles pueden estar abiertos al mismo tiempo?",
+      "options": [
+        { "value": "single", "label": "Solo uno — al abrir uno, el anterior se cierra" },
+        { "value": "multiple", "label": "Varios simultáneos — apertura independiente" },
+        { "value": "first-open", "label": "Uno abierto por defecto, el resto colapsados" },
+        { "value": "all-closed", "label": "Todos cerrados por defecto" }
+      ],
+      "impact": "allowMultiple boolean en Accordion parent",
+      "tags": ["exclusive", "multiple", "FAQ", "filters", "single-open", "multi-open"]
+    },
+    {
+      "id": "header-extras",
+      "text": "¿El header de cada panel tiene elementos adicionales además del título?",
+      "options": [
+        { "value": "simple", "label": "Solo título + ícono de toggle" },
+        { "value": "badge", "label": "Título + badge o contador" },
+        { "value": "actions", "label": "Título + acciones (editar, eliminar)" },
+        { "value": "custom", "label": "Header completamente personalizable" }
+      ],
+      "impact": "hasIcon boolean, slots adicionales en .AccordionItem header",
+      "tags": ["badge", "counter", "actions", "editable", "custom-header"]
+    },
+    {
+      "id": "variants",
+      "text": "¿Qué variantes visuales del accordion necesitas?",
+      "options": [
+        { "value": "default-only", "label": "Solo default — con bordes y separadores" },
+        { "value": "bordered", "label": "Bordered — cada item con borde completo" },
+        { "value": "ghost", "label": "Ghost — sin bordes ni separadores" },
+        { "value": "all", "label": "Todas las variantes" }
+      ],
+      "impact": "Variant property values en .AccordionItem",
+      "tags": ["bordered", "ghost", "minimal", "card-style", "clean"]
+    },
+    {
+      "id": "icon-position",
+      "text": "¿Dónde se ubica el ícono de toggle (chevron)?",
+      "options": [
+        { "value": "right", "label": "A la derecha del título — patrón más común" },
+        { "value": "left", "label": "A la izquierda del título — patrón alternativo" },
+        { "value": "configurable", "label": "Configurable — ambas posiciones según contexto" }
+      ],
+      "impact": "Orden de slots en .AccordionItem y layout direction",
+      "tags": ["chevron", "icon-position", "toggle", "left-icon", "right-icon"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de accordion necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño es suficiente (md)" },
+        { "value": "sm-md", "label": "Pequeño y mediano — interfaces compactas y normales" },
+        { "value": "all", "label": "Todos (sm, md, lg)" }
+      ],
+      "impact": "Size property values en .AccordionItem",
+      "tags": ["compact", "dense", "large", "mobile", "sidebar"]
+    },
+    {
+      "id": "disabled-items",
+      "text": "¿Necesitas poder deshabilitar ítems individuales del accordion?",
+      "options": [
+        { "value": "yes", "label": "Sí — algunos paneles pueden estar deshabilitados" },
+        { "value": "no", "label": "No — todos los paneles siempre están disponibles" }
+      ],
+      "impact": "State=disabled en .AccordionItem",
+      "tags": ["disabled", "locked", "permissions", "conditional", "enterprise"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el accordion?",
+      "options": [
+        { "value": "faq", "label": "FAQ o ayuda — preguntas frecuentes" },
+        { "value": "settings", "label": "Configuración — secciones de ajustes" },
+        { "value": "filters", "label": "Filtros — filtros colapsables en sidebar" },
+        { "value": "navigation", "label": "Navegación — menú expandible" },
+        { "value": "general", "label": "Uso general — múltiples contextos" }
+      ],
+      "impact": "Priorización de variantes y comportamiento de apertura",
+      "tags": ["FAQ", "settings", "filters", "sidebar", "navigation", "mobile", "enterprise"]
+    }
+  ]
+}

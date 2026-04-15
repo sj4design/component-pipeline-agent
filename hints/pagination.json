@@ -1,0 +1,146 @@
+{
+  "component": "Pagination",
+  "archetype": "inline-action",
+  "buildOrder": [
+    ".PageButton",
+    "Pagination"
+  ],
+  "family": [
+    {
+      "name": ".PageButton",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "label*:text"
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "disabled"
+        ],
+        "IsCurrent": [
+          "false",
+          "true"
+        ]
+      },
+      "booleans": [],
+      "exclusions": [
+        "disabled x hover/focus/pressed",
+        "IsCurrent=true x disabled"
+      ],
+      "frameCount": 6
+    },
+    {
+      "name": "Pagination",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "prev-button*:icon-action",
+        "page-buttons*:container",
+        "ellipsis:visual",
+        "next-button*:icon-action",
+        "total-display:text",
+        "size-changer:slot",
+        "quick-jumper:slot"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "booleans": [
+        "Show Total",
+        "Size Changer",
+        "Quick Jumper",
+        "Show Total(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 3
+    }
+  ],
+  "a11y": {
+    "role": "navigation"
+  },
+  "tokens": {
+    "total": 20,
+    "prefix": "pgn"
+  },
+  "questions": [
+    {
+      "id": "style",
+      "text": "¿Qué estilo de paginación necesitas?",
+      "options": [
+        { "value": "numbered", "label": "Números de página — 1, 2, 3, ..., 10" },
+        { "value": "prev-next", "label": "Solo prev/next — sin números de página" },
+        { "value": "load-more", "label": "Load more — botón para cargar más resultados" },
+        { "value": "all", "label": "Numbered + prev/next + ellipsis — completo" }
+      ],
+      "impact": "Slots page-buttons y ellipsis",
+      "tags": ["numbered", "prev-next", "load-more", "infinite-scroll"]
+    },
+    {
+      "id": "extras",
+      "text": "¿Qué elementos adicionales necesita la paginación?",
+      "options": [
+        { "value": "none", "label": "Ninguno — solo botones de página" },
+        { "value": "total", "label": "Total de resultados — 'Mostrando 1-10 de 100'" },
+        { "value": "size-changer", "label": "Selector de tamaño — '10 / 25 / 50 por página'" },
+        { "value": "jumper", "label": "Quick jumper — 'Ir a página ___'" },
+        { "value": "all", "label": "Todo — total, size changer, quick jumper" }
+      ],
+      "impact": "Show Total, Size Changer, Quick Jumper booleans",
+      "tags": ["total", "page-size", "jumper", "enterprise", "data-heavy"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de paginación necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño (md)" },
+        { "value": "sm-md", "label": "Small + Medium — tablas compactas y normales" },
+        { "value": "all", "label": "Todos (sm, md, lg)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["compact", "dense", "large", "table"]
+    },
+    {
+      "id": "ellipsis",
+      "text": "¿Se colapsan las páginas intermedias con ellipsis?",
+      "options": [
+        { "value": "yes", "label": "Sí — '1 ... 5 6 7 ... 20' cuando hay muchas páginas" },
+        { "value": "no", "label": "No — se muestran todas las páginas" },
+        { "value": "not-needed", "label": "No aplica — uso solo prev/next" }
+      ],
+      "impact": "Slot ellipsis y lógica de rango visible",
+      "tags": ["ellipsis", "collapse", "many-pages", "truncate"]
+    },
+    {
+      "id": "mobile",
+      "text": "¿Cómo se adapta la paginación en mobile?",
+      "options": [
+        { "value": "simplified", "label": "Simplificada — solo prev/next + página actual" },
+        { "value": "same", "label": "Igual que desktop" },
+        { "value": "load-more", "label": "Cambia a 'load more' en mobile" },
+        { "value": "not-needed", "label": "Solo desktop — no aplica mobile" }
+      ],
+      "impact": "Responsive behavior y visibilidad de extras",
+      "tags": ["mobile", "responsive", "simplified", "load-more"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto se usará la paginación?",
+      "options": [
+        { "value": "table", "label": "Tablas — paginación de datos tabulares" },
+        { "value": "list", "label": "Listas — resultados de búsqueda, catálogos" },
+        { "value": "cards", "label": "Grid de cards — galería, productos" },
+        { "value": "general", "label": "Uso general" }
+      ],
+      "impact": "Priorización de extras y estilo",
+      "tags": ["table", "list", "catalog", "search-results", "enterprise"]
+    }
+  ]
+}

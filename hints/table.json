@@ -1,0 +1,199 @@
+{
+  "component": "Table",
+  "archetype": "grid-tabular",
+  "buildOrder": [
+    ".TableHeaderCell",
+    ".TableCell",
+    ".TableRow",
+    "Table"
+  ],
+  "family": [
+    {
+      "name": ".TableHeaderCell",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "label*:text",
+        "sort-icon:icon"
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "sorted-asc",
+          "sorted-desc"
+        ]
+      },
+      "booleans": [
+        "hasSortIcon"
+      ],
+      "exclusions": [],
+      "frameCount": 4
+    },
+    {
+      "name": ".TableCell",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "content*:text"
+      ],
+      "properties": {
+        "Density": [
+          "compact",
+          "default",
+          "comfortable"
+        ]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 3
+    },
+    {
+      "name": ".TableRow",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "cells*:container"
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "selected",
+          "disabled"
+        ]
+      },
+      "booleans": [
+        "hasCheckbox",
+        "isStriped"
+      ],
+      "exclusions": [],
+      "frameCount": 4
+    },
+    {
+      "name": "Table",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "header-row*:container",
+        "body-rows*:container"
+      ],
+      "properties": {},
+      "booleans": [
+        "isBordered",
+        "isStriped",
+        "hasStickyHeader",
+        "hasSelection",
+        "hasPagination"
+      ],
+      "exclusions": [],
+      "frameCount": 1
+    }
+  ],
+  "a11y": {
+    "role": "table (display) or grid (interactive)",
+    "keyboard": [
+      "Tab",
+      "ArrowKeys (grid mode)"
+    ],
+    "focus": "roving"
+  },
+  "tokens": {
+    "total": 35,
+    "prefix": "tbl"
+  },
+  "questions": [
+    {
+      "id": "data-features",
+      "text": "¿Qué capacidades de manipulación de datos necesitas?",
+      "options": [
+        { "value": "read-only", "label": "Solo lectura — tabla informativa sin interacción" },
+        { "value": "sorting", "label": "Sorting — ordenar por columna" },
+        { "value": "sort-filter", "label": "Sorting + filtrado — ordenar y filtrar datos" },
+        { "value": "full", "label": "Completo — sorting, filtrado, búsqueda global, paginación" }
+      ],
+      "impact": "hasSortIcon boolean, hasPagination, toolbar features",
+      "tags": ["sorting", "filtering", "search", "pagination", "data-management"]
+    },
+    {
+      "id": "selection",
+      "text": "¿Los usuarios pueden seleccionar filas?",
+      "options": [
+        { "value": "none", "label": "No — tabla informativa" },
+        { "value": "single", "label": "Selección simple — una fila a la vez" },
+        { "value": "multi", "label": "Selección múltiple con checkboxes" },
+        { "value": "multi-bulk", "label": "Múltiple + acciones bulk — toolbar al seleccionar" }
+      ],
+      "impact": "hasSelection y hasCheckbox booleans",
+      "tags": ["selection", "checkbox", "bulk-actions", "multi-select", "batch"]
+    },
+    {
+      "id": "editing",
+      "text": "¿Los usuarios pueden modificar datos en la tabla?",
+      "options": [
+        { "value": "read-only", "label": "Solo lectura" },
+        { "value": "row-actions", "label": "Acciones por fila — editar, eliminar, ver detalle" },
+        { "value": "inline-edit", "label": "Edición inline — click en celda para editar" },
+        { "value": "both", "label": "Ambas — inline para campos simples, botón para edición completa" }
+      ],
+      "impact": "Slots de acción en .TableRow y estados de edición",
+      "tags": ["editing", "inline-edit", "row-actions", "CRUD", "editable"]
+    },
+    {
+      "id": "density",
+      "text": "¿La tabla necesita control de densidad?",
+      "options": [
+        { "value": "single", "label": "Una sola densidad (default)" },
+        { "value": "configurable", "label": "Configurable — compact, default, comfortable" }
+      ],
+      "impact": "Density property en .TableCell",
+      "tags": ["density", "compact", "comfortable", "spacing", "data-heavy"]
+    },
+    {
+      "id": "visual-style",
+      "text": "¿Qué estilo visual necesita la tabla?",
+      "options": [
+        { "value": "plain", "label": "Plain — sin bordes ni rayas" },
+        { "value": "bordered", "label": "Bordered — con bordes entre celdas" },
+        { "value": "striped", "label": "Striped — filas alternadas con fondo" },
+        { "value": "configurable", "label": "Configurable — bordered y striped como opciones" }
+      ],
+      "impact": "isBordered y isStriped booleans",
+      "tags": ["bordered", "striped", "zebra", "grid-lines", "clean"]
+    },
+    {
+      "id": "sticky",
+      "text": "¿La tabla necesita header sticky (fijo al hacer scroll)?",
+      "options": [
+        { "value": "yes", "label": "Sí — el header se mantiene visible al scrollear" },
+        { "value": "no", "label": "No — el header sube con el contenido" }
+      ],
+      "impact": "hasStickyHeader boolean",
+      "tags": ["sticky-header", "fixed-header", "scroll", "long-tables"]
+    },
+    {
+      "id": "responsive",
+      "text": "¿Cómo se comporta la tabla en pantallas pequeñas?",
+      "options": [
+        { "value": "scroll-h", "label": "Scroll horizontal — mantiene estructura" },
+        { "value": "cards", "label": "Cards apiladas — cada fila se transforma en card" },
+        { "value": "hide-columns", "label": "Ocultar columnas — solo las más importantes" },
+        { "value": "desktop-only", "label": "Solo desktop — no aplica mobile" }
+      ],
+      "impact": "Responsive behavior y breakpoint tokens",
+      "tags": ["responsive", "mobile", "scroll", "cards", "collapse-columns"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto se usará la tabla?",
+      "options": [
+        { "value": "admin", "label": "Admin panel — gestión de registros CRUD" },
+        { "value": "analytics", "label": "Analytics — datos financieros, reportes" },
+        { "value": "lists", "label": "Listados — usuarios, productos, pedidos" },
+        { "value": "general", "label": "Uso general" }
+      ],
+      "impact": "Priorización de features",
+      "tags": ["admin", "CRUD", "analytics", "reports", "enterprise", "dashboard"]
+    }
+  ]
+}

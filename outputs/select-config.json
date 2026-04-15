@@ -1,0 +1,641 @@
+{
+  "version": "1.0",
+  "component": "Select",
+  "archetype": "composite-overlay",
+  "language": "es",
+  "buildOrder": [
+    ".SelectOption",
+    "Select"
+  ],
+  "family": [
+    {
+      "name": ".SelectOption",
+      "isSubComponent": true,
+      "isBuildingBlock": false,
+      "slots": [
+        {
+          "name": "option-icon",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "checkmark",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "selected",
+          "disabled"
+        ]
+      },
+      "exclusions": [
+        {
+          "rule": "disabled x hover/focus/pressed",
+          "reason": "Disabled blocks interaction"
+        }
+      ],
+      "sizes": {
+        "sm": {
+          "h": 32,
+          "fontSize": 14,
+          "iconSize": 16,
+          "py": 6,
+          "px": 8,
+          "gap": 8,
+          "radius": 4
+        },
+        "md": {
+          "h": 36,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 8,
+          "px": 12,
+          "gap": 8,
+          "radius": 4
+        },
+        "lg": {
+          "h": 40,
+          "fontSize": 16,
+          "iconSize": 20,
+          "py": 8,
+          "px": 12,
+          "gap": 8,
+          "radius": 6
+        }
+      },
+      "colors": {},
+      "variantStyles": {
+        "default": {
+          "bg": null,
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": null
+        },
+        "hover": {
+          "bg": {
+            "r": 0.97,
+            "g": 0.97,
+            "b": 0.98
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": null
+        },
+        "focus": {
+          "bg": {
+            "r": 0.97,
+            "g": 0.97,
+            "b": 0.98
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": null
+        },
+        "pressed": {
+          "bg": {
+            "r": 0.95,
+            "g": 0.95,
+            "b": 0.97
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": null
+        },
+        "selected": {
+          "bg": {
+            "r": 0.93,
+            "g": 0.95,
+            "b": 1
+          },
+          "fg": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "border": null
+        },
+        "disabled": {
+          "bg": null,
+          "fg": {
+            "r": 0.72,
+            "g": 0.72,
+            "b": 0.75
+          },
+          "border": null
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "Label",
+          "layerName": "label",
+          "default": "Option"
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "showIcon",
+          "swapName": "Option Icon",
+          "layerName": "option-icon",
+          "defaultVisible": false
+        }
+      ],
+      "booleanLayers": [
+        {
+          "boolName": "showCheckmark",
+          "layerName": "checkmark",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "isSelected",
+          "layerName": "selected-indicator",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "showDescription",
+          "textPropName": "Description",
+          "layerName": "description",
+          "default": "Description text",
+          "defaultVisible": false
+        }
+      ],
+      "frameCount": {
+        "gross": 6,
+        "exclusions": 0,
+        "net": 6
+      },
+      "grid": {
+        "maxCols": 6,
+        "gap": 16,
+        "pad": 20
+      }
+    },
+    {
+      "name": "Select",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "icon-leading",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "value-text",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "clear-button",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "chevron",
+          "type": "icon",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "helper-text",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "error-text",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "outlined",
+          "filled",
+          "borderless"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "open",
+          "disabled",
+          "readonly"
+        ],
+        "Status": [
+          "none",
+          "error",
+          "warning"
+        ]
+      },
+      "exclusions": [
+        {
+          "rule": "disabled x hover/focus/open",
+          "reason": "Disabled blocks all interaction"
+        },
+        {
+          "rule": "disabled x error/warning",
+          "reason": "Disabled overrides validation status"
+        },
+        {
+          "rule": "readonly x open",
+          "reason": "Readonly prevents dropdown opening"
+        },
+        {
+          "rule": "readonly x hover",
+          "reason": "Readonly shows minimal interaction feedback"
+        },
+        {
+          "rule": "borderless x error/warning",
+          "reason": "Borderless variant lacks border to color for status"
+        }
+      ],
+      "sizes": {
+        "sm": {
+          "h": 32,
+          "fontSize": 12,
+          "iconSize": 16,
+          "py": 6,
+          "px": 8,
+          "gap": 8,
+          "radius": 6,
+          "chevronSize": 16
+        },
+        "md": {
+          "h": 40,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 8,
+          "px": 12,
+          "gap": 8,
+          "radius": 8,
+          "chevronSize": 16
+        },
+        "lg": {
+          "h": 48,
+          "fontSize": 16,
+          "iconSize": 20,
+          "py": 12,
+          "px": 16,
+          "gap": 8,
+          "radius": 8,
+          "chevronSize": 20
+        }
+      },
+      "dropdownSizes": {
+        "sm": {
+          "maxHeight": 200,
+          "py": 4,
+          "px": 0,
+          "radius": 8,
+          "shadow": 2
+        },
+        "md": {
+          "maxHeight": 260,
+          "py": 4,
+          "px": 0,
+          "radius": 8,
+          "shadow": 2
+        },
+        "lg": {
+          "maxHeight": 320,
+          "py": 4,
+          "px": 0,
+          "radius": 10,
+          "shadow": 2
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "bgDisabled": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.98
+        },
+        "bgDropdown": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "border": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "borderHover": {
+          "r": 0.65,
+          "g": 0.65,
+          "b": 0.7
+        },
+        "borderFocus": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "borderDisabled": {
+          "r": 0.88,
+          "g": 0.88,
+          "b": 0.9
+        },
+        "borderError": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "borderWarning": {
+          "r": 0.72,
+          "g": 0.48,
+          "b": 0.05
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "filledBg": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.98
+        },
+        "filledBgHover": {
+          "r": 0.93,
+          "g": 0.93,
+          "b": 0.96
+        },
+        "errorFg": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "warningFg": {
+          "r": 0.72,
+          "g": 0.48,
+          "b": 0.05
+        }
+      },
+      "variantStyles": {
+        "outlined": {
+          "bg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": {
+            "r": 0.82,
+            "g": 0.82,
+            "b": 0.85
+          }
+        },
+        "filled": {
+          "bg": {
+            "r": 0.96,
+            "g": 0.96,
+            "b": 0.98
+          },
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": null
+        },
+        "borderless": {
+          "bg": null,
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": null
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "Value",
+          "layerName": "value-text",
+          "default": "Select..."
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "hasLeadingIcon",
+          "swapName": "Leading Icon",
+          "layerName": "icon-leading",
+          "defaultVisible": false
+        }
+      ],
+      "booleanLayers": [
+        {
+          "boolName": "isClearable",
+          "layerName": "clear-button",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "isSearchable",
+          "layerName": "search-input",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasLabel",
+          "textPropName": "Label",
+          "layerName": "label",
+          "default": "Label",
+          "defaultVisible": true
+        },
+        {
+          "boolName": "hasHelperText",
+          "textPropName": "Helper Text",
+          "layerName": "helper-text",
+          "default": "Helper text",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "hasErrorText",
+          "textPropName": "Error Text",
+          "layerName": "error-text",
+          "default": "Error message",
+          "defaultVisible": false
+        }
+      ],
+      "frameCount": {
+        "gross": 162,
+        "exclusions": 56,
+        "net": 106
+      },
+      "grid": {
+        "maxCols": 6,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "thresholds": {
+    "warnFrames": 150,
+    "maxFrames": 200,
+    "disabledOpacity": 0.5,
+    "focusRingWidth": 2,
+    "focusRingOffset": 2
+  },
+  "a11y": {
+    "pattern": "combobox",
+    "role": "combobox (trigger) + listbox (dropdown)",
+    "ariaAttributes": [
+      "aria-expanded",
+      "aria-controls",
+      "aria-activedescendant",
+      "aria-haspopup=\"listbox\"",
+      "aria-selected on options"
+    ],
+    "keyboardNav": [
+      "Tab (focus trigger)",
+      "Enter/Space (open)",
+      "ArrowDown/Up (navigate options)",
+      "Enter (select)",
+      "Escape (close)",
+      "Type-ahead (filter)"
+    ],
+    "focusTechnique": "aria-activedescendant",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 40,
+    "prefix": "sel",
+    "mode": "C"
+  },
+  "componentDescriptions": {
+    ".SelectOption": "Opción dentro del dropdown de Select.\n\n🔑 ARIA:\n• role=\"option\"\n• aria-selected cuando seleccionada\n• aria-disabled cuando disabled\n\n⌨️ Keyboard:\n• ArrowDown/Up: navegar\n• Enter: seleccionar\n\nTokens: 10, prefijo sel-opt-.",
+    "Select": "Dropdown de selección con trigger y panel de opciones.\nSizes: sm(32) md(40) lg(48).\nVariants: outlined, filled, borderless.\n\n🔑 ARIA:\n• role=\"combobox\" en trigger\n• aria-expanded, aria-controls → listbox\n• aria-activedescendant para opción activa\n\n⌨️ Keyboard:\n• Enter/Space: abrir dropdown\n• ArrowDown/Up: navegar opciones\n• Enter: seleccionar y cerrar\n• Escape: cerrar sin seleccionar\n• Type-ahead: filtrar opciones\n\n🎯 Focus:\n• Open: foco en primera opción (o seleccionada)\n• Close: foco regresa al trigger\n\nTokens: 40, prefijo sel-.\nWCAG 2.2 AA · Combobox Pattern (APG)."
+  },
+  "variableBindings": {
+    "trigger/bg": "bg/surface/default",
+    "trigger/border": "border/mid/default",
+    "trigger/border-focus": "border/focus",
+    "trigger/border-error": "status/error/border",
+    "dropdown/bg": "bg/surface/default",
+    "dropdown/border": "border/mid/default",
+    "dropdown/shadow": "elevation/2",
+    "option/bg-hover": "bg/surface/hover",
+    "option/bg-selected": "bg/surface/selected",
+    "option/fg": "text/label",
+    "option/fg-disabled": "text/disabled",
+    "checkmark/fg": "interactive/default"
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10T12:00:00Z",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype: composite-overlay",
+      "why": "24/24 systems use trigger+dropdown pattern. Trigger is a button-like control; dropdown is an overlay panel with options.",
+      "source": "research"
+    },
+    {
+      "what": "Family: Select + .SelectOption sub-component",
+      "why": "24/24 systems have structured option items. Sub-component enables option-level states (hover, selected, disabled) without multiplying parent frames.",
+      "source": "research"
+    },
+    {
+      "what": "Type as property dimension removed, using booleans instead",
+      "why": "Type (single/multiple/combobox) would triple frames. Using isSearchable and hasTags booleans keeps frame count manageable. Multi-select visual differences are boolean-level (checkmarks, tags).",
+      "source": "spec+global-property-rules"
+    },
+    {
+      "what": "State includes 'open' and 'readonly'",
+      "why": "Open state shows dropdown-visible trigger appearance (active border, rotated chevron). Readonly (8/24 consensus) allows focus+copy without changes, critical for enterprise.",
+      "source": "research"
+    },
+    {
+      "what": "Disabled as State variant, not boolean",
+      "why": "Disabled changes fill, text color, border, AND removes interaction. Per global-property-rules decision tree: >=2 properties change = VARIANT. Exclusions prevent disabled x hover/focus/open combos.",
+      "source": "global-property-rules"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

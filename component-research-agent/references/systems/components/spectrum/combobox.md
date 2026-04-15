@@ -1,0 +1,34 @@
+---
+system: Spectrum (Adobe)
+component: ComboBox (distinct from Picker)
+url: https://react-spectrum.adobe.com/react-spectrum/ComboBox.html
+last_verified: 2026-03-28
+---
+
+# ComboBox
+
+## Approach
+Spectrum makes one of the cleanest architectural splits between Select and Combobox among all Tier 1 design systems: Picker is their constrained-choice Select (choose from a list, no free text), and ComboBox is the explicit free-text-plus-suggestions component. This split is intentional and well-documented. Adobe's product rationale is clear: in creative tools like Adobe Experience Manager, users frequently need to enter values like font names, CSS color names, search queries, or tag names where the system can offer suggestions from a known set but the user is not constrained to that set. A Picker would be wrong here — it implies a closed set of options. A plain TextField would be wrong — it provides no discovery assistance. ComboBox fills this specific middle space. The fact that these are separate components in Spectrum rather than a single component with a `freeText` prop reflects Adobe's view that the two patterns have different semantic contracts, different keyboard behaviors, and different ARIA roles — unifying them would require too many conditional behaviors.
+
+## Key Decisions
+1. **ComboBox vs. Picker split is a semantic contract, not a styling difference** (HIGH) — Picker communicates "you must choose from these options." ComboBox communicates "you can type anything, and here are suggestions." This distinction affects user mental model, not just implementation. A user filling in a "country" field should see a Picker (constrained set). A user filling in a "programming language" tag field should see a ComboBox (suggestions from a known set, but custom values allowed). Adobe drew this line as two components because having a `freeText={true}` prop on a single component would make the semantic contract unclear to both developers and users.
+2. **`allowsCustomValue` as the key differentiating prop** (HIGH) — ComboBox has an `allowsCustomValue` prop that controls whether the user can submit a value not in the options list. When `false` (the default), typing a value not in the list and blurring will revert to the last valid selection — this is Spectrum's "autocomplete" mode. When `true`, any typed value is accepted — this is the true Combobox mode. This single prop controls the semantic difference between autocomplete (suggest from a fixed set) and free-text Combobox (suggest from a set, but accept anything). The fact that this is a prop rather than two components is an interesting nuance in Spectrum's otherwise-clean split.
+3. **Asynchronous loading support for large option sets** (MEDIUM) — ComboBox supports `isLoading` and `onLoadMore` props for server-side filtering of large datasets. This is critical for use cases like searching a CMS asset library with millions of items, where loading all options upfront is not feasible. The `useAsyncList` hook from react-stately integrates directly with ComboBox for this pattern. This is more sophisticated async support than most Tier 1 Combobox implementations.
+4. **Filtering is controlled externally** (MEDIUM) — Spectrum's ComboBox does not do built-in client-side filtering of items. The application is responsible for filtering the `items` prop based on the current `inputValue`. This is an architectural choice that prioritizes flexibility (the app can implement any filtering algorithm — prefix match, fuzzy match, substring match) over convenience. It requires more code than Ant Design's AutoComplete but gives complete control over filtering logic.
+5. **MenuTrigger integration for advanced composition** (LOW) — ComboBox is architecturally related to the broader Spectrum Menu/Popover system, using the same `@react-aria/combobox` primitives. This means the listbox dropdown correctly handles focus management, popper placement, scroll overflow, and z-index in complex layered layouts — behaviors that are easy to get wrong in custom implementations.
+
+## Notable Props
+- `allowsCustomValue`: `boolean` — The defining prop: whether the user can enter a value not in the options list. The architectural choice to make this a prop rather than a second component is Spectrum's pragmatic compromise.
+- `inputValue` / `onInputChange`: For controlled filtering — the application manages what the user has typed and what items to show.
+- `selectedKey` / `onSelectionChange`: For the selected option value, separate from the input text value. This separation is important: a user might type "Califor" (inputValue) while the selected value is "California" (selectedKey) — ComboBox tracks both states independently.
+- `isLoading` / `onLoadMore`: Async support for server-side filtering with infinite scroll of options.
+- `menuTrigger`: `'input' | 'focus' | 'manual'` — Controls when the suggestions dropdown opens. `'input'` (opens when the user types) is the default Combobox behavior; `'focus'` opens the full list on focus (more like an autocomplete); `'manual'` requires explicit trigger.
+
+## A11y Highlights
+- **Keyboard**: Arrow Down from the input opens the listbox and moves focus to the first option. Arrow Up/Down navigates options while keeping the input focused (focus stays in the input, with `aria-activedescendant` pointing to the highlighted option). Enter selects the focused option or accepts the custom value. Escape closes the listbox and clears the selection or reverts to the previous value.
+- **Screen reader**: The listbox opens and closes are announced via `aria-expanded` on the input. The currently highlighted option is announced via `aria-activedescendant`. When no matches are found, an "No results" message in the listbox is announced. The count of available suggestions ("3 options available") is announced when the listbox opens.
+- **ARIA**: Implements the ARIA 1.1 Combobox pattern: `role="combobox"` on the input with `aria-autocomplete="list"` (or `"both"` when the input value auto-completes), `aria-expanded`, `aria-controls` pointing to the `role="listbox"` element, and `aria-activedescendant` for the highlighted option. This is the most complete ARIA Combobox implementation in Tier 1.
+
+## Strengths & Gaps
+- **Best at**: ARIA-correct Combobox implementation with clean separation from Picker, robust async loading support, and the `inputValue`/`selectedKey` separation that correctly models the dual state of a Combobox — the most architecturally rigorous Combobox in Tier 1.
+- **Missing**: Built-in client-side filtering — applications must implement their own filtering logic, which means every ComboBox requires more boilerplate code than Ant Design's AutoComplete which handles basic filtering automatically. Also no built-in "create new option" pattern (adding a custom value as a new persistent option in the list).

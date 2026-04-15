@@ -1,0 +1,525 @@
+{
+  "version": "1.0",
+  "component": "Table",
+  "archetype": "grid-tabular",
+  "language": "es",
+  "buildOrder": [
+    ".TableHeaderCell",
+    ".TableCell",
+    ".TableRow",
+    "Table"
+  ],
+  "family": [
+    {
+      "name": ".TableHeaderCell",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "sort-icon",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "sorted-asc",
+          "sorted-desc"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 40,
+          "fontSize": 12,
+          "iconSize": 16,
+          "py": 8,
+          "px": 12,
+          "gap": 4,
+          "radius": 0
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgHover": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "border": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "sortIcon": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "sortIconActive": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        }
+      },
+      "variantStyles": {
+        "sorted-asc": {
+          "sortIconColor": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "sortIconRotation": 0
+        },
+        "sorted-desc": {
+          "sortIconColor": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "sortIconRotation": 180
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Label",
+          "layerName": "label",
+          "default": "Column"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "hasSortIcon",
+          "layerName": "sort-icon",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 4,
+        "exclusions": 0,
+        "net": 4
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": ".TableCell",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "content",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        }
+      ],
+      "properties": {
+        "Density": [
+          "compact",
+          "default",
+          "comfortable"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "compact": {
+          "h": 32,
+          "fontSize": 12,
+          "py": 4,
+          "px": 12,
+          "gap": 0,
+          "radius": 0
+        },
+        "default": {
+          "h": 40,
+          "fontSize": 14,
+          "py": 8,
+          "px": 12,
+          "gap": 0,
+          "radius": 0
+        },
+        "comfortable": {
+          "h": 48,
+          "fontSize": 14,
+          "py": 12,
+          "px": 16,
+          "gap": 0,
+          "radius": 0
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "border": {
+          "r": 0.92,
+          "g": 0.92,
+          "b": 0.94
+        }
+      },
+      "variantStyles": {},
+      "textProperties": [
+        {
+          "propName": "✏️ Content",
+          "layerName": "content",
+          "default": "Cell value"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 3,
+        "exclusions": 0,
+        "net": 3
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": ".TableRow",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "cells",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "slot",
+          "buildingBlock": ".TableCell"
+        }
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "selected",
+          "disabled"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": "hug",
+          "fontSize": 14,
+          "py": 0,
+          "px": 0,
+          "gap": 0,
+          "radius": 0
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgSelected": {
+          "r": 0.93,
+          "g": 0.95,
+          "b": 1
+        },
+        "bgDisabled": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.98
+        },
+        "bgStriped": {
+          "r": 0.98,
+          "g": 0.98,
+          "b": 0.99
+        },
+        "border": {
+          "r": 0.92,
+          "g": 0.92,
+          "b": 0.94
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "checkboxBorder": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "checkboxChecked": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        }
+      },
+      "variantStyles": {
+        "hover": {
+          "bg": {
+            "r": 0.97,
+            "g": 0.97,
+            "b": 0.98
+          }
+        },
+        "selected": {
+          "bg": {
+            "r": 0.93,
+            "g": 0.95,
+            "b": 1
+          }
+        },
+        "disabled": {
+          "bg": {
+            "r": 0.96,
+            "g": 0.96,
+            "b": 0.98
+          },
+          "fg": {
+            "r": 0.72,
+            "g": 0.72,
+            "b": 0.75
+          }
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "hasCheckbox",
+          "layerName": "checkbox",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "isStriped",
+          "layerName": "striped-bg",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 4,
+        "exclusions": 0,
+        "net": 4
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "Table",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "header-row",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "slot",
+          "buildingBlock": ".TableHeaderCell"
+        },
+        {
+          "name": "body-rows",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "slot",
+          "buildingBlock": ".TableRow"
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "w": 800,
+          "h": "hug",
+          "fontSize": 14,
+          "py": 0,
+          "px": 0,
+          "gap": 0,
+          "radius": 8
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "border": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "headerBg": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "divider": {
+          "r": 0.92,
+          "g": 0.92,
+          "b": 0.94
+        }
+      },
+      "variantStyles": {},
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "isBordered",
+          "layerName": "outer-border",
+          "defaultVisible": true
+        },
+        {
+          "boolName": "isStriped",
+          "layerName": "striped-rows",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "hasStickyHeader",
+          "layerName": "sticky-header",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "hasSelection",
+          "layerName": "selection-column",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "hasPagination",
+          "layerName": "pagination",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "grid",
+    "role": "table (display) or grid (interactive)",
+    "keyboardNav": [
+      "Tab",
+      "ArrowKeys (grid mode)"
+    ],
+    "focusTechnique": "roving",
+    "sortAnnouncement": "aria-sort on header cells (ascending/descending/none)",
+    "selectionAnnouncement": "aria-selected on rows",
+    "wcagLevel": "AA",
+    "wcagCriteria": [
+      "1.3.1",
+      "2.1.1",
+      "2.4.3",
+      "2.4.7",
+      "4.1.2"
+    ]
+  },
+  "tokens": {
+    "total": 35,
+    "prefix": "tbl",
+    "mode": "C",
+    "layers": 3
+  },
+  "componentDescriptions": {
+    ".TableHeaderCell": "Celda de encabezado de tabla con soporte de ordenamiento.\nAlto 40px, fontSize 12 (uppercase-style), bg gris sutil.\nStates: default, hover (bg mas oscuro), sorted-asc (icono arriba, azul), sorted-desc (icono abajo, azul).\n\n🔑 ARIA:\n• role=\"columnheader\", scope=\"col\"\n• aria-sort: ascending, descending, none\n• Sort button focusable con Enter/Space para toggle\n\n⌨️ Keyboard:\n• Enter/Space: toggle sort direction\n• Tab: navegar entre headers sortables\n\n🎯 Focus:\n• Focus ring 2px en celda header\n\nBooleans: hasSortIcon.\n✏️ Label (text editable).\n\nTokens: 8, prefijo tbl-.\nWCAG 2.2 AA.",
+    ".TableCell": "Celda de datos con 3 niveles de densidad.\nDensity: compact(32px), default(40px), comfortable(48px).\nFontSize: 12/14/14. Padding ajustado por densidad.\n\n🔑 ARIA:\n• role=\"cell\" o role=\"gridcell\" (segun tabla)\n• Contenido leido directamente por screen reader\n\n⌨️ Keyboard:\n• Arrow keys en modo grid\n\n🎯 Focus:\n• Focus en celda cuando tabla es interactiva (role=\"grid\")\n\n✏️ Content (text editable).\n\nTokens: 6, prefijo tbl-.\nWCAG 2.2 AA.",
+    ".TableRow": "Fila de tabla que contiene .TableCell instances.\nStates: default, hover (bg sutil), selected (bg azul claro), disabled (opacity 0.5).\n\n🔑 ARIA:\n• role=\"row\"\n• Selected: aria-selected=\"true\"\n• Checkbox: vinculado al estado de seleccion\n\n⌨️ Keyboard:\n• Space: toggle seleccion (si hasCheckbox)\n• ArrowDown/Up: navegar entre filas\n\n🎯 Focus:\n• Focus ring en fila o en checkbox\n\nBooleans: hasCheckbox (columna de seleccion), isStriped (bg alterno).\n\nTokens: 10, prefijo tbl-.\nWCAG 2.2 AA.",
+    "Table": "Contenedor de tabla completo con header row + body rows.\nAncho default 800px, radius 8px. Shell de composicion sin variants propios.\n\n🔑 ARIA:\n• role=\"table\" (presentacional) o role=\"grid\" (interactivo)\n• caption o aria-label obligatorio\n• Sticky header: mantiene contexto de columnas\n\n⌨️ Keyboard:\n• Tab: entra a tabla, luego arrow keys para navegar\n• Space: seleccionar fila (si hasSelection)\n• Enter: activar accion en celda\n\n🎯 Focus:\n• Focus management via roving tabindex en modo grid\n• Scroll horizontal mantiene focus visible\n\nBooleans: isBordered, isStriped, hasStickyHeader, hasSelection, hasPagination.\n\nTokens: 11, prefijo tbl-.\nWCAG 2.2 AA · APG Grid/Table Pattern."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype: grid-tabular",
+      "why": "Table es un componente tabular con celdas en grid. Patron especifico que no encaja en container ni inline-action.",
+      "source": "research"
+    },
+    {
+      "what": "4 sub-components: HeaderCell, Cell, Row, Table",
+      "why": "Descomposicion canonica. HeaderCell tiene sort states. Cell tiene density. Row tiene selection states. Table es composition shell.",
+      "source": "research+spec"
+    },
+    {
+      "what": "Density en Cell (compact/default/comfortable), no Size",
+      "why": "Densidad controla padding+fontSize, no el componente entero. 14/24 sistemas usan density en lugar de size para tablas.",
+      "source": "research"
+    },
+    {
+      "what": "12 frames netos total (4+3+4+1)",
+      "why": "HeaderCell 4 states + Cell 3 densities + Row 4 states + Table 1 shell. Sub-components mantienen frame count bajo.",
+      "source": "spec"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

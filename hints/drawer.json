@@ -1,0 +1,173 @@
+{
+  "component": "Drawer",
+  "archetype": "container",
+  "buildOrder": [
+    ".DrawerHeader",
+    ".DrawerBody",
+    ".DrawerFooter",
+    "Drawer"
+  ],
+  "family": [
+    {
+      "name": ".DrawerHeader",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "title*:text",
+        "close-button:icon-action",
+        "header-actions:container"
+      ],
+      "properties": {},
+      "booleans": [
+        "Close Button"
+      ],
+      "exclusions": [],
+      "frameCount": 1
+    },
+    {
+      "name": ".DrawerBody",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "content*:container"
+      ],
+      "properties": {},
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 1
+    },
+    {
+      "name": ".DrawerFooter",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "actions*:container"
+      ],
+      "properties": {},
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 1
+    },
+    {
+      "name": "Drawer",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "overlay:visual",
+        "header:container",
+        "divider-header:divider",
+        "body*:container",
+        "divider-footer:divider",
+        "footer:container"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Position": [
+          "left",
+          "right"
+        ]
+      },
+      "booleans": [
+        "Overlay",
+        "Divider Header",
+        "Divider Footer",
+        "Header(swap)",
+        "Footer(swap)"
+      ],
+      "exclusions": [],
+      "frameCount": 6
+    }
+  ],
+  "a11y": {
+    "role": "dialog (modal) | complementary (persistent)"
+  },
+  "tokens": {
+    "total": 25,
+    "prefix": "drw"
+  },
+  "questions": [
+    {
+      "id": "position",
+      "text": "¿De qué lado aparece el drawer?",
+      "options": [
+        { "value": "right", "label": "Derecha — detalles, formularios, paneles de edición" },
+        { "value": "left", "label": "Izquierda — navegación, menús laterales" },
+        { "value": "both", "label": "Ambos lados según contexto" },
+        { "value": "bottom", "label": "Inferior — bottom sheet en mobile" }
+      ],
+      "impact": "Position property values",
+      "tags": ["right", "left", "bottom", "bottom-sheet", "mobile", "navigation"]
+    },
+    {
+      "id": "behavior",
+      "text": "¿El drawer es modal o persistente?",
+      "options": [
+        { "value": "modal", "label": "Modal — con overlay, bloquea el contenido detrás" },
+        { "value": "persistent", "label": "Persistente — se mantiene abierto, contenido se desplaza" },
+        { "value": "both", "label": "Configurable según contexto" }
+      ],
+      "impact": "Overlay boolean y role a11y (dialog vs complementary)",
+      "tags": ["modal", "persistent", "overlay", "push-content", "inline"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué anchos de drawer necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño es suficiente" },
+        { "value": "sm-md-lg", "label": "Small, Medium, Large — según el contenido" },
+        { "value": "fullscreen", "label": "Incluir fullscreen — para mobile o edición compleja" }
+      ],
+      "impact": "Size property values",
+      "tags": ["narrow", "wide", "fullscreen", "responsive", "mobile"]
+    },
+    {
+      "id": "content-type",
+      "text": "¿Qué tipo de contenido va dentro del drawer?",
+      "options": [
+        { "value": "form", "label": "Formularios — crear/editar registros" },
+        { "value": "detail", "label": "Detalle — vista de lectura de un registro" },
+        { "value": "navigation", "label": "Navegación — menú mobile, filtros" },
+        { "value": "mixed", "label": "Variable — cualquier contenido según contexto" }
+      ],
+      "impact": "Sub-componentes y anatomía (header, body, footer)",
+      "tags": ["form", "detail", "navigation", "filters", "sidebar", "mobile-menu"]
+    },
+    {
+      "id": "footer",
+      "text": "¿El drawer necesita footer con acciones?",
+      "options": [
+        { "value": "yes", "label": "Sí — botones de Guardar/Cancelar en el footer" },
+        { "value": "optional", "label": "Configurable — a veces sí, a veces no" },
+        { "value": "no", "label": "No — acciones dentro del contenido o sin acciones" }
+      ],
+      "impact": "Footer boolean y .DrawerFooter sub-componente",
+      "tags": ["footer", "actions", "save", "cancel", "submit"]
+    },
+    {
+      "id": "dividers",
+      "text": "¿El drawer usa divisores entre header, body y footer?",
+      "options": [
+        { "value": "yes", "label": "Sí — separación visual clara entre secciones" },
+        { "value": "no", "label": "No — flujo continuo sin divisores" },
+        { "value": "configurable", "label": "Configurable por instancia" }
+      ],
+      "impact": "Divider Header y Divider Footer booleans",
+      "tags": ["dividers", "separators", "sections", "clean", "minimal"]
+    },
+    {
+      "id": "close-behavior",
+      "text": "¿Cómo se cierra el drawer?",
+      "options": [
+        { "value": "all", "label": "Botón X + overlay click + Escape" },
+        { "value": "button-only", "label": "Solo botón X — sin cerrar con overlay/Escape" },
+        { "value": "configurable", "label": "Configurable — modal bloqueante en algunos casos" }
+      ],
+      "impact": "Close Button boolean y behavior del overlay",
+      "tags": ["close", "dismiss", "escape", "blocking", "unsaved-changes"]
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "component": "Card",
+  "archetype": "container",
+  "buildOrder": [
+    ".ContentMedia",
+    ".ContentHeader",
+    ".ContentBody",
+    ".ContentFooter",
+    "Card"
+  ],
+  "family": [
+    {
+      "name": ".ContentMedia",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "image*:media"
+      ],
+      "properties": {},
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 1
+    },
+    {
+      "name": ".ContentHeader",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "prefix:icon",
+        "eyebrow:text",
+        "title*:text",
+        "subtitle:text",
+        "badge:text",
+        "suffix:icon-action"
+      ],
+      "properties": {},
+      "booleans": [
+        "Show prefix(swap)",
+        "Show suffix(swap)",
+        "Has Eyebrow(text)",
+        "Has Subtitle(text)",
+        "Has Badge(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 1
+    },
+    {
+      "name": ".ContentBody",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "body-text:text",
+        "metadata:text",
+        "divider:divider"
+      ],
+      "properties": {},
+      "booleans": [
+        "Has Divider",
+        "Has Body(text)",
+        "Has Metadata(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 1
+    },
+    {
+      "name": ".ContentFooter",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "action-primary:text",
+        "action-secondary:text"
+      ],
+      "properties": {},
+      "booleans": [
+        "Has Primary Action(text)",
+        "Has Secondary Action(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 1
+    },
+    {
+      "name": "Card",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "media:media",
+        "header*:container",
+        "body:container",
+        "footer:container",
+        "close:icon-action",
+        "checkbox:icon-action"
+      ],
+      "properties": {
+        "Variant": [
+          "elevated",
+          "filled",
+          "outlined",
+          "ghost"
+        ],
+        "State": [
+          "default",
+          "hover"
+        ],
+        "Orientation": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "booleans": [
+        "Disabled",
+        "Loading",
+        "Is Clickable",
+        "Is Selected",
+        "Is Expandable",
+        "Has Overlay",
+        "Has Divider",
+        "Has Media(swap)",
+        "Has Header(swap)",
+        "Has Body(swap)",
+        "Has Actions(swap)",
+        "Has Close(swap)"
+      ],
+      "exclusions": [],
+      "frameCount": 16
+    }
+  ],
+  "a11y": {
+    "role": "article (standalone) | none (in grid/list)",
+    "keyboard": [
+      "Tab: focus card (if interactive) or internal actions (if static)",
+      "Enter: activate clickable card or focused action",
+      "Space: toggle selectable card",
+      "Arrow keys: navigate between cards in grid selection"
+    ],
+    "focus": "linear (tab between cards) or roving (arrow keys in grid)"
+  },
+  "tokens": {
+    "total": 38,
+    "prefix": "crd"
+  },
+  "questions": [
+    {
+      "id": "content-type",
+      "text": "¿Qué tipo de contenido va dentro de la card?",
+      "options": [
+        { "value": "text-only", "label": "Solo texto — títulos, descripciones, metadata" },
+        { "value": "image-text", "label": "Imagen + texto — blog, producto, perfil" },
+        { "value": "data", "label": "Data/Métricas — KPIs, gráficas, dashboards" },
+        { "value": "interactive", "label": "Interactivo — formularios, inputs dentro de la card" },
+        { "value": "any", "label": "Cualquier combinación — slot libre" }
+      ],
+      "impact": "Sub-componentes a incluir (.ContentMedia, .ContentBody, etc.)",
+      "tags": ["media", "image", "data", "metrics", "dashboard", "product", "blog"]
+    },
+    {
+      "id": "interaction",
+      "text": "¿La card es interactiva? ¿Qué hace al interactuar?",
+      "options": [
+        { "value": "static", "label": "No interactiva — solo display informativo" },
+        { "value": "navigates", "label": "Click navega a detalle" },
+        { "value": "opens-panel", "label": "Click abre panel o modal" },
+        { "value": "selectable", "label": "Seleccionable — checkbox, estado selected" },
+        { "value": "draggable", "label": "Drag & drop — kanban, reordenamiento" }
+      ],
+      "impact": "Is Clickable, Is Selected booleans y states hover/pressed",
+      "tags": ["clickable", "selectable", "draggable", "kanban", "navigation", "link"]
+    },
+    {
+      "id": "orientation",
+      "text": "¿Qué orientaciones de layout necesita la card?",
+      "options": [
+        { "value": "vertical", "label": "Solo vertical — imagen arriba, contenido abajo" },
+        { "value": "horizontal", "label": "Solo horizontal — imagen a la izquierda, contenido a la derecha" },
+        { "value": "both", "label": "Ambas — vertical en grid, horizontal en lista" }
+      ],
+      "impact": "Orientation property values",
+      "tags": ["vertical", "horizontal", "grid", "list", "responsive"]
+    },
+    {
+      "id": "variants",
+      "text": "¿Qué variantes visuales de card necesitas?",
+      "options": [
+        { "value": "elevated-only", "label": "Solo elevated — con sombra" },
+        { "value": "outlined-only", "label": "Solo outlined — con borde" },
+        { "value": "standard", "label": "Elevated + outlined — las más comunes" },
+        { "value": "all", "label": "Todas (elevated, filled, outlined, ghost)" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["elevated", "shadow", "outlined", "border", "filled", "ghost", "flat"]
+    },
+    {
+      "id": "anatomy",
+      "text": "¿Qué elementos opcionales necesita la card?",
+      "options": [
+        { "value": "basic", "label": "Básico — título + descripción" },
+        { "value": "media", "label": "Con media — imagen/cover arriba" },
+        { "value": "actions", "label": "Con footer de acciones — botones en la parte inferior" },
+        { "value": "rich", "label": "Completa — media, badge, avatar, acciones, overflow menu" }
+      ],
+      "impact": "Booleans Has Media, Has Actions, Has Close, etc.",
+      "tags": ["media", "cover", "actions", "badge", "overflow-menu", "avatar"]
+    },
+    {
+      "id": "structure",
+      "text": "¿El contenido de la card tiene estructura predecible o es libre?",
+      "options": [
+        { "value": "structured", "label": "Predecible — patrón fijo (header/body/footer)" },
+        { "value": "free", "label": "Libre — contenedor genérico para cualquier layout" },
+        { "value": "both", "label": "Building blocks por defecto pero reemplazables" }
+      ],
+      "impact": "Sub-componentes como building blocks vs slots libres",
+      "tags": ["building-blocks", "slots", "structured", "free-content", "flexible"]
+    },
+    {
+      "id": "loading",
+      "text": "¿La card necesita estado de carga (skeleton/loading)?",
+      "options": [
+        { "value": "yes", "label": "Sí — skeleton placeholder mientras carga datos" },
+        { "value": "no", "label": "No — los datos siempre están disponibles" }
+      ],
+      "impact": "Loading boolean y skeleton sub-componente",
+      "tags": ["loading", "skeleton", "placeholder", "async", "lazy"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará la card?",
+      "options": [
+        { "value": "catalog", "label": "Catálogo — grid de productos, artículos, usuarios" },
+        { "value": "dashboard", "label": "Dashboard — métricas, KPIs, widgets" },
+        { "value": "feed", "label": "Feed — social, noticias, actividad reciente" },
+        { "value": "general", "label": "Uso general — múltiples contextos" }
+      ],
+      "impact": "Priorización de anatomía y variantes",
+      "tags": ["catalog", "e-commerce", "dashboard", "feed", "social", "enterprise"]
+    }
+  ]
+}

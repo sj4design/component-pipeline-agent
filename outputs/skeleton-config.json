@@ -1,0 +1,117 @@
+{
+  "version": "1.0",
+  "component": "Skeleton",
+  "archetype": "inline-action",
+  "language": "es",
+  "buildOrder": [
+    "Skeleton"
+  ],
+  "family": [
+    {
+      "name": "Skeleton",
+      "isSubComponent": false,
+      "chromeless": true,
+      "slots": [],
+      "properties": {
+        "Variant": [
+          "text",
+          "circular",
+          "rectangular"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 16,
+          "fontSize": 14,
+          "radius": 4
+        }
+      },
+      "colors": {
+        "bg": {
+          "r": 0.91,
+          "g": 0.91,
+          "b": 0.93
+        }
+      },
+      "variantStyles": {
+        "text": {
+          "radius": 4,
+          "h": 16,
+          "w": 200
+        },
+        "circular": {
+          "radius": 9999,
+          "h": 40,
+          "w": 40
+        },
+        "rectangular": {
+          "radius": 8,
+          "h": 120,
+          "w": 200
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 3,
+        "exclusions": 0,
+        "net": 3
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "presentation",
+    "role": "none (aria-hidden)",
+    "keyboardNav": [],
+    "wcagLevel": "AA",
+    "wcagCriteria": [
+      "1.3.1"
+    ]
+  },
+  "tokens": {
+    "total": 8,
+    "prefix": "skl",
+    "mode": "C",
+    "layers": 1
+  },
+  "componentDescriptions": {
+    "Skeleton": "Placeholder de carga con 3 formas para representar contenido ausente.\nVariant: text (linea de texto, radius 4), circular (avatar/icono, radius full), rectangular (card/imagen, radius 8).\nChromeless: true — sin bordes ni sombras.\n\n🔑 ARIA:\n• aria-hidden=\"true\" — invisible para screen readers\n• role=\"none\" (presentacional puro)\n• Contenido real debe tener aria-busy=\"true\" en contenedor padre\n\n⌨️ Keyboard:\n• No interactivo — sin keyboard nav\n\n🎯 Focus:\n• No recibe foco\n• Animacion pulse/shimmer via CSS (no representada en Figma)\n\nColor: gris neutro (0.91, 0.91, 0.93). Sin border.\nDimensiones controladas por instance override en el consumidor.\n\nTokens: 8, prefijo skl-.\nWCAG 2.2 AA."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype: inline-action",
+      "why": "Skeleton es un placeholder visual inline. No contiene otros componentes ni es overlay.",
+      "source": "research"
+    },
+    {
+      "what": "3 Variants: text/circular/rectangular",
+      "why": "Text simula lineas de texto. Circular simula avatares/iconos. Rectangular simula cards/imagenes. Cubre 100% de casos.",
+      "source": "research"
+    },
+    {
+      "what": "Chromeless: true, sin Size variant",
+      "why": "Skeleton no tiene bordes, sombras ni estados. Dimensiones se ajustan via instance override, no via Size property.",
+      "source": "research+spec"
+    },
+    {
+      "what": "3 frames netos (3 variants)",
+      "why": "Minimo absoluto. Skeleton es el componente mas simple del sistema.",
+      "source": "spec"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

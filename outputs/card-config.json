@@ -1,0 +1,897 @@
+{
+  "version": "1.0",
+  "component": "Card",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": [
+    ".ContentMedia",
+    ".ContentHeader",
+    ".ContentBody",
+    ".ContentFooter",
+    "Card"
+  ],
+  "family": [
+    {
+      "name": ".ContentMedia",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "skipIfExists": false,
+      "parentSlot": "media",
+      "slots": [
+        {
+          "name": "image",
+          "type": "media",
+          "required": true,
+          "figmaBinding": "none",
+          "height": 180
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 180,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 0,
+          "px": 0,
+          "gap": 0,
+          "radius": 0,
+          "width": 320
+        }
+      },
+      "colors": {
+        "bgPlaceholder": {
+          "r": 0.92,
+          "g": 0.92,
+          "b": 0.94
+        }
+      },
+      "variantStyles": {},
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 1,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": ".ContentHeader",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "skipIfExists": false,
+      "parentSlot": "header",
+      "slots": [
+        {
+          "name": "prefix",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "eyebrow",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "subtitle",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "badge",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "suffix",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "swap"
+        }
+      ],
+      "slotGroups": [
+        {
+          "name": "eyebrow",
+          "slot": "eyebrow"
+        },
+        {
+          "name": "text+icons",
+          "layout": "HORIZONTAL",
+          "gap": 8,
+          "children": [
+            {
+              "name": "prefix",
+              "slot": "prefix"
+            },
+            {
+              "name": "title+subtitle",
+              "layout": "VERTICAL",
+              "sizing": "FILL",
+              "gap": 2,
+              "children": [
+                {
+                  "name": "title",
+                  "slot": "title"
+                },
+                {
+                  "name": "subtitle",
+                  "slot": "subtitle"
+                }
+              ]
+            },
+            {
+              "name": "suffix",
+              "slot": "suffix"
+            }
+          ]
+        },
+        {
+          "name": "badge",
+          "slot": "badge",
+          "style": {
+            "bgColor": {
+              "r": 0.93,
+              "g": 0.93,
+              "b": 0.96
+            },
+            "paddingH": 16,
+            "paddingV": 4,
+            "radius": 4
+          }
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 100,
+          "fontSize": 14,
+          "titleSize": 16,
+          "titleWeight": 600,
+          "subtitleSize": 14,
+          "eyebrowSize": 12,
+          "iconSize": 20,
+          "avatarSize": 32,
+          "py": 16,
+          "px": 16,
+          "padTop": 16,
+          "padBottom": 8,
+          "gap": 4,
+          "radius": 0,
+          "padding": 16
+        }
+      },
+      "colors": {
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "fgSubtlest": {
+          "r": 0.55,
+          "g": 0.55,
+          "b": 0.6
+        }
+      },
+      "variantStyles": {},
+      "textProperties": [
+        {
+          "propName": "✏️ Title",
+          "layerName": "title",
+          "default": "Title"
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "Show prefix",
+          "swapName": "Prefix Icon",
+          "layerName": "prefix",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Show suffix",
+          "swapName": "Suffix Icon",
+          "layerName": "suffix",
+          "defaultVisible": false
+        }
+      ],
+      "booleanLayers": [],
+      "booleanTextPairs": [
+        {
+          "boolName": "Has Eyebrow",
+          "textName": "✏️ Eyebrow",
+          "layerName": "eyebrow",
+          "defaultVisible": false,
+          "defaultText": "Category"
+        },
+        {
+          "boolName": "Has Subtitle",
+          "textName": "✏️ Subtitle",
+          "layerName": "subtitle",
+          "defaultVisible": true,
+          "defaultText": "Supporting text"
+        },
+        {
+          "boolName": "Has Badge",
+          "textName": "✏️ Badge",
+          "layerName": "badge",
+          "defaultVisible": false,
+          "defaultText": "New"
+        }
+      ],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 1,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": ".ContentBody",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "skipIfExists": false,
+      "parentSlot": "body",
+      "slots": [
+        {
+          "name": "body-text",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "metadata",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "divider",
+          "type": "divider",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 100,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 0,
+          "px": 16,
+          "padTop": 8,
+          "padBottom": 16,
+          "gap": 8,
+          "radius": 0,
+          "padding": 16
+        }
+      },
+      "colors": {
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "dividerColor": {
+          "r": 0.88,
+          "g": 0.88,
+          "b": 0.9
+        }
+      },
+      "variantStyles": {},
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "Has Divider",
+          "layerName": "divider",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "Has Body",
+          "textName": "✏️ Body",
+          "layerName": "body-text",
+          "defaultVisible": true,
+          "defaultText": "Body text"
+        },
+        {
+          "boolName": "Has Metadata",
+          "textName": "✏️ Metadata",
+          "layerName": "metadata",
+          "defaultVisible": false,
+          "defaultText": "Jan 15 · 5 min"
+        }
+      ],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 1,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": ".ContentFooter",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "skipIfExists": false,
+      "parentSlot": "footer",
+      "slots": [
+        {
+          "name": "action-primary",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "action-secondary",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 100,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 8,
+          "px": 16,
+          "padTop": 8,
+          "padBottom": 24,
+          "gap": 8,
+          "radius": 0,
+          "buttonGap": 8,
+          "padding": 16
+        }
+      },
+      "colors": {
+        "fgInteractive": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        }
+      },
+      "variantStyles": {},
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [
+        {
+          "boolName": "Has Primary Action",
+          "textName": "✏️ Primary Action",
+          "layerName": "action-primary",
+          "defaultVisible": true,
+          "defaultText": "Action"
+        },
+        {
+          "boolName": "Has Secondary Action",
+          "textName": "✏️ Secondary Action",
+          "layerName": "action-secondary",
+          "defaultVisible": false,
+          "defaultText": "Details"
+        }
+      ],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 1,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "Card",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "media",
+          "type": "media",
+          "required": false,
+          "figmaBinding": "slot",
+          "buildingBlock": ".ContentMedia",
+          "height": 180
+        },
+        {
+          "name": "header",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "slot",
+          "buildingBlock": ".ContentHeader"
+        },
+        {
+          "name": "body",
+          "type": "container",
+          "required": false,
+          "figmaBinding": "slot",
+          "buildingBlock": ".ContentBody"
+        },
+        {
+          "name": "footer",
+          "type": "container",
+          "required": false,
+          "figmaBinding": "slot",
+          "buildingBlock": ".ContentFooter"
+        },
+        {
+          "name": "close",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "checkbox",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "Variant": [
+          "elevated",
+          "filled",
+          "outlined",
+          "ghost"
+        ],
+        "State": [
+          "default",
+          "hover"
+        ],
+        "Orientation": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 100,
+          "width": 340,
+          "minWidth": 280,
+          "maxWidth": 420,
+          "fontSize": 14,
+          "titleSize": 16,
+          "titleWeight": 600,
+          "iconSize": 20,
+          "py": 0,
+          "px": 0,
+          "gap": 0,
+          "padding": 16,
+          "bodyPad": 16,
+          "headerBodyGap": 8,
+          "bodyFooterGap": 12,
+          "radius": 12,
+          "mediaHeight": 180,
+          "horizontalMediaWidth": 160
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "bgSelected": {
+          "r": 0.93,
+          "g": 0.95,
+          "b": 1
+        },
+        "bgDisabled": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.98
+        },
+        "bgFilled": {
+          "r": 0.96,
+          "g": 0.96,
+          "b": 0.98
+        },
+        "border": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "borderHover": {
+          "r": 0.65,
+          "g": 0.65,
+          "b": 0.7
+        },
+        "borderFocus": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "borderDisabled": {
+          "r": 0.88,
+          "g": 0.88,
+          "b": 0.9
+        },
+        "borderError": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "borderSelected": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        }
+      },
+      "variantStyles": {
+        "elevated": {
+          "elevation": 2,
+          "bg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "border": null,
+          "hoverElevation": 3,
+          "pressedElevation": 1
+        },
+        "filled": {
+          "elevation": 0,
+          "bg": {
+            "r": 0.96,
+            "g": 0.96,
+            "b": 0.98
+          },
+          "border": null,
+          "hoverBg": {
+            "r": 0.94,
+            "g": 0.94,
+            "b": 0.96
+          },
+          "pressedBg": {
+            "r": 0.92,
+            "g": 0.92,
+            "b": 0.95
+          }
+        },
+        "outlined": {
+          "elevation": 0,
+          "bg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "border": {
+            "r": 0.82,
+            "g": 0.82,
+            "b": 0.85
+          },
+          "borderWidth": 1,
+          "hoverBorder": {
+            "r": 0.65,
+            "g": 0.65,
+            "b": 0.7
+          },
+          "pressedBg": {
+            "r": 0.97,
+            "g": 0.97,
+            "b": 0.98
+          }
+        },
+        "ghost": {
+          "elevation": 0,
+          "bg": null,
+          "border": null,
+          "hoverBg": {
+            "r": 0.97,
+            "g": 0.97,
+            "b": 0.98
+          },
+          "pressedBg": {
+            "r": 0.95,
+            "g": 0.95,
+            "b": 0.97
+          }
+        }
+      },
+      "stateStyles": {
+        "default": {
+          "note": "Base appearance per variant"
+        },
+        "hover": {
+          "note": "Elevated: shadow +1 level. Filled: darker bg. Outlined: darker border. Ghost: surface hover bg."
+        },
+        "focus": {
+          "focusRing": true,
+          "focusRingWidth": 2,
+          "focusRingOffset": 2,
+          "focusRingColor": "focusRing"
+        },
+        "pressed": {
+          "note": "Elevated: shadow -1 level. Filled: darkest bg. Outlined: light fill + border. Ghost: pressed bg."
+        },
+        "disabled": {
+          "type": "boolean",
+          "opacity": 0.5,
+          "note": "Applied via boolean isDisabled. Blocks all interaction states."
+        },
+        "loading": {
+          "type": "boolean",
+          "note": "Skeleton placeholders in slots. Applied via boolean isLoading."
+        },
+        "selected": {
+          "type": "boolean",
+          "note": "Accent border (2px brand) + selected bg tint. Applied via boolean isSelected."
+        },
+        "error": {
+          "type": "boolean",
+          "note": "Error border color + optional error icon. Applied via boolean isError."
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [
+        {
+          "boolName": "Has Media",
+          "swapName": "Media Content",
+          "layerName": "media",
+          "defaultVisible": true,
+          "preferredRef": ".ContentMedia"
+        },
+        {
+          "boolName": "Has Header",
+          "swapName": "Header Content",
+          "layerName": "header",
+          "defaultVisible": true,
+          "preferredRef": ".ContentHeader"
+        },
+        {
+          "boolName": "Has Body",
+          "swapName": "Body Content",
+          "layerName": "body",
+          "defaultVisible": true,
+          "preferredRef": ".ContentBody"
+        },
+        {
+          "boolName": "Has Actions",
+          "swapName": "Footer Content",
+          "layerName": "actions",
+          "defaultVisible": true,
+          "preferredRef": ".ContentFooter"
+        },
+        {
+          "boolName": "Has Close",
+          "swapName": "Close Icon",
+          "layerName": "close",
+          "defaultVisible": false
+        }
+      ],
+      "booleanLayers": [
+        {
+          "boolName": "Disabled",
+          "layerName": "_disabled-overlay",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Loading",
+          "layerName": "_loading-skeleton",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Is Clickable",
+          "layerName": "_clickable-cursor",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Is Selected",
+          "layerName": "_selected-ring",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Is Expandable",
+          "layerName": "_expand-chevron",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Has Overlay",
+          "layerName": "_overlay",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Has Divider",
+          "layerName": "divider",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 16,
+        "exclusions": 0,
+        "net": 16,
+        "detail": {
+          "formula": "4 variants × 2 states × 2 orientations = 16",
+          "booleans": "Has Media, Has Header, Has Body, Has Actions, Has Close, Has Avatar, Has Eyebrow, Has Subtitle, Has Badge, Has Metadata, Has Secondary Action, Has Divider, Has Overlay, Disabled, Loading, Is Clickable, Is Selected, Is Expandable",
+          "building_blocks": ".ContentMedia(1) + .ContentHeader(1) + .ContentBody(1) + .ContentFooter(1) = 4",
+          "family_total": 20
+        }
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 24,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "card",
+    "role": "article (standalone) | none (in grid/list)",
+    "interactiveRoles": {
+      "clickable": "role=link with <a> wrapper or role=link + tabindex=0",
+      "selectable": "role=checkbox with aria-checked"
+    },
+    "keyboardNav": [
+      "Tab: focus card (if interactive) or internal actions (if static)",
+      "Enter: activate clickable card or focused action",
+      "Space: toggle selectable card",
+      "Arrow keys: navigate between cards in grid selection"
+    ],
+    "focusTechnique": "linear (tab between cards) or roving (arrow keys in grid)",
+    "nestedInteractive": "Sibling pattern — internal links/buttons as siblings of card link, not children",
+    "headingLevel": "Contextual h2-h4 via title slot. aria-labelledby pointing to title.",
+    "edgeCases": 5,
+    "wcagLevel": "AA",
+    "wcagCriteria": [
+      "1.3.1",
+      "2.1.1",
+      "2.4.7",
+      "4.1.2",
+      "4.1.3"
+    ]
+  },
+  "tokens": {
+    "total": 38,
+    "prefix": "crd",
+    "mode": "C",
+    "layers": 3
+  },
+  "variableBindings": {
+    "surface/default": "bg/surface/default",
+    "surface/hover": "bg/surface/hover",
+    "surface/pressed": "bg/surface/pressed",
+    "surface/selected": "bg/surface/selected",
+    "surface/disabled": "bg/surface/disabled",
+    "surface/filled": "bg/fill/default",
+    "border/default": "border/default",
+    "border/hover": "border/hover",
+    "border/focus": "border/focus",
+    "border/disabled": "border/disabled",
+    "border/error": "border/error",
+    "border/selected": "interactive/default",
+    "text/primary": "text/primary",
+    "text/secondary": "text/secondary",
+    "text/disabled": "text/disabled",
+    "focus/ring": "interactive/default",
+    "interactive/default": "interactive/default"
+  },
+  "componentDescriptions": {
+    ".ContentMedia": "Region de media full-bleed (imagen/video) sin padding.\nOcupa el ancho completo del Card. Aspect ratio controlado por altura fija.\nSoporta placeholder bg cuando no hay imagen.",
+    ".ContentHeader": "Cabecera estructurada del Card con avatar, eyebrow, titulo, subtitulo, badge y action menu.\nTodos los slots opcionales excepto titulo.\nSize hereda del Card padre (sm/md/lg).\n\nAnatomia:\n  [Avatar] [Eyebrow / Title / Subtitle] [Badge] [ActionMenu]",
+    ".ContentBody": "Contenido principal del Card con texto body, metadata y divider opcional.\nSoporta contenido libre via composicion.\nPadding horizontal hereda del Card padre.\n\nAnatomia:\n  [Body text]\n  [Metadata]\n  [Divider]",
+    ".ContentFooter": "Region de acciones del Card con botones primario/secundario y divider superior opcional.\nAcciones alineadas horizontalmente con gap de 8-12px.\nUna CTA primaria maxima por card (anti-patron: multiples CTAs primarios).\n\nAnatomia:\n  [Divider]\n  [Secondary Action] [Primary Action]",
+    "Card": "Contenedor de contenido estructurado con media, header, body y footer como building blocks.\n4 variantes: elevated (shadow), filled (bg diferenciado), outlined (borde 1px), ghost (sin contenedor).\n3 tamanos: sm (280px), md (340px), lg (420px).\n2 orientaciones: vertical (media arriba), horizontal (media izquierda).\n3 modos interactivos: static, clickable (link), selectable (checkbox).\n\n🔑 ARIA:\n• Standalone: role=\"article\"\n• En grid/lista: role implicito\n• Clickable: role=\"link\" + tabindex=\"0\" o <a> wrapper\n• Selectable: role=\"checkbox\" + aria-checked\n• NUNCA anidar links dentro de card clickable (sibling pattern)\n\n⌨️ Keyboard:\n• Tab: navegar entre cards interactivas o acciones internas\n• Enter: activar card clickable o accion enfocada\n• Space: toggle card selectable\n• Arrow keys: navegar grid de seleccion\n\n🎯 States:\n• hover: elevated +1 shadow, filled darker bg, outlined darker border\n• focus: 2px ring offset 2px (brand color)\n• pressed: elevated -1 shadow, filled darkest bg\n• disabled (bool): opacity 0.5, bloquea interaccion\n• loading (bool): skeleton placeholders en slots\n• selected (bool): accent border 2px + tint bg\n• error (bool): error border color\n\nTokens: 38, prefijo crd-.\nWCAG 2.2 AA — 1.3.1, 2.1.1, 2.4.7, 4.1.2, 4.1.3."
+  },
+  "thresholds": {
+    "warnFrames": 150,
+    "maxFrames": 200,
+    "maxDescriptionChars": 800,
+    "disabledOpacity": 0.5,
+    "focusRingWidth": 2,
+    "focusRingOffset": 2
+  },
+  "_decisions": [
+    {
+      "what": "4 variantes (elevated/filled/outlined/ghost)",
+      "why": "18/22 sistemas tienen variantes por elevacion/borde. Ghost (Radix, Spectrum quiet) cubre fondos oscuros/texturizados. 4 variantes = cobertura completa.",
+      "source": "research"
+    },
+    {
+      "what": "disabled/loading/selected/error como BOOLEAN, no State variant",
+      "why": "global-property-rules: disabled es boolean (solo cambia opacity). loading/selected son config toggles. error es status. 4 booleans evitan multiplicar 180 frames x4.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "Interactive como variant (static/clickable/selectable), no boolean",
+      "why": "14/22 sistemas diferencian interactividad. Fluent 2 formaliza 3 modos con ARIA distinto. Cambio estructural (role, keyboard, focus) justifica variant.",
+      "source": "research"
+    },
+    {
+      "what": "4 building blocks (.ContentMedia/.ContentHeader/.ContentBody/.ContentFooter) antes de Card",
+      "why": "14/22 sistemas usan sub-componentes estructurados. shadcn, Fluent 2, Chakra como referencia. BBs permiten composicion + estructura pre-armada.",
+      "source": "research"
+    },
+    {
+      "what": "Excluir sm x horizontal y static x hover/focus/pressed",
+      "why": "sm cards no tienen espacio para layout horizontal (7/22 soportan H, ninguno en sm). Static cards sin interaccion no tienen estados de interaccion (22/22 consenso). Ahorra 108 frames.",
+      "source": "spec"
+    }
+  ],
+  "_meta": {
+    "lastUpdatedBy": "spec",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-04T12:00:00.000Z",
+    "mode": "max"
+  },
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,308 @@
+{
+  "version": "1.0",
+  "component": "Alert",
+  "archetype": "container",
+  "buildOrder": [
+    "Alert"
+  ],
+  "family": [
+    {
+      "name": "Alert",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "status-icon",
+          "type": "icon",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "action",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "close-button",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "Status": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "disabled"
+        ],
+        "Display": [
+          "default",
+          "banner"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "_default": {
+          "h": 48,
+          "fontSize": 14,
+          "titleSize": 14,
+          "titleWeight": 500,
+          "descSize": 13,
+          "iconSize": 20,
+          "px": 16,
+          "py": 12,
+          "gap": 12,
+          "radius": 8,
+          "width": 480,
+          "padding": 16
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "border": {
+          "r": 0.88,
+          "g": 0.88,
+          "b": 0.9
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "divider": {
+          "r": 0.92,
+          "g": 0.92,
+          "b": 0.94
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        }
+      },
+      "variantStyles": {
+        "info": {
+          "bg": {
+            "r": 0.93,
+            "g": 0.95,
+            "b": 1
+          },
+          "border": {
+            "r": 0.72,
+            "g": 0.8,
+            "b": 0.96
+          },
+          "fg": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "titleFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "success": {
+          "bg": {
+            "r": 0.93,
+            "g": 0.99,
+            "b": 0.95
+          },
+          "border": {
+            "r": 0.6,
+            "g": 0.9,
+            "b": 0.68
+          },
+          "fg": {
+            "r": 0.08,
+            "g": 0.55,
+            "b": 0.22
+          },
+          "titleFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "warning": {
+          "bg": {
+            "r": 1,
+            "g": 0.97,
+            "b": 0.92
+          },
+          "border": {
+            "r": 0.96,
+            "g": 0.82,
+            "b": 0.52
+          },
+          "fg": {
+            "r": 0.72,
+            "g": 0.48,
+            "b": 0.05
+          },
+          "titleFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "error": {
+          "bg": {
+            "r": 1,
+            "g": 0.94,
+            "b": 0.94
+          },
+          "border": {
+            "r": 0.96,
+            "g": 0.62,
+            "b": 0.62
+          },
+          "fg": {
+            "r": 0.86,
+            "g": 0.15,
+            "b": 0.15
+          },
+          "titleFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          }
+        },
+        "banner": {
+          "radius": 0
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Title",
+          "layerName": "title",
+          "default": "Alert title"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "Has Close",
+          "layerName": "close-button",
+          "defaultVisible": true
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "Has Description",
+          "textName": "✏️ Description",
+          "layerName": "description",
+          "defaultVisible": true,
+          "defaultText": "Additional context about this alert."
+        },
+        {
+          "boolName": "Has Action",
+          "textName": "✏️ Action",
+          "layerName": "action",
+          "defaultVisible": false,
+          "defaultText": "Learn more"
+        }
+      ],
+      "frameCount": {
+        "gross": 8,
+        "exclusions": 0,
+        "net": 8
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 30,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "alert",
+    "roleByStatus": {
+      "error": "alert",
+      "warning": "alert",
+      "success": "status",
+      "info": "status"
+    },
+    "ariaLiveByStatus": {
+      "error": "assertive",
+      "warning": "assertive",
+      "success": "polite",
+      "info": "polite"
+    },
+    "keyboardNav": [
+      "Tab (navigate to close/action)",
+      "Space/Enter (activate close/action)",
+      "Escape (dismiss if closable)"
+    ],
+    "touchTarget": "44x44px for close button",
+    "iconSemantics": "aria-hidden=true (color+icon communicate severity, never color alone)",
+    "edgeCases": 4,
+    "wcagLevel": "AA",
+    "wcagCriteria": [
+      "1.4.1",
+      "2.1.1",
+      "2.4.7",
+      "4.1.2",
+      "4.1.3"
+    ]
+  },
+  "tokens": {
+    "total": 28,
+    "prefix": "alt",
+    "mode": "C",
+    "layers": 3
+  },
+  "componentDescriptions": {
+    "Alert": "Notificación inline persistente con 4 niveles de severidad.\nStatus: info, success, warning, error.\n\n🔑 ARIA:\n• error/warning: role=\"alert\" (assertive — interrumpe screen reader)\n• success/info: role=\"status\" (polite — anuncia en cola)\n• Ícono: aria-hidden=\"true\" (color + ícono, nunca solo color)\n• Severidad comunicada por color + ícono + texto\n\n⌨️ Keyboard:\n• Tab: navegar a close button y action link\n• Space / Enter: activar close o action\n• Escape: dismiss (si closable)\n\n🎯 Focus:\n• Close button ≥ 44×44px touch target\n• Focus ring 2px en elementos interactivos\n• No auto-focus al aparecer (usa live region en su lugar)\n\nDismiss: enforced para info/success/warning. Error crítico puede ser no-dismissible.\nTokens: 28, prefijo alt-.\nWCAG 2.2 AA · Carbon + Polaris consensus."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-02T22:08:33.239Z",
+    "mode": "max"
+  },
+  "_foundationsRef": "foundations.json"
+}

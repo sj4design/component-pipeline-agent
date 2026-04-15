@@ -1,0 +1,36 @@
+---
+system: Atlassian Design System
+component: InlineEdit
+url: https://atlassian.design/components/inline-edit/examples
+last_verified: 2026-03-28
+---
+
+# InlineEdit
+
+## Approach
+Atlassian's InlineEdit is the most complete and thoroughly documented inline editing implementation among all Tier 1 design systems. It is a first-class component in the Atlassian Design System because in-place editing is a core interaction pattern across Jira, Confluence, and Trello: Jira issue titles, Epic names, sprint goals, Confluence page titles, Trello card names, and board column names are all edited in-place through this exact pattern. The volume and centrality of this use case across Atlassian's product portfolio justified the investment in a purpose-built, thoroughly specified component rather than a composition pattern or documented convention. Atlassian's InlineEdit implements a clear three-state model — view mode (the value displayed as readable text), edit mode (the value in an active input field with confirm/cancel affordances), and loading/saving state (for async operations) — and provides dedicated documentation on when to use InlineEdit vs. when to use a form or modal, which is as valuable as the component itself.
+
+## Key Decisions
+1. **Explicit three-state model (view → edit → confirm/cancel)** (HIGH) — Atlassian's InlineEdit formalizes the view/edit distinction as an explicit component concern, not an application-level state machine to be built by each team. The component renders either a custom `readView` (the display content, typically styled text) or a custom `editView` (typically a TextField or TextArea). This render-prop approach means the display and edit surfaces can be fully customized per use case while the state transition logic — activation, keyboard handling, confirmation, cancellation, focus management — is provided by the component. This is the key architectural insight: separate the layout/display customization from the state machine.
+2. **`readView` and `editView` as render props** (HIGH) — Rather than hardcoding the display or edit element, Atlassian's InlineEdit accepts `readView` and `editView` as functions that return React elements. This means a Jira issue title (large text with specific typography) and a filter name (small label text) can both use the same InlineEdit component with completely different visual treatments for their view and edit states. The generality of render props prevents the component from being too opinionated about how the content looks while being appropriately opinionated about how it behaves.
+3. **Confirm/cancel button pair is built-in and keyboard-linked** (HIGH) — InlineEdit renders a confirm (checkmark) and cancel (X) button pair below the edit field, and these are automatically linked to Enter (confirm) and Escape (cancel) keyboard shortcuts. The presence of explicit buttons is important for mouse/touch users who may not know the keyboard shortcuts, and the button placement below the field follows Atlassian's established pattern from Jira's issue editing — users who frequently edit Jira issue titles have built muscle memory for this exact affordance location.
+4. **`keepEditViewOpenOnBlur` for multi-field editing** (MEDIUM) — By default, InlineEdit saves on blur (focus leaving the edit field), which is appropriate for single-value edits like a card title. The `keepEditViewOpenOnBlur` prop changes this so the field stays in edit mode when focus moves to the confirm/cancel buttons, which is necessary when the edit view contains multiple fields or when users need to click the explicit confirm button rather than relying on blur-save. This prop represents a deliberate design decision about trust — when the edit is simple and low-risk, auto-save on blur reduces friction; when it is multi-field or high-stakes, explicit confirmation is safer.
+5. **Usage guidelines: InlineEdit is for known values, not unknown entries** (HIGH) — Atlassian's documentation explicitly states that InlineEdit should only be used when there is an existing value to edit, not for creating new values. The reasoning is interaction clarity: if a field is empty (no existing value), the "read view" has nothing to show, making the click-to-edit affordance invisible. For creating new values, Atlassian recommends forms or dedicated create screens. This guidance prevents teams from misusing InlineEdit as a lazy substitute for proper create flows.
+
+## Notable Props
+- `readView`: `() => ReactElement` — Custom render function for the display state. This is the primary API that makes InlineEdit reusable across Jira, Confluence, and Trello's different typographic contexts.
+- `editView`: `(fieldProps, ref) => ReactElement` — Custom render function for the edit state, receiving field props (value, onChange, onBlur, etc.) to pass to the input element.
+- `onConfirm`: `(value) => void` — Called when the user confirms the edit (Enter key, confirm button click, or blur if auto-save is enabled).
+- `keepEditViewOpenOnBlur`: `boolean` — Controls whether blur triggers an automatic save or keeps the edit mode open for explicit confirmation.
+- `isRequired`: `boolean` — Marks the field as required, preventing confirmation of empty values.
+- `validate`: `(value) => string | void` — Validation function that can return an error message to display below the edit field. Inline validation feedback is built into the component.
+- `startWithEditViewOpen`: `boolean` — Opens the component immediately in edit mode, useful for new items just created.
+
+## A11y Highlights
+- **Keyboard**: Click or Enter on the read view activates edit mode. Within the edit field: Enter confirms (unless it is a TextArea where Enter creates a new line), Escape cancels. Tab moves focus to the confirm/cancel buttons. The confirm button is also linked to Enter when it is focused. After confirmation or cancellation, focus returns to the read view element.
+- **Screen reader**: Entering edit mode triggers an `aria-live` announcement of "Editing: [field name]". Validation errors are announced immediately via `aria-live="assertive"` when they occur. After save, a confirmation announcement is made. The read view renders with `aria-label` describing that the value is editable (e.g., "Issue title, clickable to edit").
+- **ARIA**: The read view wrapper has `role="button"` and `tabIndex={0}` when in view mode, making it keyboard-activatable. The edit view renders the provided input element with associated `aria-label` and `aria-invalid` on validation errors. The confirm/cancel button pair have descriptive `aria-label` attributes.
+
+## Strengths & Gaps
+- **Best at**: A complete, production-proven InlineEdit implementation with render-prop flexibility, built-in confirm/cancel keyboard handling, inline validation, accessibility focus management, and explicit usage guidance — this is the definitive Tier 1 InlineEdit component and the reference implementation other systems should study.
+- **Missing**: Multi-field inline edit (editing multiple related values at once, such as start and end dates of a sprint as a pair) — the current component models single-field editing, and multi-field in-place editing is handled at the product level in Jira rather than through an extended InlineEdit component.

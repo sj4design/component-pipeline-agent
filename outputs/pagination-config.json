@@ -1,0 +1,408 @@
+{
+  "version": "1.0",
+  "component": "Pagination",
+  "archetype": "inline-action",
+  "language": "es",
+  "buildOrder": [
+    ".PageButton",
+    "Pagination"
+  ],
+  "family": [
+    {
+      "name": ".PageButton",
+      "isSubComponent": true,
+      "isBuildingBlock": false,
+      "chromeless": false,
+      "slots": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        }
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "disabled"
+        ],
+        "IsCurrent": [
+          "false",
+          "true"
+        ]
+      },
+      "exclusions": [
+        {
+          "rule": "disabled x hover/focus/pressed",
+          "reason": "Disabled blocks all interaction states",
+          "saved": 3
+        },
+        {
+          "rule": "IsCurrent=true x disabled",
+          "reason": "Current page should never be disabled",
+          "saved": 1
+        }
+      ],
+      "sizes": {
+        "sm": {
+          "h": 32,
+          "fontSize": 12,
+          "iconSize": 16,
+          "py": 6,
+          "px": 8,
+          "gap": 0,
+          "radius": 6
+        },
+        "md": {
+          "h": 40,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 8,
+          "px": 12,
+          "gap": 0,
+          "radius": 8
+        },
+        "lg": {
+          "h": 48,
+          "fontSize": 16,
+          "iconSize": 20,
+          "py": 12,
+          "px": 16,
+          "gap": 0,
+          "radius": 8
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "Page Label",
+          "layerName": "label",
+          "default": "1"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "variantStyles": {
+        "IsCurrent=false": {
+          "bg": null,
+          "fg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "border": null
+        },
+        "IsCurrent=true": {
+          "bg": {
+            "r": 0.15,
+            "g": 0.35,
+            "b": 0.92
+          },
+          "fg": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "border": null
+        }
+      },
+      "colors": {
+        "bgSurface": null,
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "bgCurrentDefault": {
+          "r": 0.15,
+          "g": 0.35,
+          "b": 0.92
+        },
+        "bgCurrentHover": {
+          "r": 0.12,
+          "g": 0.3,
+          "b": 0.82
+        },
+        "bgCurrentPressed": {
+          "r": 0.1,
+          "g": 0.25,
+          "b": 0.72
+        },
+        "fgCurrent": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "borderFocus": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        }
+      },
+      "frameCount": {
+        "gross": 10,
+        "exclusions": 4,
+        "net": 6
+      },
+      "grid": {
+        "maxCols": 5,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "Pagination",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "chromeless": false,
+      "slots": [
+        {
+          "name": "prev-button",
+          "type": "icon-action",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "page-buttons",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none",
+          "buildingBlock": ".PageButton"
+        },
+        {
+          "name": "ellipsis",
+          "type": "visual",
+          "required": false,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "next-button",
+          "type": "icon-action",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "total-display",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "size-changer",
+          "type": "slot",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "quick-jumper",
+          "type": "slot",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": 32,
+          "fontSize": 12,
+          "iconSize": 16,
+          "py": 0,
+          "px": 0,
+          "gap": 4,
+          "radius": 0,
+          "itemsGap": 4
+        },
+        "md": {
+          "h": 40,
+          "fontSize": 14,
+          "iconSize": 20,
+          "py": 0,
+          "px": 0,
+          "gap": 8,
+          "radius": 0,
+          "itemsGap": 4
+        },
+        "lg": {
+          "h": 48,
+          "fontSize": 16,
+          "iconSize": 20,
+          "py": 0,
+          "px": 0,
+          "gap": 8,
+          "radius": 0,
+          "itemsGap": 8
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "Total Text",
+          "layerName": "total-display",
+          "default": "1-10 of 100"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "Show Total",
+          "layerName": "total-display",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Size Changer",
+          "layerName": "size-changer",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Quick Jumper",
+          "layerName": "quick-jumper",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "Show Total",
+          "textPropName": "Total Text",
+          "layerName": "total-display",
+          "default": "1-10 of 100"
+        }
+      ],
+      "colors": {
+        "bgSurface": null,
+        "fgPrimary": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "fgSecondary": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.5
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        },
+        "borderDefault": {
+          "r": 0.82,
+          "g": 0.82,
+          "b": 0.85
+        },
+        "borderFocus": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        },
+        "focusRing": {
+          "r": 0.25,
+          "g": 0.39,
+          "b": 0.95
+        }
+      },
+      "variantStyles": {},
+      "frameCount": {
+        "gross": 3,
+        "exclusions": 0,
+        "net": 3
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 40,
+        "pad": 40
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "navigation",
+    "role": "navigation",
+    "ariaAttributes": [
+      "aria-label=\"Pagination\"",
+      "aria-current=\"page\" on active"
+    ],
+    "keyboard": {
+      "Tab": "navigates between buttons",
+      "Enter": "activates button",
+      "Space": "activates button"
+    },
+    "edgeCases": 5,
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 20,
+    "prefix": "pgn",
+    "mode": "C"
+  },
+  "componentDescriptions": {
+    "Pagination": "Barra de navegacion entre paginas de contenido paginado.\n\n🔑 nav con aria-label=\"Pagination\". aria-current=\"page\" en pagina activa.\n⌨️ Tab navega entre botones. Enter/Space activan.\n🎯 Navegacion de datasets, tablas y listados con soporte para salto rapido y selector de tamano de pagina."
+  },
+  "variableBindings": {
+    "bg": "surface/default",
+    "active": "interactive/default",
+    "text": "text/label",
+    "disabled": "text/disabled"
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype inline-action",
+      "why": "Pagination is a horizontal bar of button-like controls. 20/20 systems use flat button arrangement. Not a container, form-control, or overlay.",
+      "source": "research"
+    },
+    {
+      "what": "Family: Pagination + .PageButton sub-component",
+      "why": "16/20 systems have structured page button items with own states. .PageButton has State + IsCurrent as variant dimensions. Parent Pagination only varies by Size.",
+      "source": "research"
+    },
+    {
+      "what": "IsCurrent as variant on .PageButton, not boolean",
+      "why": "Current page changes bg (brand) + fg (white) = structural visual change across 2+ properties. Per global-property-rules decision tree: >= 2 properties change = variant.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "quickJumper/sizeChanger/showTotal as booleans",
+      "why": "Optional UI regions that show/hide without changing structure. Per naming-conventions.md: pagination booleans are quick-jumper, size-changer, simple-mode.",
+      "source": "research"
+    },
+    {
+      "what": "6 net frames for .PageButton (10 gross - 4 exclusions)",
+      "why": "State(5) x IsCurrent(2) = 10 gross. Exclude: disabled x hover/focus/pressed (3) + IsCurrent=true x disabled (1) = 4 exclusions.",
+      "source": "spec"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

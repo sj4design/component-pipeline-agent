@@ -1,0 +1,297 @@
+{
+  "version": "1.0",
+  "component": "Modal",
+  "archetype": "container",
+  "buildOrder": [
+    "Modal"
+  ],
+  "family": [
+    {
+      "name": "Modal",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "body",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "footer",
+          "type": "container",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "close-button",
+          "type": "icon-action",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "danger-icon",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "none"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg",
+          "fullscreen"
+        ],
+        "Variant": [
+          "default",
+          "danger"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "w": 400,
+          "padding": 24,
+          "headerGap": 16,
+          "bodyMinH": 120,
+          "radius": 12,
+          "titleSize": 16,
+          "titleWeight": 600,
+          "bodySize": 14,
+          "bodyWeight": 400,
+          "descSize": 14,
+          "gap": 16,
+          "footerGap": 12
+        },
+        "md": {
+          "w": 560,
+          "padding": 24,
+          "headerGap": 16,
+          "bodyMinH": 160,
+          "radius": 12,
+          "titleSize": 18,
+          "titleWeight": 600,
+          "bodySize": 14,
+          "bodyWeight": 400,
+          "descSize": 14,
+          "gap": 16,
+          "footerGap": 12
+        },
+        "lg": {
+          "w": 800,
+          "padding": 32,
+          "headerGap": 20,
+          "bodyMinH": 200,
+          "radius": 16,
+          "titleSize": 20,
+          "titleWeight": 600,
+          "bodySize": 14,
+          "bodyWeight": 400,
+          "descSize": 14,
+          "gap": 20,
+          "footerGap": 12
+        },
+        "fullscreen": {
+          "w": 1280,
+          "padding": 32,
+          "headerGap": 20,
+          "bodyMinH": 400,
+          "radius": 0,
+          "titleSize": 20,
+          "titleWeight": 600,
+          "bodySize": 14,
+          "bodyWeight": 400,
+          "descSize": 14,
+          "gap": 20,
+          "footerGap": 12
+        }
+      },
+      "colors": {
+        "bgSurface": {
+          "r": 1,
+          "g": 1,
+          "b": 1
+        },
+        "border": {
+          "r": 0.89,
+          "g": 0.89,
+          "b": 0.91
+        },
+        "overlayBg": {
+          "r": 0,
+          "g": 0,
+          "b": 0
+        },
+        "overlayOpacity": 0.5,
+        "titleFg": {
+          "r": 0.07,
+          "g": 0.07,
+          "b": 0.07
+        },
+        "titleFgDanger": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "descFg": {
+          "r": 0.42,
+          "g": 0.45,
+          "b": 0.49
+        },
+        "divider": {
+          "r": 0.89,
+          "g": 0.89,
+          "b": 0.91
+        },
+        "dangerIconFg": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "dangerBorderTop": {
+          "r": 0.86,
+          "g": 0.15,
+          "b": 0.15
+        },
+        "focusRing": {
+          "r": 0.23,
+          "g": 0.51,
+          "b": 0.96
+        },
+        "bgHover": {
+          "r": 0.97,
+          "g": 0.97,
+          "b": 0.98
+        },
+        "bgPressed": {
+          "r": 0.95,
+          "g": 0.95,
+          "b": 0.97
+        },
+        "fgDisabled": {
+          "r": 0.72,
+          "g": 0.72,
+          "b": 0.75
+        }
+      },
+      "variantStyles": {
+        "default": {
+          "titleFg": {
+            "r": 0.07,
+            "g": 0.07,
+            "b": 0.07
+          },
+          "headerIcon": null,
+          "primaryButton": "primary",
+          "borderTop": null
+        },
+        "danger": {
+          "titleFg": {
+            "r": 0.86,
+            "g": 0.15,
+            "b": 0.15
+          },
+          "headerIcon": "alert-triangle",
+          "primaryButton": "danger",
+          "borderTop": {
+            "r": 0.86,
+            "g": 0.15,
+            "b": 0.15
+          }
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Title",
+          "layerName": "title",
+          "default": "Modal title"
+        },
+        {
+          "propName": "✏️ Description",
+          "layerName": "description",
+          "default": "Description text"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "Has Footer",
+          "layerName": "footer",
+          "defaultVisible": true
+        },
+        {
+          "boolName": "Has Dividers",
+          "layerName": "divider-top",
+          "defaultVisible": true
+        },
+        {
+          "boolName": "Has Dividers",
+          "layerName": "divider-bottom",
+          "defaultVisible": true
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "Has Description",
+          "textPropName": "✏️ Description",
+          "layerName": "description",
+          "defaultVisible": false
+        }
+      ],
+      "frameCount": {
+        "gross": 8,
+        "exclusions": 0,
+        "net": 8
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 40,
+        "pad": 40
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "dialog",
+    "role": "dialog",
+    "roleDanger": "alertdialog",
+    "keyboardNav": [
+      "Tab",
+      "Shift+Tab",
+      "Escape",
+      "Enter",
+      "Space"
+    ],
+    "focusTrap": true,
+    "focusOnOpen": "first-focusable",
+    "focusOnClose": "trigger",
+    "edgeCases": 7,
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 30,
+    "prefix": "mdl",
+    "mode": "C"
+  },
+  "componentDescriptions": {
+    "Modal": "Overlay dialog centrado.\nSizes: sm(400) md(560) lg(800) fullscreen(1280).\nVariants: default, danger.\n\n🔑 ARIA:\n• default: role=\"dialog\", danger: role=\"alertdialog\"\n• aria-modal=\"true\", aria-labelledby → title, aria-describedby → description\n• Background content: inert\n\n⌨️ Keyboard:\n• Tab / Shift+Tab: navegar dentro (focus trap, wrap circular)\n• Escape: cerrar modal\n• Enter / Space: activar botón enfocado\n\n🎯 Focus:\n• Al abrir: primer input (si form) o close-button\n• Al cerrar: retornar foco al trigger\n• Modales apilados: cada uno con su propio focus trap\n\n📱 Touch: close-button ≥ 44×44px.\nTokens: 30, prefijo mdl-.\n\nWCAG 2.2 AA · APG Dialog Pattern."
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-02T22:08:33.239Z",
+    "mode": "max"
+  },
+  "_foundationsRef": "foundations.json"
+}

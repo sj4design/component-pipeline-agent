@@ -1,0 +1,388 @@
+{
+  "version": "1.0",
+  "component": "Menu",
+  "archetype": "composite-overlay",
+  "language": "es",
+  "buildOrder": [
+    ".MenuItem",
+    ".MenuGroup",
+    "Menu"
+  ],
+  "a11y": {
+    "pattern": "menu",
+    "roles": [
+      "menu",
+      "menuitem"
+    ],
+    "ariaAttributes": [
+      "aria-haspopup (submenus)",
+      "aria-expanded"
+    ],
+    "keyboard": {
+      "ArrowDown": "next item",
+      "ArrowUp": "previous item",
+      "Enter": "activates item",
+      "ArrowRight": "opens submenu",
+      "ArrowLeft": "closes submenu",
+      "Escape": "closes menu",
+      "Home": "first item",
+      "End": "last item"
+    },
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 30,
+    "prefix": "mnu",
+    "mode": "C"
+  },
+  "componentDescriptions": {
+    "Menu": "Lista de acciones contextuales que aparece como overlay anclado a un trigger.\n\n🔑 role=menu con role=menuitem en cada opcion. aria-haspopup en items con submenu, aria-expanded indica estado.\n⌨️ Flechas arriba/abajo navegan items. Enter activa. Derecha abre submenu. Izquierda/Escape cierran.\n🎯 Acciones contextuales, navegacion secundaria y comandos agrupados."
+  },
+  "variableBindings": {
+    "bg": "surface/default",
+    "hover": "surface/hover",
+    "text": "text/label",
+    "icon": "icon/secondary",
+    "danger": "status/error/fg",
+    "border": "border/mid/default"
+  },
+  "family": [
+    {
+      "name": ".MenuItem",
+      "isSubComponent": true,
+      "isBuildingBlock": false,
+      "chromeless": true,
+      "slots": [
+        {
+          "name": "item-icon",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "item-label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "item-shortcut",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "submenu-arrow",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "disabled"
+        ],
+        "ItemType": [
+          "default",
+          "danger"
+        ]
+      },
+      "exclusions": [
+        {
+          "if": "State=disabled",
+          "then": "not hover, focus, pressed",
+          "reason": "Disabled blocks all interaction states",
+          "saved": 6
+        }
+      ],
+      "sizes": {
+        "sm": {
+          "h": 32,
+          "fontSize": 12,
+          "iconSize": 16,
+          "py": 6,
+          "px": 8,
+          "gap": 8,
+          "radius": 4
+        },
+        "md": {
+          "h": 36,
+          "fontSize": 14,
+          "iconSize": 16,
+          "py": 8,
+          "px": 12,
+          "gap": 8,
+          "radius": 4
+        },
+        "lg": {
+          "h": 44,
+          "fontSize": 16,
+          "iconSize": 20,
+          "py": 12,
+          "px": 12,
+          "gap": 8,
+          "radius": 6
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "Label",
+          "layerName": "item-label",
+          "default": "Menu Item"
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "hasIcon",
+          "swapName": "Icon",
+          "layerName": "item-icon",
+          "defaultVisible": false
+        }
+      ],
+      "booleanLayers": [
+        {
+          "boolName": "hasSubmenuArrow",
+          "layerName": "submenu-arrow",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasShortcut",
+          "textPropName": "Shortcut",
+          "layerName": "item-shortcut",
+          "defaultVisible": false,
+          "default": "Ctrl+K"
+        }
+      ],
+      "frameCount": {
+        "gross": 30,
+        "exclusions": 6,
+        "net": 24
+      },
+      "grid": {
+        "maxCols": 5,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": ".MenuGroup",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentSlot": "content",
+      "chromeless": true,
+      "slots": [
+        {
+          "name": "group-label",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "items",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "slot"
+        },
+        {
+          "name": "divider",
+          "type": "divider",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {},
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": "hug",
+          "fontSize": 10,
+          "py": 4,
+          "px": 8,
+          "gap": 0,
+          "radius": 0
+        },
+        "md": {
+          "h": "hug",
+          "fontSize": 12,
+          "py": 4,
+          "px": 12,
+          "gap": 0,
+          "radius": 0
+        },
+        "lg": {
+          "h": "hug",
+          "fontSize": 12,
+          "py": 4,
+          "px": 12,
+          "gap": 0,
+          "radius": 0
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "hasDivider",
+          "layerName": "divider",
+          "defaultVisible": true
+        },
+        {
+          "boolName": "hasGroupLabel",
+          "layerName": "group-label",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasGroupLabel",
+          "textPropName": "Group Label",
+          "layerName": "group-label",
+          "defaultVisible": false,
+          "default": "Section"
+        }
+      ],
+      "frameCount": {
+        "gross": 1,
+        "exclusions": 0,
+        "net": 1
+      },
+      "grid": {
+        "maxCols": 1,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "Menu",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "trigger",
+          "type": "slot",
+          "required": true,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "panel",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "slot",
+          "buildingBlock": ".MenuGroup"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "State": [
+          "default",
+          "open"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": "hug",
+          "panelMinW": 160,
+          "panelMaxW": 280,
+          "panelPy": 4,
+          "panelPx": 0,
+          "panelRadius": 8,
+          "panelShadow": "elevation-2",
+          "gap": 0
+        },
+        "md": {
+          "h": "hug",
+          "panelMinW": 180,
+          "panelMaxW": 320,
+          "panelPy": 4,
+          "panelPx": 0,
+          "panelRadius": 8,
+          "panelShadow": "elevation-2",
+          "gap": 0
+        },
+        "lg": {
+          "h": "hug",
+          "panelMinW": 200,
+          "panelMaxW": 360,
+          "panelPy": 6,
+          "panelPx": 0,
+          "panelRadius": 12,
+          "panelShadow": "elevation-3",
+          "gap": 0
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [
+        {
+          "boolName": "hasTrigger",
+          "swapName": "Trigger",
+          "layerName": "trigger",
+          "defaultVisible": true
+        }
+      ],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 6,
+        "exclusions": 0,
+        "net": 6
+      },
+      "grid": {
+        "maxCols": 3,
+        "gap": 40,
+        "pad": 30
+      }
+    }
+  ],
+  "thresholds": {
+    "warnFrames": 150,
+    "maxFrames": 200,
+    "maxDescriptionChars": 800,
+    "disabledOpacity": 0.5,
+    "focusRingWidth": 2,
+    "focusRingOffset": 2
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10T12:00:00Z",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Archetype composite-overlay (trigger + panel)",
+      "why": "21/21 systems implement menu as triggered overlay list anchored to trigger element. Universal consensus.",
+      "source": "research"
+    },
+    {
+      "what": "Family: Menu + .MenuItem + .MenuGroup",
+      "why": "21/21 systems have discrete menu items with own interaction states. 14/21 have section groups with optional labels. Sub-component pattern prevents frame explosion.",
+      "source": "research+spec"
+    },
+    {
+      "what": ".MenuItem has State variant with 5 values + ItemType with 2",
+      "why": "All systems differentiate hover/focus/pressed/disabled on items. 14/21 have danger/destructive item type. Using State variant because item states change bg+fg (structural, not just opacity).",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "hasShortcut as booleanTextPair, not variant",
+      "why": "Only 4/21 systems support keyboard shortcut display. Boolean toggle avoids frame multiplication. Enterprise apps enable it, consumer apps disable.",
+      "source": "research+spec"
+    },
+    {
+      "what": "Menu panel has Size=sm/md/lg with State=default/open",
+      "why": "8/21 systems support sizing. Panel State is binary (closed=hidden, open=visible). Panel width uses min/max constraints, not fixed width.",
+      "source": "research"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,151 @@
+{
+  "component": "Sidebar",
+  "archetype": "nav-content",
+  "buildOrder": [
+    ".SidebarItem",
+    "Sidebar"
+  ],
+  "family": [
+    {
+      "name": ".SidebarItem",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "icon:icon",
+        "label*:text",
+        "badge:text",
+        "chevron:icon"
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "active",
+          "disabled"
+        ]
+      },
+      "booleans": [
+        "hasChevron",
+        "isActive",
+        "hasIcon(swap)",
+        "hasBadge(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 6
+    },
+    {
+      "name": "Sidebar",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "header:container",
+        "nav-items*:container",
+        "footer:container"
+      ],
+      "properties": {
+        "SidebarState": [
+          "expanded",
+          "collapsed"
+        ]
+      },
+      "booleans": [
+        "hasHeader",
+        "hasFooter",
+        "hasSearch"
+      ],
+      "exclusions": [],
+      "frameCount": 2
+    }
+  ],
+  "a11y": {
+    "role": "navigation",
+    "keyboard": [
+      "Tab",
+      "ArrowDown/Up",
+      "Enter"
+    ],
+    "focus": "roving"
+  },
+  "tokens": {
+    "total": 28,
+    "prefix": "sdb"
+  },
+  "questions": [
+    {
+      "id": "collapsible",
+      "text": "¿El sidebar se puede colapsar (modo ícono-only)?",
+      "options": [
+        { "value": "yes", "label": "Sí — se contrae a solo íconos, se expande con hover o toggle" },
+        { "value": "no", "label": "No — siempre expandido con íconos + labels" }
+      ],
+      "impact": "SidebarState property (expanded vs collapsed)",
+      "tags": ["collapsible", "collapsed", "icon-only", "mini", "toggle"]
+    },
+    {
+      "id": "nested",
+      "text": "¿Los items del sidebar tienen sub-items (niveles anidados)?",
+      "options": [
+        { "value": "yes", "label": "Sí — grupos expandibles con sub-navegación" },
+        { "value": "no", "label": "No — navegación plana de un solo nivel" }
+      ],
+      "impact": "hasChevron boolean y patrón de sub-items expandibles",
+      "tags": ["nested", "sub-items", "expandable", "tree", "multi-level"]
+    },
+    {
+      "id": "badges",
+      "text": "¿Los items del sidebar muestran badges o contadores?",
+      "options": [
+        { "value": "yes", "label": "Sí — contadores de notificaciones, items pendientes" },
+        { "value": "no", "label": "No — solo ícono + label" }
+      ],
+      "impact": "hasBadge boolean en .SidebarItem",
+      "tags": ["badge", "counter", "notifications", "unread", "pending"]
+    },
+    {
+      "id": "header-footer",
+      "text": "¿El sidebar tiene header y/o footer?",
+      "options": [
+        { "value": "header-only", "label": "Solo header — logo o nombre de la app" },
+        { "value": "header-footer", "label": "Header + footer — logo arriba, perfil/settings abajo" },
+        { "value": "none", "label": "Ni header ni footer — solo navegación" }
+      ],
+      "impact": "hasHeader y hasFooter booleans",
+      "tags": ["header", "footer", "logo", "profile", "settings"]
+    },
+    {
+      "id": "search",
+      "text": "¿El sidebar incluye campo de búsqueda?",
+      "options": [
+        { "value": "yes", "label": "Sí — para filtrar items de navegación" },
+        { "value": "no", "label": "No — los items son pocos y fijos" }
+      ],
+      "impact": "hasSearch boolean",
+      "tags": ["search", "filter", "many-items", "large-navigation"]
+    },
+    {
+      "id": "icons",
+      "text": "¿Todos los items del sidebar llevan ícono?",
+      "options": [
+        { "value": "all", "label": "Sí — todos con ícono (obligatorio si hay modo colapsado)" },
+        { "value": "optional", "label": "Algunos — configurable por item" },
+        { "value": "none", "label": "No — solo texto" }
+      ],
+      "impact": "hasIcon boolean en .SidebarItem",
+      "tags": ["icons", "icon-navigation", "visual"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué tipo de aplicación se usará el sidebar?",
+      "options": [
+        { "value": "dashboard", "label": "Dashboard — admin panel, analytics" },
+        { "value": "email-docs", "label": "Email/Docs — app tipo Gmail, Notion, Slack" },
+        { "value": "settings", "label": "Configuración — panel de settings" },
+        { "value": "general", "label": "Uso general — múltiples tipos de app" }
+      ],
+      "impact": "Priorización de features y profundidad de navegación",
+      "tags": ["dashboard", "admin", "SaaS", "email", "docs", "settings", "enterprise"]
+    }
+  ]
+}

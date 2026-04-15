@@ -1,0 +1,600 @@
+{
+  "version": "1.0",
+  "component": "Checkbox",
+  "archetype": "form-control",
+  "language": "es",
+  "buildOrder": [
+    ".CheckboxControl",
+    "Checkbox",
+    "CheckboxGroup"
+  ],
+  "family": [
+    {
+      "name": ".CheckboxControl",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "box",
+          "type": "visual",
+          "required": true,
+          "figmaBinding": null
+        },
+        {
+          "name": "icon-check",
+          "type": "icon",
+          "required": true,
+          "figmaBinding": null
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Selected": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed"
+        ],
+        "Status": [
+          "none",
+          "error"
+        ]
+      },
+      "exclusions": [
+        {
+          "combo": "State=hover + Status=error",
+          "reason": "Error state persists independently of hover, but visually hover does not override error border"
+        }
+      ],
+      "sizes": {
+        "sm": {
+          "h": 16,
+          "w": 16,
+          "iconSize": 12,
+          "radius": 2,
+          "borderWidth": 1.5
+        },
+        "md": {
+          "h": 20,
+          "w": 20,
+          "iconSize": 14,
+          "radius": 4,
+          "borderWidth": 2
+        },
+        "lg": {
+          "h": 24,
+          "w": 24,
+          "iconSize": 16,
+          "radius": 4,
+          "borderWidth": 2
+        }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 72,
+        "exclusions": 3,
+        "net": 69
+      },
+      "grid": {
+        "maxCols": 6,
+        "gap": 16,
+        "pad": 24
+      }
+    },
+    {
+      "name": "Checkbox",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "control",
+          "type": "instance",
+          "required": true,
+          "figmaBinding": null,
+          "ref": ".CheckboxControl"
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "help-text",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Selected": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed"
+        ],
+        "Status": [
+          "none",
+          "error"
+        ]
+      },
+      "exclusions": [
+        {
+          "combo": "State=hover + Status=error",
+          "reason": "Error persists visually; hover does not override error border"
+        }
+      ],
+      "sizes": {
+        "sm": {
+          "h": "hug",
+          "fontSize": 12,
+          "lineHeight": 16,
+          "controlSize": 16,
+          "iconSize": 12,
+          "py": 4,
+          "px": 0,
+          "gap": 8,
+          "radius": 0
+        },
+        "md": {
+          "h": "hug",
+          "fontSize": 14,
+          "lineHeight": 20,
+          "controlSize": 20,
+          "iconSize": 14,
+          "py": 4,
+          "px": 0,
+          "gap": 8,
+          "radius": 0
+        },
+        "lg": {
+          "h": "hug",
+          "fontSize": 16,
+          "lineHeight": 24,
+          "controlSize": 24,
+          "iconSize": 16,
+          "py": 4,
+          "px": 0,
+          "gap": 8,
+          "radius": 0
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Label",
+          "layerName": "label",
+          "default": "Checkbox label"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "isDisabled",
+          "layerName": "root",
+          "effect": "opacity",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasHelpText",
+          "textName": "✏️ Help text",
+          "layerName": "help-text",
+          "default": "Help text goes here"
+        }
+      ],
+      "frameCount": {
+        "gross": 72,
+        "exclusions": 3,
+        "net": 69
+      },
+      "grid": {
+        "maxCols": 4,
+        "gap": 20,
+        "pad": 30
+      }
+    },
+    {
+      "name": "CheckboxGroup",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "legend",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "items",
+          "type": "children",
+          "required": true,
+          "figmaBinding": null
+        },
+        {
+          "name": "error-message",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {
+        "Orientation": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {},
+      "textProperties": [
+        {
+          "propName": "✏️ Legend",
+          "layerName": "legend",
+          "default": "Select options"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [
+        {
+          "boolName": "hasError",
+          "textName": "✏️ Error",
+          "layerName": "error-message",
+          "default": "Please select at least one option"
+        }
+      ],
+      "frameCount": {
+        "gross": 2,
+        "exclusions": 0,
+        "net": 2
+      },
+      "grid": {
+        "maxCols": 2,
+        "gap": 20,
+        "pad": 30
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "checkbox",
+    "role": "checkbox",
+    "keyboardNav": [
+      "Space (toggle checked)",
+      "Tab (navigate between checkboxes)"
+    ],
+    "focusTechnique": "linear",
+    "wrapAround": false,
+    "edgeCases": 6,
+    "wcagLevel": "AA"
+  },
+  "tokens": {
+    "total": 42,
+    "prefixes": {
+      "control": "chk",
+      "group": "chkg"
+    },
+    "mode": "C",
+    "layers": 3
+  },
+  "colors": {
+    "controlBorder": {
+      "r": 0.55,
+      "g": 0.55,
+      "b": 0.58
+    },
+    "controlBorderHover": {
+      "r": 0.35,
+      "g": 0.35,
+      "b": 0.4
+    },
+    "controlBorderFocus": {
+      "r": 0.15,
+      "g": 0.35,
+      "b": 0.92
+    },
+    "controlBorderError": {
+      "r": 0.86,
+      "g": 0.15,
+      "b": 0.15
+    },
+    "controlBgChecked": {
+      "r": 0.15,
+      "g": 0.35,
+      "b": 0.92
+    },
+    "controlBgCheckedHover": {
+      "r": 0.12,
+      "g": 0.3,
+      "b": 0.82
+    },
+    "controlBgCheckedPressed": {
+      "r": 0.1,
+      "g": 0.25,
+      "b": 0.72
+    },
+    "controlBgIndeterminate": {
+      "r": 0.15,
+      "g": 0.35,
+      "b": 0.92
+    },
+    "controlBgUnchecked": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "checkmarkFg": {
+      "r": 1,
+      "g": 1,
+      "b": 1
+    },
+    "focusRing": {
+      "r": 0.25,
+      "g": 0.39,
+      "b": 0.95
+    },
+    "labelFg": {
+      "r": 0.07,
+      "g": 0.07,
+      "b": 0.07
+    },
+    "labelFgDisabled": {
+      "r": 0.72,
+      "g": 0.72,
+      "b": 0.75
+    },
+    "helpTextFg": {
+      "r": 0.42,
+      "g": 0.45,
+      "b": 0.5
+    },
+    "errorFg": {
+      "r": 0.86,
+      "g": 0.15,
+      "b": 0.15
+    },
+    "disabledBorder": {
+      "r": 0.88,
+      "g": 0.88,
+      "b": 0.9
+    },
+    "disabledBgChecked": {
+      "r": 0.72,
+      "g": 0.72,
+      "b": 0.75
+    }
+  },
+  "variantStyles": {
+    "unchecked-default": {
+      "boxBg": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "boxBorder": {
+        "r": 0.55,
+        "g": 0.55,
+        "b": 0.58
+      },
+      "checkmark": null
+    },
+    "unchecked-hover": {
+      "boxBg": {
+        "r": 0.97,
+        "g": 0.97,
+        "b": 0.98
+      },
+      "boxBorder": {
+        "r": 0.35,
+        "g": 0.35,
+        "b": 0.4
+      },
+      "checkmark": null
+    },
+    "unchecked-focus": {
+      "boxBg": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "boxBorder": {
+        "r": 0.15,
+        "g": 0.35,
+        "b": 0.92
+      },
+      "checkmark": null
+    },
+    "unchecked-pressed": {
+      "boxBg": {
+        "r": 0.95,
+        "g": 0.95,
+        "b": 0.97
+      },
+      "boxBorder": {
+        "r": 0.35,
+        "g": 0.35,
+        "b": 0.4
+      },
+      "checkmark": null
+    },
+    "checked-default": {
+      "boxBg": {
+        "r": 0.15,
+        "g": 0.35,
+        "b": 0.92
+      },
+      "boxBorder": null,
+      "checkmark": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      }
+    },
+    "checked-hover": {
+      "boxBg": {
+        "r": 0.12,
+        "g": 0.3,
+        "b": 0.82
+      },
+      "boxBorder": null,
+      "checkmark": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      }
+    },
+    "checked-focus": {
+      "boxBg": {
+        "r": 0.15,
+        "g": 0.35,
+        "b": 0.92
+      },
+      "boxBorder": null,
+      "checkmark": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      }
+    },
+    "checked-pressed": {
+      "boxBg": {
+        "r": 0.1,
+        "g": 0.25,
+        "b": 0.72
+      },
+      "boxBorder": null,
+      "checkmark": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      }
+    },
+    "indeterminate-default": {
+      "boxBg": {
+        "r": 0.15,
+        "g": 0.35,
+        "b": 0.92
+      },
+      "boxBorder": null,
+      "checkmark": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      }
+    },
+    "indeterminate-hover": {
+      "boxBg": {
+        "r": 0.12,
+        "g": 0.3,
+        "b": 0.82
+      },
+      "boxBorder": null,
+      "checkmark": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      }
+    },
+    "error-unchecked": {
+      "boxBg": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "boxBorder": {
+        "r": 0.86,
+        "g": 0.15,
+        "b": 0.15
+      },
+      "checkmark": null
+    },
+    "error-checked": {
+      "boxBg": {
+        "r": 0.86,
+        "g": 0.15,
+        "b": 0.15
+      },
+      "boxBorder": null,
+      "checkmark": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      }
+    }
+  },
+  "componentDescriptions": {
+    ".CheckboxControl": "Caja visual del checkbox (check/dash/empty).\nSizes: sm(16) md(20) lg(24).\n\n🔑 ARIA:\n• role=\"checkbox\"\n• aria-checked: true/false/mixed\n• aria-invalid cuando Status=error\n\n⌨️ Keyboard:\n• Space: toggle checked (NO Enter)\n• Tab: navegar entre checkboxes\n\n🎯 Focus:\n• Focus ring 2px visible (WCAG 2.4.7)\n• Disabled: opacity 0.5, no focusable\n\nTokens: 28, prefijo chk-.\nWCAG 2.2 AA · APG Checkbox Pattern.",
+    "Checkbox": "Control de seleccion con label y help text opcional.\nSizes: sm(16) md(20) lg(24) (caja del control).\nSelected: unchecked/checked/indeterminate.\n\n🔑 ARIA:\n• role=\"checkbox\", aria-checked (true/false/mixed)\n• aria-invalid + aria-describedby cuando error\n• aria-describedby -> help-text cuando presente\n\n⌨️ Keyboard:\n• Space: toggle checked (NO Enter, Enter submits form)\n• Tab: navegar al siguiente checkbox\n\n🎯 Focus:\n• Focus ring en el control (no en el label)\n• isDisabled: opacity 0.5, no focusable\n\nTokens: 32, prefijo chk-.\nWCAG 2.2 AA · APG Checkbox Pattern.",
+    "CheckboxGroup": "Contenedor de checkboxes (vertical u horizontal).\n\n🔑 ARIA:\n• role=\"group\" o fieldset/legend\n• aria-labelledby -> legend\n• aria-describedby -> error-message cuando hasError\n• aria-required cuando aplique\n\n⌨️ Keyboard:\n• Tab: navegar entre checkboxes del grupo\n• NO arrow keys (multi-select != radio)\n\n🎯 Focus:\n• Linear: Tab/Shift+Tab entre items\n• Error: focus al primer item invalido\n\nTokens: 10, prefijo chkg-.\nWCAG 2.2 AA · APG Checkbox Pattern."
+  },
+  "variableBindings": {
+    "control/unchecked/border": "border/mid/default",
+    "control/unchecked/border-hover": "border/mid/hover",
+    "control/checked/bg": "brand/900",
+    "control/checked/bg-hover": "brand/1000",
+    "control/checked/bg-pressed": "brand/1100",
+    "control/indeterminate/bg": "brand/900",
+    "control/checkmark": "brand/0",
+    "control/focus-ring": "border/focus",
+    "control/error/border": "status/error/border",
+    "control/error/bg-checked": "status/error/fg",
+    "label/default": "text/label",
+    "label/disabled": "text/disabled",
+    "helpText/default": "text/secondary",
+    "error/fg": "status/error/fg",
+    "disabled/bg": "bg/disabled",
+    "disabled/border": "border/disabled"
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-10T00:00:00.000Z",
+    "mode": "max"
+  },
+  "_decisions": [
+    {
+      "what": "Selected como variant tri-state (unchecked/checked/indeterminate), no boolean",
+      "why": "Cada valor cambia el icono visual (empty/check/dash). 24/24 sistemas reconocen tri-state. Boolean no puede representar 3 estados.",
+      "source": "research"
+    },
+    {
+      "what": "3 tamanos sm(16)/md(20)/lg(24) para la caja del control",
+      "why": "Carbon usa exactamente 16/20/24. Consistencia con density system y otros form controls del DS.",
+      "source": "research"
+    },
+    {
+      "what": "isDisabled como boolean, no State variant",
+      "why": "Disabled solo cambia opacity (0.5). No cambia estructura. global-property-rules decision tree: <=1 property change -> boolean.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "Status=error como variant (no boolean) porque cambia border color",
+      "why": "Error cambia borde a rojo + muestra texto error. >=2 visual properties change -> variant per global-property-rules.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": ".CheckboxControl como sub-componente separado",
+      "why": "La caja visual se reutiliza en Checkbox y potencialmente en CheckboxCard futuro. Separar permite componer sin duplicar variants.",
+      "source": "spec"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,190 @@
+{
+  "component": "Radio",
+  "archetype": "form-control",
+  "buildOrder": [
+    ".RadioItem",
+    ".RadioCard",
+    "RadioGroup"
+  ],
+  "family": [
+    {
+      "name": ".RadioItem",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "label*:text"
+      ],
+      "properties": {
+        "Selected": [
+          "false",
+          "true"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed"
+        ],
+        "Disabled": [
+          "false",
+          "true"
+        ]
+      },
+      "booleans": [],
+      "exclusions": [
+        null,
+        null,
+        null
+      ],
+      "frameCount": 10
+    },
+    {
+      "name": ".RadioCard",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "content*:container",
+        "addon:slot"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Selected": [
+          "false",
+          "true"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus"
+        ],
+        "Disabled": [
+          "false",
+          "true"
+        ]
+      },
+      "booleans": [
+        "hasAddon(swap)"
+      ],
+      "exclusions": [
+        null,
+        null
+      ],
+      "frameCount": 24
+    },
+    {
+      "name": "RadioGroup",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "legend*:text",
+        "error-message:text",
+        "items*:children"
+      ],
+      "properties": {
+        "Orientation": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "booleans": [
+        "hasError(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 2
+    }
+  ],
+  "a11y": {
+    "role": "radiogroup",
+    "keyboard": [
+      "Tab (enter/exit group)",
+      "↑↓←→ (navigate + select)",
+      "Space (select when none)"
+    ],
+    "focus": "roving-tabindex"
+  },
+  "tokens": {
+    "total": 48
+  },
+  "questions": [
+    {
+      "id": "radio-card",
+      "text": "¿Necesitas radio buttons con formato de card (radio cards)?",
+      "options": [
+        { "value": "yes", "label": "Sí — opciones como cards seleccionables (planes, templates)" },
+        { "value": "no", "label": "No — solo radio buttons estándar con label" },
+        { "value": "both", "label": "Ambos — radio items y radio cards según contexto" }
+      ],
+      "impact": "Incluir .RadioCard en el build",
+      "tags": ["radio-card", "card-select", "plan-selection", "template", "visual-options"]
+    },
+    {
+      "id": "orientation",
+      "text": "¿Cómo se disponen las opciones de radio?",
+      "options": [
+        { "value": "vertical", "label": "Vertical — lista apilada" },
+        { "value": "horizontal", "label": "Horizontal — en fila" },
+        { "value": "both", "label": "Ambas orientaciones" }
+      ],
+      "impact": "Orientation property en RadioGroup",
+      "tags": ["vertical", "horizontal", "inline", "row", "layout"]
+    },
+    {
+      "id": "description",
+      "text": "¿Las opciones de radio necesitan texto descriptivo?",
+      "options": [
+        { "value": "label-only", "label": "Solo label — una línea por opción" },
+        { "value": "with-description", "label": "Label + descripción — explicación bajo cada opción" },
+        { "value": "rich", "label": "Contenido rico — íconos, badges, precios en radio cards" }
+      ],
+      "impact": "Slots adicionales en .RadioItem o .RadioCard content",
+      "tags": ["description", "help-text", "rich-content", "pricing", "detailed"]
+    },
+    {
+      "id": "validation",
+      "text": "¿Necesitas validación de error en el grupo de radios?",
+      "options": [
+        { "value": "yes", "label": "Sí — mensaje de error cuando no se selecciona opción" },
+        { "value": "no", "label": "No — siempre hay una opción pre-seleccionada" }
+      ],
+      "impact": "hasError boolean en RadioGroup",
+      "tags": ["validation", "error", "required", "form-validation"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño — estándar para todos" },
+        { "value": "multiple", "label": "Varios tamaños (sm, md, lg) — radio cards en distintos contextos" }
+      ],
+      "impact": "Size property en .RadioCard",
+      "tags": ["compact", "large", "mobile", "card-sizes"]
+    },
+    {
+      "id": "addon",
+      "text": "¿Las radio cards necesitan contenido adicional (addon)?",
+      "options": [
+        { "value": "yes", "label": "Sí — ícono, precio, badge, o cualquier contenido extra" },
+        { "value": "no", "label": "No — solo el contenido principal" },
+        { "value": "not-needed", "label": "No uso radio cards" }
+      ],
+      "impact": "hasAddon boolean en .RadioCard",
+      "tags": ["addon", "extra-content", "icon", "price", "badge"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el radio?",
+      "options": [
+        { "value": "forms", "label": "Formularios — selección de opciones en forms" },
+        { "value": "settings", "label": "Configuración — preferencias, ajustes" },
+        { "value": "pricing", "label": "Pricing — selección de plan o producto" },
+        { "value": "general", "label": "Uso general" }
+      ],
+      "impact": "Priorización de sub-componentes y anatomía",
+      "tags": ["forms", "settings", "pricing", "plans", "onboarding", "survey"]
+    }
+  ]
+}

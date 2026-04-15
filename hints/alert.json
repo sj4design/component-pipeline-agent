@@ -1,0 +1,136 @@
+{
+  "component": "Alert",
+  "archetype": "container",
+  "buildOrder": [
+    "Alert"
+  ],
+  "family": [
+    {
+      "name": "Alert",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "status-icon*:icon",
+        "title*:text",
+        "description:text",
+        "action:text",
+        "close-button:icon-action"
+      ],
+      "properties": {
+        "Status": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "disabled"
+        ],
+        "Display": [
+          "default",
+          "banner"
+        ]
+      },
+      "booleans": [
+        "Has Close",
+        "Has Description(text)",
+        "Has Action(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 8
+    }
+  ],
+  "a11y": {
+    "keyboard": [
+      "Tab (navigate to close/action)",
+      "Space/Enter (activate close/action)",
+      "Escape (dismiss if closable)"
+    ]
+  },
+  "tokens": {
+    "total": 28,
+    "prefix": "alt"
+  },
+  "questions": [
+    {
+      "id": "status-types",
+      "text": "¿Qué tipos de alerta necesitas en tu sistema?",
+      "options": [
+        { "value": "basic", "label": "Solo info y error — los más comunes" },
+        { "value": "standard", "label": "Info, success, warning, error — set estándar" },
+        { "value": "extended", "label": "Estándar + neutral/tip — alertas sin severidad" }
+      ],
+      "impact": "Status property values",
+      "tags": ["info", "success", "warning", "error", "neutral", "severity"]
+    },
+    {
+      "id": "dismissible",
+      "text": "¿Las alertas pueden cerrarse/descartarse?",
+      "options": [
+        { "value": "always", "label": "Sí — todas las alertas tienen botón de cerrar" },
+        { "value": "optional", "label": "Configurable — algunas sí, otras no" },
+        { "value": "never", "label": "No — las alertas son permanentes hasta resolverse" }
+      ],
+      "impact": "Has Close boolean",
+      "tags": ["dismissible", "closable", "persistent", "permanent"]
+    },
+    {
+      "id": "actions",
+      "text": "¿Las alertas necesitan acciones (botones/links)?",
+      "options": [
+        { "value": "none", "label": "No — solo texto informativo" },
+        { "value": "single", "label": "Una acción — link o botón ('Ver detalles', 'Reintentar')" },
+        { "value": "multiple", "label": "Varias acciones — primaria + secundaria" }
+      ],
+      "impact": "Has Action boolean, slots de acción",
+      "tags": ["actions", "retry", "link", "CTA", "undo"]
+    },
+    {
+      "id": "display-mode",
+      "text": "¿Cómo se presenta la alerta en la interfaz?",
+      "options": [
+        { "value": "inline", "label": "Inline — dentro del flujo de contenido (formularios, secciones)" },
+        { "value": "banner", "label": "Banner — ancho completo, arriba de la página o sección" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "Display property (default vs banner)",
+      "tags": ["inline", "banner", "full-width", "page-level", "section-level"]
+    },
+    {
+      "id": "description",
+      "text": "¿Las alertas necesitan texto descriptivo además del título?",
+      "options": [
+        { "value": "title-only", "label": "Solo título — mensajes cortos de una línea" },
+        { "value": "title-desc", "label": "Título + descripción — explicaciones más detalladas" },
+        { "value": "configurable", "label": "Configurable — a veces solo título, a veces con descripción" }
+      ],
+      "impact": "Has Description boolean",
+      "tags": ["description", "detail", "help-text", "verbose", "compact"]
+    },
+    {
+      "id": "icon-custom",
+      "text": "¿El ícono de la alerta es fijo por tipo o personalizable?",
+      "options": [
+        { "value": "fixed", "label": "Fijo — cada tipo de alerta tiene su ícono predefinido" },
+        { "value": "swappable", "label": "Personalizable — el ícono se puede cambiar por tipo" },
+        { "value": "optional", "label": "Opcional — algunas alertas no llevan ícono" }
+      ],
+      "impact": "status-icon slot behavior e Icon(swap)",
+      "tags": ["icon", "custom-icon", "no-icon", "swap"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usarán las alertas?",
+      "options": [
+        { "value": "forms", "label": "Formularios — validación, errores de campo" },
+        { "value": "system", "label": "Sistema — estados de la aplicación, mantenimiento" },
+        { "value": "notifications", "label": "Notificaciones — feedback de acciones del usuario" },
+        { "value": "general", "label": "Uso general — múltiples contextos" }
+      ],
+      "impact": "Priorización de variantes y anatomía",
+      "tags": ["forms", "validation", "system", "notifications", "enterprise", "dashboard"]
+    }
+  ]
+}

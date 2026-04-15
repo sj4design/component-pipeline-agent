@@ -1,0 +1,143 @@
+{
+  "component": "Avatar",
+  "archetype": "inline-action",
+  "buildOrder": [
+    ".Avatar",
+    "AvatarGroup"
+  ],
+  "family": [
+    {
+      "name": ".Avatar",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "image:media",
+        "initials:text",
+        "fallback-icon:icon"
+      ],
+      "properties": {
+        "Size": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "Content": [
+          "image",
+          "initials",
+          "fallback"
+        ]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 15
+    },
+    {
+      "name": "AvatarGroup",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "avatar-1*:instance",
+        "avatar-2*:instance",
+        "avatar-3*:instance",
+        "overflow:text"
+      ],
+      "properties": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "booleans": [
+        "hasOverflow(text)"
+      ],
+      "exclusions": [],
+      "frameCount": 3
+    }
+  ],
+  "a11y": {
+    "role": "img (with aria-label from name) or presentation (decorative)"
+  },
+  "tokens": {
+    "total": 14
+  },
+  "questions": [
+    {
+      "id": "content-types",
+      "text": "¿Qué tipos de contenido mostrará el avatar?",
+      "options": [
+        { "value": "image-only", "label": "Solo foto — siempre hay imagen disponible" },
+        { "value": "image-initials", "label": "Foto con fallback a iniciales cuando no hay imagen" },
+        { "value": "all-three", "label": "Foto, iniciales y ícono genérico como fallback final" }
+      ],
+      "impact": "Content property values (image, initials, fallback)",
+      "tags": ["photo", "initials", "fallback", "placeholder", "profile"]
+    },
+    {
+      "id": "group",
+      "text": "¿Necesitas mostrar grupos de avatares apilados?",
+      "options": [
+        { "value": "yes", "label": "Sí — listas de participantes, asignados, miembros" },
+        { "value": "no", "label": "No — solo avatares individuales" }
+      ],
+      "impact": "Incluir AvatarGroup en el build o solo .Avatar",
+      "tags": ["group", "stack", "team", "participants", "members", "collaborative"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de avatar necesitas?",
+      "options": [
+        { "value": "few", "label": "Solo 2-3 tamaños (sm, md, lg)" },
+        { "value": "full-range", "label": "Rango completo (xs a xl) para distintos contextos" }
+      ],
+      "impact": "Size property values",
+      "tags": ["compact", "large", "profile-page", "comment", "header", "table"]
+    },
+    {
+      "id": "shape",
+      "text": "¿Qué forma debe tener el avatar?",
+      "options": [
+        { "value": "circle", "label": "Circular — personas, perfiles" },
+        { "value": "rounded-square", "label": "Cuadrado redondeado — organizaciones, equipos, apps" },
+        { "value": "both", "label": "Ambas formas según el contexto" }
+      ],
+      "impact": "Radius token y posible Shape property",
+      "tags": ["circle", "square", "rounded", "organization", "workspace", "app-icon"]
+    },
+    {
+      "id": "status-badge",
+      "text": "¿El avatar necesita indicador de estado (online, offline, busy)?",
+      "options": [
+        { "value": "yes", "label": "Sí — dot de presencia o status badge" },
+        { "value": "no", "label": "No — avatar sin indicador de estado" }
+      ],
+      "impact": "Boolean hasStatusBadge y slot para badge de estado",
+      "tags": ["online", "offline", "busy", "presence", "status", "chat", "messaging"]
+    },
+    {
+      "id": "interactive",
+      "text": "¿El avatar es clickeable o puramente visual?",
+      "options": [
+        { "value": "display", "label": "Solo display — decorativo o informativo" },
+        { "value": "clickable", "label": "Clickeable — abre perfil, menú o tooltip" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "States hover/focus/pressed y role a11y",
+      "tags": ["clickable", "profile", "menu", "tooltip", "interactive"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué contexto principal se usará el avatar?",
+      "options": [
+        { "value": "profile", "label": "Perfiles — headers, settings, páginas de usuario" },
+        { "value": "lists", "label": "Listas — comentarios, chats, tablas de usuarios" },
+        { "value": "navigation", "label": "Navegación — navbar, sidebar, menú de usuario" },
+        { "value": "general", "label": "Uso general — múltiples contextos" }
+      ],
+      "impact": "Priorización de tamaños y features",
+      "tags": ["profile", "comments", "chat", "navbar", "table", "enterprise"]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "component": "Navbar",
+  "archetype": "nav-content",
+  "buildOrder": [
+    ".NavItem",
+    "Navbar"
+  ],
+  "family": [
+    {
+      "name": ".NavItem",
+      "isSubComponent": true,
+      "chromeless": false,
+      "slots": [
+        "icon:icon",
+        "label*:text"
+      ],
+      "properties": {
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "pressed",
+          "active",
+          "disabled"
+        ]
+      },
+      "booleans": [
+        "hasIcon(swap)"
+      ],
+      "exclusions": [],
+      "frameCount": 6
+    },
+    {
+      "name": "Navbar",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "logo*:icon",
+        "nav-items*:container",
+        "actions:container",
+        "search:container",
+        "avatar:icon",
+        "hamburger:icon-action"
+      ],
+      "properties": {},
+      "booleans": [
+        "hasSearch",
+        "hasAvatar",
+        "hasActions",
+        "hasHamburger",
+        "hasLogo(swap)"
+      ],
+      "exclusions": [],
+      "frameCount": 1
+    }
+  ],
+  "a11y": {
+    "role": "navigation",
+    "keyboard": [
+      "Tab",
+      "Enter"
+    ],
+    "focus": "linear"
+  },
+  "tokens": {
+    "total": 25,
+    "prefix": "nav"
+  },
+  "questions": [
+    {
+      "id": "elements",
+      "text": "¿Qué elementos incluye la navbar además de la navegación?",
+      "options": [
+        { "value": "minimal", "label": "Logo + nav items — lo mínimo" },
+        { "value": "with-search", "label": "Logo + nav + search — con barra de búsqueda" },
+        { "value": "with-user", "label": "Logo + nav + avatar/user menu" },
+        { "value": "full", "label": "Todo — logo, nav, search, avatar, actions, hamburger" }
+      ],
+      "impact": "Booleans hasSearch, hasAvatar, hasActions, hasHamburger",
+      "tags": ["search", "avatar", "user-menu", "hamburger", "CTA", "full-featured"]
+    },
+    {
+      "id": "responsive",
+      "text": "¿Cómo se comporta la navbar en mobile?",
+      "options": [
+        { "value": "hamburger", "label": "Hamburger menu — nav items se ocultan en un drawer" },
+        { "value": "bottom-nav", "label": "Bottom navigation — se transforma en barra inferior" },
+        { "value": "scroll", "label": "Scroll horizontal — los items se deslizan" },
+        { "value": "desktop-only", "label": "No aplica — solo se usa en desktop" }
+      ],
+      "impact": "hasHamburger boolean y patrón responsive",
+      "tags": ["responsive", "mobile", "hamburger", "bottom-nav", "drawer"]
+    },
+    {
+      "id": "nav-items",
+      "text": "¿Los items de navegación tienen íconos?",
+      "options": [
+        { "value": "text-only", "label": "Solo texto — labels de navegación" },
+        { "value": "icon-text", "label": "Ícono + texto — cada item con ícono" },
+        { "value": "optional", "label": "Configurable — algunos con ícono, otros sin" }
+      ],
+      "impact": "hasIcon boolean en .NavItem",
+      "tags": ["icons", "text-only", "icon-navigation"]
+    },
+    {
+      "id": "dropdowns",
+      "text": "¿Los items de navegación abren submenús/dropdowns?",
+      "options": [
+        { "value": "yes", "label": "Sí — mega-menu o dropdown con sub-items" },
+        { "value": "no", "label": "No — navegación plana, cada item es un link directo" }
+      ],
+      "impact": "Chevron slot y dropdown pattern en .NavItem",
+      "tags": ["dropdown", "mega-menu", "sub-navigation", "multi-level"]
+    },
+    {
+      "id": "sticky",
+      "text": "¿La navbar es sticky (fija al hacer scroll)?",
+      "options": [
+        { "value": "yes", "label": "Sí — siempre visible al scrollear" },
+        { "value": "auto-hide", "label": "Auto-hide — se oculta al scrollear hacia abajo, reaparece al subir" },
+        { "value": "static", "label": "No — sube con el contenido" }
+      ],
+      "impact": "Comportamiento de posicionamiento y sombra",
+      "tags": ["sticky", "fixed", "auto-hide", "scroll", "floating"]
+    },
+    {
+      "id": "actions",
+      "text": "¿La navbar incluye botones de acción (CTA)?",
+      "options": [
+        { "value": "yes", "label": "Sí — botones como 'Sign Up', 'Get Started'" },
+        { "value": "no", "label": "No — solo navegación sin CTAs" }
+      ],
+      "impact": "hasActions boolean y actions slot",
+      "tags": ["CTA", "sign-up", "login", "actions", "landing"]
+    },
+    {
+      "id": "context",
+      "text": "¿En qué tipo de producto se usará la navbar?",
+      "options": [
+        { "value": "webapp", "label": "Web app — dashboard, herramienta SaaS" },
+        { "value": "marketing", "label": "Marketing — landing page, sitio corporativo" },
+        { "value": "docs", "label": "Documentación — sitio de docs técnicos" },
+        { "value": "general", "label": "Uso general — múltiples tipos de producto" }
+      ],
+      "impact": "Priorización de elementos y estilo",
+      "tags": ["webapp", "SaaS", "landing", "documentation", "corporate", "enterprise"]
+    }
+  ]
+}
