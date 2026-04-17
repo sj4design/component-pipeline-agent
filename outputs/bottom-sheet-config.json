@@ -1,0 +1,108 @@
+{
+  "version": "1.0",
+  "component": "BottomSheet",
+  "archetype": "mobile-overlay",
+  "language": "es",
+  "buildOrder": ["BottomSheet"],
+  "family": [
+    {
+      "name": "BottomSheet",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "dragHandle", "type": "shape", "required": false, "note": "pill drag handle en top (M3 pattern)" },
+        { "name": "header", "type": "container", "required": false, "note": "title + close button" },
+        { "name": "content", "type": "container", "required": true, "note": "content scrollable" },
+        { "name": "footer", "type": "container", "required": false, "note": "action buttons sticky bottom" },
+        { "name": "scrim", "type": "shape", "required": false, "note": "backdrop overlay (modal variant)" }
+      ],
+      "properties": {
+        "Variant":    ["modal", "standard"],
+        "State":      ["collapsed", "half-expanded", "expanded"],
+        "Size":       ["sm", "md", "lg"]
+      },
+      "exclusions": [
+        "Variant=standard + scrim visible (standard es non-modal)",
+        "State=collapsed + footer visible (collapsed muestra solo peek)"
+      ],
+      "sizes": {
+        "sm": { "peekHeight": 120, "halfHeight": "40%", "fullHeight": "70%", "radius": 16, "dragHandleW": 40, "dragHandleH": 4 },
+        "md": { "peekHeight": 160, "halfHeight": "50%", "fullHeight": "85%", "radius": 20, "dragHandleW": 48, "dragHandleH": 4 },
+        "lg": { "peekHeight": 200, "halfHeight": "60%", "fullHeight": "95%", "radius": 24, "dragHandleW": 56, "dragHandleH": 4 }
+      },
+      "variantStyles": {
+        "modal":    { "scrimBg": { "r": 0.0, "g": 0.0, "b": 0.0, "a": 0.5 }, "focusTrap": true, "swipeToDismiss": true },
+        "standard": { "scrim": "none", "focusTrap": false, "swipeToDismiss": false }
+      },
+      "sheetStyles": {
+        "bg": { "r": 1.0, "g": 1.0, "b": 1.0 },
+        "shadow": "top",
+        "radiusTop": true,
+        "radiusBottom": 0
+      },
+      "dragHandleStyles": {
+        "bg": { "r": 0.72, "g": 0.72, "b": 0.75 },
+        "radius": 9999,
+        "marginTop": 8,
+        "marginBottom": 16
+      },
+      "booleanLayers": [
+        { "propName": "👁 Show Drag Handle", "layerName": "dragHandle" },
+        { "propName": "👁 Show Header", "layerName": "header" },
+        { "propName": "👁 Show Footer", "layerName": "footer" }
+      ],
+      "frameCount": {
+        "gross": 18,
+        "exclusions": 6,
+        "net": 12,
+        "note": "Variant(2) × State(3) × Size(3) = 18; −6 exclusiones"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "bottom-sheet",
+    "role": "dialog (modal) o region (standard)",
+    "ariaAttributes": [
+      "Modal: role='dialog' + aria-modal='true' + aria-labelledby='[header-id]' + focus trap",
+      "Standard: role='region' + aria-label='[propósito]' — NO focus trap",
+      "Drag handle: role='slider' + aria-valuemin=0 + aria-valuemax=100 + aria-valuenow=[percentage] (M3 pattern)",
+      "Close button (header): aria-label='Cerrar'",
+      "Escape cierra modal; swipe-to-dismiss tiene keyboard equivalent (buttons)"
+    ],
+    "keyboardNav": [
+      "Modal: focus trapped, Tab cycles, Escape cierra",
+      "Standard: focus libre, no trap",
+      "Drag handle con slider role: Arrow Up/Down cambia snap point"
+    ],
+    "focusTechnique": "focus al primer focusable del content en open; return al trigger al close",
+    "edgeCases": 5,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 16, "prefix": "bs", "mode": "C" },
+  "componentDescriptions": {
+    "BottomSheet": "Overlay mobile desde bottom con snap points. Variant: modal (scrim + focus trap + swipe-dismiss) / standard (non-modal, coexiste con content). State: collapsed (peek) / half-expanded / expanded. Sizes: sm/md/lg.\n\n🔑 ARIA:\n• Modal: role='dialog' + aria-modal\n• Standard: role='region'\n• Drag handle: role='slider' con aria-valuenow\n• Focus trap solo en modal\n\n⌨️ Keyboard:\n• Escape cierra (modal)\n• Arrow keys en drag handle cambian snap point\n\n🎯 Focus:\n• M3 spec completo: peek → half → expanded\n• Nested scrolling: sheet expande antes que content scrollee\n\nTokens: 16, prefijo bs-.\nWCAG 2.2 AA.\n\nScope: mobile primarily (viewport <768px). En desktop usa Modal o Drawer.\nSolo M3 tiene spec completo; 5/6 T1 lo omiten. Carbon y Polaris argumentan que mobile debe ser full-screen.\n\nSwipe-to-dismiss SIEMPRE debe tener equivalente keyboard (close button)."
+  },
+  "variableBindings": {
+    "bs/sm/peek": "sizing/120",
+    "bs/md/peek": "sizing/160",
+    "bs/lg/peek": "sizing/200",
+    "bs/radius/sm": "radius/xl",
+    "bs/radius/md": "radius/xxl",
+    "bs/radius/lg": "radius/xxl",
+    "bs/bg": "surface/default",
+    "bs/shadow": "elevation/4",
+    "bs/scrim": "overlay/backdrop",
+    "bs/handle/bg": "text/disabled",
+    "bs/handle/radius": "radius/pill",
+    "bs/handle/marginTop": "spacing/2",
+    "bs/handle/marginBottom": "spacing/4"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Modal + Standard variants (M3 pattern)", "why": "Modal bloquea background con scrim; Standard coexiste (ej. map behind location list). M3 es único T1 con spec completo; replicamos la distinción fundamental.", "source": "research" },
+    { "what": "3 snap points: collapsed/half-expanded/expanded (M3)", "why": "Peek (ver algo sin abrir), half (quick browse), expanded (full interaction). M3 progressive disclosure canonical pattern.", "source": "research" },
+    { "what": "Drag handle como slot visible", "why": "M3 drag handle es primary affordance. role='slider' con aria-valuenow permite keyboard control de snap points (equivalent a swipe).", "source": "research" },
+    { "what": "Scope: mobile-only", "why": "Solo M3 y Ant (como bottom Drawer) implementan. 4/6 T1 lo omiten. Polaris/Carbon argumentan que mobile debe ser full-screen. Documentar scope explícito.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,70 @@
+{
+  "component": "Divider",
+  "archetype": "layout-primitive",
+  "buildOrder": ["Divider"],
+  "family": [
+    {
+      "name": "Divider",
+      "isSubComponent": false,
+      "slots": ["label:text"],
+      "properties": {
+        "Orientation": ["horizontal", "vertical"],
+        "Thickness":   ["sm", "md", "lg"],
+        "Style":       ["solid", "dashed"],
+        "Emphasis":    ["subtle", "default"]
+      },
+      "booleans": ["Has Label"],
+      "exclusions": ["Orientation=vertical + label"],
+      "frameCount": 36
+    }
+  ],
+  "a11y": {
+    "role": "separator o decorative (aria-hidden)",
+    "keyboard": ["No focusable"],
+    "focus": "none"
+  },
+  "tokens": { "total": 8, "prefix": "div" },
+  "questions": [
+    {
+      "id": "orientation",
+      "text": "¿Orientación?",
+      "options": [
+        { "value": "horizontal", "label": "Horizontal (default)" },
+        { "value": "vertical", "label": "Vertical (toolbars, inline actions)" },
+        { "value": "both", "label": "Ambas" }
+      ],
+      "impact": "Orientation property",
+      "tags": ["horizontal", "vertical", "toolbar"]
+    },
+    {
+      "id": "thickness",
+      "text": "¿Qué thickness necesitas?",
+      "options": [
+        { "value": "sm-only", "label": "Solo 1px (standard)" },
+        { "value": "all", "label": "1px / 2px / 4px (Spectrum scale)" }
+      ],
+      "impact": "Thickness property",
+      "tags": ["thickness", "weight", "border"]
+    },
+    {
+      "id": "label",
+      "text": "¿Necesitas text label embebido?",
+      "options": [
+        { "value": "no", "label": "No — solo línea" },
+        { "value": "yes", "label": "Sí — section header pattern (Ant único)" }
+      ],
+      "impact": "Has Label boolean",
+      "tags": ["label", "section", "header", "ant"]
+    },
+    {
+      "id": "style",
+      "text": "¿Estilo visual?",
+      "options": [
+        { "value": "solid-only", "label": "Solo solid" },
+        { "value": "both", "label": "Solid + dashed (para optional/expandable sections)" }
+      ],
+      "impact": "Style property",
+      "tags": ["solid", "dashed", "optional"]
+    }
+  ]
+}

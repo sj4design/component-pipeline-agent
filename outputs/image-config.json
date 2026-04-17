@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "component": "Image",
+  "archetype": "visual-primitive",
+  "language": "es",
+  "buildOrder": ["Image"],
+  "family": [
+    {
+      "name": "Image",
+      "isSubComponent": false,
+      "isBuildingBlock": true,
+      "slots": [
+        { "name": "source", "type": "image", "required": true, "figmaBinding": "image-fill" },
+        { "name": "fallback", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "placeholder en loading/error" },
+        { "name": "caption", "type": "text", "required": false, "figmaBinding": "text" }
+      ],
+      "properties": {
+        "AspectRatio": ["auto", "1:1", "4:3", "16:9", "21:9", "3:4"],
+        "Fit":         ["cover", "contain", "fill", "none"],
+        "Radius":      ["none", "sm", "md", "lg", "full"],
+        "State":       ["loaded", "loading", "error"]
+      },
+      "exclusions": [
+        "State=loading|error + AspectRatio=auto (placeholders necesitan aspect fijo)"
+      ],
+      "sizes": {
+        "none": { "radius": 0 },
+        "sm":   { "radius": 4 },
+        "md":   { "radius": 8 },
+        "lg":   { "radius": 16 },
+        "full": { "radius": 9999 }
+      },
+      "stateStyles": {
+        "loaded":  { "bg": "transparent" },
+        "loading": { "bg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "shimmer": true },
+        "error":   { "bg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "fg": { "r": 0.55, "g": 0.55, "b": 0.60 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Alt text", "layerName": "source", "default": "Descripción de la imagen" },
+        { "propName": "✏️ Caption", "layerName": "caption", "default": "Image caption" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Fallback", "layerName": "fallback", "default": "placeholder/image" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Caption", "layerName": "caption" }
+      ],
+      "frameCount": {
+        "gross": 360,
+        "exclusions": 60,
+        "net": 60,
+        "note": "Subset representativo: 6 aspect ratios × 5 radius × 3 states = 90; combinamos con Fit en instance. Mostramos 60 frames clave."
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "image",
+    "role": "img (con alt) o presentation (decorativo)",
+    "ariaAttributes": [
+      "alt text obligatorio — vacío (alt='') para decorativo, texto descriptivo para informativo",
+      "Caption con figcaption si <figure> wrapper usado",
+      "State=loading: aria-busy='true'; screen reader no lee contenido hasta loaded",
+      "State=error: alt text o aria-label describe el fallback ('Imagen no disponible')"
+    ],
+    "keyboardNav": ["No focusable (excepto wrapped en link/button)"],
+    "focusTechnique": "none",
+    "edgeCases": 3,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 10, "prefix": "img", "mode": "C" },
+  "componentDescriptions": {
+    "Image": "Display de imagen. AspectRatio: auto (native) / 1:1 / 4:3 / 16:9 / 21:9 / 3:4. Fit: cover / contain / fill / none. Radius: none/sm/md/lg/full. States: loaded / loading (shimmer placeholder) / error (fallback).\n\n🔑 ARIA:\n• alt obligatorio (vacío='' para decorativo)\n• loading: aria-busy='true'\n• error: alt describe fallback\n\n⌨️ Keyboard:\n• No focusable\n\nTokens: 10, prefijo img-.\nWCAG 2.2 AA.\n\nAspectRatio previene layout shift durante load (CLS performance).\nFit=cover para avatars/thumbnails; contain para logos; fill para full bleed."
+  },
+  "variableBindings": {
+    "img/radius/sm": "radius/sm",
+    "img/radius/md": "radius/md",
+    "img/radius/lg": "radius/lg",
+    "img/radius/full": "radius/pill",
+    "img/loading/bg": "surface/disabled",
+    "img/error/bg": "surface/disabled",
+    "img/error/fg": "text/subtlest",
+    "img/caption/fontSize": "type/sm",
+    "img/caption/fg": "text/secondary",
+    "img/caption/marginTop": "spacing/2"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "AspectRatio como property discreta (6 ratios comunes)", "why": "Previene Cumulative Layout Shift (CLS) reservando espacio antes del load. 6 ratios cubren casos comunes: 1:1 (avatars), 4:3 (photos), 16:9 (video), 21:9 (cinematic), 3:4 (portrait).", "source": "inferred from common patterns" },
+    { "what": "3 Estados: loaded / loading / error con placeholders", "why": "Loading shimmer + error fallback son críticos para UX en listas con imágenes remotas (product cards, user avatars). Modelado como State discreto.", "source": "inferred from common patterns" },
+    { "what": "Fit y Radius separados", "why": "Fit=cover para imágenes que deben rellenar (avatars/thumbnails); contain para logos que no deben recortarse. Radius independiente para combinar ej. avatar cover+full.", "source": "inferred from common patterns" },
+    { "what": "Alt text obligatorio (WCAG 1.1.1)", "why": "No-text content requirement. Vacío ('') para decorativo, descriptivo para informativo. Documentado en ARIA rules.", "source": "WCAG 1.1.1" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,118 @@
+{
+  "version": "1.0",
+  "component": "DescriptionList",
+  "archetype": "key-value-display",
+  "language": "es",
+  "buildOrder": ["DescriptionItem", "DescriptionList"],
+  "family": [
+    {
+      "name": "DescriptionItem",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "DescriptionList",
+      "slots": [
+        { "name": "term", "type": "text", "required": true, "figmaBinding": "text", "note": "<dt> — key/label" },
+        { "name": "description", "type": "text", "required": true, "figmaBinding": "text", "note": "<dd> — value" },
+        { "name": "termIcon", "type": "icon", "required": false, "figmaBinding": "instance-swap" }
+      ],
+      "properties": {
+        "Layout":  ["stacked", "horizontal", "inline"],
+        "Size":    ["sm", "md", "lg"],
+        "Emphasis": ["term", "description", "equal"]
+      },
+      "exclusions": [
+        "Layout=inline + Emphasis=equal (inline necesita term subdued para legibilidad)"
+      ],
+      "sizes": {
+        "sm": { "termFontSize": 12, "descriptionFontSize": 13, "gap": 4, "termWidth": 120 },
+        "md": { "termFontSize": 13, "descriptionFontSize": 14, "gap": 6, "termWidth": 160 },
+        "lg": { "termFontSize": 14, "descriptionFontSize": 16, "gap": 8, "termWidth": 200 }
+      },
+      "layoutStyles": {
+        "stacked":    { "direction": "column", "termOnTop": true },
+        "horizontal": { "direction": "row", "termWidth": "fixed", "descriptionFlex": 1 },
+        "inline":     { "direction": "row", "separator": ":" }
+      },
+      "emphasisStyles": {
+        "term":        { "termFontWeight": 600, "termFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "descriptionFg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "description": { "termFontWeight": 400, "termFg": { "r": 0.42, "g": 0.45, "b": 0.50 }, "descriptionFontWeight": 600, "descriptionFg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "equal":       { "termFontWeight": 400, "termFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "descriptionFontWeight": 400, "descriptionFg": { "r": 0.07, "g": 0.07, "b": 0.07 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Term", "layerName": "term", "default": "Email" },
+        { "propName": "✏️ Description", "layerName": "description", "default": "user@example.com" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Term Icon", "layerName": "termIcon" }
+      ],
+      "frameCount": {
+        "gross": 27,
+        "exclusions": 3,
+        "net": 24,
+        "note": "Layout(3) × Size(3) × Emphasis(3) = 27; −3 inline+equal"
+      }
+    },
+    {
+      "name": "DescriptionList",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "items", "type": "container", "required": true, "note": "N DescriptionItems" }
+      ],
+      "properties": {
+        "Columns":  ["1", "2", "3"],
+        "Dividers": ["none", "between", "all"]
+      },
+      "exclusions": [],
+      "frameCount": {
+        "gross": 9,
+        "exclusions": 0,
+        "net": 9,
+        "note": "Columns(3) × Dividers(3) = 9"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "description-list",
+    "role": "description list (native)",
+    "ariaAttributes": [
+      "<dl> como container, <dt> para term, <dd> para description (native semantics)",
+      "Multiple <dd> permitidos por <dt> (si un term tiene varios valores)",
+      "Descriptive term icon: aria-hidden='true' (el term text lleva la semántica)",
+      "Columns=2|3: layout visual, pero DOM order es linear (term→description→term→description)"
+    ],
+    "keyboardNav": ["No focusable (display-only)"],
+    "focusTechnique": "none",
+    "edgeCases": 2,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 14, "prefix": "dl", "mode": "C" },
+  "componentDescriptions": {
+    "DescriptionItem": "Par key-value. Layout: stacked (term arriba) / horizontal (side-by-side) / inline (term: description en línea). Size: sm/md/lg. Emphasis: term / description / equal (cuál recibe más peso visual).\n\n🔑 ARIA:\n• <dt>+<dd> native\n• Term icon aria-hidden='true'\n\n⌨️ Keyboard:\n• No focusable\n\nWCAG 2.2 AA.",
+    "DescriptionList": "Display de pares term/description (metadata, details panels, order summaries). Columns: 1 (stacked list) / 2 (two-column grid) / 3 (three-column). Dividers: none/between/all.\n\n🔑 ARIA:\n• <dl> native\n• DOM order lineal (term → description alternando)\n\n⌨️ Keyboard:\n• No focusable\n\nTokens: 14, prefijo dl-.\nWCAG 2.2 AA.\n\nScope: metadata displays (User profile fields, order summary, product attributes, settings preview). Para editable key-value usa Form.\n\nNative HTML <dl><dt><dd> es el único element HTML diseñado para este pattern — accessibility built-in."
+  },
+  "variableBindings": {
+    "dl/sm/gap": "spacing/1",
+    "dl/md/gap": "spacing/1.5",
+    "dl/lg/gap": "spacing/2",
+    "dl/term/fg/emphasized": "text/primary",
+    "dl/term/fg/subtle": "text/secondary",
+    "dl/term/fontWeight/emphasized": "type/weight-semibold",
+    "dl/term/fontWeight/subtle": "type/weight-regular",
+    "dl/description/fg/emphasized": "text/primary",
+    "dl/description/fg/subtle": "text/secondary",
+    "dl/description/fontWeight/emphasized": "type/weight-semibold",
+    "dl/description/fontWeight/subtle": "type/weight-regular",
+    "dl/divider/color": "border/default",
+    "dl/fontSize/sm": "type/sm",
+    "dl/fontSize/md": "type/md",
+    "dl/fontSize/lg": "type/lg"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "3 Layouts: stacked / horizontal / inline", "why": "Stacked (mobile, densidad) / horizontal (settings panels side-by-side) / inline (compact metadata 'Email: foo@bar.com'). Cubre casi todos los casos.", "source": "research" },
+    { "what": "Emphasis property (term / description / equal)", "why": "Settings UIs enfatizan value (description); metadata displays enfatizan label (term); comparison tables son equal. 3 values cubren los contextos.", "source": "research" },
+    { "what": "Multi-column layout (1/2/3)", "why": "Product specs sheets, user details panels frecuentemente necesitan 2-3 columns para compactness. DOM order sigue linear (DL pattern), visual es grid.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

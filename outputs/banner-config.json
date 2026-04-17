@@ -1,0 +1,105 @@
+{
+  "version": "1.0",
+  "component": "Banner",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": ["Banner"],
+  "family": [
+    {
+      "name": "Banner",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "icon",        "type": "icon",      "required": false, "figmaBinding": "bool" },
+        { "name": "title",       "type": "text",       "required": false, "figmaBinding": "boolText" },
+        { "name": "description", "type": "text",       "required": true,  "figmaBinding": "text" },
+        { "name": "action",      "type": "container",  "required": false, "figmaBinding": "bool" },
+        { "name": "close",       "type": "icon-action","required": false, "figmaBinding": "bool" }
+      ],
+      "properties": {
+        "Variant":    ["info", "warning", "error", "success"],
+        "Placement":  ["page", "inline"]
+      },
+      "exclusions": [
+        "Variant=error + Has Close=true (errores críticos no deberían ser descartables — Polaris pattern)"
+      ],
+      "sizes": {
+        "page": {
+          "w": "100%", "py": 12, "px": 16, "gap": 12,
+          "fontSize": 14, "lineHeight": 20, "radius": 0,
+          "iconSize": 20, "borderWidth": 0, "borderLeft": 0
+        },
+        "inline": {
+          "w": "100%", "py": 12, "px": 16, "gap": 12,
+          "fontSize": 14, "lineHeight": 20, "radius": 8,
+          "iconSize": 20, "borderWidth": 1, "borderLeft": 4
+        }
+      },
+      "colors": {
+        "info":    { "bg": { "r": 0.93, "g": 0.95, "b": 1.0  }, "border": { "r": 0.72, "g": 0.80, "b": 0.96 }, "iconFg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "titleFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "bodyFg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "warning": { "bg": { "r": 1.0,  "g": 0.97, "b": 0.92 }, "border": { "r": 0.96, "g": 0.82, "b": 0.52 }, "iconFg": { "r": 0.72, "g": 0.48, "b": 0.05 }, "titleFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "bodyFg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "error":   { "bg": { "r": 1.0,  "g": 0.94, "b": 0.94 }, "border": { "r": 0.96, "g": 0.62, "b": 0.62 }, "iconFg": { "r": 0.86, "g": 0.15, "b": 0.15 }, "titleFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "bodyFg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "success": { "bg": { "r": 0.93, "g": 0.99, "b": 0.95 }, "border": { "r": 0.60, "g": 0.90, "b": 0.68 }, "iconFg": { "r": 0.08, "g": 0.55, "b": 0.22 }, "titleFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "bodyFg": { "r": 0.42, "g": 0.45, "b": 0.50 } }
+      },
+      "variantStyles": {
+        "info":    { "iconName": "info-circle",    "role": "status" },
+        "warning": { "iconName": "alert-triangle",  "role": "alert"  },
+        "error":   { "iconName": "alert-circle",    "role": "alert"  },
+        "success": { "iconName": "check-circle",    "role": "status" }
+      },
+      "textProperties": [
+        { "propName": "✏️ Title",       "layerName": "title",       "default": "Título del banner"    },
+        { "propName": "✏️ Description", "layerName": "description", "default": "Descripción del mensaje del sistema." }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        { "boolName": "Has Icon",   "layerName": "icon",   "defaultVisible": true  },
+        { "boolName": "Has Action", "layerName": "action", "defaultVisible": false },
+        { "boolName": "Has Close",  "layerName": "close",  "defaultVisible": false }
+      ],
+      "booleanTextPairs": [
+        { "boolName": "Has Title", "textPropName": "✏️ Title", "textLayerName": "title", "defaultVisible": false, "defaultText": "Título del banner" }
+      ],
+      "frameCount": { "gross": 8, "exclusions": 0, "net": 8 },
+      "grid": { "maxCols": 4, "gap": 24, "pad": 32 }
+    }
+  ],
+  "a11y": {
+    "pattern": "alert/status",
+    "role": "alert (warning/error) | status (info/success)",
+    "ariaAttributes": [
+      "role=\"alert\" para warning y error (interrumpe SR inmediatamente)",
+      "role=\"status\" para info y success (polite, no interrumpe)",
+      "aria-live=\"assertive\" para page-level error/warning",
+      "aria-live=\"polite\" para info/success y anuncios"
+    ],
+    "keyboardNav": [
+      "Has Close=true: botón × es focusable y activable con Enter/Space",
+      "Has Action=true: botón de acción focusable",
+      "Tab: navega entre acciones dentro del banner"
+    ],
+    "focusTechnique": "no focus trap — inline en el flujo del documento",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 18, "prefix": "bnr", "mode": "C" },
+  "componentDescriptions": {
+    "Banner": "Mensaje persistente de sistema. Placement: page (ancho completo, sin radius) o inline (dentro de sección, con radius y borde izquierdo). Variants: info, warning, error, success.\n\n🔑 ARIA:\n• role=\"alert\" para warning/error (interrumpe)\n• role=\"status\" para info/success (polite)\n• Has Icon: ícono es aria-hidden, color+texto transmiten el mensaje\n\n⌨️ Keyboard:\n• Has Close: botón × con aria-label='Cerrar'\n• Has Action: botón de acción con label descriptivo\n• Tab navega entre elementos interactivos\n\n🎯 Focus:\n• Sin focus trap\n• Banner page: sticky en top del viewport\n• Banner inline: flujo normal del documento\n• Error crítico: considerar no dismissible (Polaris pattern)\n\nTokens: 18, prefijo bnr-.\nWCAG 2.2 AA."
+  },
+  "variableBindings": {
+    "bnr/info/bg": "status/info/bg", "bnr/info/border": "status/info/border", "bnr/info/icon": "status/info/fg",
+    "bnr/warning/bg": "status/warning/bg", "bnr/warning/border": "status/warning/border", "bnr/warning/icon": "status/warning/fg",
+    "bnr/error/bg": "status/error/bg", "bnr/error/border": "status/error/border", "bnr/error/icon": "status/error/fg",
+    "bnr/success/bg": "status/success/bg", "bnr/success/border": "status/success/border", "bnr/success/icon": "status/success/fg",
+    "bnr/title-color": "text/primary", "bnr/body-color": "text/secondary",
+    "bnr/close-color": "text/secondary", "bnr/radius": "radius/md",
+    "focus/ring": "border/focus"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "Placement=page|inline (no size)", "why": "La diferencia visual clave no es tamaño sino layout — page es full-width sin radius, inline tiene radius y borde izquierdo accentuado. Polaris (el sistema más completo) también hace esta distinción.", "source": "research" },
+    { "what": "role=alert para error/warning, role=status para info/success", "why": "Polaris y Atlassian hacen esta distinción. alert interrumpe el SR inmediatamente (correcto para errores urgentes); status es polite (correcto para confirmaciones).", "source": "research" },
+    { "what": "Has Close=false default para error", "why": "Polaris enforces: errores críticos no son dismissibles. El usuario debe resolverlos. Warnings e info/success sí son dismissibles.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

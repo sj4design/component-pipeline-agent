@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "component": "Toast",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": ["Toast"],
+  "family": [
+    {
+      "name": "Toast",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "icon",    "type": "icon",       "required": false, "figmaBinding": "bool" },
+        { "name": "message", "type": "text",        "required": true,  "figmaBinding": "text" },
+        { "name": "action",  "type": "text-action", "required": false, "figmaBinding": "bool" },
+        { "name": "close",   "type": "icon-action", "required": false, "figmaBinding": "bool" }
+      ],
+      "properties": {
+        "Variant": ["neutral", "info", "success", "warning", "error"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "default": {
+          "minW": 280, "maxW": 480, "py": 12, "px": 16, "gap": 12,
+          "fontSize": 14, "lineHeight": 20, "fontWeight": 400,
+          "radius": 8, "iconSize": 20, "shadowLevel": 3
+        }
+      },
+      "colors": {
+        "neutral": { "bg": { "r": 0.13, "g": 0.13, "b": 0.15 }, "fg": { "r": 1, "g": 1, "b": 1 }, "iconFg": { "r": 0.80, "g": 0.80, "b": 0.82 } },
+        "info":    { "bg": { "r": 0.13, "g": 0.13, "b": 0.15 }, "fg": { "r": 1, "g": 1, "b": 1 }, "iconFg": { "r": 0.55, "g": 0.70, "b": 0.98 } },
+        "success": { "bg": { "r": 0.13, "g": 0.13, "b": 0.15 }, "fg": { "r": 1, "g": 1, "b": 1 }, "iconFg": { "r": 0.30, "g": 0.78, "b": 0.45 } },
+        "warning": { "bg": { "r": 0.13, "g": 0.13, "b": 0.15 }, "fg": { "r": 1, "g": 1, "b": 1 }, "iconFg": { "r": 0.98, "g": 0.72, "b": 0.20 } },
+        "error":   { "bg": { "r": 0.13, "g": 0.13, "b": 0.15 }, "fg": { "r": 1, "g": 1, "b": 1 }, "iconFg": { "r": 0.98, "g": 0.40, "b": 0.40 } }
+      },
+      "variantStyles": {
+        "neutral": { "iconName": null },
+        "info":    { "iconName": "info-circle" },
+        "success": { "iconName": "check-circle" },
+        "warning": { "iconName": "alert-triangle" },
+        "error":   { "iconName": "alert-circle" }
+      },
+      "textProperties": [
+        { "propName": "✏️ Message", "layerName": "message", "default": "Acción completada exitosamente." }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        { "boolName": "Has Icon",   "layerName": "icon",   "defaultVisible": true  },
+        { "boolName": "Has Action", "layerName": "action", "defaultVisible": false },
+        { "boolName": "Has Close",  "layerName": "close",  "defaultVisible": true  }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": { "gross": 5, "exclusions": 0, "net": 5 },
+      "grid": { "maxCols": 5, "gap": 20, "pad": 32 }
+    }
+  ],
+  "a11y": {
+    "pattern": "live-region",
+    "role": "status (neutral/info/success) | alert (warning/error)",
+    "ariaAttributes": [
+      "role=\"status\" + aria-live=\"polite\" para neutral/info/success",
+      "role=\"alert\" + aria-live=\"assertive\" para warning/error",
+      "aria-atomic=\"true\" (anuncia el mensaje completo, no solo cambios)",
+      "aria-live region persiste en DOM aunque el toast no sea visible"
+    ],
+    "keyboardNav": [
+      "Has Close: botón × focusable con Enter/Space",
+      "Has Action: botón de acción focusable",
+      "Auto-dismiss se pausa cuando el foco está dentro del toast (WCAG 2.2)"
+    ],
+    "focusTechnique": "no auto-focus — toast no roba foco al aparecer",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 10, "prefix": "tst", "mode": "C" },
+  "componentDescriptions": {
+    "Toast": "Notificación efímera no bloqueante. Un solo tamaño (280-480px ancho). Variants: neutral, info, success, warning, error. Fondo oscuro en todos los variants (dark surface).\n\n🔑 ARIA:\n• role=\"status\" / aria-live=\"polite\" para neutral/info/success\n• role=\"alert\" / aria-live=\"assertive\" para warning/error\n• aria-atomic=\"true\": anuncia mensaje completo\n• Live region siempre en DOM (aunque vacía)\n\n⌨️ Keyboard:\n• Has Close: botón × con aria-label='Cerrar notificación'\n• Has Action: botón de texto con label descriptivo\n• Auto-dismiss se pausa con foco dentro\n\n🎯 Focus:\n• Toast NO roba foco al aparecer\n• Mínimo 5000ms de duración (WCAG 2.2)\n• Con acción: no auto-dismiss hasta interacción\n• Errores críticos → usar Banner (no Toast)\n\nTokens: 10, prefijo tst-.\nWCAG 2.2 AA."
+  },
+  "variableBindings": {
+    "tst/bg": "surface/inverse",
+    "tst/fg": "text/inverse",
+    "tst/close-color": "text/inverse/secondary",
+    "tst/action-color": "interactive/inverse",
+    "tst/radius": "radius/md",
+    "tst/info/icon": "status/info/fg",
+    "tst/success/icon": "status/success/fg",
+    "tst/warning/icon": "status/warning/fg",
+    "tst/error/icon": "status/error/fg",
+    "focus/ring": "border/focus"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "Fondo oscuro (dark surface) para todos los variants", "why": "20/24 sistemas usan fondo oscuro para toast — contrasta con el contenido de página (generalmente claro) y da identidad visual propia. El color semántico se expresa solo en el ícono.", "source": "research" },
+    { "what": "Un solo size (no sm/md/lg)", "why": "5/6 sistemas tienen un solo tamaño para toast — la anchura se controla por min/max-width y el contenido. Size variants harían frames innecesarios.", "source": "research" },
+    { "what": "Errores críticos → Banner, no Toast", "why": "Polaris enforces esto explícitamente. Toast es efímero — errores que el usuario debe resolver necesitan Banner (persistente). Toast errors solo para confirmaciones de operaciones fallidas recuperables.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

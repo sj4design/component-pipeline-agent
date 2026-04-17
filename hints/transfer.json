@@ -1,0 +1,129 @@
+{
+  "component": "Transfer",
+  "archetype": "dual-list-selector",
+  "buildOrder": ["TransferItem", "TransferList", "Transfer"],
+  "family": [
+    {
+      "name": "TransferItem",
+      "isSubComponent": true,
+      "slots": ["checkbox:container", "avatar:container", "leadingIcon:icon", "label*:text", "description:text", "trailingMeta:text"],
+      "properties": {
+        "State": ["default", "hover", "selected", "focused", "disabled"],
+        "Size":  ["sm", "md"]
+      },
+      "booleans": ["Show Checkbox", "Has Avatar", "Has Leading Icon", "Has Description", "Has Trailing Meta"],
+      "exclusions": [],
+      "frameCount": 10
+    },
+    {
+      "name": "TransferList",
+      "isSubComponent": true,
+      "slots": ["header*:container", "search:container", "items*:container", "footer:container", "emptyState:container"],
+      "properties": {
+        "Side":  ["source", "target"],
+        "State": ["default", "empty", "loading"],
+        "Size":  ["sm", "md"]
+      },
+      "booleans": ["Show Search", "Show Footer"],
+      "exclusions": [],
+      "frameCount": 12
+    },
+    {
+      "name": "Transfer",
+      "isSubComponent": false,
+      "slots": ["sourceList*:container", "actions*:container", "targetList*:container"],
+      "properties": {
+        "Size":        ["sm", "md"],
+        "OneWay":      ["no", "yes"],
+        "Orientation": ["horizontal", "vertical"]
+      },
+      "booleans": [],
+      "exclusions": ["Orientation=vertical + Size=sm"],
+      "frameCount": 7
+    }
+  ],
+  "a11y": {
+    "role": "group + listbox + button (actions)",
+    "keyboard": [
+      "Tab: source → actions → target",
+      "Arrow keys en listas",
+      "Space toggle selection",
+      "Ctrl/Cmd+A selecciona todos visibles"
+    ],
+    "focus": "Roving tabindex en cada listbox. aria-live anuncia movimientos."
+  },
+  "tokens": { "total": 30, "prefix": "xfr" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Transfer?",
+      "options": [
+        { "value": "user-assignment", "label": "Asignar users/members a groups/teams/channels" },
+        { "value": "permissions", "label": "Asignar permissions/roles/policies" },
+        { "value": "field-selection", "label": "Seleccionar campos/columns visibles en un report" },
+        { "value": "resource-allocation", "label": "Asignar resources (devices, rooms) a owners" },
+        { "value": "other", "label": "Otro — describir en --brief" }
+      ],
+      "impact": "OneWay default, custom render slots (avatar), search inclusion",
+      "tags": ["assignment", "permissions", "fields", "resources", "enterprise", "users"]
+    },
+    {
+      "id": "item-count",
+      "text": "¿Cuántos items típicos en source?",
+      "options": [
+        { "value": "small", "label": "<50 — sin search, sin pagination" },
+        { "value": "medium", "label": "50–200 — search recomendado" },
+        { "value": "large", "label": "200–1000 — search + pagination" },
+        { "value": "huge", "label": ">1000 — considerar typeahead multi-select (Atlassian pattern)" }
+      ],
+      "impact": "Show Search + Show Footer (pagination) defaults",
+      "tags": ["count", "search", "pagination", "typeahead", "large-dataset"]
+    },
+    {
+      "id": "direction",
+      "text": "¿Bidirectional o one-way?",
+      "options": [
+        { "value": "bidirectional", "label": "Bidirectional — source ↔ target (add y remove)" },
+        { "value": "one-way", "label": "One-way — source → target solo, target con remove individual (Ant oneWay)" }
+      ],
+      "impact": "OneWay property, action buttons count",
+      "tags": ["bidirectional", "one-way", "add-remove", "ant"]
+    },
+    {
+      "id": "item-content",
+      "text": "¿Cómo se ven los items?",
+      "options": [
+        { "value": "label-only", "label": "Solo texto — label" },
+        { "value": "with-description", "label": "Label + descripción — 2 líneas" },
+        { "value": "person", "label": "Persona — Avatar + name + email/role (user picker)" },
+        { "value": "rich", "label": "Rich — icon + label + meta (status, count, date)" }
+      ],
+      "impact": "Has Avatar, Has Description, Has Trailing Meta booleans",
+      "tags": ["avatar", "description", "person", "rich", "user", "email"]
+    },
+    {
+      "id": "orientation",
+      "text": "¿Orientación?",
+      "options": [
+        { "value": "horizontal", "label": "Horizontal — source | actions | target (desktop)" },
+        { "value": "vertical", "label": "Vertical — source / actions / target (mobile narrow)" },
+        { "value": "responsive", "label": "Responsive — horizontal desktop, vertical mobile" }
+      ],
+      "impact": "Orientation property",
+      "tags": ["horizontal", "vertical", "mobile", "responsive", "stack"]
+    },
+    {
+      "id": "search-and-actions",
+      "text": "¿Features adicionales?",
+      "options": [
+        { "value": "basic", "label": "Básico — checkboxes + move buttons" },
+        { "value": "search", "label": "+ Search per panel" },
+        { "value": "move-all", "label": "+ Move all (» «) además de move selected" },
+        { "value": "pagination", "label": "+ Pagination en panels grandes" },
+        { "value": "full", "label": "Todos — search + move-all + pagination + selectAll" }
+      ],
+      "impact": "Show Search, Show Footer (pagination), action button variants",
+      "tags": ["search", "move-all", "pagination", "select-all", "bulk"]
+    }
+  ]
+}

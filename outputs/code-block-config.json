@@ -1,0 +1,112 @@
+{
+  "version": "1.0",
+  "component": "CodeBlock",
+  "archetype": "code-display",
+  "language": "es",
+  "buildOrder": ["CodeBlock"],
+  "family": [
+    {
+      "name": "CodeBlock",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "header", "type": "container", "required": false, "note": "filename, language tag, copy button" },
+        { "name": "lineNumbers", "type": "container", "required": false, "note": "column de line numbers" },
+        { "name": "code", "type": "text", "required": true, "figmaBinding": "text", "note": "contenido con syntax highlighting" },
+        { "name": "copyButton", "type": "icon-action", "required": false },
+        { "name": "languageTag", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "Tag con 'javascript', 'python', etc." }
+      ],
+      "properties": {
+        "Theme":         ["light", "dark"],
+        "Size":          ["sm", "md"],
+        "LineNumbers":   ["no", "yes"],
+        "Wrap":          ["no", "yes"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "fontSize": 12, "lineHeight": 18, "padding": 12, "headerH": 32 },
+        "md": { "fontSize": 13, "lineHeight": 20, "padding": 16, "headerH": 40 }
+      },
+      "themeStyles": {
+        "light": {
+          "bg": { "r": 0.97, "g": 0.97, "b": 0.98 },
+          "fg": { "r": 0.12, "g": 0.12, "b": 0.13 },
+          "headerBg": { "r": 0.94, "g": 0.94, "b": 0.96 },
+          "lineNumberFg": { "r": 0.55, "g": 0.55, "b": 0.60 },
+          "border": { "r": 0.88, "g": 0.88, "b": 0.90 }
+        },
+        "dark": {
+          "bg": { "r": 0.11, "g": 0.11, "b": 0.13 },
+          "fg": { "r": 0.92, "g": 0.92, "b": 0.94 },
+          "headerBg": { "r": 0.16, "g": 0.16, "b": 0.18 },
+          "lineNumberFg": { "r": 0.42, "g": 0.45, "b": 0.50 },
+          "border": { "r": 0.20, "g": 0.20, "b": 0.22 }
+        }
+      },
+      "textProperties": [
+        { "propName": "✏️ Code", "layerName": "code", "default": "const foo = 'bar';" },
+        { "propName": "✏️ Filename", "layerName": "header", "default": "example.js" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Language Tag", "layerName": "languageTag", "default": "Tag/javascript" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Show Header", "layerName": "header" },
+        { "propName": "👁 Show Copy Button", "layerName": "copyButton" },
+        { "propName": "👁 Show Language Tag", "layerName": "languageTag" },
+        { "propName": "👁 Show Line Numbers", "layerName": "lineNumbers" }
+      ],
+      "frameCount": {
+        "gross": 16,
+        "exclusions": 0,
+        "net": 16,
+        "note": "Theme(2) × Size(2) × LineNumbers(2) × Wrap(2) = 16"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "code-display",
+    "role": "region con código",
+    "ariaAttributes": [
+      "<pre><code> native semantics",
+      "Copy button: aria-label='Copiar código' + aria-live='polite' anuncia 'Copiado'",
+      "Language: aria-label incluye idioma ('Código JavaScript')",
+      "Line numbers: aria-hidden='true' (decorative — code text ya tiene orden)",
+      "Long code: role='region' + tabindex=0 + aria-label para scrollable"
+    ],
+    "keyboardNav": [
+      "Tab al copy button",
+      "Enter/Space copia código al clipboard",
+      "Focus en code block scrollable: arrow keys + Home/End"
+    ],
+    "focusTechnique": "ring 2px en copy button; code block con tabindex=0 si scrollable",
+    "edgeCases": 3,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 14, "prefix": "cb", "mode": "C" },
+  "componentDescriptions": {
+    "CodeBlock": "Display de código con syntax highlighting. Theme: light / dark. Size: sm (12px) / md (13px). LineNumbers: yes/no. Wrap: yes/no (wrap long lines).\n\n🔑 ARIA:\n• <pre><code> native\n• Copy button aria-live anuncia 'Copiado'\n• Line numbers aria-hidden\n• Scrollable: role='region' + tabindex=0\n\n⌨️ Keyboard:\n• Tab al copy\n• Enter/Space copia\n• Arrow keys scroll en el block\n\n🎯 Focus:\n• Copy button destacado\n• Success state después de copy\n\nTokens: 14, prefijo cb-.\nWCAG 2.2 AA.\n\nFont: monospace (SF Mono, Menlo, Consolas). Syntax highlighting runtime (Prism, Shiki) — en Figma muestra estático.\n\nNO usar para: inline code (usa <code> con Typography). Para diffs usa componente especializado."
+  },
+  "variableBindings": {
+    "cb/light/bg": "surface/pressed",
+    "cb/light/fg": "text/primary",
+    "cb/light/headerBg": "surface/hover",
+    "cb/dark/bg": "surface/inverse",
+    "cb/dark/fg": "text/onInverse",
+    "cb/border": "border/default",
+    "cb/radius": "radius/md",
+    "cb/sm/fontSize": "type/xs",
+    "cb/md/fontSize": "type/sm",
+    "cb/sm/padding": "spacing/3",
+    "cb/md/padding": "spacing/4",
+    "cb/lineNumber/fg": "text/subtlest",
+    "cb/font/family": "type/mono"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Theme light/dark (inverso al resto del sistema)", "why": "Code blocks frecuentemente se muestran en dark theme independiente del resto de la UI (developer preference, better contrast for syntax colors). Explicit Theme property.", "source": "common-patterns" },
+    { "what": "Syntax highlighting es runtime, no modelado en Figma", "why": "Prism/Shiki aplica colors según token type. En Figma el código se muestra en color uniforme; el render final tiene highlighting.", "source": "common-patterns" },
+    { "what": "Copy button first-class", "why": "UX crítico para code snippets. aria-live anuncia 'Copiado' para feedback accesible.", "source": "common-patterns" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

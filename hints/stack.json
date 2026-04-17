@@ -1,0 +1,72 @@
+{
+  "component": "Stack",
+  "archetype": "layout-primitive",
+  "buildOrder": ["Stack"],
+  "family": [
+    {
+      "name": "Stack",
+      "isSubComponent": false,
+      "slots": ["children*:container"],
+      "properties": {
+        "Direction": ["vertical", "horizontal"],
+        "Gap":       ["none", "xs", "sm", "md", "lg", "xl"],
+        "Align":     ["start", "center", "end", "stretch"],
+        "Justify":   ["start", "center", "end", "space-between", "space-around"],
+        "Wrap":      ["no", "yes"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 60
+    }
+  ],
+  "a11y": {
+    "role": "none",
+    "keyboard": ["No focusable"],
+    "focus": "none"
+  },
+  "tokens": { "total": 8, "prefix": "stk" },
+  "questions": [
+    {
+      "id": "direction",
+      "text": "¿Direction principal?",
+      "options": [
+        { "value": "vertical", "label": "Vertical (form fields, card content)" },
+        { "value": "horizontal", "label": "Horizontal (toolbars, button groups)" },
+        { "value": "both", "label": "Ambas" }
+      ],
+      "impact": "Direction property",
+      "tags": ["vertical", "horizontal", "flex-direction"]
+    },
+    {
+      "id": "gap",
+      "text": "¿Qué gaps necesitas?",
+      "options": [
+        { "value": "sm-md-lg", "label": "sm + md + lg (8/16/24) — común" },
+        { "value": "full", "label": "Full scale xs-xl + none" }
+      ],
+      "impact": "Gap property values",
+      "tags": ["gap", "spacing", "xs", "sm", "md", "lg", "xl"]
+    },
+    {
+      "id": "alignment",
+      "text": "¿Necesitas alignment/justify customization?",
+      "options": [
+        { "value": "basic", "label": "Solo start (default)" },
+        { "value": "common", "label": "start/center/end (Align) + start/center/end/space-between (Justify)" },
+        { "value": "full", "label": "Todos los valores flexbox" }
+      ],
+      "impact": "Align + Justify property values",
+      "tags": ["align", "justify", "flexbox", "center", "space-between"]
+    },
+    {
+      "id": "wrap",
+      "text": "¿Items necesitan hacer wrap cuando no caben?",
+      "options": [
+        { "value": "no", "label": "No — siempre single line" },
+        { "value": "yes", "label": "Sí — wrap a multiple lines (ej. chip groups)" }
+      ],
+      "impact": "Wrap property",
+      "tags": ["wrap", "flex-wrap", "multi-line"]
+    }
+  ]
+}

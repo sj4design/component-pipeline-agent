@@ -1,0 +1,123 @@
+{
+  "version": "1.0",
+  "component": "Typography",
+  "archetype": "text-primitive",
+  "language": "es",
+  "buildOrder": ["Text"],
+  "family": [
+    {
+      "name": "Text",
+      "isSubComponent": false,
+      "isBuildingBlock": true,
+      "slots": [
+        { "name": "content", "type": "text", "required": true, "figmaBinding": "text" }
+      ],
+      "properties": {
+        "Variant":  ["display-lg", "display-md", "heading-xl", "heading-lg", "heading-md", "heading-sm", "heading-xs", "body-lg", "body-md", "body-sm", "body-xs", "label-md", "label-sm", "caption"],
+        "Tone":     ["primary", "secondary", "subtlest", "disabled", "inverse", "success", "warning", "critical", "info"],
+        "Weight":   ["regular", "medium", "semibold", "bold"],
+        "Align":    ["start", "center", "end"],
+        "Truncate": ["no", "yes"]
+      },
+      "exclusions": [
+        "Variant=caption + Weight=bold (caption siempre regular/medium)",
+        "Variant=display-* + Weight=regular (display siempre semibold+)"
+      ],
+      "variantStyles": {
+        "display-lg":  { "fontSize": 48, "lineHeight": 56, "fontWeight": 700, "letterSpacing": -0.02 },
+        "display-md":  { "fontSize": 40, "lineHeight": 48, "fontWeight": 700, "letterSpacing": -0.02 },
+        "heading-xl":  { "fontSize": 32, "lineHeight": 40, "fontWeight": 700 },
+        "heading-lg":  { "fontSize": 24, "lineHeight": 32, "fontWeight": 600 },
+        "heading-md":  { "fontSize": 20, "lineHeight": 28, "fontWeight": 600 },
+        "heading-sm":  { "fontSize": 18, "lineHeight": 24, "fontWeight": 600 },
+        "heading-xs":  { "fontSize": 16, "lineHeight": 20, "fontWeight": 600 },
+        "body-lg":     { "fontSize": 16, "lineHeight": 24, "fontWeight": 400 },
+        "body-md":     { "fontSize": 14, "lineHeight": 20, "fontWeight": 400 },
+        "body-sm":     { "fontSize": 13, "lineHeight": 18, "fontWeight": 400 },
+        "body-xs":     { "fontSize": 12, "lineHeight": 16, "fontWeight": 400 },
+        "label-md":    { "fontSize": 14, "lineHeight": 20, "fontWeight": 500 },
+        "label-sm":    { "fontSize": 12, "lineHeight": 16, "fontWeight": 500 },
+        "caption":     { "fontSize": 11, "lineHeight": 14, "fontWeight": 400 }
+      },
+      "toneStyles": {
+        "primary":   { "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "secondary": { "fg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "subtlest":  { "fg": { "r": 0.55, "g": 0.55, "b": 0.60 } },
+        "disabled":  { "fg": { "r": 0.72, "g": 0.72, "b": 0.75 } },
+        "inverse":   { "fg": { "r": 1.0, "g": 1.0, "b": 1.0 } },
+        "success":   { "fg": { "r": 0.08, "g": 0.55, "b": 0.22 } },
+        "warning":   { "fg": { "r": 0.72, "g": 0.48, "b": 0.05 } },
+        "critical":  { "fg": { "r": 0.86, "g": 0.15, "b": 0.15 } },
+        "info":      { "fg": { "r": 0.15, "g": 0.35, "b": 0.92 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Content", "layerName": "content", "default": "Text content" }
+      ],
+      "frameCount": {
+        "gross": 14,
+        "exclusions": 0,
+        "net": 14,
+        "note": "Frames principales = una variante por combinación estándar (14 variants). Tone/Weight/Align/Truncate aplicados vía properties multiplicarían excesivamente; Figma expone como properties en instances."
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "text",
+    "role": "depende del element (heading, paragraph, span)",
+    "ariaAttributes": [
+      "Polaris pattern: `variant` (visual) y `as` (semantic HTML) son independientes",
+      "Heading variants → <h1> a <h6> según level semántico (developer decide, no visual)",
+      "Body/label variants → <p>, <span>, <label>",
+      "Tone=disabled: aplicar aria-disabled si el elemento es interactivo",
+      "Truncate=yes con título completo en title attribute o tooltip",
+      "Heading hierarchy: no saltar niveles (h1 → h2 → h3)"
+    ],
+    "keyboardNav": ["No focusable (excepto wrapped en button/link)"],
+    "focusTechnique": "none",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 30, "prefix": "typ", "mode": "C" },
+  "componentDescriptions": {
+    "Text": "Component único de typography (Polaris pattern). 14 Variants cubren Display / Heading / Body / Label / Caption. Tone: 5 neutros + 4 semánticos. Weight: regular/medium/semibold/bold. Align: start/center/end. Truncate: single-line ellipsis.\n\n🔑 ARIA:\n• Variant es visual; elemento HTML es responsabilidad del developer (as prop)\n• Heading variants NO fuerzan <h1>-<h6> — developer elige según jerarquía semántica\n• Truncate=yes debe incluir texto completo en title o tooltip\n• Heading hierarchy: no saltar niveles\n\n⌨️ Keyboard:\n• No focusable\n\nTokens: 30, prefijo typ-.\nWCAG 2.2 AA.\n\nDual scale foundation (14 sizes) cubre Display/Heading/Body/Label/Caption. Escala built on foundations.typeScale.\n\nNO para: inline editing (usa InlineEdit), copyable text (wrap custom action), rich formatting (usa editor).\n\nCustom features opcionales a implementar: ellipsis con rows count (Ant), breakWord (Polaris), tracking override, responsive scale."
+  },
+  "variableBindings": {
+    "typ/display-lg/size": "type/display-lg",
+    "typ/display-md/size": "type/display-md",
+    "typ/heading-xl/size": "type/heading-xl",
+    "typ/heading-lg/size": "type/heading-lg",
+    "typ/heading-md/size": "type/heading-md",
+    "typ/heading-sm/size": "type/heading-sm",
+    "typ/heading-xs/size": "type/heading-xs",
+    "typ/body-lg/size": "type/body-lg",
+    "typ/body-md/size": "type/body-md",
+    "typ/body-sm/size": "type/body-sm",
+    "typ/body-xs/size": "type/body-xs",
+    "typ/label-md/size": "type/label-md",
+    "typ/label-sm/size": "type/label-sm",
+    "typ/caption/size": "type/caption",
+    "typ/primary/fg": "text/primary",
+    "typ/secondary/fg": "text/secondary",
+    "typ/subtlest/fg": "text/subtlest",
+    "typ/disabled/fg": "text/disabled",
+    "typ/inverse/fg": "text/inverse",
+    "typ/success/fg": "status/success/fg",
+    "typ/warning/fg": "status/warning/fg",
+    "typ/critical/fg": "status/error/fg",
+    "typ/info/fg": "status/info/fg",
+    "typ/weight/regular": "type/weight-regular",
+    "typ/weight/medium": "type/weight-medium",
+    "typ/weight/semibold": "type/weight-semibold",
+    "typ/weight/bold": "type/weight-bold"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Single Text component (Polaris pattern)", "why": "Polaris, Ant (Typography family) unifican. Spectrum splits en Heading/Body/Detail (3 componentes). 1 component con Variant = minimal API surface + flexibility. Decoupling visual (variant) de semantic (as) es best practice.", "source": "research" },
+    { "what": "14 variants cubriendo Display/Heading/Body/Label/Caption", "why": "M3 tiene 15 (5 roles × 3 sizes); Polaris 9. Nosotros 14 = display(2) + heading(5) + body(4) + label(2) + caption(1). Match con Zoom typography scale needs.", "source": "research" },
+    { "what": "Tone: 5 neutros (primary/secondary/subtlest/disabled/inverse) + 4 semánticos", "why": "Polaris tone pattern (base/subdued/critical/success). Semantic tones (success/warning/critical/info) para inline status text sin componente separado.", "source": "research" },
+    { "what": "Weight override independiente del Variant", "why": "Variants tienen weight default (heading=600, body=400). Weight prop permite override (body-md + bold = emphasized paragraph text). No todos los casos requieren cambiar Variant.", "source": "research" },
+    { "what": "Truncate single-line solo (no multi-line)", "why": "Ant tiene ellipsis con rows + expandable; complejo. Truncate single-line cubre 95% de casos (long URLs, table cells). Multi-line truncate es runtime CSS (-webkit-line-clamp).", "source": "research" },
+    { "what": "Frame count 14 representativo (no multiplicar Tone×Weight×Align)", "why": "Multiplicar 14 × 9 tones × 4 weights × 3 align = 1512 frames — absurdo para Figma. Expose como component properties instead; los 14 variants son el build output, el resto se configura por instance.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

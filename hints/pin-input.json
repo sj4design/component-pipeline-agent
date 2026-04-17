@@ -1,0 +1,66 @@
+{
+  "component": "PinInput",
+  "archetype": "container",
+  "buildOrder": ["PinInput"],
+  "family": [
+    {
+      "name": "PinInput",
+      "isSubComponent": false,
+      "slots": ["cell-1*:text", "cell-2*:text", "cell-3*:text", "cell-4*:text", "cell-5:text", "cell-6:text"],
+      "properties": { "Length": ["4", "6"], "State": ["default", "error"] },
+      "booleans": ["Has Mask"],
+      "exclusions": [],
+      "frameCount": 4
+    }
+  ],
+  "a11y": {
+    "role": "group (wrapper) + cada celda es input",
+    "keyboard": ["Typing: auto-avanza", "Backspace: retrocede", "←→: navega", "Paste: distribuye"],
+    "focus": "autocomplete=one-time-code para WebOTP auto-fill desde SMS"
+  },
+  "tokens": { "total": 8, "prefix": "pin" },
+  "questions": [
+    {
+      "id": "length",
+      "text": "¿Cuántos dígitos tiene el código?",
+      "options": [
+        { "value": "4",    "label": "4 dígitos — PIN simple, código corto" },
+        { "value": "6",    "label": "6 dígitos — OTP estándar (SMS, 2FA)" },
+        { "value": "both", "label": "Ambos — según contexto de uso" }
+      ],
+      "impact": "Length property values",
+      "tags": ["4-digit", "6-digit", "otp", "pin", "verification-code"]
+    },
+    {
+      "id": "input-type",
+      "text": "¿El código es numérico o alfanumérico?",
+      "options": [
+        { "value": "numeric",      "label": "Solo números — teclado numérico en móvil" },
+        { "value": "alphanumeric", "label": "Letras y números — ej. códigos de licencia" }
+      ],
+      "impact": "type=number vs type=text + inputmode",
+      "tags": ["numeric", "alphanumeric", "mobile-keyboard", "license-code"]
+    },
+    {
+      "id": "mask",
+      "text": "¿Los caracteres deben ocultarse (como un password)?",
+      "options": [
+        { "value": "yes",      "label": "Sí — mostrar bullets en lugar de los dígitos" },
+        { "value": "no",       "label": "No — dígitos visibles" },
+        { "value": "optional", "label": "Configurable — toggle para mostrar/ocultar" }
+      ],
+      "impact": "Has Mask boolean",
+      "tags": ["mask", "password", "secure", "sensitive", "dots"]
+    },
+    {
+      "id": "auto-submit",
+      "text": "¿El formulario se envía automáticamente al completar todos los campos?",
+      "options": [
+        { "value": "yes", "label": "Sí — auto-submit cuando todos los dígitos están llenos" },
+        { "value": "no",  "label": "No — requiere botón de confirmación explícito" }
+      ],
+      "impact": "onComplete callback behavior",
+      "tags": ["auto-submit", "onComplete", "auto-advance", "ux-flow"]
+    }
+  ]
+}

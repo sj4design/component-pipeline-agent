@@ -1,0 +1,85 @@
+{
+  "component": "Grid",
+  "archetype": "layout-primitive",
+  "buildOrder": ["GridItem", "Grid"],
+  "family": [
+    {
+      "name": "GridItem",
+      "isSubComponent": true,
+      "slots": ["content*:container"],
+      "properties": {
+        "ColSpan": ["1", "2", "3", "4", "6", "8", "12"],
+        "RowSpan": ["1", "2", "3"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 21
+    },
+    {
+      "name": "Grid",
+      "isSubComponent": false,
+      "slots": ["items*:container"],
+      "properties": {
+        "Columns":    ["1", "2", "3", "4", "6", "12"],
+        "Gap":        ["none", "sm", "md", "lg", "xl"],
+        "GutterMode": ["wide", "narrow", "condensed"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 90
+    }
+  ],
+  "a11y": {
+    "role": "none (landmarks en children)",
+    "keyboard": ["No focusable"],
+    "focus": "none"
+  },
+  "tokens": { "total": 12, "prefix": "grd" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Grid?",
+      "options": [
+        { "value": "card-grid", "label": "Card grid — product/blog/feature cards en columnas" },
+        { "value": "page-layout", "label": "Page layout — sidebar + main + right panel (asymmetric)" },
+        { "value": "dashboard", "label": "Dashboard — widgets en grid density-variable" },
+        { "value": "forms", "label": "Forms — multi-column form layouts" }
+      ],
+      "impact": "GutterMode default, ColSpan patterns",
+      "tags": ["cards", "layout", "dashboard", "forms", "responsive"]
+    },
+    {
+      "id": "columns",
+      "text": "¿Cuántas columnas típicas?",
+      "options": [
+        { "value": "2-3", "label": "2-3 columnas — simple layouts" },
+        { "value": "4-6", "label": "4-6 — dashboards" },
+        { "value": "12", "label": "12 cols — full flexibility con Span" }
+      ],
+      "impact": "Columns property values",
+      "tags": ["columns", "12", "6", "4", "3", "2"]
+    },
+    {
+      "id": "gutter-mode",
+      "text": "¿Densidad de gutters?",
+      "options": [
+        { "value": "narrow", "label": "Narrow (16px) — admin estándar" },
+        { "value": "wide", "label": "Wide (32px) — marketing/whitespace" },
+        { "value": "condensed", "label": "Condensed (1px) — data-dense (Carbon)" },
+        { "value": "all", "label": "Los 3 modes" }
+      ],
+      "impact": "GutterMode property",
+      "tags": ["gutter", "wide", "narrow", "condensed", "density"]
+    },
+    {
+      "id": "gap",
+      "text": "¿Qué gaps necesitas?",
+      "options": [
+        { "value": "standard", "label": "sm/md/lg (8/16/24)" },
+        { "value": "full", "label": "Full scale none/xs-xl" }
+      ],
+      "impact": "Gap property",
+      "tags": ["gap", "spacing", "scale"]
+    }
+  ]
+}

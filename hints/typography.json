@@ -1,0 +1,72 @@
+{
+  "component": "Typography",
+  "archetype": "text-primitive",
+  "buildOrder": ["Text"],
+  "family": [
+    {
+      "name": "Text",
+      "isSubComponent": false,
+      "slots": ["content*:text"],
+      "properties": {
+        "Variant":  ["display-lg", "display-md", "heading-xl", "heading-lg", "heading-md", "heading-sm", "heading-xs", "body-lg", "body-md", "body-sm", "body-xs", "label-md", "label-sm", "caption"],
+        "Tone":     ["primary", "secondary", "subtlest", "disabled", "inverse", "success", "warning", "critical", "info"],
+        "Weight":   ["regular", "medium", "semibold", "bold"],
+        "Align":    ["start", "center", "end"],
+        "Truncate": ["no", "yes"]
+      },
+      "booleans": [],
+      "exclusions": ["Variant=caption + Weight=bold", "Variant=display-* + Weight=regular"],
+      "frameCount": 14
+    }
+  ],
+  "a11y": {
+    "role": "depends on element (heading/paragraph/span)",
+    "keyboard": ["No focusable"],
+    "focus": "none"
+  },
+  "tokens": { "total": 30, "prefix": "typ" },
+  "questions": [
+    {
+      "id": "variant-coverage",
+      "text": "¿Qué tan completa quieres la escala?",
+      "options": [
+        { "value": "minimal", "label": "Mínima — heading + body + caption (5-6 variants)" },
+        { "value": "standard", "label": "Standard — +display +label (10 variants)" },
+        { "value": "full", "label": "Full — 14 variants (display×2, heading×5, body×4, label×2, caption×1)" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["display", "heading", "body", "label", "caption", "scale"]
+    },
+    {
+      "id": "semantic-tones",
+      "text": "¿Necesitas semantic tones en el Text component?",
+      "options": [
+        { "value": "neutral-only", "label": "Solo neutrales (primary/secondary/subtlest/disabled/inverse)" },
+        { "value": "all", "label": "Neutrales + semantic (success/warning/critical/info)" }
+      ],
+      "impact": "Tone property values",
+      "tags": ["tone", "color", "success", "warning", "critical", "info", "semantic"]
+    },
+    {
+      "id": "truncation",
+      "text": "¿Qué tan avanzado truncation?",
+      "options": [
+        { "value": "none", "label": "Sin truncate" },
+        { "value": "single-line", "label": "Single-line ellipsis (estándar)" },
+        { "value": "multi-line", "label": "Multi-line clamp (Ant ellipsis con rows — requiere CSS runtime)" }
+      ],
+      "impact": "Truncate boolean",
+      "tags": ["truncate", "ellipsis", "clamp", "overflow", "multi-line"]
+    },
+    {
+      "id": "semantic-decoupling",
+      "text": "¿Decoupling visual/semantic? (variant vs as prop)",
+      "options": [
+        { "value": "coupled", "label": "Coupled — heading-lg siempre renderea <h1>" },
+        { "value": "decoupled", "label": "Decoupled — variant (visual) y as (semantic) independientes (Polaris pattern)" }
+      ],
+      "impact": "Documentación + discipline de uso; afecta a11y guidance",
+      "tags": ["semantic", "heading", "as-prop", "decoupled", "wcag"]
+    }
+  ]
+}

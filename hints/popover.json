@@ -1,0 +1,155 @@
+{
+  "component": "Popover",
+  "archetype": "container",
+  "buildOrder": [
+    "Popover"
+  ],
+  "family": [
+    {
+      "name": "Popover",
+      "isSubComponent": false,
+      "chromeless": false,
+      "slots": [
+        "title:text",
+        "content*:container",
+        "footer:container",
+        "close:icon-action",
+        "arrow:shape"
+      ],
+      "properties": {
+        "Placement": ["top", "bottom", "left", "right"],
+        "Size": ["sm", "md", "lg"],
+        "Variant": ["default", "info", "warning", "error", "success"]
+      },
+      "booleans": [
+        "Has Title(text)",
+        "Has Footer",
+        "Has Arrow",
+        "Has Close"
+      ],
+      "exclusions": [],
+      "frameCount": 60
+    }
+  ],
+  "a11y": {
+    "role": "dialog",
+    "roleNonModal": "tooltip",
+    "keyboard": [
+      "Enter/Space en trigger: abre",
+      "Escape: cierra + retorna foco",
+      "Tab/Shift+Tab: navega dentro",
+      "Tab (non-modal): sale del popover"
+    ],
+    "focus": "primer elemento focusable al abrir (modal=true); trigger al cerrar"
+  },
+  "tokens": {
+    "total": 22,
+    "prefix": "pop"
+  },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué se usa el popover principalmente?",
+      "options": [
+        { "value": "contextual-help", "label": "Ayuda contextual — '?' junto a campos o features" },
+        { "value": "confirmation", "label": "Confirmación inline — antes de acciones destructivas" },
+        { "value": "status", "label": "Estado de campo — errores, warnings, validación anclada" },
+        { "value": "preview", "label": "Preview / detalle — info adicional de un elemento" },
+        { "value": "form", "label": "Formulario inline — editar datos sin salir del flujo" },
+        { "value": "multiple", "label": "Varios propósitos" }
+      ],
+      "impact": "Variant, Has Title, Has Footer, Has Close, Size",
+      "tags": ["help", "confirmation", "validation", "error", "preview", "form", "inline-edit"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de popover necesitas?",
+      "options": [
+        { "value": "sm-only", "label": "Solo sm (240px) — ayuda breve, tooltips ricos" },
+        { "value": "md-only", "label": "Solo md (320px) — uso general" },
+        { "value": "sm-md", "label": "sm + md" },
+        { "value": "all", "label": "sm + md + lg (240/320/480px)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "large", "width", "compact", "form-content"]
+    },
+    {
+      "id": "variant",
+      "text": "¿Necesitas variantes semánticas de color en el popover?",
+      "options": [
+        { "value": "default-only", "label": "No — solo el estilo default (blanco)" },
+        { "value": "status", "label": "Sí — info, warning, error, success para estados de campo" },
+        { "value": "help-info", "label": "Solo info — para ayuda contextual neutral" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["info", "warning", "error", "success", "semantic", "status", "validation"]
+    },
+    {
+      "id": "placement",
+      "text": "¿En cuántas direcciones se posiciona el popover?",
+      "options": [
+        { "value": "bottom-only", "label": "Solo abajo — posición fija debajo del trigger" },
+        { "value": "top-bottom", "label": "Arriba y abajo" },
+        { "value": "all-four", "label": "Las 4 direcciones (top, bottom, left, right)" },
+        { "value": "auto", "label": "Auto — flip automático según espacio disponible" }
+      ],
+      "impact": "Placement property values",
+      "tags": ["placement", "position", "flip", "top", "bottom", "left", "right", "auto"]
+    },
+    {
+      "id": "arrow",
+      "text": "¿El popover siempre muestra la flecha de anclaje?",
+      "options": [
+        { "value": "always", "label": "Siempre — flecha que conecta visualmente con el trigger" },
+        { "value": "never", "label": "Nunca — flotante sin flecha" },
+        { "value": "configurable", "label": "Configurable — a veces con, a veces sin flecha" }
+      ],
+      "impact": "Has Arrow boolean (default ON/OFF)",
+      "tags": ["arrow", "caret", "pointer", "anchor", "no-arrow"]
+    },
+    {
+      "id": "title",
+      "text": "¿El popover siempre tiene título?",
+      "options": [
+        { "value": "always", "label": "Siempre — todos los popovers tienen encabezado" },
+        { "value": "sometimes", "label": "A veces — algunos tienen título, otros solo body" },
+        { "value": "never", "label": "Nunca — solo contenido sin título" }
+      ],
+      "impact": "Has Title boolean (default ON/OFF)",
+      "tags": ["title", "header", "heading", "label", "no-title"]
+    },
+    {
+      "id": "footer",
+      "text": "¿El popover necesita área de acciones (footer)?",
+      "options": [
+        { "value": "yes", "label": "Sí — botones de acción (confirmar, cancelar, guardar)" },
+        { "value": "no", "label": "No — solo contenido informativo, sin acciones" },
+        { "value": "sometimes", "label": "A veces — algunos casos tienen acciones, otros no" }
+      ],
+      "impact": "Has Footer boolean",
+      "tags": ["footer", "actions", "buttons", "confirm", "cancel", "cta"]
+    },
+    {
+      "id": "close-button",
+      "text": "¿El popover necesita botón de cierre explícito (×)?",
+      "options": [
+        { "value": "yes", "label": "Sí — siempre visible para cerrar sin Escape" },
+        { "value": "no", "label": "No — se cierra con Escape o click fuera" },
+        { "value": "modal-only", "label": "Solo en popovers modales (con form o acción crítica)" }
+      ],
+      "impact": "Has Close boolean",
+      "tags": ["close", "dismiss", "x-button", "modal", "explicit-close"]
+    },
+    {
+      "id": "modal",
+      "text": "¿El popover debe atrapar el foco (comportamiento modal)?",
+      "options": [
+        { "value": "never", "label": "No — foco puede salir libremente (info, ayuda)" },
+        { "value": "always", "label": "Sí — siempre modal (focus trap, para formularios)" },
+        { "value": "configurable", "label": "Configurable — modal=true/false según el caso" }
+      ],
+      "impact": "modal prop, role=dialog vs tooltip, focus trap",
+      "tags": ["modal", "focus-trap", "accessible", "form", "non-modal", "informational"]
+    }
+  ]
+}

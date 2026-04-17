@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "component": "Icon",
+  "archetype": "visual-primitive",
+  "language": "es",
+  "buildOrder": ["Icon"],
+  "family": [
+    {
+      "name": "Icon",
+      "isSubComponent": false,
+      "isBuildingBlock": true,
+      "slots": [
+        { "name": "svg", "type": "shape", "required": true, "figmaBinding": "instance-swap", "note": "SVG del icono; Figma usa component set con glyph variants" }
+      ],
+      "properties": {
+        "Size":  ["xs", "sm", "md", "lg", "xl"],
+        "Style": ["outlined", "filled", "two-tone"],
+        "Tone":  ["inherit", "primary", "secondary", "subdued", "success", "warning", "critical", "info"]
+      },
+      "exclusions": [
+        "Style=two-tone + Tone!=primary|inherit (two-tone tiene 2 colores, Tone aplica al primary solo)"
+      ],
+      "sizes": {
+        "xs": { "size": 12 },
+        "sm": { "size": 16 },
+        "md": { "size": 20 },
+        "lg": { "size": 24 },
+        "xl": { "size": 32 }
+      },
+      "toneStyles": {
+        "inherit":   { "fg": "currentColor" },
+        "primary":   { "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "secondary": { "fg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "subdued":   { "fg": { "r": 0.55, "g": 0.55, "b": 0.60 } },
+        "success":   { "fg": { "r": 0.08, "g": 0.55, "b": 0.22 } },
+        "warning":   { "fg": { "r": 0.72, "g": 0.48, "b": 0.05 } },
+        "critical":  { "fg": { "r": 0.86, "g": 0.15, "b": 0.15 } },
+        "info":      { "fg": { "r": 0.15, "g": 0.35, "b": 0.92 } }
+      },
+      "swapSlots": [
+        { "propName": "🔄 Glyph", "layerName": "svg", "default": "icon/placeholder" }
+      ],
+      "frameCount": {
+        "gross": 120,
+        "exclusions": 18,
+        "net": 102,
+        "note": "Size(5) × Style(3) × Tone(8) = 120; −18 two-tone+tone incompatibles"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "icon",
+    "role": "img (informativo) o ninguno (decorativo)",
+    "ariaAttributes": [
+      "Decorativo (default): aria-hidden='true' — parent provee contexto",
+      "Informativo: role='img' + aria-label='[descripción]'",
+      "Interactivo (wrapped en button): parent button tiene aria-label; icon sigue decorativo",
+      "Dev warning: si no hay aria-label ni aria-hidden explícito, SR lee nombre del icon (noise)"
+    ],
+    "keyboardNav": ["No focusable (excepto wrapped en button/link)"],
+    "focusTechnique": "none (el parent interactivo maneja focus)",
+    "edgeCases": 3,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 14, "prefix": "icn", "mode": "C" },
+  "componentDescriptions": {
+    "Icon": "Icon primitivo. Size: xs (12) / sm (16) / md (20) / lg (24) / xl (32). Style: outlined (default) / filled / two-tone. Tone: inherit (currentColor) + 7 semantic colors.\n\n🔑 ARIA:\n• Decorativo por default (aria-hidden='true')\n• Informativo requiere role='img' + aria-label\n• Parent button/link provee contexto de interacción\n\n⌨️ Keyboard:\n• No focusable standalone\n\n🎯 Focus:\n• Heredado del parent si wrapped en interactive\n\nTokens: 14, prefijo icn-.\nWCAG 2.2 AA.\n\nStyle=filled para estados active (iOS pattern). Style=two-tone para status icons (Ant).\nTone=inherit es el default — el icon adopta el color del texto circundante (currentColor)."
+  },
+  "variableBindings": {
+    "icn/xs": "iconSize/xs",
+    "icn/sm": "iconSize/sm",
+    "icn/md": "iconSize/md",
+    "icn/lg": "iconSize/lg",
+    "icn/xl": "iconSize/xl",
+    "icn/inherit/fg": "text/currentColor",
+    "icn/primary/fg": "text/primary",
+    "icn/secondary/fg": "text/secondary",
+    "icn/subdued/fg": "text/subtlest",
+    "icn/success/fg": "status/success/fg",
+    "icn/warning/fg": "status/warning/fg",
+    "icn/critical/fg": "status/error/fg",
+    "icn/info/fg": "status/info/fg"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "5 sizes (xs/sm/md/lg/xl) alineado con foundations.iconSizes", "why": "Carbon 4 sizes (16/20/24/32); Polaris 2 (minor/major); Spectrum 4 (S/M/L/XL). Nosotros 5 matching foundations.json. Size-specific SVG optimizado como Carbon (pixel-perfect en cada size).", "source": "research" },
+    { "what": "3 Styles: outlined/filled/two-tone (Ant pattern)", "why": "Ant tiene 3 themes; Atlassian tiene twoTone; iOS outlined→filled al activar (pattern BottomNav). outlined default, filled para active states, two-tone para status.", "source": "research" },
+    { "what": "Tone inherit como default (currentColor, Spectrum pattern)", "why": "Spectrum + Polaris default es currentColor — el icon adopta el color del texto. Esto es crítico para buttons, links, alerts donde el icon debe match el texto. 7 semantic tones explícitos para casos standalone.", "source": "research" },
+    { "what": "Decorativo por default (Carbon + Polaris pattern)", "why": "Ant es noise-heavy (default aria-label); Carbon/Polaris son decorativo por default (aria-hidden). Decorativo por default es más sane — SR users ya tienen contexto del parent. Override explícito con label prop.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

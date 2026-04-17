@@ -1,0 +1,139 @@
+{
+  "version": "1.0",
+  "component": "ColorPicker",
+  "archetype": "value-picker",
+  "language": "es",
+  "buildOrder": ["ColorSwatch", "ColorPicker"],
+  "family": [
+    {
+      "name": "ColorSwatch",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "ColorPicker",
+      "slots": [
+        { "name": "color", "type": "shape", "required": true, "figmaBinding": "fill" },
+        { "name": "checkIcon", "type": "icon", "required": false, "note": "visible en selected" }
+      ],
+      "properties": {
+        "State": ["default", "hover", "selected", "focused", "disabled"],
+        "Size":  ["sm", "md", "lg"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "size": 20, "radius": 4, "border": 1 },
+        "md": { "size": 28, "radius": 6, "border": 1 },
+        "lg": { "size": 36, "radius": 8, "border": 2 }
+      },
+      "stateStyles": {
+        "default":  { "border": { "r": 0.82, "g": 0.82, "b": 0.85 } },
+        "hover":    { "border": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "selected": { "border": { "r": 0.15, "g": 0.35, "b": 0.92 }, "borderWidth": 2, "outline": 2 },
+        "focused":  { "ring": true },
+        "disabled": { "border": { "r": 0.88, "g": 0.88, "b": 0.90 }, "opacity": 0.5 }
+      },
+      "booleanLayers": [
+        { "propName": "👁 Show Checkmark", "layerName": "checkIcon" }
+      ],
+      "frameCount": {
+        "gross": 15,
+        "exclusions": 0,
+        "net": 15,
+        "note": "State(5) × Size(3) = 15"
+      }
+    },
+    {
+      "name": "ColorPicker",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "saturationArea", "type": "shape", "required": false, "note": "2D area para saturation/brightness" },
+        { "name": "hueSlider", "type": "container", "required": false, "note": "slider horizontal 0-360° hue" },
+        { "name": "alphaSlider", "type": "container", "required": false, "note": "slider transparency (si alpha enabled)" },
+        { "name": "eyedropper", "type": "icon-action", "required": false, "note": "browser EyeDropper API" },
+        { "name": "input", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "hex/rgb/hsl input" },
+        { "name": "presets", "type": "container", "required": false, "note": "grid de ColorSwatch presets" },
+        { "name": "preview", "type": "shape", "required": false, "note": "current color large preview" }
+      ],
+      "properties": {
+        "Layout":  ["compact", "default", "expanded"],
+        "Format":  ["hex", "rgb", "hsl", "all"],
+        "Alpha":   ["no", "yes"],
+        "State":   ["default", "focused", "disabled"]
+      },
+      "exclusions": [
+        "Layout=compact + Format=all (no cabe todos los inputs)",
+        "Layout=compact + Alpha=yes (no hay espacio para alpha slider)"
+      ],
+      "sizes": {
+        "compact":  { "w": 240, "saturationH": 140, "presetCols": 5, "presetRows": 2 },
+        "default":  { "w": 320, "saturationH": 200, "presetCols": 8, "presetRows": 3 },
+        "expanded": { "w": 400, "saturationH": 260, "presetCols": 10, "presetRows": 4 }
+      },
+      "frameCount": {
+        "gross": 72,
+        "exclusions": 12,
+        "net": 60,
+        "note": "Layout(3) × Format(4) × Alpha(2) × State(3) = 72; −12 exclusiones"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "color-picker",
+    "role": "dialog (popover) + various sub-controls",
+    "ariaAttributes": [
+      "Container: role='dialog' + aria-label='Selector de color'",
+      "Saturation area: role='slider' 2D con aria-valuenow='[s, v]' + aria-valuetext descriptivo",
+      "Hue slider: role='slider' aria-valuemin=0 aria-valuemax=360 aria-valuenow=[deg]",
+      "Alpha slider: role='slider' aria-valuemin=0 aria-valuemax=100",
+      "Swatches: role='button' + aria-label='Color #[hex]' + aria-pressed si selected",
+      "Input: role='textbox' con pattern=[hex|rgb] validation",
+      "Eyedropper: aria-label='Selector de color del cursor'"
+    ],
+    "keyboardNav": [
+      "Tab: navega entre controls",
+      "Arrow keys en saturation: mueve cursor 2D",
+      "Arrow keys en hue slider: cambia 1° (Shift+Arrow = 10°)",
+      "Enter en swatch: selecciona"
+    ],
+    "focusTechnique": "ring 2px en control activo; indicator visible en saturation area",
+    "edgeCases": 7,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 22, "prefix": "cp", "mode": "C" },
+  "componentDescriptions": {
+    "ColorSwatch": "Color swatch. State: default/hover/selected/focused/disabled. Size: sm(20)/md(28)/lg(36). Selected state con border + outline + opcional checkmark.\n\n🔑 ARIA:\n• role='button' + aria-label='Color #[hex]'\n• aria-pressed='true' si selected\n\n⌨️ Keyboard:\n• Tab navega, Enter selecciona\n\nWCAG 2.2 AA.",
+    "ColorPicker": "Selector de color completo. Layout: compact (sidebar picker) / default (form popover) / expanded (dedicated page). Format: hex / rgb / hsl / all (tabs). Alpha: yes/no (transparency slider).\n\n🔑 ARIA:\n• role='dialog' con sub-controls\n• Saturation area: slider 2D\n• Hue/Alpha: slider con aria-valuenow\n• Eyedropper: browser EyeDropper API\n\n⌨️ Keyboard:\n• Arrow keys en saturation 2D\n• Arrow keys en hue (Shift = 10°)\n• Tab entre controls\n\n🎯 Focus:\n• Ring visible en cada control\n• Tabindex trap en popover\n\nTokens: 22, prefijo cp-.\nWCAG 2.2 AA.\n\nWCAG 1.4.1 (color no es único indicador): contrast info opcional mostrar WCAG ratio del color seleccionado vs background."
+  },
+  "variableBindings": {
+    "cp/swatch/sm": "sizing/20",
+    "cp/swatch/md": "sizing/28",
+    "cp/swatch/lg": "sizing/36",
+    "cp/swatch/radius/sm": "radius/xs",
+    "cp/swatch/radius/md": "radius/sm",
+    "cp/swatch/radius/lg": "radius/md",
+    "cp/swatch/border/default": "border/default",
+    "cp/swatch/border/selected": "interactive/default",
+    "cp/swatch/focused/ring": "focus/ring",
+    "cp/saturation/h/compact": "sizing/140",
+    "cp/saturation/h/default": "sizing/200",
+    "cp/saturation/h/expanded": "sizing/260",
+    "cp/w/compact": "sizing/240",
+    "cp/w/default": "sizing/320",
+    "cp/w/expanded": "sizing/400",
+    "cp/slider/h": "sizing/16",
+    "cp/slider/radius": "radius/pill",
+    "cp/input/h": "sizing/32",
+    "cp/gap/sm": "spacing/1.5",
+    "cp/gap/md": "spacing/2",
+    "cp/padding": "spacing/4",
+    "cp/preset/gap": "spacing/1"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Familia ColorSwatch + ColorPicker", "why": "ColorSwatch standalone útil para presets/palettes display sin picker completo. Reutilizable.", "source": "common-patterns" },
+    { "what": "3 Layouts (compact/default/expanded)", "why": "Compact para inline sidebar (SaaS); default para form popover; expanded para dedicated brand page.", "source": "common-patterns" },
+    { "what": "Format como property (hex/rgb/hsl/all)", "why": "Developers prefieren hex; designers HSL; export RGB. 'all' muestra tabs.", "source": "common-patterns" },
+    { "what": "Saturation area es slider 2D (role='slider' con aria-valuetext)", "why": "WAI-ARIA Color Picker pattern: 2D slider con arrow keys + descriptive aria-valuetext ('Saturation 80%, Brightness 60%').", "source": "WAI-ARIA" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

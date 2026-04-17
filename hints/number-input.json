@@ -1,0 +1,82 @@
+{
+  "component": "NumberInput",
+  "archetype": "container",
+  "buildOrder": ["NumberInput"],
+  "family": [
+    {
+      "name": "NumberInput",
+      "isSubComponent": false,
+      "slots": ["addon-before:text", "input*:text", "addon-after:text", "decrement:icon-action", "increment:icon-action"],
+      "properties": { "Size": ["sm", "md", "lg"], "State": ["default", "error", "disabled"] },
+      "booleans": ["Has Stepper", "Has Addon Before(text)", "Has Addon After(text)"],
+      "exclusions": [],
+      "frameCount": 9
+    }
+  ],
+  "a11y": {
+    "role": "spinbutton",
+    "keyboard": ["↑↓: ±1 paso", "Shift+↑↓: ±10 pasos", "Page Up/Down: paso grande", "Home/End: min/max"],
+    "focus": "Steppers no Tab-focusables — operados via Arrow keys en el input"
+  },
+  "tokens": { "total": 12, "prefix": "nmi" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué se usa el input numérico?",
+      "options": [
+        { "value": "quantity",    "label": "Cantidad — stock, items, participantes (enteros positivos)" },
+        { "value": "currency",    "label": "Dinero — precios, límites, presupuestos (con formato $)" },
+        { "value": "percentage",  "label": "Porcentaje — valores 0-100%" },
+        { "value": "measurement", "label": "Medidas — px, rem, segundos, MB (con unidades)" },
+        { "value": "general",     "label": "Uso general — cualquier número" }
+      ],
+      "impact": "Has Addon (unidades), formatter/parser, min/max values",
+      "tags": ["quantity", "currency", "percentage", "units", "measurement"]
+    },
+    {
+      "id": "stepper",
+      "text": "¿El input necesita botones de incremento/decremento?",
+      "options": [
+        { "value": "yes",  "label": "Sí — botones +/− visibles" },
+        { "value": "no",   "label": "No — solo input numérico sin steppers" },
+        { "value": "both", "label": "Configurable — a veces con, a veces sin" }
+      ],
+      "impact": "Has Stepper boolean (default ON/OFF)",
+      "tags": ["stepper", "increment", "decrement", "buttons", "arrow-keys"]
+    },
+    {
+      "id": "addon",
+      "text": "¿El input muestra unidades o símbolo de moneda?",
+      "options": [
+        { "value": "none",   "label": "No — solo el número" },
+        { "value": "before", "label": "Antes — ej. '$100' o '€50'" },
+        { "value": "after",  "label": "Después — ej. '100 kg', '50%', '200 ms'" },
+        { "value": "both",   "label": "Ambos (raro)" }
+      ],
+      "impact": "Has Addon Before / Has Addon After booleans",
+      "tags": ["addon", "currency", "units", "prefix", "suffix", "symbol"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños necesitas?",
+      "options": [
+        { "value": "md-only", "label": "Solo md (40px) — uso general" },
+        { "value": "sm-md",   "label": "sm + md (32/40px)" },
+        { "value": "all",     "label": "sm + md + lg (32/40/48px)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "large", "compact"]
+    },
+    {
+      "id": "precision",
+      "text": "¿Los valores son enteros o decimales?",
+      "options": [
+        { "value": "integer",  "label": "Solo enteros (1, 2, 3...)" },
+        { "value": "decimal",  "label": "Decimales (1.5, 0.01...)" },
+        { "value": "both",     "label": "Ambos según contexto" }
+      ],
+      "impact": "step y precision config",
+      "tags": ["integer", "decimal", "precision", "float", "step"]
+    }
+  ]
+}

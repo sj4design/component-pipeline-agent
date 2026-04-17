@@ -1,0 +1,110 @@
+{
+  "version": "1.0",
+  "component": "Notification",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": ["Notification"],
+  "family": [
+    {
+      "name": "Notification",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "icon",        "type": "icon",       "required": false, "figmaBinding": "bool" },
+        { "name": "title",       "type": "text",        "required": true,  "figmaBinding": "text" },
+        { "name": "description", "type": "text",        "required": false, "figmaBinding": "boolText" },
+        { "name": "actions",     "type": "container",   "required": false, "figmaBinding": "bool" },
+        { "name": "close",       "type": "icon-action", "required": false, "figmaBinding": "bool" },
+        { "name": "avatar",      "type": "image",       "required": false, "figmaBinding": "bool" }
+      ],
+      "properties": {
+        "Variant": ["info", "success", "warning", "error", "discovery"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "default": {
+          "w": 360, "py": 16, "px": 16, "gap": 12,
+          "titleSize": 14, "titleWeight": 600, "titleLineHeight": 20,
+          "descSize": 14, "descWeight": 400, "descLineHeight": 20,
+          "radius": 8, "iconSize": 20, "shadowLevel": 3,
+          "avatarSize": 36
+        }
+      },
+      "colors": {
+        "bg":       { "r": 1,    "g": 1,    "b": 1    },
+        "border":   { "r": 0.82, "g": 0.82, "b": 0.85 },
+        "titleFg":  { "r": 0.07, "g": 0.07, "b": 0.07 },
+        "descFg":   { "r": 0.42, "g": 0.45, "b": 0.50 },
+        "closeFg":  { "r": 0.42, "g": 0.45, "b": 0.50 }
+      },
+      "variantStyles": {
+        "info":      { "iconName": "info-circle",     "accentFg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "borderLeft": { "r": 0.15, "g": 0.35, "b": 0.92 } },
+        "success":   { "iconName": "check-circle",    "accentFg": { "r": 0.08, "g": 0.55, "b": 0.22 }, "borderLeft": { "r": 0.08, "g": 0.55, "b": 0.22 } },
+        "warning":   { "iconName": "alert-triangle",  "accentFg": { "r": 0.72, "g": 0.48, "b": 0.05 }, "borderLeft": { "r": 0.72, "g": 0.48, "b": 0.05 } },
+        "error":     { "iconName": "alert-circle",    "accentFg": { "r": 0.86, "g": 0.15, "b": 0.15 }, "borderLeft": { "r": 0.86, "g": 0.15, "b": 0.15 } },
+        "discovery": { "iconName": "sparkle",         "accentFg": { "r": 0.45, "g": 0.22, "b": 0.75 }, "borderLeft": { "r": 0.45, "g": 0.22, "b": 0.75 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Title",       "layerName": "title",       "default": "Título de la notificación" },
+        { "propName": "✏️ Description", "layerName": "description", "default": "Descripción adicional del evento del sistema." }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        { "boolName": "Has Icon",        "layerName": "icon",        "defaultVisible": true  },
+        { "boolName": "Has Actions",     "layerName": "actions",     "defaultVisible": false },
+        { "boolName": "Has Close",       "layerName": "close",       "defaultVisible": true  },
+        { "boolName": "Has Avatar",      "layerName": "avatar",      "defaultVisible": false }
+      ],
+      "booleanTextPairs": [
+        { "boolName": "Has Description", "textPropName": "✏️ Description", "textLayerName": "description", "defaultVisible": true, "defaultText": "Descripción adicional del evento del sistema." }
+      ],
+      "frameCount": { "gross": 5, "exclusions": 0, "net": 5 },
+      "grid": { "maxCols": 5, "gap": 24, "pad": 32 }
+    }
+  ],
+  "a11y": {
+    "pattern": "live-region",
+    "role": "alert (warning/error) | status (info/success/discovery)",
+    "ariaAttributes": [
+      "role=\"alert\" para warning/error (interrumpe SR)",
+      "role=\"status\" para info/success/discovery (polite)",
+      "aria-live=\"assertive\" o \"polite\" según variante",
+      "aria-labelledby → title id",
+      "aria-atomic=\"true\""
+    ],
+    "keyboardNav": [
+      "Has Close: botón × focusable",
+      "Has Actions: botones de acción focusables",
+      "Tab navega entre acciones",
+      "Auto-dismiss pausa con foco dentro"
+    ],
+    "focusTechnique": "no auto-focus",
+    "edgeCases": 5,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 14, "prefix": "ntf", "mode": "C" },
+  "componentDescriptions": {
+    "Notification": "Notificación de sistema con título y descripción estructurada. Más rica que Toast. Variants: info, success, warning, error, discovery. Fondo blanco con borde izquierdo de acento por variante.\n\n🔑 ARIA:\n• role=\"alert\" para warning/error\n• role=\"status\" para info/success/discovery\n• aria-labelledby → title\n• aria-atomic=\"true\"\n\n⌨️ Keyboard:\n• Has Close: botón × con aria-label='Cerrar'\n• Has Actions: botones con labels descriptivos\n• Tab navega entre acciones\n\n🎯 Focus:\n• No roba foco al aparecer\n• Auto-dismiss pausa con foco dentro\n• Discovery variant: para onboarding y nuevas features\n• Has Avatar: para notificaciones de actividad de usuarios\n\nTokens: 14, prefijo ntf-.\nWCAG 2.2 AA."
+  },
+  "variableBindings": {
+    "ntf/bg": "surface/default",
+    "ntf/border": "border/default",
+    "ntf/title-color": "text/primary",
+    "ntf/desc-color": "text/secondary",
+    "ntf/close-color": "text/secondary",
+    "ntf/radius": "radius/md",
+    "ntf/info/accent": "status/info/fg",
+    "ntf/success/accent": "status/success/fg",
+    "ntf/warning/accent": "status/warning/fg",
+    "ntf/error/accent": "status/error/fg",
+    "ntf/discovery/accent": "interactive/visited",
+    "focus/ring": "border/focus"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "Fondo blanco con borde izquierdo de acento (vs. Toast oscuro)", "why": "Notification es más rica y persistente que Toast — vive en panels o feeds, no como overlay flotante. Fondo blanco con border-left de color es el patrón de Atlassian Flag y Ant notification.", "source": "research" },
+    { "what": "Variant=discovery (5to variant)", "why": "Atlassian es el único sistema con 'discovery' — pero Zoom tiene patrones de onboarding y nuevas features que necesitan un estilo visual diferente a los 4 semánticos estándar.", "source": "research" },
+    { "what": "Has Avatar boolean", "why": "Ant Design y sistemas de notificaciones sociales/colaborativas (Zoom tiene meetings, chat) necesitan mostrar el avatar del usuario que generó el evento (ej. 'Pedro te invitó a una reunión').", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

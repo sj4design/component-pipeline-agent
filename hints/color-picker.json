@@ -1,0 +1,93 @@
+{
+  "component": "ColorPicker",
+  "archetype": "value-picker",
+  "buildOrder": ["ColorSwatch", "ColorPicker"],
+  "family": [
+    {
+      "name": "ColorSwatch",
+      "isSubComponent": true,
+      "slots": ["color*:shape", "checkIcon:icon"],
+      "properties": { "State": ["default", "hover", "selected", "focused", "disabled"], "Size": ["sm", "md", "lg"] },
+      "booleans": ["Show Checkmark"],
+      "exclusions": [],
+      "frameCount": 15
+    },
+    {
+      "name": "ColorPicker",
+      "isSubComponent": false,
+      "slots": ["saturationArea:shape", "hueSlider:container", "alphaSlider:container", "eyedropper:icon-action", "input:container", "presets:container", "preview:shape"],
+      "properties": {
+        "Layout": ["compact", "default", "expanded"],
+        "Format": ["hex", "rgb", "hsl", "all"],
+        "Alpha":  ["no", "yes"],
+        "State":  ["default", "focused", "disabled"]
+      },
+      "booleans": [],
+      "exclusions": ["Layout=compact + Format=all", "Layout=compact + Alpha=yes"],
+      "frameCount": 60
+    }
+  ],
+  "a11y": {
+    "role": "dialog + saturation slider 2D + listbox (swatches)",
+    "keyboard": ["Arrow keys en saturation 2D", "Shift+Arrow en hue slider = 10°", "Tab entre controls"],
+    "focus": "Ring 2px. aria-valuetext descriptivo en saturation area."
+  },
+  "tokens": { "total": 22, "prefix": "cp" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas ColorPicker?",
+      "options": [
+        { "value": "theming", "label": "Theming — brand colors, user preferences" },
+        { "value": "design-tool", "label": "Design tool — precise color selection (full features)" },
+        { "value": "form-field", "label": "Form field — user selects categoría color (presets)" },
+        { "value": "annotation", "label": "Annotation — highlight/pen colors" }
+      ],
+      "impact": "Layout, Format, Alpha defaults",
+      "tags": ["theming", "design", "brand", "presets", "annotation"]
+    },
+    {
+      "id": "layout",
+      "text": "¿Layout?",
+      "options": [
+        { "value": "compact", "label": "Compact — sidebar/inline (240px)" },
+        { "value": "default", "label": "Default — form popover (320px)" },
+        { "value": "expanded", "label": "Expanded — dedicated page (400px)" }
+      ],
+      "impact": "Layout property",
+      "tags": ["compact", "default", "expanded", "popover", "page"]
+    },
+    {
+      "id": "format",
+      "text": "¿Formato(s) de input?",
+      "options": [
+        { "value": "hex-only", "label": "Solo hex (#RRGGBB) — developers" },
+        { "value": "hex-rgb", "label": "Hex + RGB" },
+        { "value": "all", "label": "Hex + RGB + HSL (tabs)" }
+      ],
+      "impact": "Format property",
+      "tags": ["hex", "rgb", "hsl", "format"]
+    },
+    {
+      "id": "alpha",
+      "text": "¿Soporta transparency (alpha channel)?",
+      "options": [
+        { "value": "no", "label": "No — opacity siempre 100%" },
+        { "value": "yes", "label": "Sí — alpha slider (para overlays, semi-transparent fills)" }
+      ],
+      "impact": "Alpha property",
+      "tags": ["alpha", "transparency", "opacity"]
+    },
+    {
+      "id": "presets",
+      "text": "¿Presets palette?",
+      "options": [
+        { "value": "none", "label": "Sin presets" },
+        { "value": "brand", "label": "Brand palette (10-15 colors)" },
+        { "value": "extended", "label": "Extended — brand + neutrals + semantic (30+)" }
+      ],
+      "impact": "Presets slot, swatch count",
+      "tags": ["presets", "palette", "brand", "swatches"]
+    }
+  ]
+}

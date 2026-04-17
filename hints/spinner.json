@@ -1,0 +1,73 @@
+{
+  "component": "Spinner",
+  "archetype": "indicator",
+  "buildOrder": ["Spinner"],
+  "family": [
+    {
+      "name": "Spinner",
+      "isSubComponent": false,
+      "slots": ["label:text"],
+      "properties": {
+        "Size":  ["sm", "md", "lg"],
+        "Color": ["default", "invert"]
+      },
+      "booleans": ["Has Label(text)"],
+      "exclusions": [],
+      "frameCount": 6
+    }
+  ],
+  "a11y": {
+    "role": "status (aria-live polite implícito)",
+    "keyboard": ["No focusable"],
+    "focus": "aria-busy en contenedor padre + aria-label descriptivo"
+  },
+  "tokens": { "total": 8, "prefix": "spn" },
+  "questions": [
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de spinner necesitas?",
+      "options": [
+        { "value": "sm-only",   "label": "Solo sm (16px) — dentro de botones y campos" },
+        { "value": "md-only",   "label": "Solo md (24px) — uso general" },
+        { "value": "sm-md",     "label": "sm + md" },
+        { "value": "all-three", "label": "sm + md + lg (16/24/40px)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "large", "button-loading", "page-loading"]
+    },
+    {
+      "id": "color",
+      "text": "¿El spinner aparece sobre fondos claros, oscuros o ambos?",
+      "options": [
+        { "value": "default-only", "label": "Solo fondos claros — azul sobre blanco" },
+        { "value": "invert-only",  "label": "Solo fondos oscuros — blanco sobre dark" },
+        { "value": "both",         "label": "Ambos — ej. spinner en botón primario (dark) y en página (light)" }
+      ],
+      "impact": "Color property values (default | invert)",
+      "tags": ["dark-bg", "light-bg", "invert", "contrast", "button-loading"]
+    },
+    {
+      "id": "label",
+      "text": "¿El spinner muestra texto de carga visible?",
+      "options": [
+        { "value": "never",     "label": "Nunca — solo el ícono giratorio" },
+        { "value": "sometimes", "label": "A veces — para cargas largas que necesitan contexto" },
+        { "value": "always",    "label": "Siempre — con mensaje visible debajo" }
+      ],
+      "impact": "Has Label boolean",
+      "tags": ["label", "loading-text", "context", "overlay"]
+    },
+    {
+      "id": "context",
+      "text": "¿Dónde se usa el spinner principalmente?",
+      "options": [
+        { "value": "button",   "label": "Dentro de botones — reemplaza el ícono/texto al cargar" },
+        { "value": "section",  "label": "En secciones — mientras carga contenido de una región" },
+        { "value": "overlay",  "label": "Full-page overlay — bloquea la interfaz durante operaciones" },
+        { "value": "multiple", "label": "En varios contextos" }
+      ],
+      "impact": "Size apropiado + overlay behavior",
+      "tags": ["button", "section", "overlay", "page-block", "inline"]
+    }
+  ]
+}

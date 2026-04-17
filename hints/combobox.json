@@ -1,0 +1,78 @@
+{
+  "component": "Combobox",
+  "archetype": "container",
+  "buildOrder": ["Combobox"],
+  "family": [
+    {
+      "name": "Combobox",
+      "isSubComponent": false,
+      "slots": ["prefix-icon:icon", "input*:text", "clear:icon-action", "chevron*:icon", "loading:icon"],
+      "properties": { "Size": ["sm", "md", "lg"], "State": ["default", "error", "disabled"] },
+      "booleans": ["Has Prefix Icon", "Has Clear", "Has Loading"],
+      "exclusions": [],
+      "frameCount": 9
+    }
+  ],
+  "a11y": {
+    "role": "combobox",
+    "keyboard": ["↓↑: navega opciones", "Enter: selecciona", "Escape: cierra", "Tab: confirma y avanza"],
+    "focus": "aria-activedescendant — virtual focus en opciones del dropdown"
+  },
+  "tokens": { "total": 14, "prefix": "cbx" },
+  "questions": [
+    {
+      "id": "value-mode",
+      "text": "¿El usuario puede escribir valores que no están en la lista?",
+      "options": [
+        { "value": "autocomplete",   "label": "No — solo puede elegir de las sugerencias (autocomplete cerrado)" },
+        { "value": "free-text",      "label": "Sí — acepta cualquier texto, sugerencias son opcionales" },
+        { "value": "create",         "label": "Sí + puede crear nuevas opciones ('Crear [valor]')" }
+      ],
+      "impact": "allowsCustomValue behavior + Has Create Option",
+      "tags": ["custom-value", "free-text", "create", "autocomplete", "closed-list"]
+    },
+    {
+      "id": "filtering",
+      "text": "¿Cómo se filtran las opciones?",
+      "options": [
+        { "value": "client",  "label": "Filtrado local — opciones estáticas que se filtran en el cliente" },
+        { "value": "async",   "label": "Búsqueda async — llama a una API mientras el usuario escribe" },
+        { "value": "both",    "label": "Ambos según contexto" }
+      ],
+      "impact": "Has Loading boolean + onSearch behavior",
+      "tags": ["async", "server-side", "local", "loading", "debounce"]
+    },
+    {
+      "id": "multi-select",
+      "text": "¿El combobox permite seleccionar múltiples valores?",
+      "options": [
+        { "value": "single", "label": "No — selección única" },
+        { "value": "multi",  "label": "Sí — múltiples valores (tags/chips en el input)" }
+      ],
+      "impact": "allowMultiple behavior + Tag chips en prefix",
+      "tags": ["multi-select", "tags", "chips", "multiple-values"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños necesitas?",
+      "options": [
+        { "value": "md-only",  "label": "Solo md (40px) — uso general" },
+        { "value": "sm-md",    "label": "sm + md (32/40px)" },
+        { "value": "all",      "label": "sm + md + lg (32/40/48px)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "large", "compact", "form"]
+    },
+    {
+      "id": "prefix-icon",
+      "text": "¿El combobox tiene ícono de prefijo (dentro del campo)?",
+      "options": [
+        { "value": "yes",      "label": "Sí — ícono de búsqueda u otro indicador contextual" },
+        { "value": "no",       "label": "No — solo texto y chevron" },
+        { "value": "sometimes","label": "A veces — configurable por instancia" }
+      ],
+      "impact": "Has Prefix Icon boolean",
+      "tags": ["icon", "prefix", "search-icon", "leading"]
+    }
+  ]
+}

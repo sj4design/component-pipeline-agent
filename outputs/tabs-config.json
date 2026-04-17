@@ -1,0 +1,171 @@
+{
+  "version": "1.0",
+  "component": "Tabs",
+  "archetype": "navigation-switcher",
+  "language": "es",
+  "buildOrder": ["Tab", "Tabs"],
+  "family": [
+    {
+      "name": "Tab",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "Tabs",
+      "slots": [
+        { "name": "icon", "type": "icon", "required": false, "figmaBinding": "instance-swap" },
+        { "name": "label", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "badge", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "Badge component (count/dot)" },
+        { "name": "closeButton", "type": "icon-action", "required": false, "figmaBinding": "instance-swap", "note": "visible solo con Closable=true" },
+        { "name": "indicator", "type": "shape", "required": false, "note": "línea/pill debajo del tab activo (Type=line)" }
+      ],
+      "properties": {
+        "Type":  ["line", "contained"],
+        "State": ["default", "hover", "active", "focused", "disabled"],
+        "Size":  ["sm", "md"]
+      },
+      "exclusions": [
+        "Type=contained + indicator visible (contained usa fondo filled, no subraya)",
+        "Closable=true + Has Icon en Size=sm (espacio insuficiente — permitido pero apretado)"
+      ],
+      "sizes": {
+        "sm": {
+          "h": 32, "px": 12, "gap": 6,
+          "fontSize": 13, "fontWeight": 500, "lineHeight": 18,
+          "iconSize": 16, "indicatorThickness": 2, "radius": 6
+        },
+        "md": {
+          "h": 40, "px": 16, "gap": 8,
+          "fontSize": 14, "fontWeight": 500, "lineHeight": 20,
+          "iconSize": 20, "indicatorThickness": 2, "radius": 8
+        }
+      },
+      "stateStyles": {
+        "line": {
+          "default":  { "bg": "transparent", "fg": { "r": 0.42, "g": 0.45, "b": 0.50 }, "indicator": "transparent" },
+          "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "indicator": "transparent" },
+          "active":   { "bg": "transparent", "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "indicator": { "r": 0.15, "g": 0.35, "b": 0.92 } },
+          "focused":  { "bg": "transparent", "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "ring": true },
+          "disabled": { "bg": "transparent", "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "indicator": "transparent" }
+        },
+        "contained": {
+          "default":  { "bg": "transparent", "fg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+          "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+          "active":   { "bg": { "r": 1.0, "g": 1.0, "b": 1.0 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "shadow": "sm" },
+          "focused":  { "bg": { "r": 1.0, "g": 1.0, "b": 1.0 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "ring": true },
+          "disabled": { "bg": "transparent", "fg": { "r": 0.72, "g": 0.72, "b": 0.75 } }
+        }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Tab label" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Icon", "layerName": "icon", "default": "icon/placeholder" },
+        { "propName": "🔄 Badge", "layerName": "badge", "default": "Badge/neutral" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Icon", "layerName": "icon" },
+        { "propName": "👁 Has Badge", "layerName": "badge" },
+        { "propName": "👁 Closable", "layerName": "closeButton" }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 20,
+        "exclusions": 2,
+        "net": 18,
+        "note": "Type(2) × State(5) × Size(2) = 20; −2 por exclusiones"
+      },
+      "grid": { "maxCols": 5, "gap": 16, "pad": 24 }
+    },
+    {
+      "name": "Tabs",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "tabList", "type": "container", "required": true, "note": "contiene N instancias de Tab" },
+        { "name": "extraContent", "type": "container", "required": false, "note": "slot para acciones al final (ej. 'Add tab')" }
+      ],
+      "properties": {
+        "Orientation": ["horizontal", "vertical"],
+        "Type":        ["line", "contained"],
+        "Size":        ["sm", "md"]
+      },
+      "exclusions": [
+        "Orientation=vertical + Type=contained (contained es horizontal-first; vertical usa line)"
+      ],
+      "sizes": {
+        "sm": { "gap": 4, "px": 0, "py": 4, "borderBottom": 1 },
+        "md": { "gap": 8, "px": 0, "py": 6, "borderBottom": 1 }
+      },
+      "frameCount": {
+        "gross": 8,
+        "exclusions": 2,
+        "net": 6,
+        "note": "Orientation(2) × Type(2) × Size(2) = 8; −2 exclusiones"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "tablist",
+    "role": "tablist (container) + tab (items) + tabpanel (content)",
+    "ariaAttributes": [
+      "Container: role='tablist' + aria-label='[propósito]' + aria-orientation='horizontal|vertical'",
+      "Tab: role='tab' + aria-selected='true|false' + aria-controls='[panel-id]' + tabindex=0 (active) o -1",
+      "TabPanel: role='tabpanel' + aria-labelledby='[tab-id]' + tabindex=0",
+      "Tab disabled: aria-disabled='true'",
+      "Tab con badge: badge count integrado en aria-label ('Mensajes, 5 nuevos')",
+      "Tab closable: close button separado con aria-label='Cerrar [tab name]'"
+    ],
+    "keyboardNav": [
+      "Arrow Left/Right (horizontal) o Up/Down (vertical): navega entre tabs",
+      "Home/End: primer/último tab",
+      "Tab: sale del tablist y entra al tabpanel",
+      "Space/Enter (manual activation) o al moverse (automatic): activa tab",
+      "Delete/Backspace en closable tab: cierra"
+    ],
+    "focusTechnique": "roving tabindex; active tab tiene tabindex=0, resto -1",
+    "activationMode": "automatic (default) o manual (para paneles pesados)",
+    "edgeCases": 6,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 24, "prefix": "tab", "mode": "C" },
+  "componentDescriptions": {
+    "Tab": "Item individual de Tabs. Type: line (underline) / contained (filled bg). States: default/hover/active/focused/disabled. Sizes: sm/md. Supports icon, badge, closable.\n\n🔑 ARIA:\n• role='tab' + aria-selected + aria-controls\n• Badge integrado en aria-label del tab\n• Close button separado con aria-label='Cerrar [tab]'\n\n⌨️ Keyboard:\n• Arrow keys: navega (roving tabindex)\n• Home/End: primer/último\n• Space/Enter: activa (manual mode)\n\nWCAG 2.2 AA.",
+    "Tabs": "Contenedor de N Tab items. Orientation: horizontal (default) / vertical. Type: line / contained. Sizes: sm/md.\n\n🔑 ARIA:\n• role='tablist' + aria-label + aria-orientation\n• aria-controls vincula tab ↔ tabpanel\n\n⌨️ Keyboard:\n• Arrow keys navegan (dirección según orientation)\n• Tab sale al tabpanel\n• Manual activation recomendado para paneles con API calls\n\n🎯 Focus:\n• Roving tabindex\n• keyboardActivation='manual' para data-heavy panels (Carbon/Spectrum pattern)\n\nTokens: 24, prefijo tab-.\nWCAG 2.2 AA.\n\nNo usar para: view-mode switching (usa SegmentedControl)."
+  },
+  "variableBindings": {
+    "tab/sm/h": "sizing/32",
+    "tab/md/h": "sizing/40",
+    "tab/line/default/fg": "text/secondary",
+    "tab/line/hover/bg": "surface/hover",
+    "tab/line/hover/fg": "text/primary",
+    "tab/line/active/fg": "interactive/default",
+    "tab/line/active/indicator": "interactive/default",
+    "tab/line/disabled/fg": "text/disabled",
+    "tab/contained/default/fg": "text/secondary",
+    "tab/contained/active/bg": "surface/default",
+    "tab/contained/active/fg": "text/primary",
+    "tab/contained/active/shadow": "elevation/1",
+    "tab/focused/ring": "focus/ring",
+    "tab/indicator/thickness": "border/2",
+    "tab/radius/sm": "radius/sm",
+    "tab/radius/md": "radius/md",
+    "tab/fontSize/sm": "type/body-sm",
+    "tab/fontSize/md": "type/body-md",
+    "tab/fontWeight": "type/weight-medium",
+    "tab/gap/sm": "spacing/1.5",
+    "tab/gap/md": "spacing/2",
+    "tab/px/sm": "spacing/3",
+    "tab/px/md": "spacing/4",
+    "tab/container/borderBottom": "border/1",
+    "tab/container/gap/sm": "spacing/1",
+    "tab/container/gap/md": "spacing/2"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Dos Types: line + contained (Carbon)", "why": "Line para UI estándar/content-switching; contained para dashboards que necesitan anchor visual entre tab y panel. 2 types cubre casos sin fragmentar API como Ant (line/card/editable-card).", "source": "research" },
+    { "what": "Sub-component architecture: Tab + Tabs", "why": "Espeja WAI-ARIA (tablist/tab/tabpanel) y la composability de Atlassian/Spectrum. Facilita usos custom (extra content slot, controlled state).", "source": "research" },
+    { "what": "Badge + Closable como booleans independientes (Polaris + Ant pattern)", "why": "Badges son first-class en Polaris; closable en Ant editable-card. Modelados como booleans permite combinaciones (closable con badge) sin variantes explícitas.", "source": "research" },
+    { "what": "Roving tabindex + manual activation opcional", "why": "Automatic activation default (Atlassian/Ant); manual opt-in para paneles con API calls caros (Carbon/Spectrum). Documentado en a11y.activationMode.", "source": "research" },
+    { "what": "Sin overflow/scroll built-in", "why": "Carbon/Ant usan scroll; Spectrum colapsa a Picker. Omitir inicialmente — recomendar limitar tabs a ≤7 o usar responsive vertical. Consumer implementa overflow si necesario.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

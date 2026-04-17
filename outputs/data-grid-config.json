@@ -1,0 +1,211 @@
+{
+  "version": "1.0",
+  "component": "DataGrid",
+  "archetype": "data-table",
+  "language": "es",
+  "buildOrder": ["Cell", "Row", "DataGrid"],
+  "family": [
+    {
+      "name": "Cell",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "Row",
+      "slots": [
+        { "name": "content", "type": "text-or-container", "required": true, "figmaBinding": "text" },
+        { "name": "leadingIcon", "type": "icon", "required": false, "figmaBinding": "instance-swap" },
+        { "name": "sortIcon", "type": "icon", "required": false, "figmaBinding": "instance-swap", "note": "solo en header" },
+        { "name": "selection", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "Checkbox en selection column" }
+      ],
+      "properties": {
+        "Type":      ["header", "body", "footer"],
+        "Alignment": ["start", "center", "end"],
+        "State":     ["default", "hover", "sorted", "disabled"],
+        "Size":      ["sm", "md", "lg"]
+      },
+      "exclusions": [
+        "Type=body|footer + State=sorted (sort solo en headers)",
+        "Type=header + State=disabled (headers no se disable)"
+      ],
+      "sizes": {
+        "sm": { "h": 32, "px": 12, "py": 6, "fontSize": 12, "lineHeight": 16, "iconSize": 14 },
+        "md": { "h": 40, "px": 16, "py": 8, "fontSize": 13, "lineHeight": 18, "iconSize": 16 },
+        "lg": { "h": 48, "px": 20, "py": 12, "fontSize": 14, "lineHeight": 20, "iconSize": 18 }
+      },
+      "stateStyles": {
+        "header": {
+          "default":  { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "fontWeight": 600 },
+          "hover":    { "bg": { "r": 0.94, "g": 0.94, "b": 0.96 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "fontWeight": 600 },
+          "sorted":   { "bg": { "r": 0.93, "g": 0.95, "b": 1.0  }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "fontWeight": 600 }
+        },
+        "body": {
+          "default":  { "bg": { "r": 1.0, "g": 1.0, "b": 1.0 }, "fg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "fontWeight": 400 },
+          "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "fontWeight": 400 },
+          "disabled": { "bg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "fontWeight": 400 }
+        },
+        "footer": {
+          "default":  { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "fontWeight": 600 }
+        }
+      },
+      "textProperties": [
+        { "propName": "✏️ Content", "layerName": "content", "default": "Cell value" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Leading Icon", "layerName": "leadingIcon", "default": "icon/placeholder" },
+        { "propName": "🔄 Sort Icon", "layerName": "sortIcon", "default": "icon/sort-asc" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Leading Icon", "layerName": "leadingIcon" },
+        { "propName": "👁 Has Sort Icon", "layerName": "sortIcon" },
+        { "propName": "👁 Has Selection", "layerName": "selection" }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 108,
+        "exclusions": 36,
+        "net": 72,
+        "note": "Type(3) × Alignment(3) × State(4) × Size(3) = 108; −36 por exclusiones sort/disabled"
+      },
+      "grid": { "maxCols": 6, "gap": 16, "pad": 24 }
+    },
+    {
+      "name": "Row",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "DataGrid",
+      "slots": [
+        { "name": "cells", "type": "container", "required": true, "note": "N instancias de Cell" },
+        { "name": "expandButton", "type": "icon-action", "required": false, "note": "chevron para expandable rows" },
+        { "name": "expandedContent", "type": "container", "required": false, "note": "contenido revelado (Carbon TableExpandedRow)" }
+      ],
+      "properties": {
+        "State":    ["default", "hover", "selected", "expanded", "focused", "disabled"],
+        "Type":     ["header", "body", "footer", "subheader"],
+        "Density":  ["compact", "default", "comfortable"]
+      },
+      "exclusions": [
+        "Type=header + State=selected|expanded",
+        "Type=footer + State=hover|selected|expanded"
+      ],
+      "sizes": {
+        "compact":     { "h": 32, "py": 6 },
+        "default":     { "h": 40, "py": 8 },
+        "comfortable": { "h": 48, "py": 12 }
+      },
+      "stateStyles": {
+        "default":  { "bg": { "r": 1.0,  "g": 1.0,  "b": 1.0  }, "border": { "r": 0.93, "g": 0.93, "b": 0.95 } },
+        "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "border": { "r": 0.93, "g": 0.93, "b": 0.95 } },
+        "selected": { "bg": { "r": 0.93, "g": 0.95, "b": 1.0  }, "border": { "r": 0.72, "g": 0.80, "b": 0.96 } },
+        "expanded": { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "border": { "r": 0.15, "g": 0.35, "b": 0.92 }, "borderLeft": 3 },
+        "focused":  { "bg": { "r": 1.0,  "g": 1.0,  "b": 1.0  }, "ring": true },
+        "disabled": { "bg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "border": { "r": 0.93, "g": 0.93, "b": 0.95 }, "opacity": 0.6 }
+      },
+      "frameCount": {
+        "gross": 72,
+        "exclusions": 24,
+        "net": 48,
+        "note": "State(6) × Type(4) × Density(3) = 72; −24 por exclusiones"
+      }
+    },
+    {
+      "name": "DataGrid",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "toolbar", "type": "container", "required": false, "note": "title + search + filter + bulk-actions" },
+        { "name": "headerRow", "type": "container", "required": true, "note": "Row con Type=header" },
+        { "name": "body", "type": "container", "required": true, "note": "N Rows con Type=body" },
+        { "name": "footer", "type": "container", "required": false, "note": "Row con Type=footer (totals)" },
+        { "name": "pagination", "type": "container", "required": false, "figmaBinding": "instance-swap" },
+        { "name": "emptyState", "type": "container", "required": false }
+      ],
+      "properties": {
+        "Density":      ["compact", "default", "comfortable"],
+        "StickyHeader": ["no", "yes"],
+        "ZebraStripes": ["off", "on"],
+        "Bordered":     ["no", "yes"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "compact":     { "headerH": 32, "rowH": 32, "fontSize": 12 },
+        "default":     { "headerH": 40, "rowH": 40, "fontSize": 13 },
+        "comfortable": { "headerH": 48, "rowH": 48, "fontSize": 14 }
+      },
+      "frameCount": {
+        "gross": 24,
+        "exclusions": 0,
+        "net": 24,
+        "note": "Density(3) × StickyHeader(2) × ZebraStripes(2) × Bordered(2) = 24"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "data-grid",
+    "role": "table o grid",
+    "ariaAttributes": [
+      "Container: <table> nativo (default) o role='grid' si navegación 2D con arrow keys",
+      "Header cell: scope='col' + aria-sort='ascending|descending|none'",
+      "Body row: aria-selected='true|false' (si selection activa)",
+      "Expanded row: aria-expanded='true|false' en el expand button",
+      "Selection column: checkbox con aria-label incluyendo row identifier ('Seleccionar fila: [primera cell]')",
+      "Batch actions bar: aria-live='polite' anuncia 'N filas seleccionadas'",
+      "Sortable header: <button> interno con aria-label='Ordenar por [columna]'"
+    ],
+    "keyboardNav": [
+      "Tab: navega entre elementos interactivos (headers sortables, checkboxes, expand buttons) — no cell-to-cell por default",
+      "Space en row checkbox: toggle selection",
+      "Enter en sortable header: cicla sort asc/desc/none",
+      "Arrow keys (grid mode opcional): navegación 2D cell-to-cell con roving tabindex",
+      "Escape: cancela inline edit (si aplica)"
+    ],
+    "focusTechnique": "ring 2px en elemento focuseado; row highlighted cuando cell interna tiene foco (optional)",
+    "edgeCases": 8,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 38, "prefix": "dg", "mode": "C" },
+  "componentDescriptions": {
+    "Cell": "Celda individual. Type: header/body/footer. Alignment: start/center/end. States: default/hover/sorted/disabled. Sizes: sm/md/lg.\n\n🔑 ARIA:\n• Header: scope='col' + aria-sort\n• Body: valor plano o con leading icon\n• Sortable header: <button> interno con aria-label\n\n⌨️ Keyboard:\n• Enter en sortable: cicla asc/desc/none\n\nWCAG 2.2 AA.",
+    "Row": "Fila de la grid. Type: header/body/footer/subheader. States: default/hover/selected/expanded/focused/disabled. Density: compact/default/comfortable.\n\n🔑 ARIA:\n• aria-selected cuando selection activa\n• aria-expanded en expand button (si expandable)\n• Border-left + bg en expanded state\n\n⌨️ Keyboard:\n• Space toggle selection (en checkbox)\n• Enter activa row (si onClick)\n\nWCAG 2.2 AA.",
+    "DataGrid": "Tabla de datos con selección, sort, expandable rows, toolbar con bulk actions. Density: compact/default/comfortable. StickyHeader opcional. ZebraStripes para legibilidad.\n\n🔑 ARIA:\n• <table> nativo (preferido) o role='grid' para arrow-key navigation\n• aria-live en batch action bar anuncia selection count\n• Pagination y empty state en slots separados\n\n⌨️ Keyboard:\n• Tab entre elementos interactivos (Carbon pattern default)\n• Arrow keys opcional para grid mode (Spectrum/MUI pattern)\n\n🎯 Focus:\n• Roving tabindex si grid mode\n• Batch actions bar focus trap cuando activo\n\nTokens: 38, prefijo dg-.\nWCAG 2.2 AA.\n\nScope: moderate datasets (50-500 filas, Carbon pattern). Para datasets >1000 usar virtualization (no modelado en Figma)."
+  },
+  "variableBindings": {
+    "dg/compact/h": "sizing/32",
+    "dg/default/h": "sizing/40",
+    "dg/comfortable/h": "sizing/48",
+    "dg/header/bg": "surface/hover",
+    "dg/header/fg": "text/primary",
+    "dg/header/fontWeight": "type/weight-semibold",
+    "dg/header/sorted/bg": "brand/subtle",
+    "dg/header/sorted/fg": "interactive/default",
+    "dg/body/bg": "surface/default",
+    "dg/body/fg": "text/primary",
+    "dg/row/hover/bg": "surface/hover",
+    "dg/row/selected/bg": "brand/subtle",
+    "dg/row/selected/border": "interactive/hover",
+    "dg/row/expanded/borderLeft": "interactive/default",
+    "dg/row/focused/ring": "focus/ring",
+    "dg/row/disabled/opacity": "opacity/disabled",
+    "dg/zebra/bg": "surface/pressed",
+    "dg/border/default": "border/default",
+    "dg/border/strong": "border/hover",
+    "dg/cell/px/sm": "spacing/3",
+    "dg/cell/px/md": "spacing/4",
+    "dg/cell/px/lg": "spacing/5",
+    "dg/cell/fontSize/sm": "type/xs",
+    "dg/cell/fontSize/md": "type/sm",
+    "dg/cell/fontSize/lg": "type/md",
+    "dg/toolbar/h": "sizing/56",
+    "dg/toolbar/bg": "surface/default",
+    "dg/pagination/h": "sizing/48",
+    "dg/pagination/bg": "surface/default"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Familia de 3 sub-components: Cell → Row → DataGrid", "why": "Espeja la composición HTML nativa (<td><tr><table>). Carbon render-prop + Ant column-config se pueden mapear a esta jerarquía. Permite reutilizar Cell/Row en otros contextos (lists, summaries).", "source": "research" },
+    { "what": "3 densities (compact/default/comfortable) siguiendo Carbon + foundations.densityModes", "why": "Enterprise dashboards necesitan compact (Carbon xs/sm 32px); touch mobile necesita comfortable (48px). Match foundations.densityModes del sistema.", "source": "research" },
+    { "what": "Selection + Expansion como State values, no booleans separados", "why": "State=selected|expanded son mutuamente excluyentes con hover en runtime (Carbon/Ant pattern). Modelado como State values facilita frames de todos los casos sin booleans adicionales multiplicando.", "source": "research" },
+    { "what": "Sort icon solo en header type (exclusión)", "why": "Sort es propiedad de columna, no de celda individual. Exclusiones en config.exclusions fuerzan que Type=body|footer no rendereen sort icon.", "source": "research" },
+    { "what": "Toolbar y pagination como slots externos, no propiedades", "why": "Carbon TableToolbar y Atlassian pagination son composable BBs. Mantener DataGrid enfocado en grid semantics; consumer compone toolbar/pagination según necesidad. Reduce frames netos.", "source": "research" },
+    { "what": "Sin virtualization ni column resize modelados", "why": "Son runtime behaviors (scroll listeners, pointer events), no propiedades Figma. Documentados en scope ('datasets 50-500'). Virtual scroll + column resize son Premium features commercial grids (MUI Pro).", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

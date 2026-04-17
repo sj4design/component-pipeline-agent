@@ -1,0 +1,116 @@
+{
+  "version": "1.0",
+  "component": "Link",
+  "archetype": "interactive-text",
+  "language": "es",
+  "buildOrder": ["Link"],
+  "family": [
+    {
+      "name": "Link",
+      "isSubComponent": false,
+      "isBuildingBlock": true,
+      "slots": [
+        { "name": "icon", "type": "icon", "required": false, "figmaBinding": "instance-swap", "note": "leading o trailing según Position" },
+        { "name": "label", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "externalIcon", "type": "icon", "required": false, "note": "Launch icon automático en external=true (Carbon pattern)" }
+      ],
+      "properties": {
+        "Variant":  ["inline", "standalone"],
+        "State":    ["default", "hover", "visited", "focused", "disabled"],
+        "Size":     ["sm", "md", "lg"],
+        "Tone":     ["default", "subdued", "monochrome", "critical"]
+      },
+      "exclusions": [
+        "Variant=inline + State=visited (inline links visited no estándar)",
+        "Tone=monochrome + State=visited (monochrome hereda color del texto)"
+      ],
+      "sizes": {
+        "sm": { "fontSize": 13, "lineHeight": 18, "iconSize": 14, "gap": 4 },
+        "md": { "fontSize": 14, "lineHeight": 20, "iconSize": 16, "gap": 4 },
+        "lg": { "fontSize": 16, "lineHeight": 24, "iconSize": 18, "gap": 6 }
+      },
+      "stateStyles": {
+        "default":  { "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "underline": true },
+        "hover":    { "fg": { "r": 0.12, "g": 0.30, "b": 0.82 }, "underline": true },
+        "visited":  { "fg": { "r": 0.45, "g": 0.22, "b": 0.75 }, "underline": true },
+        "focused":  { "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "underline": true, "ring": true },
+        "disabled": { "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "underline": false }
+      },
+      "toneStyles": {
+        "default":    { "fg": { "r": 0.15, "g": 0.35, "b": 0.92 } },
+        "subdued":    { "fg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "monochrome": { "fg": "currentColor" },
+        "critical":   { "fg": { "r": 0.86, "g": 0.15, "b": 0.15 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Link text" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Icon", "layerName": "icon", "default": "icon/placeholder" },
+        { "propName": "🔄 External Icon", "layerName": "externalIcon", "default": "icon/launch" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Icon", "layerName": "icon" },
+        { "propName": "👁 External (Launch icon)", "layerName": "externalIcon" },
+        { "propName": "👁 Remove Underline", "layerName": "underline" }
+      ],
+      "frameCount": {
+        "gross": 120,
+        "exclusions": 16,
+        "net": 104,
+        "note": "Variant(2) × State(5) × Size(3) × Tone(4) = 120; −16 exclusiones"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "link",
+    "role": "link (si url) o button (si onClick sin url — Polaris semantic enforcement)",
+    "ariaAttributes": [
+      "url prop → <a href>, onClick sin url → <button> (Polaris pattern estricto)",
+      "external=true: target='_blank' + rel='noopener noreferrer' automático (Polaris/Spectrum)",
+      "External link: 'opens in a new tab' visually-hidden text + Launch icon visual (Carbon)",
+      "disabled: aria-disabled='true' + sin href (Carbon)",
+      "Icon-only link: aria-label obligatorio",
+      "aria-current='page' para active navigation links (Atlassian)"
+    ],
+    "keyboardNav": [
+      "Tab: navega al link",
+      "Enter: activa (navega)",
+      "Space: no activa (diferencia con button)"
+    ],
+    "focusTechnique": "ring 2px offset 2px; underline visible siempre excepto navigation (removeUnderline)",
+    "edgeCases": 5,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 16, "prefix": "lnk", "mode": "C" },
+  "componentDescriptions": {
+    "Link": "Link navegacional. Variant: inline (en body copy, con underline) / standalone (en navigation, puede removeUnderline). States: default/hover/visited/focused/disabled. Sizes: sm/md/lg. Tones: default / subdued / monochrome (currentColor) / critical.\n\n🔑 ARIA:\n• <a href> para navigation; <button> para actions (Polaris strict: url vs onClick)\n• external=true auto: target='_blank' + rel='noopener noreferrer' + Launch icon\n• 'opens in a new tab' visually-hidden text para SR\n• disabled sin href + aria-disabled\n\n⌨️ Keyboard:\n• Tab navega, Enter activa\n• Space NO activa (diferencia vs button)\n\n🎯 Focus:\n• Ring 2px\n• Underline always en inline; opcional en standalone\n• Visited state: púrpura (user research-backed)\n\nTokens: 16, prefijo lnk-.\nWCAG 2.2 AA.\n\n'Button vs Link' doctrine (Atlassian): Link para navegar, Button para acción. Usar url para <a>, onClick para <button>."
+  },
+  "variableBindings": {
+    "lnk/default/fg": "interactive/default",
+    "lnk/hover/fg": "interactive/hover",
+    "lnk/visited/fg": "interactive/visited",
+    "lnk/focused/ring": "focus/ring",
+    "lnk/disabled/fg": "text/disabled",
+    "lnk/subdued/fg": "text/secondary",
+    "lnk/monochrome/fg": "text/currentColor",
+    "lnk/critical/fg": "status/error/fg",
+    "lnk/sm/fontSize": "type/sm",
+    "lnk/md/fontSize": "type/md",
+    "lnk/lg/fontSize": "type/lg",
+    "lnk/iconSize/sm": "iconSize/sm",
+    "lnk/iconSize/md": "iconSize/md",
+    "lnk/iconSize/lg": "iconSize/md",
+    "lnk/gap/sm": "spacing/1",
+    "lnk/gap/md": "spacing/1"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Variant inline vs standalone (Carbon pattern)", "why": "Carbon explicita inline (body copy con underline) vs standalone (con Launch icon para external). Tratamiento visual diferente para dos contextos diferentes.", "source": "research" },
+    { "what": "Visited state incluido (vs Atlassian omission)", "why": "Atlassian omitió visited por UX research en dense UI. Nosotros lo mantenemos porque es WCAG-recomendado y mayoría de users lo esperan (Polaris/Ant lo incluyen). Tone monochrome para casos que no lo necesitan.", "source": "research" },
+    { "what": "4 Tones (default/subdued/monochrome/critical)", "why": "Monochrome (Polaris) es crítico para links sobre fondos de color (banners, toasts). Critical para delete/destructive links. Subdued para metadata/less-emphasis. Default para navegación estándar.", "source": "research" },
+    { "what": "External automatic: target='_blank' + rel + Launch icon (Polaris/Spectrum/Carbon convergence)", "why": "3 sistemas agregan security attrs + icon automáticamente. Evita forget rel='noopener noreferrer' (security best practice). 'opens in new tab' SR text auto.", "source": "research" },
+    { "what": "url vs onClick determina <a> vs <button> (Polaris semantic enforcement)", "why": "Prevents anti-pattern de link con onClick sin url. Documentado en componentDescription como doctrine.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,85 @@
+{
+  "component": "Carousel",
+  "archetype": "media-carousel",
+  "buildOrder": ["CarouselSlide", "Carousel"],
+  "family": [
+    {
+      "name": "CarouselSlide",
+      "isSubComponent": true,
+      "slots": ["content*:container"],
+      "properties": { "State": ["default", "active", "transitioning"] },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 3
+    },
+    {
+      "name": "Carousel",
+      "isSubComponent": false,
+      "slots": ["slides*:container", "prevButton:icon-action", "nextButton:icon-action", "indicators:container", "counter:text"],
+      "properties": {
+        "Type":       ["single", "multi", "hero", "thumbnail"],
+        "Indicators": ["dots", "lines", "counter", "none"],
+        "Controls":   ["arrows", "none", "both"],
+        "Size":       ["sm", "md", "lg"]
+      },
+      "booleans": ["Show Controls", "Show Indicators", "Show Counter"],
+      "exclusions": ["Type=thumbnail + Indicators=dots"],
+      "frameCount": 36
+    }
+  ],
+  "a11y": {
+    "role": "region + group per slide (WAI-ARIA Carousel)",
+    "keyboard": ["Arrow Left/Right navega slides", "Home/End primer/último"],
+    "focus": "Prev/next buttons focuseables. aria-live anuncia cambios según autoplay."
+  },
+  "tokens": { "total": 18, "prefix": "crl" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Carousel?",
+      "options": [
+        { "value": "product-gallery", "label": "Product image gallery (single o thumbnail)" },
+        { "value": "hero-banner", "label": "Hero banner rotativo (landing pages)" },
+        { "value": "feature-highlight", "label": "Feature highlight en onboarding" },
+        { "value": "testimonials", "label": "Testimonials / quotes" },
+        { "value": "content-scroll", "label": "Content scroll (recommended items, related cards)" }
+      ],
+      "impact": "Type, Controls, Indicators default",
+      "tags": ["gallery", "hero", "banner", "feature", "testimonials", "scroll"]
+    },
+    {
+      "id": "type",
+      "text": "¿Layout?",
+      "options": [
+        { "value": "single", "label": "Single — 1 slide visible" },
+        { "value": "multi", "label": "Multi — varios visibles (cards row)" },
+        { "value": "hero", "label": "Hero — full-width banner" },
+        { "value": "thumbnail", "label": "Thumbnail — main + strip de previews (e-commerce)" }
+      ],
+      "impact": "Type property",
+      "tags": ["single", "multi", "hero", "thumbnail", "strip"]
+    },
+    {
+      "id": "indicators",
+      "text": "¿Cómo mostrar progreso/posición?",
+      "options": [
+        { "value": "dots", "label": "Dots (estándar)" },
+        { "value": "lines", "label": "Lines (progress bars)" },
+        { "value": "counter", "label": "Counter '3 / 12' (Atlassian)" },
+        { "value": "none", "label": "Ninguno" }
+      ],
+      "impact": "Indicators property",
+      "tags": ["dots", "lines", "counter", "progress"]
+    },
+    {
+      "id": "autoplay",
+      "text": "¿Autoplay?",
+      "options": [
+        { "value": "no", "label": "No — user-controlled" },
+        { "value": "yes", "label": "Sí — con pause button obligatorio (WCAG 2.2.2)" }
+      ],
+      "impact": "aria-live behavior, pause button inclusion",
+      "tags": ["autoplay", "pause", "wcag", "auto-advance"]
+    }
+  ]
+}

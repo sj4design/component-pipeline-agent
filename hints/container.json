@@ -1,0 +1,62 @@
+{
+  "component": "Container",
+  "archetype": "layout-primitive",
+  "buildOrder": ["Container"],
+  "family": [
+    {
+      "name": "Container",
+      "isSubComponent": false,
+      "slots": ["children*:container"],
+      "properties": {
+        "MaxWidth": ["sm", "md", "lg", "xl", "full"],
+        "Padding":  ["none", "sm", "md", "lg"],
+        "Centered": ["yes", "no"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 40
+    }
+  ],
+  "a11y": {
+    "role": "none (landmark al consumer)",
+    "keyboard": ["No focusable"],
+    "focus": "none"
+  },
+  "tokens": { "total": 10, "prefix": "cnt" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Container?",
+      "options": [
+        { "value": "marketing", "label": "Marketing pages / landing" },
+        { "value": "docs", "label": "Documentation / reading flows" },
+        { "value": "admin", "label": "Admin panels / dashboard wrapper" },
+        { "value": "multiple", "label": "Varios casos" }
+      ],
+      "impact": "MaxWidth default, Padding default",
+      "tags": ["marketing", "docs", "admin", "landing", "wrapper"]
+    },
+    {
+      "id": "max-width",
+      "text": "¿Qué max-widths necesitas?",
+      "options": [
+        { "value": "lg-only", "label": "Solo lg (1312px) — estándar" },
+        { "value": "sm-md-lg", "label": "sm + md + lg (672/1056/1312)" },
+        { "value": "all", "label": "sm + md + lg + xl + full" }
+      ],
+      "impact": "MaxWidth property values",
+      "tags": ["width", "breakpoint", "max-width", "672", "1056", "1312"]
+    },
+    {
+      "id": "padding",
+      "text": "¿Padding interior?",
+      "options": [
+        { "value": "none", "label": "No — consumer maneja padding" },
+        { "value": "md-only", "label": "Solo md (24px)" },
+        { "value": "scale", "label": "Scale completo none/sm/md/lg" }
+      ],
+      "impact": "Padding property values",
+      "tags": ["padding", "inset", "spacing"]
+    }
+  ]
+}

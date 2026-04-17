@@ -1,0 +1,94 @@
+{
+  "component": "Stat",
+  "archetype": "kpi-display",
+  "buildOrder": ["Stat"],
+  "family": [
+    {
+      "name": "Stat",
+      "isSubComponent": false,
+      "slots": ["label*:text", "value*:text", "unit:text", "trend:container", "icon:icon", "description:text", "sparkline:shape"],
+      "properties": {
+        "Size":     ["sm", "md", "lg"],
+        "Trend":    ["none", "up", "down", "neutral"],
+        "Layout":   ["stacked", "horizontal", "card"],
+        "Emphasis": ["default", "prominent"]
+      },
+      "booleans": ["Has Icon", "Has Trend", "Has Description", "Has Sparkline", "Has Unit"],
+      "exclusions": ["Trend=none + description 'vs last month'", "Layout=horizontal + sparkline"],
+      "frameCount": 60
+    }
+  ],
+  "a11y": {
+    "role": "group con reading order (label → value → unit → trend)",
+    "keyboard": ["No focusable (excepto link wrapping)"],
+    "focus": "Trend con aria-label descriptivo. Sparkline aria-hidden + alt."
+  },
+  "tokens": { "total": 20, "prefix": "st" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Stat?",
+      "options": [
+        { "value": "dashboard", "label": "Dashboard KPIs — revenue, users, conversion" },
+        { "value": "analytics", "label": "Analytics — engagement metrics con trend" },
+        { "value": "summary", "label": "Summary card — user profile stats, project metrics" },
+        { "value": "realtime", "label": "Realtime — live data con updates" }
+      ],
+      "impact": "Size, Trend, Sparkline defaults",
+      "tags": ["dashboard", "kpi", "analytics", "summary", "realtime"]
+    },
+    {
+      "id": "size",
+      "text": "¿Size principal?",
+      "options": [
+        { "value": "sm", "label": "sm — inline en cards (20px value)" },
+        { "value": "md", "label": "md — dashboard grids (28px value)" },
+        { "value": "lg", "label": "lg — hero metrics (40px value)" }
+      ],
+      "impact": "Size property",
+      "tags": ["size", "small", "medium", "large", "hero"]
+    },
+    {
+      "id": "trend",
+      "text": "¿Mostrar trend indicator?",
+      "options": [
+        { "value": "no", "label": "No — solo value" },
+        { "value": "yes", "label": "Sí — up/down/neutral con delta + color" }
+      ],
+      "impact": "Trend property, Has Trend boolean",
+      "tags": ["trend", "up", "down", "delta", "change"]
+    },
+    {
+      "id": "layout",
+      "text": "¿Layout?",
+      "options": [
+        { "value": "stacked", "label": "Stacked — label arriba, value abajo" },
+        { "value": "horizontal", "label": "Horizontal — label izquierda, value derecha (compact)" },
+        { "value": "card", "label": "Card — elevated con padding + border" }
+      ],
+      "impact": "Layout property",
+      "tags": ["stacked", "horizontal", "card", "elevated"]
+    },
+    {
+      "id": "sparkline",
+      "text": "¿Incluir sparkline mini chart?",
+      "options": [
+        { "value": "no", "label": "No — solo KPI number" },
+        { "value": "yes", "label": "Sí — tendencia últimos 7/30 días" }
+      ],
+      "impact": "Has Sparkline boolean",
+      "tags": ["sparkline", "trend-line", "mini-chart", "visualization"]
+    },
+    {
+      "id": "unit",
+      "text": "¿Mostrar unit (USD, %, users)?",
+      "options": [
+        { "value": "never", "label": "Nunca — value es self-evident" },
+        { "value": "always", "label": "Siempre — unit explícito" },
+        { "value": "contextual", "label": "Contextual — solo cuando necesario" }
+      ],
+      "impact": "Has Unit boolean",
+      "tags": ["unit", "currency", "percentage", "count"]
+    }
+  ]
+}

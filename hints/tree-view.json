@@ -1,0 +1,120 @@
+{
+  "component": "TreeView",
+  "archetype": "hierarchical-list",
+  "buildOrder": ["TreeNode", "TreeView"],
+  "family": [
+    {
+      "name": "TreeNode",
+      "isSubComponent": true,
+      "slots": ["expandToggle:icon-action", "checkbox:container", "leadingIcon:icon", "label*:text", "trailingContent:container", "connector:shape"],
+      "properties": {
+        "State":  ["default", "hover", "selected", "focused", "disabled"],
+        "Kind":   ["leaf", "branch-collapsed", "branch-expanded"],
+        "Level":  ["0", "1", "2", "3+"],
+        "Size":   ["sm", "md"]
+      },
+      "booleans": ["Show Expand Toggle", "Show Checkbox", "Has Leading Icon", "Has Trailing Content", "Show Connector"],
+      "exclusions": ["Kind=leaf + expandToggle visible"],
+      "frameCount": 80
+    },
+    {
+      "name": "TreeView",
+      "isSubComponent": false,
+      "slots": ["nodes*:container", "search:container", "emptyState:container"],
+      "properties": {
+        "SelectionMode": ["none", "single", "multiple", "checkbox"],
+        "Size":          ["sm", "md"],
+        "ShowLines":     ["no", "yes"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 16
+    }
+  ],
+  "a11y": {
+    "role": "tree + treeitem",
+    "keyboard": [
+      "Arrow Up/Down navega nodes visibles",
+      "Arrow Right expande / first child",
+      "Arrow Left colapsa / parent",
+      "Home/End primer/último",
+      "Enter/Space selecciona",
+      "Type-ahead: letras saltan al match"
+    ],
+    "focus": "Roving tabindex. aria-level/setsize/posinset en cada node."
+  },
+  "tokens": { "total": 26, "prefix": "tv" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas TreeView?",
+      "options": [
+        { "value": "file-browser", "label": "File browser — folders + files (Ant DirectoryTree)" },
+        { "value": "navigation", "label": "Navigation — sidebar con secciones anidadas (Confluence page tree)" },
+        { "value": "permissions", "label": "Permissions tree — checkbox con parent/child cascade (Ant checkStrictly)" },
+        { "value": "category-hierarchy", "label": "Category hierarchy — productos, taxonomy" },
+        { "value": "multiple", "label": "Varios casos" }
+      ],
+      "impact": "SelectionMode, ShowLines, Checkbox inclusion",
+      "tags": ["file-browser", "navigation", "permissions", "category", "taxonomy", "hierarchy"]
+    },
+    {
+      "id": "selection",
+      "text": "¿Cómo se seleccionan nodes?",
+      "options": [
+        { "value": "none", "label": "Ninguna — navigation view only" },
+        { "value": "single", "label": "Single — un node activo (sidebar pattern)" },
+        { "value": "multiple", "label": "Multiple — varios highlighted (file selection)" },
+        { "value": "checkbox", "label": "Checkbox — cada node con checkbox (permissions, bulk operations)" }
+      ],
+      "impact": "SelectionMode property, Show Checkbox boolean",
+      "tags": ["none", "single", "multiple", "checkbox", "bulk", "permissions"]
+    },
+    {
+      "id": "nesting-depth",
+      "text": "¿Profundidad típica del tree?",
+      "options": [
+        { "value": "shallow", "label": "1-2 niveles — navigation simple" },
+        { "value": "medium", "label": "3-4 niveles — categorías estándar" },
+        { "value": "deep", "label": "5+ niveles — file systems profundos (considerar Level=3+ genérico)" }
+      ],
+      "impact": "Level property rendering",
+      "tags": ["depth", "nesting", "level", "indent", "shallow", "deep"]
+    },
+    {
+      "id": "icons",
+      "text": "¿Nodes muestran icons (file type, category)?",
+      "options": [
+        { "value": "never", "label": "No — solo texto" },
+        { "value": "always", "label": "Siempre — folder/file icons (file browser)" },
+        { "value": "branch-only", "label": "Solo branches — folders con icon, leaves sin" },
+        { "value": "custom", "label": "Custom — por tipo de entidad" }
+      ],
+      "impact": "Has Leading Icon boolean default",
+      "tags": ["icon", "folder", "file", "leaf", "branch", "category"]
+    },
+    {
+      "id": "connectors",
+      "text": "¿Mostrar líneas conectoras entre parent y children?",
+      "options": [
+        { "value": "no", "label": "No — indent suficiente (navigation pattern)" },
+        { "value": "yes", "label": "Sí — Ant showLine (file system pattern)" },
+        { "value": "optional", "label": "Configurable por instance" }
+      ],
+      "impact": "ShowLines property, Show Connector boolean en nodes",
+      "tags": ["lines", "connector", "tree-lines", "show-line", "file-system"]
+    },
+    {
+      "id": "trailing-content",
+      "text": "¿Los nodes muestran contenido trailing (badges, status, actions)?",
+      "options": [
+        { "value": "no", "label": "No — solo label" },
+        { "value": "count", "label": "Count — número de items en branch" },
+        { "value": "status", "label": "Status badge — Jira issue status, file size" },
+        { "value": "actions", "label": "Actions hover — edit, delete, more menu" }
+      ],
+      "impact": "Has Trailing Content boolean, slot trailingContent",
+      "tags": ["trailing", "badge", "count", "status", "actions", "hover"]
+    }
+  ]
+}

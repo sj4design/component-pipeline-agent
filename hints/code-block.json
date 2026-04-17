@@ -1,0 +1,73 @@
+{
+  "component": "CodeBlock",
+  "archetype": "code-display",
+  "buildOrder": ["CodeBlock"],
+  "family": [
+    {
+      "name": "CodeBlock",
+      "isSubComponent": false,
+      "slots": ["header:container", "lineNumbers:container", "code*:text", "copyButton:icon-action", "languageTag:container"],
+      "properties": {
+        "Theme":       ["light", "dark"],
+        "Size":        ["sm", "md"],
+        "LineNumbers": ["no", "yes"],
+        "Wrap":        ["no", "yes"]
+      },
+      "booleans": ["Show Header", "Show Copy Button", "Show Language Tag", "Show Line Numbers"],
+      "exclusions": [],
+      "frameCount": 16
+    }
+  ],
+  "a11y": {
+    "role": "region con <pre><code>",
+    "keyboard": ["Tab al copy", "Enter copia", "Arrow keys scroll en block"],
+    "focus": "Copy button focuseable. aria-live anuncia 'Copiado'."
+  },
+  "tokens": { "total": 14, "prefix": "cb" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas CodeBlock?",
+      "options": [
+        { "value": "docs", "label": "Documentación técnica — con copy button + language tag" },
+        { "value": "chat", "label": "Chat/message — inline snippets (compact)" },
+        { "value": "tutorial", "label": "Tutorial/onboarding — con header + highlighted lines" },
+        { "value": "error-trace", "label": "Error/stack traces — monospace, posiblemente wrap" }
+      ],
+      "impact": "Size, slots defaults",
+      "tags": ["docs", "chat", "tutorial", "error", "stack-trace", "snippet"]
+    },
+    {
+      "id": "theme",
+      "text": "¿Theme?",
+      "options": [
+        { "value": "light", "label": "Light — match UI light mode" },
+        { "value": "dark", "label": "Dark — developer preference (mejor contrast syntax)" },
+        { "value": "both", "label": "Ambos — user selectable" }
+      ],
+      "impact": "Theme property values",
+      "tags": ["light", "dark", "theme", "syntax-highlighting"]
+    },
+    {
+      "id": "features",
+      "text": "¿Qué features necesitas?",
+      "options": [
+        { "value": "basic", "label": "Basic — solo code display" },
+        { "value": "copy", "label": "+ Copy button" },
+        { "value": "full", "label": "+ Header (filename) + language tag + line numbers" }
+      ],
+      "impact": "Booleans (header, copy, language, line numbers)",
+      "tags": ["copy", "filename", "language", "line-numbers", "header"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Size?",
+      "options": [
+        { "value": "md-only", "label": "Solo md (13px)" },
+        { "value": "sm-md", "label": "sm (12px) + md (13px)" }
+      ],
+      "impact": "Size property",
+      "tags": ["size", "font-size", "compact"]
+    }
+  ]
+}

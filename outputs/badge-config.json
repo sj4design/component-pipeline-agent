@@ -1,0 +1,103 @@
+{
+  "version": "1.0",
+  "component": "Badge",
+  "archetype": "indicator",
+  "language": "es",
+  "buildOrder": ["Badge"],
+  "family": [
+    {
+      "name": "Badge",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "count", "type": "text", "required": false, "figmaBinding": "text" }
+      ],
+      "properties": {
+        "Type": ["count", "dot", "label"],
+        "Variant": ["neutral", "info", "success", "warning", "error"],
+        "Size": ["sm", "md"]
+      },
+      "exclusions": [
+        "Type=dot + Variant (dot es solo indicador de presencia, sin color semántico)",
+        "Type=dot + Size=md (dot siempre sm)"
+      ],
+      "sizes": {
+        "sm": {
+          "h": 16, "minW": 16, "px": 4,
+          "fontSize": 11, "fontWeight": 500, "lineHeight": 14,
+          "radius": 9999, "dotSize": 8
+        },
+        "md": {
+          "h": 20, "minW": 20, "px": 6,
+          "fontSize": 12, "fontWeight": 500, "lineHeight": 16,
+          "radius": 9999, "dotSize": 10
+        }
+      },
+      "colors": {
+        "neutral": { "bg": { "r": 0.89, "g": 0.89, "b": 0.91 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "info":    { "bg": { "r": 0.93, "g": 0.95, "b": 1.0  }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 } },
+        "success": { "bg": { "r": 0.93, "g": 0.99, "b": 0.95 }, "fg": { "r": 0.08, "g": 0.55, "b": 0.22 } },
+        "warning": { "bg": { "r": 1.0,  "g": 0.97, "b": 0.92 }, "fg": { "r": 0.72, "g": 0.48, "b": 0.05 } },
+        "error":   { "bg": { "r": 1.0,  "g": 0.94, "b": 0.94 }, "fg": { "r": 0.86, "g": 0.15, "b": 0.15 } },
+        "dot":     { "bg": { "r": 0.86, "g": 0.15, "b": 0.15 } }
+      },
+      "variantStyles": {
+        "neutral": { "bg": { "r": 0.89, "g": 0.89, "b": 0.91 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "info":    { "bg": { "r": 0.93, "g": 0.95, "b": 1.0  }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 } },
+        "success": { "bg": { "r": 0.93, "g": 0.99, "b": 0.95 }, "fg": { "r": 0.08, "g": 0.55, "b": 0.22 } },
+        "warning": { "bg": { "r": 1.0,  "g": 0.97, "b": 0.92 }, "fg": { "r": 0.72, "g": 0.48, "b": 0.05 } },
+        "error":   { "bg": { "r": 1.0,  "g": 0.94, "b": 0.94 }, "fg": { "r": 0.86, "g": 0.15, "b": 0.15 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Count", "layerName": "count", "default": "9" }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 21,
+        "exclusions": 0,
+        "net": 21,
+        "note": "count×5×2 + label×5×2 + dot×1 = 21"
+      },
+      "grid": { "maxCols": 7, "gap": 16, "pad": 24 }
+    }
+  ],
+  "a11y": {
+    "pattern": "status-indicator",
+    "role": "none (span decorativo)",
+    "ariaAttributes": [
+      "Conteo integrado en aria-label del elemento padre (ej. 'Bandeja de entrada, 5 nuevos')",
+      "Badge nunca tiene role propio — su valor se expone via el parent"
+    ],
+    "keyboardNav": ["No focusable — decorativo"],
+    "focusTechnique": "none",
+    "edgeCases": 3,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 12, "prefix": "bdg", "mode": "C" },
+  "componentDescriptions": {
+    "Badge": "Indicador de estado o conteo. Types: count (número), dot (presencia), label (texto). Sizes: sm/md. Variants: neutral, info, success, warning, error.\n\n🔑 ARIA:\n• Decorativo — sin role propio\n• Conteo debe incluirse en aria-label del elemento padre\n• badge-count: aria-label en parent 'Notificaciones, 5 nuevas'\n\n⌨️ Keyboard:\n• No focusable\n• Elemento padre maneja toda la interacción\n\n🎯 Focus:\n• Badge no recibe foco\n• Max overflow: 99+ (configurable)\n• showZero: ocultar cuando 0 (default) o mostrar siempre\n\nTokens: 12, prefijo bdg-.\nWCAG 2.2 AA."
+  },
+  "variableBindings": {
+    "bdg/neutral/bg": "surface/neutral",
+    "bdg/neutral/fg": "text/primary",
+    "bdg/info/bg": "status/info/bg",
+    "bdg/info/fg": "status/info/fg",
+    "bdg/success/bg": "status/success/bg",
+    "bdg/success/fg": "status/success/fg",
+    "bdg/warning/bg": "status/warning/bg",
+    "bdg/warning/fg": "status/warning/fg",
+    "bdg/error/bg": "status/error/bg",
+    "bdg/error/fg": "status/error/fg",
+    "bdg/dot/bg": "status/error/fg",
+    "bdg/radius": "radius/full"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "Type=count|dot|label en un solo componente", "why": "Atlassian los separa (Badge + Lozenge) pero para un sistema compacto, los 3 tipos comparten la misma forma base (pill). Un componente con Type variant es más manejable en Figma.", "source": "research" },
+    { "what": "Dot siempre con color error (rojo)", "why": "M3 y 4/5 sistemas usan error color para el dot — semánticamente significa 'atención requerida'. No tiene variantes de color.", "source": "research" },
+    { "what": "Conteo expuesto via parent aria-label", "why": "5/6 sistemas no dan role propio al badge. El valor se integra en la etiqueta accesible del elemento al que se superpone.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

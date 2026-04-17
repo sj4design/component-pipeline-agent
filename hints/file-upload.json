@@ -1,0 +1,94 @@
+{
+  "component": "FileUpload",
+  "archetype": "file-input",
+  "buildOrder": ["FileItem", "FileUpload"],
+  "family": [
+    {
+      "name": "FileItem",
+      "isSubComponent": true,
+      "slots": ["icon:icon", "name*:text", "size:text", "progressBar:container", "statusIcon:icon", "removeButton:icon-action"],
+      "properties": { "State": ["pending", "uploading", "success", "error", "paused"], "Size": ["sm", "md"] },
+      "booleans": ["Has Icon", "Has Size", "Show Progress", "Show Remove"],
+      "exclusions": [],
+      "frameCount": 10
+    },
+    {
+      "name": "FileUpload",
+      "isSubComponent": false,
+      "slots": ["dropZone*:container", "dropZoneIcon:icon", "dropZoneLabel*:text", "dropZoneHint:text", "browseButton:container", "fileList:container", "errorMessage:text"],
+      "properties": {
+        "State":   ["default", "hover", "dragover", "error", "disabled"],
+        "Size":    ["sm", "md", "lg"],
+        "Variant": ["dropzone", "button-only", "compact"]
+      },
+      "booleans": [],
+      "exclusions": ["Variant=button-only + State=dragover"],
+      "frameCount": 36
+    }
+  ],
+  "a11y": {
+    "role": "button + region (drop zone) + list (file list)",
+    "keyboard": ["Tab al dropzone, Enter abre file picker", "Tab a remove, Enter elimina"],
+    "focus": "Ring en drop zone. aria-live anuncia progress + success + errors."
+  },
+  "tokens": { "total": 26, "prefix": "fu" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas FileUpload?",
+      "options": [
+        { "value": "avatar", "label": "Avatar upload — single image (button-only pattern)" },
+        { "value": "document", "label": "Document upload — PDFs, Word (dropzone)" },
+        { "value": "media", "label": "Media — images/video batch (dropzone + preview)" },
+        { "value": "csv-import", "label": "CSV import — 1 file con validation" },
+        { "value": "attachments", "label": "Attachments — emails, tickets (compact inline)" }
+      ],
+      "impact": "Variant, Size, validation defaults",
+      "tags": ["avatar", "document", "media", "csv", "attachments"]
+    },
+    {
+      "id": "variant",
+      "text": "¿Variant principal?",
+      "options": [
+        { "value": "dropzone", "label": "Dropzone — area grande con drag & drop" },
+        { "value": "button-only", "label": "Button-only — compact, solo click-to-browse" },
+        { "value": "compact", "label": "Compact — inline con file list" }
+      ],
+      "impact": "Variant property",
+      "tags": ["dropzone", "button", "compact", "inline"]
+    },
+    {
+      "id": "multiple",
+      "text": "¿Multiple files?",
+      "options": [
+        { "value": "single", "label": "Single — 1 archivo a la vez" },
+        { "value": "multiple", "label": "Multiple — batch upload con file list" }
+      ],
+      "impact": "fileList slot visibility",
+      "tags": ["single", "multiple", "batch", "list"]
+    },
+    {
+      "id": "file-types",
+      "text": "¿Validación de tipos?",
+      "options": [
+        { "value": "any", "label": "Cualquier tipo" },
+        { "value": "images", "label": "Solo imágenes (JPG, PNG, GIF, WebP)" },
+        { "value": "documents", "label": "Solo documentos (PDF, Word, Excel)" },
+        { "value": "custom", "label": "Custom por caso" }
+      ],
+      "impact": "Hint text + accept attribute (runtime)",
+      "tags": ["accept", "validation", "file-types", "images", "documents"]
+    },
+    {
+      "id": "size-limits",
+      "text": "¿Límite de tamaño?",
+      "options": [
+        { "value": "small", "label": "<10MB — documents/images standard" },
+        { "value": "medium", "label": "10-100MB — videos, large files (considerar chunked upload)" },
+        { "value": "large", "label": ">100MB — requires pause/resume (State=paused)" }
+      ],
+      "impact": "Pause state inclusion, hint text",
+      "tags": ["size-limit", "chunked", "pause", "resume", "large-file"]
+    }
+  ]
+}

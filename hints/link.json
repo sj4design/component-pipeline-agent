@@ -1,0 +1,82 @@
+{
+  "component": "Link",
+  "archetype": "interactive-text",
+  "buildOrder": ["Link"],
+  "family": [
+    {
+      "name": "Link",
+      "isSubComponent": false,
+      "slots": ["icon:icon", "label*:text", "externalIcon:icon"],
+      "properties": {
+        "Variant":  ["inline", "standalone"],
+        "State":    ["default", "hover", "visited", "focused", "disabled"],
+        "Size":     ["sm", "md", "lg"],
+        "Tone":     ["default", "subdued", "monochrome", "critical"]
+      },
+      "booleans": ["Has Icon", "External (Launch icon)", "Remove Underline"],
+      "exclusions": ["Variant=inline + State=visited", "Tone=monochrome + State=visited"],
+      "frameCount": 104
+    }
+  ],
+  "a11y": {
+    "role": "link (url) o button (onClick sin url — Polaris strict)",
+    "keyboard": ["Tab navega", "Enter activa (Space NO activa)"],
+    "focus": "Ring 2px. Underline visible siempre en inline."
+  },
+  "tokens": { "total": 16, "prefix": "lnk" },
+  "questions": [
+    {
+      "id": "variant",
+      "text": "¿Inline o standalone?",
+      "options": [
+        { "value": "inline-only", "label": "Solo inline — en body copy con underline" },
+        { "value": "standalone-only", "label": "Solo standalone — para navigation actions" },
+        { "value": "both", "label": "Ambos (Carbon pattern)" }
+      ],
+      "impact": "Variant property",
+      "tags": ["inline", "standalone", "body", "navigation"]
+    },
+    {
+      "id": "visited",
+      "text": "¿Incluir visited state?",
+      "options": [
+        { "value": "yes", "label": "Sí — WCAG recomendado (Polaris/Ant)" },
+        { "value": "no", "label": "No — Atlassian pattern (UX research: noise en dense UI)" }
+      ],
+      "impact": "State=visited inclusion",
+      "tags": ["visited", "state", "purple", "history"]
+    },
+    {
+      "id": "external",
+      "text": "¿Handling automático de external links?",
+      "options": [
+        { "value": "auto", "label": "Automático — target='_blank' + rel + Launch icon + SR text" },
+        { "value": "manual", "label": "Manual — consumer aplica target/rel/icon" }
+      ],
+      "impact": "External boolean behavior",
+      "tags": ["external", "target-blank", "rel", "launch", "security"]
+    },
+    {
+      "id": "tones",
+      "text": "¿Qué tones necesitas?",
+      "options": [
+        { "value": "default-only", "label": "Solo default (azul)" },
+        { "value": "default-monochrome", "label": "Default + monochrome (para surfaces colored)" },
+        { "value": "all", "label": "default + subdued + monochrome + critical (destructive links)" }
+      ],
+      "impact": "Tone property values",
+      "tags": ["tone", "color", "monochrome", "critical", "destructive", "subdued"]
+    },
+    {
+      "id": "icons",
+      "text": "¿Los links llevan icons?",
+      "options": [
+        { "value": "never", "label": "Nunca" },
+        { "value": "external-only", "label": "Solo Launch icon para external" },
+        { "value": "optional", "label": "Opcional — leading/trailing icon custom" }
+      ],
+      "impact": "Has Icon boolean, External boolean",
+      "tags": ["icon", "leading", "trailing", "launch", "external"]
+    }
+  ]
+}

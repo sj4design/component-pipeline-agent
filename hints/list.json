@@ -1,0 +1,88 @@
+{
+  "component": "List",
+  "archetype": "display-list",
+  "buildOrder": ["ListItem", "List"],
+  "family": [
+    {
+      "name": "ListItem",
+      "isSubComponent": true,
+      "slots": ["marker:icon-or-text", "label*:text", "description:text", "trailing:container"],
+      "properties": {
+        "State":   ["default", "hover", "selected", "focused", "disabled"],
+        "Density": ["compact", "default", "comfortable"]
+      },
+      "booleans": ["Has Marker", "Has Description", "Has Trailing", "Has Divider"],
+      "exclusions": [],
+      "frameCount": 15
+    },
+    {
+      "name": "List",
+      "isSubComponent": false,
+      "slots": ["items*:container"],
+      "properties": {
+        "Type":     ["unordered", "ordered", "description", "nav", "action"],
+        "Density":  ["compact", "default", "comfortable"],
+        "Dividers": ["none", "between", "all"]
+      },
+      "booleans": [],
+      "exclusions": ["Type=nav|action + Dividers=all"],
+      "frameCount": 39
+    }
+  ],
+  "a11y": {
+    "role": "list (ul/ol/dl) o menu/menuitem (action)",
+    "keyboard": ["nav: Tab", "action: Arrow keys + Enter (menu pattern)"],
+    "focus": "Ring 2px en item interactivo"
+  },
+  "tokens": { "total": 18, "prefix": "lst" },
+  "questions": [
+    {
+      "id": "list-type",
+      "text": "¿Qué tipo de List necesitas?",
+      "options": [
+        { "value": "unordered", "label": "Unordered — bullets, features list" },
+        { "value": "ordered", "label": "Ordered — numbered steps, ranking" },
+        { "value": "description", "label": "Description (<dl>) — key/value metadata (usa DescriptionList)" },
+        { "value": "nav", "label": "Nav — navigation menu items" },
+        { "value": "action", "label": "Action — overflow menu con arrow keys" },
+        { "value": "multiple", "label": "Varios types" }
+      ],
+      "impact": "Type property, a11y pattern",
+      "tags": ["unordered", "ordered", "description", "nav", "action", "menu"]
+    },
+    {
+      "id": "density",
+      "text": "¿Densidad?",
+      "options": [
+        { "value": "compact", "label": "Compact (32px) — enterprise dense" },
+        { "value": "default", "label": "Default (40px) — general" },
+        { "value": "comfortable", "label": "Comfortable (56px) — mobile touch" },
+        { "value": "all", "label": "Las 3" }
+      ],
+      "impact": "Density property",
+      "tags": ["compact", "default", "comfortable", "density"]
+    },
+    {
+      "id": "item-content",
+      "text": "¿Contenido de los items?",
+      "options": [
+        { "value": "label-only", "label": "Solo label" },
+        { "value": "with-description", "label": "Label + description (two-line)" },
+        { "value": "rich", "label": "Marker + label + description + trailing (full)" }
+      ],
+      "impact": "Has Marker / Description / Trailing booleans",
+      "tags": ["label", "description", "marker", "trailing", "rich"]
+    },
+    {
+      "id": "dividers",
+      "text": "¿Dividers entre items?",
+      "options": [
+        { "value": "none", "label": "Sin dividers" },
+        { "value": "between", "label": "Entre items (padrón común)" },
+        { "value": "all", "label": "All — con bordes top/bottom" }
+      ],
+      "impact": "Dividers property",
+      "tags": ["dividers", "separators", "lines"]
+    }
+  ]
+}

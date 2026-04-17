@@ -1,0 +1,152 @@
+{
+  "version": "1.0",
+  "component": "FileUpload",
+  "archetype": "file-input",
+  "language": "es",
+  "buildOrder": ["FileItem", "FileUpload"],
+  "family": [
+    {
+      "name": "FileItem",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "FileUpload",
+      "slots": [
+        { "name": "icon", "type": "icon", "required": false, "figmaBinding": "instance-swap", "note": "file type icon (pdf, image, doc, etc.)" },
+        { "name": "name", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "size", "type": "text", "required": false, "note": "'2.3 MB'" },
+        { "name": "progressBar", "type": "container", "required": false, "note": "progress bar horizontal (uploading)" },
+        { "name": "statusIcon", "type": "icon", "required": false, "note": "check/alert según status" },
+        { "name": "removeButton", "type": "icon-action", "required": false }
+      ],
+      "properties": {
+        "State":  ["pending", "uploading", "success", "error", "paused"],
+        "Size":   ["sm", "md"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "h": 48, "px": 12, "gap": 10, "fontSize": 13, "iconSize": 18, "buttonSize": 24 },
+        "md": { "h": 64, "px": 16, "gap": 12, "fontSize": 14, "iconSize": 24, "buttonSize": 32 }
+      },
+      "stateStyles": {
+        "pending":   { "bg": "transparent", "fg": { "r": 0.42, "g": 0.45, "b": 0.50 }, "statusIcon": "hourglass" },
+        "uploading": { "bg": { "r": 0.93, "g": 0.95, "b": 1.0 }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "progressVisible": true },
+        "success":   { "bg": { "r": 0.93, "g": 0.99, "b": 0.95 }, "fg": { "r": 0.08, "g": 0.55, "b": 0.22 }, "statusIcon": "check-circle" },
+        "error":     { "bg": { "r": 1.0, "g": 0.94, "b": 0.94 }, "fg": { "r": 0.86, "g": 0.15, "b": 0.15 }, "statusIcon": "alert-circle" },
+        "paused":    { "bg": { "r": 1.0, "g": 0.97, "b": 0.92 }, "fg": { "r": 0.72, "g": 0.48, "b": 0.05 }, "statusIcon": "pause" }
+      },
+      "textProperties": [
+        { "propName": "✏️ Name", "layerName": "name", "default": "document.pdf" },
+        { "propName": "✏️ Size", "layerName": "size", "default": "2.3 MB" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 File Icon", "layerName": "icon", "default": "icon/file-pdf" },
+        { "propName": "🔄 Status Icon", "layerName": "statusIcon", "default": "icon/check" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Icon", "layerName": "icon" },
+        { "propName": "👁 Has Size", "layerName": "size" },
+        { "propName": "👁 Show Progress", "layerName": "progressBar" },
+        { "propName": "👁 Show Remove", "layerName": "removeButton" }
+      ],
+      "frameCount": {
+        "gross": 10,
+        "exclusions": 0,
+        "net": 10,
+        "note": "State(5) × Size(2) = 10"
+      }
+    },
+    {
+      "name": "FileUpload",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "dropZone", "type": "container", "required": true, "note": "area con dashed border para drag & drop" },
+        { "name": "dropZoneIcon", "type": "icon", "required": false, "figmaBinding": "instance-swap", "note": "upload icon large" },
+        { "name": "dropZoneLabel", "type": "text", "required": true, "note": "'Arrastra archivos aquí o haz click'" },
+        { "name": "dropZoneHint", "type": "text", "required": false, "note": "'JPG, PNG hasta 10MB'" },
+        { "name": "browseButton", "type": "container", "required": false },
+        { "name": "fileList", "type": "container", "required": false, "note": "N FileItems después de seleccionar" },
+        { "name": "errorMessage", "type": "text", "required": false }
+      ],
+      "properties": {
+        "State":    ["default", "hover", "dragover", "error", "disabled"],
+        "Size":     ["sm", "md", "lg"],
+        "Variant":  ["dropzone", "button-only", "compact"]
+      },
+      "exclusions": [
+        "Variant=button-only + State=dragover (button no acepta drag)",
+        "Variant=compact + dropZoneIcon large"
+      ],
+      "sizes": {
+        "sm": { "dropZoneH": 120, "padding": 16, "iconSize": 32, "labelFontSize": 14 },
+        "md": { "dropZoneH": 180, "padding": 24, "iconSize": 48, "labelFontSize": 16 },
+        "lg": { "dropZoneH": 240, "padding": 32, "iconSize": 64, "labelFontSize": 18 }
+      },
+      "stateStyles": {
+        "default":  { "bg": "transparent", "border": { "r": 0.82, "g": 0.82, "b": 0.85 }, "borderStyle": "dashed" },
+        "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "border": { "r": 0.15, "g": 0.35, "b": 0.92 }, "borderStyle": "dashed" },
+        "dragover": { "bg": { "r": 0.93, "g": 0.95, "b": 1.0 }, "border": { "r": 0.15, "g": 0.35, "b": 0.92 }, "borderStyle": "solid", "borderWidth": 2 },
+        "error":    { "bg": { "r": 1.0, "g": 0.94, "b": 0.94 }, "border": { "r": 0.86, "g": 0.15, "b": 0.15 }, "borderStyle": "dashed" },
+        "disabled": { "bg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "border": { "r": 0.88, "g": 0.88, "b": 0.90 }, "borderStyle": "dashed", "opacity": 0.6 }
+      },
+      "frameCount": {
+        "gross": 45,
+        "exclusions": 9,
+        "net": 36,
+        "note": "State(5) × Size(3) × Variant(3) = 45; −9 exclusiones"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "file-upload",
+    "role": "button (click-to-browse) + region (drop zone)",
+    "ariaAttributes": [
+      "Drop zone: role='button' + tabindex=0 + aria-label='Subir archivo. Arrastra o haz click para seleccionar'",
+      "Hidden <input type='file'> con aria-describedby apuntando a hint text",
+      "Dragover state: aria-live='polite' anuncia 'Suelta para subir'",
+      "File list: role='list' + role='listitem' en cada FileItem",
+      "Upload progress: aria-live='polite' con 'Subiendo archivo.pdf, 40%'",
+      "Success: aria-live='polite' con 'archivo.pdf subido correctamente'",
+      "Error: aria-live='assertive' con descripción específica",
+      "Remove button: aria-label='Eliminar [filename]'"
+    ],
+    "keyboardNav": [
+      "Tab al drop zone → Enter/Space abre file picker nativo",
+      "Tab a cada FileItem → Enter/Space al remove button para eliminar",
+      "Escape durante upload: cancela (si supported)"
+    ],
+    "focusTechnique": "ring 2px en drop zone y remove buttons; drop zone focuseable incluso con drag & drop disabled por keyboard users",
+    "edgeCases": 8,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 26, "prefix": "fu", "mode": "C" },
+  "componentDescriptions": {
+    "FileItem": "Item de archivo subido. State: pending / uploading (con progress bar) / success / error / paused. Sizes: sm/md.\n\n🔑 ARIA:\n• aria-live anuncia progress + final state\n• Remove button con aria-label descriptivo\n\n⌨️ Keyboard:\n• Tab al remove, Enter elimina\n\nWCAG 2.2 AA.",
+    "FileUpload": "Upload de archivos con drag & drop. Variant: dropzone (area grande) / button-only (compact) / compact (inline con list). Size: sm/md/lg. State: default / hover / dragover / error / disabled.\n\n🔑 ARIA:\n• Drop zone: role='button' + tabindex (keyboard accessible incluso sin mouse)\n• aria-live anuncia progress + success + errors\n• File list: role='list'\n\n⌨️ Keyboard:\n• Tab al drop zone, Enter abre file picker\n• Drag & drop tiene fallback (click-to-browse)\n\n🎯 Focus:\n• Ring visible en drop zone\n• Remove buttons focuseables\n\nTokens: 26, prefijo fu-.\nWCAG 2.2 AA.\n\nWCAG 2.1.1 critical: drag & drop DEBE tener equivalente keyboard (file picker click). Dragover state visual + aria-live reforzado.\n\nValidation: tipo archivo (accept), size máximo, count máximo — errors específicos por tipo."
+  },
+  "variableBindings": {
+    "fu/sm/h": "sizing/120",
+    "fu/md/h": "sizing/180",
+    "fu/lg/h": "sizing/240",
+    "fu/default/border": "border/default",
+    "fu/hover/border": "border/focus",
+    "fu/dragover/bg": "brand/subtle",
+    "fu/dragover/border": "interactive/default",
+    "fu/error/bg": "status/error/bg",
+    "fu/error/border": "status/error/border",
+    "fu/disabled/bg": "surface/disabled",
+    "fu/item/pending/fg": "text/secondary",
+    "fu/item/uploading/bg": "brand/subtle",
+    "fu/item/success/bg": "status/success/bg",
+    "fu/item/error/bg": "status/error/bg",
+    "fu/item/paused/bg": "status/warning/bg"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "3 Variants: dropzone / button-only / compact", "why": "Dropzone para primary actions (image upload, document upload); button-only para compactness (avatar upload, attach); compact para inline con file list (Gmail attach pattern).", "source": "common-patterns" },
+    { "what": "5 FileItem states incluyendo paused", "why": "Large files requieren pause/resume. State=paused es estándar en enterprise file upload (Dropbox, Drive).", "source": "common-patterns" },
+    { "what": "Progress bar como slot en FileItem", "why": "Visual feedback crítico durante upload. Integrado en item vs separado simplifica layout.", "source": "common-patterns" },
+    { "what": "Drag & drop con keyboard fallback mandatorio", "why": "WCAG 2.1.1. Click-to-browse debe funcionar sin mouse. Drop zone es tabindex=0 + role='button'.", "source": "WCAG 2.1.1" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

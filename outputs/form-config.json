@@ -1,0 +1,171 @@
+{
+  "version": "1.0",
+  "component": "Form",
+  "archetype": "form-layout",
+  "language": "es",
+  "buildOrder": ["FormField", "FormSection", "Form"],
+  "family": [
+    {
+      "name": "FormField",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "Form",
+      "slots": [
+        { "name": "label", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "requiredIndicator", "type": "text", "required": false, "note": "'*' o 'Required'" },
+        { "name": "helperText", "type": "text", "required": false, "note": "instructional text" },
+        { "name": "input", "type": "container", "required": true, "figmaBinding": "instance-swap", "note": "Input, Select, Textarea, etc." },
+        { "name": "errorMessage", "type": "text", "required": false },
+        { "name": "successMessage", "type": "text", "required": false },
+        { "name": "labelIcon", "type": "icon", "required": false, "note": "info icon con tooltip" }
+      ],
+      "properties": {
+        "State":  ["default", "focused", "error", "success", "disabled"],
+        "Size":   ["sm", "md", "lg"],
+        "Layout": ["stacked", "horizontal", "inline"]
+      },
+      "exclusions": [
+        "Layout=inline + helperText visible (inline es compact)"
+      ],
+      "sizes": {
+        "sm": { "labelFontSize": 12, "labelMarginBottom": 4, "helperFontSize": 11, "gap": 8 },
+        "md": { "labelFontSize": 13, "labelMarginBottom": 6, "helperFontSize": 12, "gap": 12 },
+        "lg": { "labelFontSize": 14, "labelMarginBottom": 8, "helperFontSize": 13, "gap": 16 }
+      },
+      "stateStyles": {
+        "default":  { "labelFg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "helperFg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "focused":  { "labelFg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "helperFg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "error":    { "labelFg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "helperFg": { "r": 0.86, "g": 0.15, "b": 0.15 } },
+        "success":  { "labelFg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "helperFg": { "r": 0.08, "g": 0.55, "b": 0.22 } },
+        "disabled": { "labelFg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "helperFg": { "r": 0.72, "g": 0.72, "b": 0.75 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Nombre" },
+        { "propName": "✏️ Helper Text", "layerName": "helperText", "default": "Este campo es requerido" },
+        { "propName": "✏️ Error", "layerName": "errorMessage", "default": "El nombre es obligatorio" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Helper Text", "layerName": "helperText" },
+        { "propName": "👁 Has Label Icon", "layerName": "labelIcon" },
+        { "propName": "👁 Show Required Indicator", "layerName": "requiredIndicator" },
+        { "propName": "👁 Show Error Message", "layerName": "errorMessage" },
+        { "propName": "👁 Show Success Message", "layerName": "successMessage" }
+      ],
+      "frameCount": {
+        "gross": 45,
+        "exclusions": 3,
+        "net": 42,
+        "note": "State(5) × Size(3) × Layout(3) = 45; −3 exclusiones"
+      }
+    },
+    {
+      "name": "FormSection",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "Form",
+      "slots": [
+        { "name": "sectionTitle", "type": "text", "required": false },
+        { "name": "sectionDescription", "type": "text", "required": false },
+        { "name": "fields", "type": "container", "required": true, "note": "N FormFields" },
+        { "name": "divider", "type": "shape", "required": false }
+      ],
+      "properties": {
+        "Variant": ["default", "card", "inset"]
+      },
+      "exclusions": [],
+      "frameCount": {
+        "gross": 3,
+        "exclusions": 0,
+        "net": 3,
+        "note": "Variant(3) = 3"
+      }
+    },
+    {
+      "name": "Form",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "title", "type": "text", "required": false },
+        { "name": "description", "type": "text", "required": false },
+        { "name": "sections", "type": "container", "required": true },
+        { "name": "footer", "type": "container", "required": true, "note": "submit + cancel buttons" }
+      ],
+      "properties": {
+        "Layout":     ["single-column", "two-column", "horizontal"],
+        "Size":       ["sm", "md", "lg"]
+      },
+      "exclusions": [],
+      "frameCount": {
+        "gross": 9,
+        "exclusions": 0,
+        "net": 9,
+        "note": "Layout(3) × Size(3) = 9"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "form",
+    "role": "form",
+    "ariaAttributes": [
+      "Container: <form> native + aria-labelledby='[title-id]'",
+      "FormField: <label for='[input-id]'> native + input id match",
+      "Required: aria-required='true' en input + indicador visual",
+      "Error: aria-invalid='true' + aria-errormessage='[error-id]' apuntando a errorMessage",
+      "Helper text: aria-describedby='[helper-id]'",
+      "Error message: role='alert' + aria-live='assertive' (inmediato) o 'polite' (summary)",
+      "FormSection: <fieldset> + <legend> (sectionTitle)",
+      "Disabled: aria-disabled='true' + input disabled"
+    ],
+    "keyboardNav": [
+      "Tab: navega entre campos en DOM order",
+      "Shift+Tab: reverse",
+      "Enter en submit button: envía form",
+      "Enter en input field: envía si hay único textfield; ignora si multiple",
+      "Escape en modal form: cancela"
+    ],
+    "focusTechnique": "ring 2px en input focuseado; label clickeable mueve focus al input; error message linked via aria-errormessage",
+    "edgeCases": 10,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 24, "prefix": "frm", "mode": "C" },
+  "componentDescriptions": {
+    "FormField": "Campo individual de form: label + input + helper/error/success. State: default/focused/error/success/disabled. Layout: stacked (label arriba) / horizontal (label left) / inline (single line compact). Sizes: sm/md/lg.\n\n🔑 ARIA:\n• <label for='...'> native\n• aria-required + required visual indicator\n• aria-invalid + aria-errormessage en error\n• aria-describedby → helper text\n\n⌨️ Keyboard:\n• Label clickeable mueve focus al input\n\nWCAG 2.2 AA.",
+    "FormSection": "Agrupación de FormFields relacionados. Variant: default (spacing visual) / card (borderless container) / inset (con padding + bg).\n\n🔑 ARIA:\n• <fieldset> + <legend> native\n\nWCAG 2.2 AA.",
+    "Form": "Layout completo de formulario. Layout: single-column / two-column (form grid) / horizontal (label left alineado). Size: sm/md/lg.\n\n🔑 ARIA:\n• <form> native\n• Submit button explicit\n\n⌨️ Keyboard:\n• Tab order en DOM order\n• Enter submit (si único textfield)\n\n🎯 Focus:\n• Focus al primer field empty al abrir (si form modal)\n• Return focus al trigger al cancelar\n• Error: focus al primer invalid field al submit\n\nTokens: 24, prefijo frm-.\nWCAG 2.2 AA.\n\nForm validation: client-side immediate (on blur) + server-side submit. Error summary opcional en top con links a invalid fields (WCAG 3.3.1)."
+  },
+  "variableBindings": {
+    "frm/field/sm/gap": "spacing/2",
+    "frm/field/md/gap": "spacing/3",
+    "frm/field/lg/gap": "spacing/4",
+    "frm/label/default/fg": "text/primary",
+    "frm/label/focused/fg": "interactive/default",
+    "frm/label/disabled/fg": "text/disabled",
+    "frm/label/fontSize/sm": "type/xs",
+    "frm/label/fontSize/md": "type/sm",
+    "frm/label/fontSize/lg": "type/md",
+    "frm/label/fontWeight": "type/weight-medium",
+    "frm/helper/fg": "text/secondary",
+    "frm/helper/fontSize/sm": "type/caption",
+    "frm/helper/fontSize/md": "type/xs",
+    "frm/error/fg": "status/error/fg",
+    "frm/success/fg": "status/success/fg",
+    "frm/required/fg": "status/error/fg",
+    "frm/section/gap": "spacing/8",
+    "frm/section/card/bg": "surface/default",
+    "frm/section/card/border": "border/default",
+    "frm/section/card/radius": "radius/md",
+    "frm/section/card/padding": "spacing/6",
+    "frm/footer/gap": "spacing/3",
+    "frm/footer/borderTop": "border/1",
+    "frm/footer/paddingTop": "spacing/6"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "3 sub-components: FormField + FormSection + Form", "why": "Composición natural: Form contiene N FormSections, cada Section contiene N FormFields. Permite reutilizar FormField standalone (inline forms).", "source": "common-patterns" },
+    { "what": "FormField Layout: stacked/horizontal/inline", "why": "Stacked (default mobile-first), horizontal (desktop settings con label left), inline (compact single-row forms).", "source": "common-patterns" },
+    { "what": "Error message linked via aria-errormessage (WCAG)", "why": "aria-errormessage es ARIA 1.2 pattern correcto para validation. aria-describedby para helper; aria-errormessage para errors — separación semántica.", "source": "WCAG ARIA" },
+    { "what": "FormSection Variants: default / card / inset", "why": "Default: spacing visual; card: elevated section (settings page pattern); inset: bg tinted section (sub-settings).", "source": "common-patterns" },
+    { "what": "Focus al primer invalid field al submit", "why": "WCAG 3.3.1 Error Identification. Usuarios keyboard-only no ven visual errors en fields distantes — focus shift requerido.", "source": "WCAG 3.3.1" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,119 @@
+{
+  "version": "1.0",
+  "component": "Stat",
+  "archetype": "kpi-display",
+  "language": "es",
+  "buildOrder": ["Stat"],
+  "family": [
+    {
+      "name": "Stat",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "label", "type": "text", "required": true, "figmaBinding": "text", "note": "'Total Revenue', 'Active Users'" },
+        { "name": "value", "type": "text", "required": true, "figmaBinding": "text", "note": "'$42,350', '1,234'" },
+        { "name": "unit", "type": "text", "required": false, "note": "'USD', 'users', '%'" },
+        { "name": "trend", "type": "container", "required": false, "note": "arrow + delta + direction color" },
+        { "name": "icon", "type": "icon", "required": false, "figmaBinding": "instance-swap" },
+        { "name": "description", "type": "text", "required": false, "note": "'vs last month'" },
+        { "name": "sparkline", "type": "shape", "required": false, "note": "mini chart visual" }
+      ],
+      "properties": {
+        "Size":          ["sm", "md", "lg"],
+        "Trend":         ["none", "up", "down", "neutral"],
+        "Layout":        ["stacked", "horizontal", "card"],
+        "Emphasis":      ["default", "prominent"]
+      },
+      "exclusions": [
+        "Trend=none + description 'vs last month' (description requiere trend context)",
+        "Layout=horizontal + sparkline visible (horizontal tiene espacio limitado)"
+      ],
+      "sizes": {
+        "sm": { "labelFontSize": 12, "valueFontSize": 20, "valueLineHeight": 28, "iconSize": 16, "trendFontSize": 11, "padding": 12, "gap": 4 },
+        "md": { "labelFontSize": 13, "valueFontSize": 28, "valueLineHeight": 36, "iconSize": 20, "trendFontSize": 12, "padding": 16, "gap": 6 },
+        "lg": { "labelFontSize": 14, "valueFontSize": 40, "valueLineHeight": 48, "iconSize": 24, "trendFontSize": 13, "padding": 24, "gap": 8 }
+      },
+      "trendStyles": {
+        "up":      { "icon": "arrow-up", "fg": { "r": 0.08, "g": 0.55, "b": 0.22 }, "bg": { "r": 0.93, "g": 0.99, "b": 0.95 } },
+        "down":    { "icon": "arrow-down", "fg": { "r": 0.86, "g": 0.15, "b": 0.15 }, "bg": { "r": 1.0, "g": 0.94, "b": 0.94 } },
+        "neutral": { "icon": "minus", "fg": { "r": 0.42, "g": 0.45, "b": 0.50 }, "bg": { "r": 0.93, "g": 0.93, "b": 0.95 } }
+      },
+      "layoutStyles": {
+        "stacked":    { "direction": "column", "iconPosition": "top-right" },
+        "horizontal": { "direction": "row", "iconPosition": "leading" },
+        "card":       { "direction": "column", "bg": "surface", "border": true, "radius": 8, "padding": "applies" }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Total Revenue" },
+        { "propName": "✏️ Value", "layerName": "value", "default": "$42,350" },
+        { "propName": "✏️ Unit", "layerName": "unit", "default": "USD" },
+        { "propName": "✏️ Description", "layerName": "description", "default": "vs last month" },
+        { "propName": "✏️ Trend Delta", "layerName": "trend", "default": "+12.5%" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Icon", "layerName": "icon", "default": "icon/trending-up" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Icon", "layerName": "icon" },
+        { "propName": "👁 Has Trend", "layerName": "trend" },
+        { "propName": "👁 Has Description", "layerName": "description" },
+        { "propName": "👁 Has Sparkline", "layerName": "sparkline" },
+        { "propName": "👁 Has Unit", "layerName": "unit" }
+      ],
+      "frameCount": {
+        "gross": 72,
+        "exclusions": 12,
+        "net": 60,
+        "note": "Size(3) × Trend(4) × Layout(3) × Emphasis(2) = 72; −12 exclusiones"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "kpi-display",
+    "role": "group con reading order",
+    "ariaAttributes": [
+      "Container: role='group' + aria-labelledby='[label-id]'",
+      "Value: <strong> con aria-label='[value] [unit]' (ej. '$42,350 dólares')",
+      "Trend: aria-label descriptivo ('aumento de 12.5% vs mes anterior')",
+      "Sparkline: aria-hidden='true' + alternativa textual ('Tendencia al alza en los últimos 30 días')",
+      "Reading order: label → value → unit → trend → description"
+    ],
+    "keyboardNav": ["No focusable (display-only — excepto wrapped en link)"],
+    "focusTechnique": "none",
+    "edgeCases": 3,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 20, "prefix": "st", "mode": "C" },
+  "componentDescriptions": {
+    "Stat": "KPI display: label + value + optional trend + unit + icon + sparkline + description. Size: sm/md/lg (valueFontSize 20/28/40). Trend: none/up/down/neutral (color + icon). Layout: stacked (default) / horizontal (inline) / card (elevated). Emphasis: default / prominent (larger + bolder).\n\n🔑 ARIA:\n• role='group' con reading order lógico\n• Trend delta con aria-label descriptivo\n• Sparkline decorativo con alternativa textual\n• Value con unit concatenado en aria-label\n\n⌨️ Keyboard:\n• No focusable (excepto si link al detalle)\n\n🎯 Focus:\n• Prominent variant: valor 1.5x más grande\n\nTokens: 20, prefijo st-.\nWCAG 2.2 AA.\n\nScope: dashboards, analytics, metric cards. Para valores interactivos usa Button wrapping. Para grandes grupos de stats usa Grid con múltiples Stat."
+  },
+  "variableBindings": {
+    "st/label/fg": "text/secondary",
+    "st/label/fontSize/sm": "type/xs",
+    "st/label/fontSize/md": "type/sm",
+    "st/label/fontSize/lg": "type/md",
+    "st/value/fg": "text/primary",
+    "st/value/fontSize/sm": "type/heading-sm",
+    "st/value/fontSize/md": "type/heading-md",
+    "st/value/fontSize/lg": "type/heading-lg",
+    "st/value/fontWeight": "type/weight-semibold",
+    "st/trend/up/fg": "status/success/fg",
+    "st/trend/up/bg": "status/success/bg",
+    "st/trend/down/fg": "status/error/fg",
+    "st/trend/down/bg": "status/error/bg",
+    "st/trend/neutral/fg": "text/secondary",
+    "st/trend/neutral/bg": "surface/pressed",
+    "st/description/fg": "text/subtlest",
+    "st/card/bg": "surface/default",
+    "st/card/border": "border/default",
+    "st/card/radius": "radius/md"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Stat standalone (no sub-components)", "why": "Stat es single-purpose (display KPI). Agregar sub-components (StatLabel, StatValue) over-engineeriza. Slots cubren variaciones.", "source": "common-patterns" },
+    { "what": "Trend como property + slot (color + icon)", "why": "up/down/neutral cambian color + icon + aria-label descriptivo. Semantic change — merece property explícita, no boolean.", "source": "common-patterns" },
+    { "what": "3 Layouts (stacked/horizontal/card)", "why": "Stacked para dashboards grids; horizontal para inline summaries; card para dashboard widgets elevados.", "source": "common-patterns" },
+    { "what": "Sparkline como slot opcional", "why": "Mini trend chart (últimos N days). Agrega valor sin complicar API. aria-hidden + alternativa textual para a11y.", "source": "common-patterns" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

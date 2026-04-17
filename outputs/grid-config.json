@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "component": "Grid",
+  "archetype": "layout-primitive",
+  "language": "es",
+  "buildOrder": ["GridItem", "Grid"],
+  "family": [
+    {
+      "name": "GridItem",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "Grid",
+      "slots": [
+        { "name": "content", "type": "container", "required": true }
+      ],
+      "properties": {
+        "ColSpan": ["1", "2", "3", "4", "6", "8", "12"],
+        "RowSpan": ["1", "2", "3"]
+      },
+      "exclusions": [],
+      "frameCount": {
+        "gross": 21,
+        "exclusions": 0,
+        "net": 21,
+        "note": "ColSpan(7) × RowSpan(3) = 21"
+      }
+    },
+    {
+      "name": "Grid",
+      "isSubComponent": false,
+      "isBuildingBlock": true,
+      "slots": [
+        { "name": "items", "type": "container", "required": true, "note": "N GridItems" }
+      ],
+      "properties": {
+        "Columns":    ["1", "2", "3", "4", "6", "12"],
+        "Gap":        ["none", "sm", "md", "lg", "xl"],
+        "GutterMode": ["wide", "narrow", "condensed"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "none": { "gap": 0 },
+        "sm":   { "gap": 8 },
+        "md":   { "gap": 16 },
+        "lg":   { "gap": 24 },
+        "xl":   { "gap": 32 }
+      },
+      "gutterModes": {
+        "wide":      { "gutter": 32, "note": "marketing pages, whitespace generoso (Carbon wide)" },
+        "narrow":    { "gutter": 16, "note": "standard admin (Carbon narrow)" },
+        "condensed": { "gutter": 1,  "note": "data-dense dashboards (Carbon condensed)" }
+      },
+      "frameCount": {
+        "gross": 90,
+        "exclusions": 0,
+        "net": 90,
+        "note": "Columns(6) × Gap(5) × GutterMode(3) = 90"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "layout-primitive",
+    "role": "none",
+    "ariaAttributes": [
+      "Grid y GridItem son display-only, sin role",
+      "DOM order debe match visual order (no usar push/pull que rompan tab order)",
+      "Landmarks (main/nav/aside) aplicados al consumer dentro de GridItem"
+    ],
+    "keyboardNav": ["No focusable (layout)"],
+    "focusTechnique": "none",
+    "edgeCases": 1,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 12, "prefix": "grd", "mode": "C" },
+  "componentDescriptions": {
+    "GridItem": "Celda del grid. ColSpan: 1/2/3/4/6/8/12 de 12 columnas. RowSpan: 1-3.\n\n🔑 ARIA:\n• Display-only, sin role\n\n⌨️ Keyboard:\n• No focusable (content interno maneja focus)\n\nWCAG 2.2 AA.",
+    "Grid": "Grid responsive de 12 columnas. Columns: 1/2/3/4/6/12 (auto-equal columns). Gap: none/sm/md/lg/xl. GutterMode: wide (marketing) / narrow (admin) / condensed (data-dense).\n\n🔑 ARIA:\n• Sin role — layout primitive\n• DOM order = visual order (no push/pull reordering)\n\n⌨️ Keyboard:\n• No focusable\n\n🎯 Focus:\n• Landmarks en children (main/nav/aside)\n\nTokens: 12, prefijo grd-.\nWCAG 2.2 AA.\n\n12-column grid (estándar industry). Para layouts fluidos simples usa Stack. Para marketing pages con max-width usa Container.\n\nCarbon gutterMode es first-class decision — genera frames para cada mode."
+  },
+  "variableBindings": {
+    "grd/gap/sm": "spacing/2",
+    "grd/gap/md": "spacing/4",
+    "grd/gap/lg": "spacing/6",
+    "grd/gap/xl": "spacing/8",
+    "grd/gutter/wide": "spacing/8",
+    "grd/gutter/narrow": "spacing/4",
+    "grd/gutter/condensed": "border/1",
+    "grd/columns": "layout/12cols"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "12-column system (Atlassian/Carbon/Spectrum standard)", "why": "Ant usa 24 (más granular, Chinese enterprise); 12 es estándar Western. 12 permite /2, /3, /4, /6 splits limpios y es mental model más simple.", "source": "research" },
+    { "what": "GutterMode (wide/narrow/condensed) — Carbon pattern único", "why": "Carbon distingue 3 gutter modes por densidad. 32/16/1px cubre desde marketing hasta data dashboards. First-class property en vez de arbitrary gap values.", "source": "research" },
+    { "what": "Grid.Item flat (no Row component) — Atlassian pattern", "why": "Atlassian omite Row; Grid → Grid.Item wraps automáticamente. Simplifica API vs Ant Row>Col nesting. Reduce DOM depth.", "source": "research" },
+    { "what": "Sin named grid areas (Spectrum feature)", "why": "Spectrum `areas` prop es elegante pero añade complejidad. Omitido para mantener API simple; casos complex usan Grid directamente en CSS.", "source": "research" },
+    { "what": "ColSpan values discretos (1,2,3,4,6,8,12)", "why": "Valores que dividen limpiamente 12 columnas. Omitimos 5/7/9/10/11 (uncommon, rompe balance visual). 7 opciones cubren los splits útiles.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

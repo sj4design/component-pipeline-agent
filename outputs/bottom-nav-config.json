@@ -1,0 +1,147 @@
+{
+  "version": "1.0",
+  "component": "BottomNav",
+  "archetype": "mobile-navigation",
+  "language": "es",
+  "buildOrder": ["NavItem", "BottomNav"],
+  "family": [
+    {
+      "name": "NavItem",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "BottomNav",
+      "slots": [
+        { "name": "icon", "type": "icon", "required": true, "figmaBinding": "instance-swap" },
+        { "name": "label", "type": "text", "required": false, "figmaBinding": "text" },
+        { "name": "badge", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "Badge component (dot o count)" },
+        { "name": "activeIndicator", "type": "shape", "required": false, "note": "pill detrás del icon en estado active (M3 pattern)" }
+      ],
+      "properties": {
+        "State": ["default", "hover", "active", "focused", "disabled"],
+        "Size":  ["sm", "md"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "h": 56, "minW": 56, "py": 8, "gap": 4,
+          "iconSize": 20, "indicatorH": 28, "indicatorW": 52, "indicatorRadius": 16,
+          "fontSize": 10, "fontWeight": 500, "lineHeight": 14,
+          "badgeOffset": { "top": 4, "right": -6 }
+        },
+        "md": {
+          "h": 64, "minW": 64, "py": 12, "gap": 4,
+          "iconSize": 24, "indicatorH": 32, "indicatorW": 64, "indicatorRadius": 16,
+          "fontSize": 11, "fontWeight": 500, "lineHeight": 16,
+          "badgeOffset": { "top": 4, "right": -6 }
+        }
+      },
+      "stateStyles": {
+        "default":  { "iconFg": { "r": 0.42, "g": 0.45, "b": 0.50 }, "labelFg": { "r": 0.42, "g": 0.45, "b": 0.50 }, "indicator": "transparent" },
+        "hover":    { "iconFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "labelFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "indicator": { "r": 0.93, "g": 0.95, "b": 1.0 } },
+        "active":   { "iconFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "labelFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "labelFontWeight": 600, "indicator": { "r": 0.85, "g": 0.90, "b": 1.0 } },
+        "focused":  { "iconFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "labelFg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "ring": true },
+        "disabled": { "iconFg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "labelFg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "indicator": "transparent" }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Inicio" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Icon", "layerName": "icon", "default": "icon/home" },
+        { "propName": "🔄 Active Icon", "layerName": "icon", "default": "icon/home-filled", "note": "icono filled para estado active (M3 pattern)" },
+        { "propName": "🔄 Badge", "layerName": "badge", "default": "Badge/dot" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Show Label", "layerName": "label" },
+        { "propName": "👁 Has Badge", "layerName": "badge" },
+        { "propName": "👁 Show Active Indicator", "layerName": "activeIndicator" }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 10,
+        "exclusions": 0,
+        "net": 10,
+        "note": "State(5) × Size(2) = 10"
+      },
+      "grid": { "maxCols": 5, "gap": 16, "pad": 24 }
+    },
+    {
+      "name": "BottomNav",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "items", "type": "container", "required": true, "note": "3–5 instancias de NavItem" }
+      ],
+      "properties": {
+        "Size":     ["sm", "md"],
+        "ItemCount": ["3", "4", "5"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "h": 56, "safeAreaPadding": 0, "bg": { "r": 1, "g": 1, "b": 1 }, "borderTop": 1, "shadow": "top" },
+        "md": { "h": 64, "safeAreaPadding": 0, "bg": { "r": 1, "g": 1, "b": 1 }, "borderTop": 1, "shadow": "top" }
+      },
+      "frameCount": {
+        "gross": 6,
+        "exclusions": 0,
+        "net": 6,
+        "note": "Size(2) × ItemCount(3) = 6"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "navigation-bar",
+    "role": "navigation (container) + link|button (items)",
+    "ariaAttributes": [
+      "Container: role='navigation' + aria-label='Navegación principal'",
+      "NavItem activo: aria-current='page' (si son links) o aria-selected='true' (si son tabs)",
+      "NavItem con badge: badge count integrado en accessible name ('Mensajes, 3 sin leer')",
+      "Icon-only items (Show Label=false): aria-label requerido en el NavItem",
+      "Disabled: aria-disabled='true'"
+    ],
+    "keyboardNav": [
+      "Tab: navega entre NavItems",
+      "Enter/Space: activa (navega al destino)",
+      "Screen reader announces 'N de M' al entrar a BottomNav (implicit list semantics)"
+    ],
+    "focusTechnique": "ring 2px en el NavItem focuseado; indicator pill no reemplaza al focus ring",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 20, "prefix": "bnav", "mode": "C" },
+  "componentDescriptions": {
+    "NavItem": "Item individual de BottomNav. Icon + label opcional + badge opcional. Active state usa active-indicator pill detrás del icon (M3 pattern). States: default/hover/active/focused/disabled.\n\n🔑 ARIA:\n• role='link' o 'button' según navegación\n• aria-current='page' en activo\n• Icon-only: aria-label requerido\n• Badge integrado en accessible name\n\n⌨️ Keyboard:\n• Tab navega, Enter/Space activa\n• Focus ring 2px\n\nWCAG 2.2 AA.",
+    "BottomNav": "Navegación mobile fija al bottom. 3–5 items obligatorio (M3 constraint). Icon + label (label mejora comprensión 75% per Google research). Safe-area handling automático para notches.\n\n🔑 ARIA:\n• role='navigation' + aria-label='Navegación principal'\n• Lista de NavItems focuseables\n\n⌨️ Keyboard:\n• Tab entre items\n\n🎯 Focus:\n• Safe-area inset built-in (antd-mobile pattern)\n• Hide-on-scroll opcional (M3 default)\n\nTokens: 20, prefijo bnav-.\nWCAG 2.2 AA.\n\nScope: mobile-only (viewport <768px). En desktop/tablet usa Sidebar o Tabs.\nItemCount: 3–5 estricto. <3 usa Tabs; >5 agrupa en 'More' menu."
+  },
+  "variableBindings": {
+    "bnav/sm/h": "sizing/56",
+    "bnav/md/h": "sizing/64",
+    "bnav/bg": "surface/default",
+    "bnav/borderTop": "border/1",
+    "bnav/borderTopColor": "border/default",
+    "bnav/item/default/iconFg": "text/secondary",
+    "bnav/item/default/labelFg": "text/secondary",
+    "bnav/item/hover/iconFg": "text/primary",
+    "bnav/item/hover/indicator": "surface/selected",
+    "bnav/item/active/iconFg": "text/primary",
+    "bnav/item/active/labelFg": "text/primary",
+    "bnav/item/active/indicator": "brand/subtle",
+    "bnav/item/active/fontWeight": "type/weight-semibold",
+    "bnav/item/focused/ring": "focus/ring",
+    "bnav/item/disabled/fg": "text/disabled",
+    "bnav/indicator/radius/sm": "radius/pill",
+    "bnav/indicator/radius/md": "radius/pill",
+    "bnav/iconSize/sm": "iconSize/md",
+    "bnav/iconSize/md": "iconSize/lg",
+    "bnav/label/fontSize/sm": "type/xs",
+    "bnav/label/fontSize/md": "type/xs"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Solo M3 + antd-mobile como referencias (5/6 T1 no tienen este componente)", "why": "Spectrum/Carbon/Polaris/Atlassian son desktop-first o usan native mobile. M3 define el estándar mobile web con 3-5 items, pill indicator, badge integration. Ant Design lo tiene solo en antd-mobile (separate library).", "source": "research" },
+    { "what": "Active indicator pill (M3) como boolean + slot separado", "why": "M3 reemplazó el color-tint-only de M2 con pill shape — active state no depende solo de color (WCAG 1.4.1). Modelado como slot activeIndicator + boolean Show Active Indicator para flexibilidad.", "source": "research" },
+    { "what": "ItemCount como property explícito (3/4/5)", "why": "M3 hard constraint 3-5 items. Documentar en la API evita builds con 2 o 6 items. Property discreta permite render frames para cada count sin flexibilidad ambigua.", "source": "research" },
+    { "what": "Show Label como boolean (no separate IconOnly variant)", "why": "Google research: labels mejoran comprensión 75%. Default ON; permitir OFF (icon-only) es opt-in documentado con warning. Evita variante 'icon-only' que fragmenta visual consistency.", "source": "research" },
+    { "what": "Safe-area + hide-on-scroll documentados pero no modelados", "why": "Son comportamientos runtime (CSS safe-area-inset, scroll listeners), no propiedades Figma. Documentados en componentDescription para implementación. antd-mobile `safeArea` prop referencia.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

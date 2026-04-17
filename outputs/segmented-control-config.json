@@ -1,0 +1,159 @@
+{
+  "version": "1.0",
+  "component": "SegmentedControl",
+  "archetype": "selection-group",
+  "language": "es",
+  "buildOrder": ["Segment", "SegmentedControl"],
+  "family": [
+    {
+      "name": "Segment",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "SegmentedControl",
+      "slots": [
+        { "name": "icon", "type": "icon", "required": false, "figmaBinding": "instance-swap" },
+        { "name": "label", "type": "text", "required": false, "figmaBinding": "text" },
+        { "name": "selectedIcon", "type": "icon", "required": false, "figmaBinding": "instance-swap", "note": "checkmark en selected state (M3 pattern)" }
+      ],
+      "properties": {
+        "State": ["default", "hover", "selected", "focused", "disabled"],
+        "Size":  ["sm", "md", "lg"]
+      },
+      "exclusions": [
+        "label vacío + icon ausente (segmento debe tener al menos uno)"
+      ],
+      "sizes": {
+        "sm": {
+          "h": 28, "px": 10, "gap": 6,
+          "fontSize": 12, "fontWeight": 500, "lineHeight": 16,
+          "iconSize": 14, "radius": 6
+        },
+        "md": {
+          "h": 32, "px": 12, "gap": 6,
+          "fontSize": 13, "fontWeight": 500, "lineHeight": 18,
+          "iconSize": 16, "radius": 6
+        },
+        "lg": {
+          "h": 40, "px": 16, "gap": 8,
+          "fontSize": 14, "fontWeight": 500, "lineHeight": 20,
+          "iconSize": 18, "radius": 8
+        }
+      },
+      "stateStyles": {
+        "default":  { "bg": "transparent", "fg": { "r": 0.42, "g": 0.45, "b": 0.50 }, "border": "transparent" },
+        "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "border": "transparent" },
+        "selected": { "bg": { "r": 1.0, "g": 1.0, "b": 1.0 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "border": { "r": 0.82, "g": 0.82, "b": 0.85 }, "shadow": "sm" },
+        "focused":  { "bg": { "r": 1.0, "g": 1.0, "b": 1.0 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "ring": true },
+        "disabled": { "bg": "transparent", "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "border": "transparent" }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Segment" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Icon", "layerName": "icon", "default": "icon/placeholder" },
+        { "propName": "🔄 Selected Icon", "layerName": "selectedIcon", "default": "icon/check" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Icon", "layerName": "icon" },
+        { "propName": "👁 Has Label", "layerName": "label" },
+        { "propName": "👁 Show Selected Checkmark", "layerName": "selectedIcon" }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 15,
+        "exclusions": 0,
+        "net": 15,
+        "note": "State(5) × Size(3) = 15"
+      },
+      "grid": { "maxCols": 5, "gap": 16, "pad": 24 }
+    },
+    {
+      "name": "SegmentedControl",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "segments", "type": "container", "required": true, "note": "2–5 instancias de Segment" }
+      ],
+      "properties": {
+        "SelectionMode": ["single", "multiple"],
+        "Size":          ["sm", "md", "lg"],
+        "FullWidth":     ["no", "yes"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "h": 32, "p": 2, "gap": 2, "radius": 8 },
+        "md": { "h": 36, "p": 2, "gap": 2, "radius": 8 },
+        "lg": { "h": 44, "p": 2, "gap": 2, "radius": 10 }
+      },
+      "containerStyles": {
+        "bg": { "r": 0.94, "g": 0.94, "b": 0.95 },
+        "border": { "r": 0.88, "g": 0.88, "b": 0.90 }
+      },
+      "frameCount": {
+        "gross": 12,
+        "exclusions": 0,
+        "net": 12,
+        "note": "SelectionMode(2) × Size(3) × FullWidth(2) = 12"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "segmented-selector",
+    "role": "radiogroup (single) o group (multiple) + radio|checkbox (items)",
+    "ariaAttributes": [
+      "SelectionMode=single: container role='radiogroup' + aria-label; Segment role='radio' + aria-checked",
+      "SelectionMode=multiple: container role='group' + aria-label; Segment role='checkbox' + aria-checked",
+      "Icon-only segments: aria-label obligatorio (Carbon requiere Tooltip)",
+      "Disabled: aria-disabled='true'",
+      "Selected state: checkmark icon adicional al color change (M3 pattern — WCAG 1.4.1)"
+    ],
+    "keyboardNav": [
+      "Arrow Left/Right: navega entre segments (roving tabindex)",
+      "Home/End: primer/último segment",
+      "Space: toggle (multiple) o select (single)",
+      "Tab: sale del group"
+    ],
+    "focusTechnique": "roving tabindex + ring 2px en el segment focuseado",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 22, "prefix": "seg", "mode": "C" },
+  "componentDescriptions": {
+    "Segment": "Item individual de SegmentedControl. Label, icon, o ambos. States: default/hover/selected/focused/disabled. Sizes: sm/md/lg.\n\n🔑 ARIA:\n• role='radio' (single) o 'checkbox' (multiple) según parent\n• aria-checked en selected\n• Icon-only: aria-label requerido\n• Selected: checkmark + color (non-color-only per WCAG 1.4.1)\n\n⌨️ Keyboard:\n• Arrow keys navegan (roving tabindex)\n• Space toggle/select\n\nWCAG 2.2 AA.",
+    "SegmentedControl": "Selector de opciones mutuamente excluyentes (single) o múltiples (multiple). 2–5 segments. Sizes: sm/md/lg. FullWidth: fit-content (no) o fill container (yes).\n\n🔑 ARIA:\n• SelectionMode=single: role='radiogroup'\n• SelectionMode=multiple: role='group'\n• aria-label obligatorio\n\n⌨️ Keyboard:\n• Arrow keys navegan\n• Space toggle\n\n🎯 Focus:\n• Roving tabindex\n• Selected state tiene shadow + border + checkmark (triple afordance a11y)\n\nTokens: 22, prefijo seg-.\nWCAG 2.2 AA.\n\nUsar para: view-mode switching (chart/table/list), filter single-select, compact option selection.\nNO usar para: content navegación — usa Tabs. Más de 5 opciones — usa Select o Tabs."
+  },
+  "variableBindings": {
+    "seg/container/bg": "surface/pressed",
+    "seg/container/border": "border/default",
+    "seg/sm/h": "sizing/32",
+    "seg/md/h": "sizing/36",
+    "seg/lg/h": "sizing/44",
+    "seg/segment/default/fg": "text/secondary",
+    "seg/segment/hover/bg": "surface/hover",
+    "seg/segment/hover/fg": "text/primary",
+    "seg/segment/selected/bg": "surface/default",
+    "seg/segment/selected/fg": "text/primary",
+    "seg/segment/selected/border": "border/default",
+    "seg/segment/selected/shadow": "elevation/1",
+    "seg/segment/focused/ring": "focus/ring",
+    "seg/segment/disabled/fg": "text/disabled",
+    "seg/radius/sm": "radius/md",
+    "seg/radius/md": "radius/md",
+    "seg/radius/lg": "radius/lg",
+    "seg/fontSize/sm": "type/xs",
+    "seg/fontSize/md": "type/sm",
+    "seg/fontSize/lg": "type/md",
+    "seg/gap": "spacing/0.5",
+    "seg/padding": "spacing/0.5"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "SelectionMode single + multiple (M3 + Spectrum pattern)", "why": "M3 unifica con singleSelect boolean; Spectrum tiene 3 modos (none/single/multiple). Nosotros usamos 2 — 'none' (pure actions) ya está cubierto por ButtonGroup. Mantenemos single/multiple con ARIA role adaptativa.", "source": "research" },
+    { "what": "Tres sizes (sm/md/lg) siguiendo Carbon", "why": "Carbon ofrece 3 sizes; Ant ofrece 3 (small/default/large). sm/md para densidad enterprise; lg para touch mobile. Escala matches Input component heights.", "source": "research" },
+    { "what": "Checkmark icon en selected state (M3)", "why": "WCAG 1.4.1 — selected state no puede depender solo de color. M3 reemplaza el leading icon con checkmark en single-select. Modelado como boolean Show Selected Checkmark + swap slot selectedIcon.", "source": "research" },
+    { "what": "Container con bg pressed + border (iOS/macOS pattern)", "why": "Selected segment tiene bg blanco 'elevado' sobre container oscuro. Shadow elevation/1 refuerza estado selected. Match con Ant sliding indicator visual (sin animación en Figma).", "source": "research" },
+    { "what": "FullWidth como property (Ant `block` + Polaris `fitted`)", "why": "En toolbars el segmented es fit-content; en filter bars necesita full-width. Property explícita genera frames para ambos casos.", "source": "research" },
+    { "what": "Sin overflow collapse (diferencia vs Spectrum)", "why": "Spectrum colapsa a 'more' menu con overflow; Ant/M3 no. Recomendamos limitar a ≤5 segments (M3 constraint). Overflow se resuelve con SelectionMode diferente (Select/Dropdown).", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

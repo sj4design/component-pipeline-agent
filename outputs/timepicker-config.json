@@ -1,0 +1,129 @@
+{
+  "version": "1.0",
+  "component": "TimePicker",
+  "archetype": "time-input",
+  "language": "es",
+  "buildOrder": ["TimePicker"],
+  "family": [
+    {
+      "name": "TimePicker",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "label", "type": "text", "required": false, "figmaBinding": "text" },
+        { "name": "input", "type": "container", "required": true, "note": "input con segments hour/minute/(second)/AM-PM" },
+        { "name": "clockIcon", "type": "icon", "required": false, "note": "clock icon leading o trigger" },
+        { "name": "dropdown", "type": "container", "required": false, "note": "popover con spinner columns (hour/minute/AM-PM)" },
+        { "name": "hourColumn", "type": "container", "required": false, "note": "scrollable 00-23 o 01-12" },
+        { "name": "minuteColumn", "type": "container", "required": false, "note": "scrollable 00-59 (steps 1 o 5 o 15)" },
+        { "name": "secondColumn", "type": "container", "required": false, "note": "scrollable 00-59 (showSeconds=true)" },
+        { "name": "meridiemColumn", "type": "container", "required": false, "note": "AM / PM (format=12h)" },
+        { "name": "nowButton", "type": "container", "required": false, "note": "'Ahora' shortcut" },
+        { "name": "okButton", "type": "container", "required": false }
+      ],
+      "properties": {
+        "State":      ["default", "focused", "open", "error", "disabled"],
+        "Size":       ["sm", "md", "lg"],
+        "Format":     ["12h", "24h"],
+        "Precision":  ["minute", "second"],
+        "Step":       ["1", "5", "15", "30"]
+      },
+      "exclusions": [
+        "Precision=second + Step=15|30 (mismatch)",
+        "Format=24h + meridiemColumn visible"
+      ],
+      "sizes": {
+        "sm": { "inputH": 32, "fontSize": 13, "dropdownW": 200, "columnW": 56, "columnRowH": 32 },
+        "md": { "inputH": 40, "fontSize": 14, "dropdownW": 240, "columnW": 64, "columnRowH": 36 },
+        "lg": { "inputH": 48, "fontSize": 16, "dropdownW": 280, "columnW": 72, "columnRowH": 40 }
+      },
+      "stateStyles": {
+        "default":  { "inputBorder": { "r": 0.82, "g": 0.82, "b": 0.85 }, "bg": { "r": 1.0, "g": 1.0, "b": 1.0 } },
+        "focused":  { "inputBorder": { "r": 0.15, "g": 0.35, "b": 0.92 }, "ring": true },
+        "open":     { "inputBorder": { "r": 0.15, "g": 0.35, "b": 0.92 }, "shadow": "lg" },
+        "error":    { "inputBorder": { "r": 0.86, "g": 0.15, "b": 0.15 } },
+        "disabled": { "inputBorder": { "r": 0.88, "g": 0.88, "b": 0.90 }, "bg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "opacity": 0.6 }
+      },
+      "columnItemStyles": {
+        "default":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 } },
+        "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "selected": { "bg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "fg": { "r": 1.0, "g": 1.0, "b": 1.0 }, "fontWeight": 600 },
+        "disabled": { "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "opacity": 0.5 }
+      },
+      "booleanLayers": [
+        { "propName": "👁 Has Label", "layerName": "label" },
+        { "propName": "👁 Show Clock Icon", "layerName": "clockIcon" },
+        { "propName": "👁 Show Seconds", "layerName": "secondColumn" },
+        { "propName": "👁 Show Now Button", "layerName": "nowButton" }
+      ],
+      "frameCount": {
+        "gross": 120,
+        "exclusions": 24,
+        "net": 96,
+        "note": "State(5) × Size(3) × Format(2) × Precision(2) × Step(4) = 240; selected 120 útiles −24 = 96"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "time-picker",
+    "role": "combobox + listbox (dropdown) + spinbutton (per column)",
+    "ariaAttributes": [
+      "Input: role='combobox' + aria-expanded + aria-controls='[dropdown-id]' + aria-haspopup='dialog'",
+      "Segments (Spectrum pattern): each part (hour/minute/AM-PM) como role='spinbutton' con aria-valuemin/max/now",
+      "Dropdown: role='dialog' + aria-label='Seleccionar hora'",
+      "Columns: role='listbox' con role='option' en cada valor",
+      "Selected option: aria-selected='true'",
+      "Error: aria-invalid='true' + aria-errormessage apuntando a helper/error",
+      "Disabled times: aria-disabled='true'"
+    ],
+    "keyboardNav": [
+      "Tab: navega al input",
+      "Arrow Up/Down: cambia segment value (spinbutton pattern)",
+      "Arrow Left/Right: entre segments (hour ↔ minute ↔ AM/PM)",
+      "Type digits: input directo",
+      "Alt+Down: abre dropdown",
+      "Enter en dropdown: confirma selection + cierra",
+      "Escape: cierra dropdown sin cambio"
+    ],
+    "focusTechnique": "ring 2px en input + segment activo; focus trap en dropdown cuando open",
+    "edgeCases": 8,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 22, "prefix": "tp", "mode": "C" },
+  "componentDescriptions": {
+    "TimePicker": "Input de hora. Format: 12h (con AM/PM) / 24h. Precision: minute / second. Step: 1/5/15/30 min. Size: sm/md/lg. State: default/focused/open/error/disabled.\n\n🔑 ARIA:\n• Input: role='combobox' (Spectrum pattern)\n• Segments independientes con role='spinbutton' (cada parte navegable)\n• Dropdown: role='dialog' con columns role='listbox'\n\n⌨️ Keyboard:\n• Arrow Up/Down en segment: cambia value\n• Arrow Left/Right: entre segments\n• Type digits directamente\n• Alt+Down abre dropdown\n\n🎯 Focus:\n• Segment spinbutton: WAI-ARIA pattern\n• Focus trap en dropdown\n\nTokens: 22, prefijo tp-.\nWCAG 2.2 AA.\n\nFormat 12h vs 24h driven por locale + explicit prop. Step discrete para evitar overwhelm (00:00, 00:05, 00:10... si step=5).\n\nPara rangos de tiempo (meeting inicio + fin) usa 2 TimePickers. Para fecha+hora usa DatePicker + TimePicker composición."
+  },
+  "variableBindings": {
+    "tp/sm/h": "sizing/32",
+    "tp/md/h": "sizing/40",
+    "tp/lg/h": "sizing/48",
+    "tp/default/border": "border/default",
+    "tp/focused/border": "border/focus",
+    "tp/focused/ring": "focus/ring",
+    "tp/open/shadow": "elevation/3",
+    "tp/error/border": "border/error",
+    "tp/disabled/bg": "surface/disabled",
+    "tp/disabled/opacity": "opacity/disabled",
+    "tp/dropdown/bg": "surface/default",
+    "tp/dropdown/border": "border/default",
+    "tp/dropdown/radius": "radius/md",
+    "tp/dropdown/shadow": "elevation/3",
+    "tp/column/item/hover": "surface/hover",
+    "tp/column/item/selected": "interactive/default",
+    "tp/column/item/selectedFg": "text/inverse",
+    "tp/column/item/selectedFontWeight": "type/weight-semibold",
+    "tp/fontSize/sm": "type/sm",
+    "tp/fontSize/md": "type/md",
+    "tp/fontSize/lg": "type/lg",
+    "tp/padding": "spacing/3"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Segment spinbutton pattern (Spectrum)", "why": "Spectrum DatePicker/TimePicker usa segments independientes con role='spinbutton'. Elimina format parsing errors. Each segment valida independientemente.", "source": "common-patterns" },
+    { "what": "Dropdown con 3-4 columns (hour/minute/AM-PM)", "why": "Alibaba/Ant/Polaris pattern. Scrollable columns vs. clock face — más denso, accesible por keyboard, funciona en narrow screens.", "source": "common-patterns" },
+    { "what": "Step discrete (1/5/15/30)", "why": "Calendaring requiere 15/30 min steps (meetings); logging puede ser 1 min. 4 options cubren casos enterprise + consumer.", "source": "common-patterns" },
+    { "what": "Format 12h/24h como property", "why": "US usa 12h (AM/PM); Europe usa 24h. Property explícita + detección de locale en runtime.", "source": "common-patterns" },
+    { "what": "Now button shortcut", "why": "Common UX pattern: 'set to current time' reduce steps para reservation flows ('Reservar ahora').", "source": "common-patterns" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

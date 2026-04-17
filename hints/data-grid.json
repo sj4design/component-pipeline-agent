@@ -1,0 +1,134 @@
+{
+  "component": "DataGrid",
+  "archetype": "data-table",
+  "buildOrder": ["Cell", "Row", "DataGrid"],
+  "family": [
+    {
+      "name": "Cell",
+      "isSubComponent": true,
+      "slots": ["content*:text-or-container", "leadingIcon:icon", "sortIcon:icon", "selection:container"],
+      "properties": {
+        "Type":      ["header", "body", "footer"],
+        "Alignment": ["start", "center", "end"],
+        "State":     ["default", "hover", "sorted", "disabled"],
+        "Size":      ["sm", "md", "lg"]
+      },
+      "booleans": ["Has Leading Icon", "Has Sort Icon", "Has Selection"],
+      "exclusions": ["Type=body|footer + State=sorted", "Type=header + State=disabled"],
+      "frameCount": 72
+    },
+    {
+      "name": "Row",
+      "isSubComponent": true,
+      "slots": ["cells*:container", "expandButton:icon-action", "expandedContent:container"],
+      "properties": {
+        "State":   ["default", "hover", "selected", "expanded", "focused", "disabled"],
+        "Type":    ["header", "body", "footer", "subheader"],
+        "Density": ["compact", "default", "comfortable"]
+      },
+      "booleans": [],
+      "exclusions": ["Type=header + State=selected|expanded", "Type=footer + State=hover|selected|expanded"],
+      "frameCount": 48
+    },
+    {
+      "name": "DataGrid",
+      "isSubComponent": false,
+      "slots": ["toolbar:container", "headerRow*:container", "body*:container", "footer:container", "pagination:container", "emptyState:container"],
+      "properties": {
+        "Density":      ["compact", "default", "comfortable"],
+        "StickyHeader": ["no", "yes"],
+        "ZebraStripes": ["off", "on"],
+        "Bordered":     ["no", "yes"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 24
+    }
+  ],
+  "a11y": {
+    "role": "table o grid",
+    "keyboard": [
+      "Tab entre elementos interactivos (default)",
+      "Space toggle selection en checkbox",
+      "Enter en sortable header cicla sort",
+      "Arrow keys opcional para grid mode (Spectrum/MUI)"
+    ],
+    "focus": "Ring 2px. Batch actions bar focus trap cuando activo. aria-live anuncia selection count."
+  },
+  "tokens": { "total": 38, "prefix": "dg" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Qué tipo de data grid necesitas?",
+      "options": [
+        { "value": "resource-list", "label": "Lista de recursos — users, orders, files con selección + bulk actions (Polaris IndexTable)" },
+        { "value": "data-display", "label": "Display de datos — analytics, reports, sin mucha interacción" },
+        { "value": "editable", "label": "Editable — inline editing de celdas (MUI DataGrid, Lightning)" },
+        { "value": "hierarchical", "label": "Jerárquica — tree data con expandable rows (Ant)" },
+        { "value": "moderate-list", "label": "Lista moderada — 50–500 filas con sort + selection + pagination (Carbon)" }
+      ],
+      "impact": "Toolbar, batch actions, inline edit, tree data scope",
+      "tags": ["list", "display", "editable", "tree", "analytics", "bulk-actions"]
+    },
+    {
+      "id": "selection",
+      "text": "¿Los usuarios seleccionan filas?",
+      "options": [
+        { "value": "none", "label": "No — display only" },
+        { "value": "single", "label": "Single — radio selection (ver detalle de una fila)" },
+        { "value": "multiple", "label": "Multiple — checkbox + bulk actions" },
+        { "value": "both", "label": "Ambos según caso" }
+      ],
+      "impact": "Selection column, batch actions bar, State=selected",
+      "tags": ["selection", "checkbox", "radio", "bulk", "multi-select"]
+    },
+    {
+      "id": "density",
+      "text": "¿Qué densidad principal?",
+      "options": [
+        { "value": "compact", "label": "Compact (32px) — dashboards densos enterprise" },
+        { "value": "default", "label": "Default (40px) — uso general" },
+        { "value": "comfortable", "label": "Comfortable (48px) — touch/accessibility zoom" },
+        { "value": "all", "label": "Las 3 (switch runtime)" }
+      ],
+      "impact": "Density property, Row height",
+      "tags": ["density", "compact", "comfortable", "enterprise", "touch"]
+    },
+    {
+      "id": "features",
+      "text": "¿Qué features necesitas?",
+      "options": [
+        { "value": "basic", "label": "Básico — sort + pagination" },
+        { "value": "standard", "label": "Estándar — + selection + bulk actions + zebra stripes" },
+        { "value": "advanced", "label": "Avanzado — + expandable rows + sticky header + column filters" },
+        { "value": "enterprise", "label": "Enterprise — + tree data + sub-totals + row grouping (Ant completo)" }
+      ],
+      "impact": "Booleans StickyHeader/ZebraStripes, slot footer, expand button",
+      "tags": ["sort", "pagination", "expandable", "filters", "grouping", "totals"]
+    },
+    {
+      "id": "dataset-size",
+      "text": "¿Tamaño típico del dataset?",
+      "options": [
+        { "value": "small", "label": "<100 filas — no necesita paginación ni virtualization" },
+        { "value": "moderate", "label": "100–500 filas — pagination (Carbon/Atlassian pattern)" },
+        { "value": "large", "label": "500–5000 filas — pagination + sticky header" },
+        { "value": "huge", "label": ">5000 filas — virtualization requerida (no modelado en Figma)" }
+      ],
+      "impact": "StickyHeader default, pagination slot, warning si >5k",
+      "tags": ["dataset", "virtualization", "pagination", "performance", "scroll"]
+    },
+    {
+      "id": "toolbar",
+      "text": "¿Necesitas toolbar con search/filter/actions globales?",
+      "options": [
+        { "value": "no", "label": "No — grid standalone" },
+        { "value": "search", "label": "Solo search" },
+        { "value": "full-toolbar", "label": "Full — title + search + filter + export + primary action" },
+        { "value": "batch-actions", "label": "Batch actions bar — aparece al seleccionar filas" }
+      ],
+      "impact": "Toolbar slot inclusion",
+      "tags": ["toolbar", "search", "filter", "export", "batch-actions", "bulk"]
+    }
+  ]
+}
