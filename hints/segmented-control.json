@@ -1,0 +1,112 @@
+{
+  "component": "SegmentedControl",
+  "archetype": "selection-group",
+  "buildOrder": ["Segment", "SegmentedControl"],
+  "family": [
+    {
+      "name": "Segment",
+      "isSubComponent": true,
+      "slots": ["icon:icon", "label:text", "selectedIcon:icon"],
+      "properties": {
+        "State": ["default", "hover", "selected", "focused", "disabled"],
+        "Size":  ["sm", "md", "lg"]
+      },
+      "booleans": ["Has Icon", "Has Label", "Show Selected Checkmark"],
+      "exclusions": [],
+      "frameCount": 15
+    },
+    {
+      "name": "SegmentedControl",
+      "isSubComponent": false,
+      "slots": ["segments*:container"],
+      "properties": {
+        "SelectionMode": ["single", "multiple"],
+        "Size":          ["sm", "md", "lg"],
+        "FullWidth":     ["no", "yes"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 12
+    }
+  ],
+  "a11y": {
+    "role": "radiogroup (single) / group (multiple) + radio/checkbox (items)",
+    "keyboard": [
+      "Arrow keys navegan entre segments (roving tabindex)",
+      "Home/End primer/último",
+      "Space toggle (multiple) o select (single)"
+    ],
+    "focus": "Roving tabindex + ring 2px en segment focuseado."
+  },
+  "tokens": { "total": 22, "prefix": "seg" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas SegmentedControl?",
+      "options": [
+        { "value": "view-mode", "label": "Cambiar modo de vista — chart/table/list del mismo data (Carbon ContentSwitcher)" },
+        { "value": "single-filter", "label": "Filter single-select compacto — Today/Week/Month" },
+        { "value": "multi-filter", "label": "Filter multi-select — múltiples opciones simultáneas" },
+        { "value": "option-selection", "label": "Selector compacto — Light/Dark/Auto, Small/Medium/Large" }
+      ],
+      "impact": "SelectionMode (single/multiple), sizes, Has Icon default",
+      "tags": ["view-mode", "filter", "single-select", "multi-select", "options", "chart", "table"]
+    },
+    {
+      "id": "selection-mode",
+      "text": "¿Selección única o múltiple?",
+      "options": [
+        { "value": "single", "label": "Single — solo un segment activo (radio semántica)" },
+        { "value": "multiple", "label": "Multiple — varios activos simultáneos (checkbox semántica)" },
+        { "value": "both", "label": "Ambos según el caso" }
+      ],
+      "impact": "SelectionMode property + a11y role adaptativa",
+      "tags": ["single", "multiple", "radio", "checkbox", "exclusive", "multi-select"]
+    },
+    {
+      "id": "content",
+      "text": "¿Qué contienen los segments?",
+      "options": [
+        { "value": "label-only", "label": "Solo texto" },
+        { "value": "icon-only", "label": "Solo icon — requiere aria-label/Tooltip" },
+        { "value": "icon-label", "label": "Icon + label — más descriptivo" },
+        { "value": "mixed", "label": "Mixed — algunos con icon, otros sin" }
+      ],
+      "impact": "Has Icon, Has Label booleans default",
+      "tags": ["text", "icon", "label", "icon-only", "tooltip"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños necesitas?",
+      "options": [
+        { "value": "md-only", "label": "Solo md (36px) — uso general" },
+        { "value": "sm-md", "label": "sm (32px) + md (36px) — compact + standard" },
+        { "value": "all", "label": "sm + md + lg (32/36/44px) — touch mobile incluido" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "large", "size", "touch", "density"]
+    },
+    {
+      "id": "full-width",
+      "text": "¿El control ocupa todo el ancho del contenedor?",
+      "options": [
+        { "value": "fit-content", "label": "Fit-content — ancho según segments (toolbar pattern)" },
+        { "value": "full-width", "label": "Full-width — rellena el contenedor (filter bar pattern)" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "FullWidth property",
+      "tags": ["fullwidth", "block", "fitted", "fit-content", "filter-bar"]
+    },
+    {
+      "id": "selected-indicator",
+      "text": "¿Cómo se comunica el estado selected?",
+      "options": [
+        { "value": "bg-shadow", "label": "Background blanco + shadow (macOS pattern) — default" },
+        { "value": "checkmark", "label": "Checkmark icon + color change (M3 pattern — máxima a11y)" },
+        { "value": "both", "label": "Background + checkmark — triple afordance WCAG" }
+      ],
+      "impact": "Show Selected Checkmark boolean default, stateStyle.selected",
+      "tags": ["selected", "checkmark", "background", "shadow", "wcag", "color"]
+    }
+  ]
+}

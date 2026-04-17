@@ -1,0 +1,99 @@
+{
+  "component": "BottomNav",
+  "archetype": "mobile-navigation",
+  "buildOrder": ["NavItem", "BottomNav"],
+  "family": [
+    {
+      "name": "NavItem",
+      "isSubComponent": true,
+      "slots": ["icon*:icon", "label:text", "badge:container", "activeIndicator:shape"],
+      "properties": {
+        "State": ["default", "hover", "active", "focused", "disabled"],
+        "Size":  ["sm", "md"]
+      },
+      "booleans": ["Show Label", "Has Badge", "Show Active Indicator"],
+      "exclusions": [],
+      "frameCount": 10
+    },
+    {
+      "name": "BottomNav",
+      "isSubComponent": false,
+      "slots": ["items*:container"],
+      "properties": {
+        "Size":     ["sm", "md"],
+        "ItemCount": ["3", "4", "5"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 6
+    }
+  ],
+  "a11y": {
+    "role": "navigation + link/button",
+    "keyboard": [
+      "Tab navega entre NavItems",
+      "Enter/Space activa (navega al destino)"
+    ],
+    "focus": "Ring 2px en NavItem focuseado. Indicator pill no reemplaza el focus ring."
+  },
+  "tokens": { "total": 20, "prefix": "bnav" },
+  "questions": [
+    {
+      "id": "item-count",
+      "text": "¿Cuántos items tiene tu bottom-nav?",
+      "options": [
+        { "value": "3", "label": "3 items — simple, muy claro" },
+        { "value": "4", "label": "4 items — balance estándar" },
+        { "value": "5", "label": "5 items — máximo recomendado" },
+        { "value": "variable", "label": "Variable — genera los 3 counts (3, 4, 5)" }
+      ],
+      "impact": "ItemCount property. Si >5, usar 'More' menu con Drawer",
+      "tags": ["count", "3", "4", "5", "destinations"]
+    },
+    {
+      "id": "labels",
+      "text": "¿Los items muestran labels bajo el icon?",
+      "options": [
+        { "value": "always", "label": "Siempre — recomendado (mejora comprensión 75% per Google)" },
+        { "value": "never", "label": "Nunca — icon-only (compacto, requiere aria-label)" },
+        { "value": "active-only", "label": "Solo en activo — labels ocultos, aparece al activo (M3 condicional)" }
+      ],
+      "impact": "Show Label boolean default",
+      "tags": ["label", "icon-only", "text", "comprehension"]
+    },
+    {
+      "id": "active-indicator",
+      "text": "¿Cómo se comunica el estado activo?",
+      "options": [
+        { "value": "pill-indicator", "label": "Pill detrás del icon (M3 pattern — recomendado a11y)" },
+        { "value": "color-only", "label": "Solo cambio de color del icon (no recomendado sin otro indicador)" },
+        { "value": "filled-icon", "label": "Icon outlined → filled al activar (iOS pattern)" },
+        { "value": "pill-and-filled", "label": "Pill + filled icon — máxima afordance" }
+      ],
+      "impact": "Show Active Indicator boolean, swap de icon default/active",
+      "tags": ["active", "indicator", "pill", "filled", "outlined", "wcag"]
+    },
+    {
+      "id": "badges",
+      "text": "¿Los items muestran badges (notificaciones)?",
+      "options": [
+        { "value": "never", "label": "Nunca" },
+        { "value": "dot-only", "label": "Solo dot — presencia sin número" },
+        { "value": "count", "label": "Count — número de notificaciones" },
+        { "value": "both", "label": "Ambos según item" }
+      ],
+      "impact": "Has Badge boolean, tipo de Badge a usar",
+      "tags": ["badge", "notification", "dot", "count", "unread"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Tamaños necesarios?",
+      "options": [
+        { "value": "md-only", "label": "Solo md (64px) — estándar Zoom/apps consumer" },
+        { "value": "sm-md", "label": "sm (56px) + md (64px) — compacto + comfortable" }
+      ],
+      "impact": "Size property",
+      "tags": ["small", "medium", "compact", "comfortable", "height"]
+    }
+  ]
+}

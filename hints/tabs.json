@@ -1,0 +1,112 @@
+{
+  "component": "Tabs",
+  "archetype": "navigation-switcher",
+  "buildOrder": ["Tab", "Tabs"],
+  "family": [
+    {
+      "name": "Tab",
+      "isSubComponent": true,
+      "slots": ["icon:icon", "label*:text", "badge:container", "closeButton:icon-action", "indicator:shape"],
+      "properties": {
+        "Type":  ["line", "contained"],
+        "State": ["default", "hover", "active", "focused", "disabled"],
+        "Size":  ["sm", "md"]
+      },
+      "booleans": ["Has Icon", "Has Badge", "Closable"],
+      "exclusions": ["Type=contained + indicator visible"],
+      "frameCount": 18
+    },
+    {
+      "name": "Tabs",
+      "isSubComponent": false,
+      "slots": ["tabList*:container", "extraContent:container"],
+      "properties": {
+        "Orientation": ["horizontal", "vertical"],
+        "Type":        ["line", "contained"],
+        "Size":        ["sm", "md"]
+      },
+      "booleans": [],
+      "exclusions": ["Orientation=vertical + Type=contained"],
+      "frameCount": 6
+    }
+  ],
+  "a11y": {
+    "role": "tablist + tab + tabpanel",
+    "keyboard": [
+      "Arrow keys navegan (roving tabindex)",
+      "Home/End primer/último",
+      "Tab sale al tabpanel",
+      "Space/Enter activa (manual mode)"
+    ],
+    "focus": "Roving tabindex: active=0, resto=-1. Ring 2px en focus."
+  },
+  "tokens": { "total": 24, "prefix": "tab" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Tabs principalmente?",
+      "options": [
+        { "value": "content-sections", "label": "Secciones de contenido — páginas/vistas con contenido distinto (ej. Overview, Settings, Members)" },
+        { "value": "filtered-views", "label": "Vistas filtradas — listas con filtros predefinidos (ej. All / Active / Archived)" },
+        { "value": "document-tabs", "label": "Tabs tipo browser — documentos abiertos simultáneos, closable/addable" },
+        { "value": "multiple", "label": "Varios casos" }
+      ],
+      "impact": "Type (line/contained), Closable boolean, Badge boolean",
+      "tags": ["content", "sections", "filters", "views", "documents", "closable"]
+    },
+    {
+      "id": "type",
+      "text": "¿Estilo visual de los tabs?",
+      "options": [
+        { "value": "line", "label": "Line — underline bajo el tab activo (más común, minimal)" },
+        { "value": "contained", "label": "Contained — fondo filled en el tab activo (dashboards, anchor visual)" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "Type property values",
+      "tags": ["line", "underline", "contained", "filled", "dashboard"]
+    },
+    {
+      "id": "orientation",
+      "text": "¿Orientación?",
+      "options": [
+        { "value": "horizontal", "label": "Horizontal — default, arriba del panel" },
+        { "value": "vertical", "label": "Vertical — sidebar-style, para muchos tabs o settings" },
+        { "value": "both", "label": "Ambas según contexto" }
+      ],
+      "impact": "Orientation property",
+      "tags": ["horizontal", "vertical", "sidebar", "top-tabs", "settings"]
+    },
+    {
+      "id": "badge-count",
+      "text": "¿Los tabs muestran contadores/badges (ej. '3 Unread')?",
+      "options": [
+        { "value": "never", "label": "Nunca" },
+        { "value": "always", "label": "Siempre — cada tab lleva badge" },
+        { "value": "optional", "label": "Opcional — algunos con badge" }
+      ],
+      "impact": "Has Badge boolean",
+      "tags": ["badge", "count", "notification", "unread"]
+    },
+    {
+      "id": "closable",
+      "text": "¿Los tabs pueden cerrarse individualmente (X button)?",
+      "options": [
+        { "value": "never", "label": "Nunca — navegación fija" },
+        { "value": "always", "label": "Siempre — browser-style, cada tab cerrable" },
+        { "value": "user-created-only", "label": "Solo tabs user-created (vistas guardadas)" }
+      ],
+      "impact": "Closable boolean",
+      "tags": ["closable", "dismissible", "browser-tabs", "user-created"]
+    },
+    {
+      "id": "activation",
+      "text": "¿Cómo se activa un tab al navegar con teclado?",
+      "options": [
+        { "value": "automatic", "label": "Automatic — al mover arrow keys, tab se activa inmediatamente (default)" },
+        { "value": "manual", "label": "Manual — arrow key mueve foco, Enter/Space activa (para paneles con API calls caros)" }
+      ],
+      "impact": "Patrón de a11y/keyboard; no afecta Figma frames",
+      "tags": ["automatic", "manual", "activation", "performance", "api-calls"]
+    }
+  ]
+}
