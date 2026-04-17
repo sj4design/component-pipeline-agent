@@ -24,7 +24,11 @@ Flags: `--fresh` (ignore cache), `--from=spec` (skip research), `--human` (also 
 7. Generate outputs/[comp]-spec-completo.md (v4 format)
    • Para la sección "Reference: how other systems do it":
      - IF research/components/[comp].md existe → usar sus Per-System Narratives
-     - IF NO existe (comps generados fast-mode) → FALLBACK: leer component-research-agent/references/systems/compiled/[comp].md (tier-1 digest, 6 sistemas) y sintetizar inline un párrafo compact por sistema (~80 chars cada uno). NO leer tier-2/tier-3 (no worth the tokens).
+     - IF NO existe (comps generados fast-mode) → FALLBACK: leer los 3 tiers en paralelo:
+       · component-research-agent/references/systems/compiled/[comp].md (T1, 6 systems)
+       · component-research-agent/references/systems/compiled-tier2/[comp].md (T2, 8 systems)
+       · component-research-agent/references/systems/compiled-tier3/[comp].md (T3, 10 systems)
+       Sintetizar inline 24 systems (~80 chars narrativa por sistema). Resultado equivalente en cobertura a research.md pregenerado.
 8. Save filtered config.json
 ```
 
