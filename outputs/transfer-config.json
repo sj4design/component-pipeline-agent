@@ -1,0 +1,204 @@
+{
+  "version": "1.0",
+  "component": "Transfer",
+  "archetype": "dual-list-selector",
+  "language": "es",
+  "buildOrder": ["TransferItem", "TransferList", "Transfer"],
+  "family": [
+    {
+      "name": "TransferItem",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "TransferList",
+      "slots": [
+        { "name": "checkbox", "type": "container", "required": false, "figmaBinding": "instance-swap" },
+        { "name": "avatar", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "Avatar si item es persona (Ant custom render)" },
+        { "name": "leadingIcon", "type": "icon", "required": false, "figmaBinding": "instance-swap" },
+        { "name": "label", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "description", "type": "text", "required": false, "figmaBinding": "text" },
+        { "name": "trailingMeta", "type": "text", "required": false, "note": "rol, departamento, count" }
+      ],
+      "properties": {
+        "State":    ["default", "hover", "selected", "focused", "disabled"],
+        "Size":     ["sm", "md"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "h": 32, "px": 10, "gap": 8, "fontSize": 13, "iconSize": 14 },
+        "md": { "h": 40, "px": 12, "gap": 10, "fontSize": 14, "iconSize": 16 }
+      },
+      "stateStyles": {
+        "default":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 } },
+        "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "selected": { "bg": { "r": 0.93, "g": 0.95, "b": 1.0 }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "fontWeight": 500 },
+        "focused":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "ring": true },
+        "disabled": { "bg": "transparent", "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "opacity": 0.6 }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Item label" },
+        { "propName": "✏️ Description", "layerName": "description", "default": "Descripción" },
+        { "propName": "✏️ Meta", "layerName": "trailingMeta", "default": "Admin" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Checkbox", "layerName": "checkbox", "default": "Checkbox/default" },
+        { "propName": "🔄 Avatar", "layerName": "avatar", "default": "Avatar/sm" },
+        { "propName": "🔄 Leading Icon", "layerName": "leadingIcon", "default": "icon/user" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Show Checkbox", "layerName": "checkbox" },
+        { "propName": "👁 Has Avatar", "layerName": "avatar" },
+        { "propName": "👁 Has Leading Icon", "layerName": "leadingIcon" },
+        { "propName": "👁 Has Description", "layerName": "description" },
+        { "propName": "👁 Has Trailing Meta", "layerName": "trailingMeta" }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 10,
+        "exclusions": 0,
+        "net": 10,
+        "note": "State(5) × Size(2) = 10"
+      },
+      "grid": { "maxCols": 5, "gap": 16, "pad": 24 }
+    },
+    {
+      "name": "TransferList",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "Transfer",
+      "slots": [
+        { "name": "header", "type": "container", "required": true, "note": "title + selected count + selectAll checkbox" },
+        { "name": "search", "type": "container", "required": false, "figmaBinding": "instance-swap" },
+        { "name": "items", "type": "container", "required": true, "note": "N TransferItems scroll container" },
+        { "name": "footer", "type": "container", "required": false, "note": "pagination o custom action (Ant footer prop)" },
+        { "name": "emptyState", "type": "container", "required": false }
+      ],
+      "properties": {
+        "Side":  ["source", "target"],
+        "State": ["default", "empty", "loading"],
+        "Size":  ["sm", "md"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "w": 280, "h": 400, "headerH": 36, "searchH": 32 },
+        "md": { "w": 320, "h": 480, "headerH": 44, "searchH": 36 }
+      },
+      "listStyles": {
+        "bg": { "r": 1.0, "g": 1.0, "b": 1.0 },
+        "border": { "r": 0.82, "g": 0.82, "b": 0.85 },
+        "radius": 8
+      },
+      "booleanLayers": [
+        { "propName": "👁 Show Search", "layerName": "search" },
+        { "propName": "👁 Show Footer", "layerName": "footer" }
+      ],
+      "frameCount": {
+        "gross": 12,
+        "exclusions": 0,
+        "net": 12,
+        "note": "Side(2) × State(3) × Size(2) = 12"
+      }
+    },
+    {
+      "name": "Transfer",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "sourceList", "type": "container", "required": true, "note": "TransferList con Side=source" },
+        { "name": "actions", "type": "container", "required": true, "note": "botones → ← (move selected) y » « (move all)" },
+        { "name": "targetList", "type": "container", "required": true, "note": "TransferList con Side=target" }
+      ],
+      "properties": {
+        "Size":     ["sm", "md"],
+        "OneWay":   ["no", "yes"],
+        "Orientation": ["horizontal", "vertical"]
+      },
+      "exclusions": [
+        "Orientation=vertical + Size=sm (vertical necesita más altura)"
+      ],
+      "sizes": {
+        "sm": { "gap": 16, "actionButtonSize": 32 },
+        "md": { "gap": 20, "actionButtonSize": 36 }
+      },
+      "frameCount": {
+        "gross": 8,
+        "exclusions": 1,
+        "net": 7,
+        "note": "Size(2) × OneWay(2) × Orientation(2) = 8; −1 exclusión"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "dual-listbox",
+    "role": "group (container) + listbox (source/target) + button (actions)",
+    "ariaAttributes": [
+      "Container: role='group' + aria-label='Transferir items'",
+      "Source list: role='listbox' + aria-multiselectable='true' + aria-label='Disponibles'",
+      "Target list: role='listbox' + aria-multiselectable='true' + aria-label='Seleccionados'",
+      "List header incluye count en aria-label ('Disponibles, 12 items, 2 seleccionados')",
+      "TransferItem: role='option' + aria-selected='true|false'",
+      "Action buttons: aria-label descriptivo ('Mover 2 items seleccionados a Seleccionados')",
+      "aria-live='polite' anuncia movimiento ('2 items movidos a Seleccionados')"
+    ],
+    "keyboardNav": [
+      "Tab: source search → source list → actions → target list → target search",
+      "Arrow Up/Down en lista: navega entre items",
+      "Space: toggle selection de item",
+      "Enter en action button → move selected → focus regresa a source list",
+      "Shift+Click: rango de selección",
+      "Ctrl/Cmd+A: selecciona todos visibles (Spectrum pattern)"
+    ],
+    "focusTechnique": "roving tabindex en cada listbox; focus al action button después de mover",
+    "edgeCases": 6,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 30, "prefix": "xfr", "mode": "C" },
+  "componentDescriptions": {
+    "TransferItem": "Item individual de una TransferList. Checkbox + label + optional avatar/icon/meta. States: default/hover/selected/focused/disabled.\n\n🔑 ARIA:\n• role='option' + aria-selected\n\n⌨️ Keyboard:\n• Arrow keys navegan, Space toggle\n\nWCAG 2.2 AA.",
+    "TransferList": "Panel source o target del Transfer. Header con count + selectAll. Search opcional. Scroll container con N TransferItems. Side: source / target. States: default/empty/loading.\n\n🔑 ARIA:\n• role='listbox' + aria-multiselectable\n• aria-label con count ('Disponibles, 12 items')\n\n⌨️ Keyboard:\n• Arrow keys + Space\n\nWCAG 2.2 AA.",
+    "Transfer": "Dual-list selector (Ant pattern único). Source → Target con action buttons (→ ← » «). Size: sm/md. OneWay: true (solo source→target con remove en target) / false (bidirectional). Orientation: horizontal (default) / vertical (mobile).\n\n🔑 ARIA:\n• role='group' en container\n• role='listbox' en cada panel\n• aria-live='polite' anuncia movimientos\n• Action buttons con aria-label descriptivo\n\n⌨️ Keyboard:\n• Tab entre paneles y actions\n• Arrow keys en listas\n• Space toggle selection\n\n🎯 Focus:\n• Focus return al source/target después de mover\n• Ctrl/Cmd+A selecciona todos visibles\n\nTokens: 30, prefijo xfr-.\nWCAG 2.2 AA.\n\nScope: asignaciones enterprise (users→groups, permissions→roles, resources→policies). Ant Design es único sistema T1 que lo implementa. Alternativas consideradas:\n- Search-first multi-select (Atlassian pattern): mejor para catálogos grandes\n- ResourcePicker modal (Polaris): mejor para mobile e-commerce\n- FilterableMultiSelect (Carbon): alternativa compacta\n\nNO usar para: catálogos con >1000 items (considerar typeahead); mobile narrow (<600px — usar modal picker)."
+  },
+  "variableBindings": {
+    "xfr/list/sm/w": "sizing/280",
+    "xfr/list/md/w": "sizing/320",
+    "xfr/list/sm/h": "sizing/400",
+    "xfr/list/md/h": "sizing/480",
+    "xfr/list/bg": "surface/default",
+    "xfr/list/border": "border/default",
+    "xfr/list/radius": "radius/md",
+    "xfr/header/bg": "surface/hover",
+    "xfr/header/border": "border/default",
+    "xfr/item/sm/h": "sizing/32",
+    "xfr/item/md/h": "sizing/40",
+    "xfr/item/default/fg": "text/primary",
+    "xfr/item/hover/bg": "surface/hover",
+    "xfr/item/selected/bg": "brand/subtle",
+    "xfr/item/selected/fg": "interactive/default",
+    "xfr/item/selected/fontWeight": "type/weight-medium",
+    "xfr/item/focused/ring": "focus/ring",
+    "xfr/item/disabled/opacity": "opacity/disabled",
+    "xfr/action/size/sm": "sizing/32",
+    "xfr/action/size/md": "sizing/36",
+    "xfr/action/bg": "surface/default",
+    "xfr/action/border": "border/default",
+    "xfr/action/hover/bg": "surface/hover",
+    "xfr/search/h/sm": "sizing/32",
+    "xfr/search/h/md": "sizing/36",
+    "xfr/gap/sm": "spacing/4",
+    "xfr/gap/md": "spacing/5",
+    "xfr/item/gap": "spacing/2",
+    "xfr/item/px": "spacing/3",
+    "xfr/item/fontSize/sm": "type/sm",
+    "xfr/item/fontSize/md": "type/md"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Familia de 3 sub-components: TransferItem → TransferList → Transfer", "why": "Ant Design es único T1 con Transfer. Arquitectura 3-niveles permite reutilizar TransferList independiente (display-only con selectAll) y TransferItem en otros contextos (search results, picker modals).", "source": "research" },
+    { "what": "Side property (source/target) en TransferList", "why": "Source muestra 'Disponibles' + search; target muestra 'Seleccionados' + pagination. Property discreta permite frames para ambos sin variantes condicionales.", "source": "research" },
+    { "what": "OneWay como boolean (Ant oneWay prop)", "why": "Use case común: 'agregar permisos' donde source infinito, target solo crece y permite remove. Modelado como property OneWay=yes oculta el botón 'mover back a source' y muestra delete icons en target items.", "source": "research" },
+    { "what": "Orientation horizontal/vertical", "why": "Horizontal estándar para desktop; vertical para mobile narrow o dashboards con paneles verticales (stack source + actions + target). Ant solo horizontal, nosotros agregamos vertical.", "source": "research" },
+    { "what": "4 action buttons estándar: → ← » «", "why": "Ant tiene 2 buttons (move selected). Nosotros proponemos 4 incluyendo 'move all' (» «) porque enterprise use cases frecuentemente agregan todo lo filtered. Bi-direccional cuando OneWay=no.", "source": "research" },
+    { "what": "Search + pagination en TransferList slots opcionales", "why": "Ant tiene showSearch y pagination como props. Modelados como slots/booleans en TransferList. Para listas <50 items, ambos off; para >100 items, ambos on.", "source": "research" },
+    { "what": "Custom render via slots (avatar/icon/meta) en TransferItem", "why": "Ant custom render function permite items ricos (avatar + name + role). Modelado como slots + booleans. Common case: user picker con Avatar + email + role.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

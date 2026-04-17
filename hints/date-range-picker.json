@@ -1,0 +1,116 @@
+{
+  "component": "DateRangePicker",
+  "archetype": "date-range-input",
+  "buildOrder": ["PresetItem", "DateRangePicker"],
+  "family": [
+    {
+      "name": "PresetItem",
+      "isSubComponent": true,
+      "slots": ["label*:text"],
+      "properties": {
+        "State": ["default", "hover", "selected", "focused"],
+        "Size":  ["sm", "md"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 8
+    },
+    {
+      "name": "DateRangePicker",
+      "isSubComponent": false,
+      "slots": ["startInput*:container", "separator:icon-or-text", "endInput*:container", "presetsPanel:container", "calendar*:container", "applyButton:container", "cancelButton:container"],
+      "properties": {
+        "State":  ["default", "focused", "open", "error", "disabled"],
+        "Size":   ["sm", "md", "lg"],
+        "Picker": ["date", "month", "quarter", "year"],
+        "Layout": ["inline", "popover"]
+      },
+      "booleans": ["Show Presets Panel", "Show Apply Button", "Show Separator"],
+      "exclusions": ["Layout=inline + State=open", "Picker=quarter|year + ShowPresets"],
+      "frameCount": 80
+    }
+  ],
+  "a11y": {
+    "role": "group + textbox + dialog",
+    "keyboard": [
+      "Tab: start → end → calendar → presets → apply",
+      "Arrow keys + Page Up/Down en calendar",
+      "Escape cierra popover"
+    ],
+    "focus": "Focus trap en popover. aria-live anuncia rango."
+  },
+  "tokens": { "total": 32, "prefix": "drp" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas DateRangePicker principalmente?",
+      "options": [
+        { "value": "analytics-filter", "label": "Filtro de analytics/reports — presets + calendar popover" },
+        { "value": "booking", "label": "Booking/reservas — inline calendar con visible disponibilidad" },
+        { "value": "billing-period", "label": "Billing period — meses/quarters (Picker=month|quarter)" },
+        { "value": "campaign-dates", "label": "Campaign dates — start/end con validación y presets" },
+        { "value": "multiple", "label": "Varios casos" }
+      ],
+      "impact": "Layout, Picker, presets inclusion",
+      "tags": ["analytics", "booking", "billing", "campaign", "reports", "filter"]
+    },
+    {
+      "id": "layout",
+      "text": "¿Layout del picker?",
+      "options": [
+        { "value": "popover", "label": "Popover — inputs + calendar se despliega al focus (estándar)" },
+        { "value": "inline", "label": "Inline — calendar siempre visible (Polaris always-on dashboard)" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "Layout property",
+      "tags": ["popover", "inline", "dropdown", "always-visible"]
+    },
+    {
+      "id": "picker-type",
+      "text": "¿Tipo de rango temporal?",
+      "options": [
+        { "value": "date", "label": "Día a día — uso general" },
+        { "value": "month", "label": "Mes a mes — billing, sales reports" },
+        { "value": "quarter", "label": "Quarter — fiscal reporting (Q1 2026 – Q4 2026)" },
+        { "value": "year", "label": "Año — planeación anual, históricos" },
+        { "value": "all", "label": "Los 4 tipos (Ant pattern completo)" }
+      ],
+      "impact": "Picker property values",
+      "tags": ["date", "month", "quarter", "year", "fiscal", "reporting"]
+    },
+    {
+      "id": "presets",
+      "text": "¿Incluyes presets panel (Today, Last 7 days, etc.)?",
+      "options": [
+        { "value": "no", "label": "No — solo calendar" },
+        { "value": "static", "label": "Presets estáticos — Today, Yesterday, Last 7/30/90 days" },
+        { "value": "dynamic", "label": "Dynamic + static — incluye callbacks ('Últimos N días laborales')" },
+        { "value": "custom", "label": "Custom por producto — analytics tiene unos, billing otros" }
+      ],
+      "impact": "Show Presets Panel boolean, PresetItem count",
+      "tags": ["presets", "shortcuts", "today", "last-7-days", "dynamic", "callbacks"]
+    },
+    {
+      "id": "confirmation",
+      "text": "¿Auto-apply o explicit Apply button?",
+      "options": [
+        { "value": "auto", "label": "Auto-apply — selecciona end y cierra (compacto)" },
+        { "value": "explicit", "label": "Explicit Apply — botón requerido (Polaris pattern, safer)" },
+        { "value": "configurable", "label": "Configurable — auto para quick filters, explicit para high-stakes" }
+      ],
+      "impact": "Show Apply Button boolean",
+      "tags": ["apply", "confirm", "auto-close", "explicit", "polaris", "safer"]
+    },
+    {
+      "id": "validation",
+      "text": "¿Validación de rangos inválidos?",
+      "options": [
+        { "value": "client-only", "label": "Solo client-side — end >= start, max rango N días" },
+        { "value": "disabled-dates", "label": "Fechas disabled — min/max o callback con info.from (Ant)" },
+        { "value": "both", "label": "Ambos — validación cruzada + dates disabled dinámicos" }
+      ],
+      "impact": "State=error case, disabled-dates integration",
+      "tags": ["validation", "invalid", "min-max", "disabled", "info-from"]
+    }
+  ]
+}

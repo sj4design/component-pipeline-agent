@@ -1,0 +1,165 @@
+{
+  "version": "1.0",
+  "component": "DateRangePicker",
+  "archetype": "date-range-input",
+  "language": "es",
+  "buildOrder": ["PresetItem", "DateRangePicker"],
+  "family": [
+    {
+      "name": "PresetItem",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "DateRangePicker",
+      "slots": [
+        { "name": "label", "type": "text", "required": true, "figmaBinding": "text" }
+      ],
+      "properties": {
+        "State": ["default", "hover", "selected", "focused"],
+        "Size":  ["sm", "md"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "h": 28, "px": 10, "fontSize": 12, "lineHeight": 16, "radius": 6 },
+        "md": { "h": 32, "px": 12, "fontSize": 13, "lineHeight": 18, "radius": 6 }
+      },
+      "stateStyles": {
+        "default":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 } },
+        "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "selected": { "bg": { "r": 0.93, "g": 0.95, "b": 1.0 }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "fontWeight": 600 },
+        "focused":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "ring": true }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Last 7 days" }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 8,
+        "exclusions": 0,
+        "net": 8,
+        "note": "State(4) × Size(2) = 8"
+      }
+    },
+    {
+      "name": "DateRangePicker",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "startInput", "type": "container", "required": true, "figmaBinding": "instance-swap", "note": "Input o DateInput para fecha inicio" },
+        { "name": "separator", "type": "icon-or-text", "required": false, "note": "→ o 'to' entre inputs" },
+        { "name": "endInput", "type": "container", "required": true, "figmaBinding": "instance-swap" },
+        { "name": "presetsPanel", "type": "container", "required": false, "note": "columna de PresetItem (Polaris pattern)" },
+        { "name": "calendar", "type": "container", "required": true, "figmaBinding": "instance-swap", "note": "Calendar component con Mode=range, VisibleMonths=2" },
+        { "name": "applyButton", "type": "container", "required": false, "note": "Polaris: explicit Apply required" },
+        { "name": "cancelButton", "type": "container", "required": false }
+      ],
+      "properties": {
+        "State":    ["default", "focused", "open", "error", "disabled"],
+        "Size":     ["sm", "md", "lg"],
+        "Picker":   ["date", "month", "quarter", "year"],
+        "Layout":   ["inline", "popover"]
+      },
+      "exclusions": [
+        "Layout=inline + State=open (inline siempre abierto)",
+        "Picker=quarter|year + ShowPresets (presets menos útiles en rangos grandes)"
+      ],
+      "sizes": {
+        "sm": { "inputH": 32, "fontSize": 13, "presetsW": 140, "calendarW": 560, "gap": 12 },
+        "md": { "inputH": 40, "fontSize": 14, "presetsW": 160, "calendarW": 640, "gap": 16 },
+        "lg": { "inputH": 48, "fontSize": 16, "presetsW": 180, "calendarW": 720, "gap": 20 }
+      },
+      "stateStyles": {
+        "default":  { "inputBorder": { "r": 0.82, "g": 0.82, "b": 0.85 }, "bg": { "r": 1.0, "g": 1.0, "b": 1.0 } },
+        "focused":  { "inputBorder": { "r": 0.15, "g": 0.35, "b": 0.92 }, "bg": { "r": 1.0, "g": 1.0, "b": 1.0 }, "ring": true },
+        "open":     { "inputBorder": { "r": 0.15, "g": 0.35, "b": 0.92 }, "bg": { "r": 1.0, "g": 1.0, "b": 1.0 }, "shadow": "lg" },
+        "error":    { "inputBorder": { "r": 0.86, "g": 0.15, "b": 0.15 }, "bg": { "r": 1.0, "g": 1.0, "b": 1.0 } },
+        "disabled": { "inputBorder": { "r": 0.88, "g": 0.88, "b": 0.90 }, "bg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "opacity": 0.6 }
+      },
+      "booleanLayers": [
+        { "propName": "👁 Show Presets Panel", "layerName": "presetsPanel" },
+        { "propName": "👁 Show Apply Button", "layerName": "applyButton" },
+        { "propName": "👁 Show Separator", "layerName": "separator" }
+      ],
+      "frameCount": {
+        "gross": 120,
+        "exclusions": 40,
+        "net": 80,
+        "note": "State(5) × Size(3) × Picker(4) × Layout(2) = 120; −40 exclusiones"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "date-range-picker",
+    "role": "group (container) + textbox (inputs) + dialog (popover calendar)",
+    "ariaAttributes": [
+      "Container: role='group' + aria-label='Rango de fechas'",
+      "Start/End inputs: role='textbox' o spinbutton (Spectrum) con aria-label='Fecha inicio'/'Fecha fin'",
+      "Calendar popover: role='dialog' + aria-modal='false' + aria-label='Seleccionar rango'",
+      "Preset items: role='button' + aria-label con rango ('Últimos 7 días, del [fecha] al [fecha]')",
+      "Aria-describedby entre inputs y calendar",
+      "Error: aria-invalid='true' + aria-errormessage en ambos inputs si rango inválido",
+      "Apply button: aria-label='Aplicar rango [fecha inicio] al [fecha fin]'"
+    ],
+    "keyboardNav": [
+      "Tab: start input → end input → calendar → presets → apply/cancel",
+      "Arrow keys en calendar: día a día",
+      "Page Up/Down: mes anterior/siguiente",
+      "Enter en calendar cell: selecciona start, luego end",
+      "Escape: cierra popover (Layout=popover)",
+      "Shift+Tab regresa al input"
+    ],
+    "focusTechnique": "ring 2px en elemento focuseado; focus trap en popover cuando open",
+    "edgeCases": 8,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 32, "prefix": "drp", "mode": "C" },
+  "componentDescriptions": {
+    "PresetItem": "Item de preset range ('Today', 'Last 7 days', 'This month'). States: default/hover/selected/focused. Sizes: sm/md.\n\n🔑 ARIA:\n• role='button' + aria-label con rango descriptivo\n\n⌨️ Keyboard:\n• Enter/Space selecciona preset → llena inputs + highlight calendar\n\nWCAG 2.2 AA.",
+    "DateRangePicker": "Selector de rango de fechas. Layout: inline (Polaris) / popover (M3/Ant). Picker: date/month/quarter/year (Ant). Size: sm/md/lg.\n\n🔑 ARIA:\n• role='group' + aria-label\n• Calendar popover: role='dialog'\n• Inputs: aria-label 'Fecha inicio'/'Fecha fin'\n• Error: aria-invalid + aria-errormessage\n\n⌨️ Keyboard:\n• Tab: start → end → calendar → presets → apply\n• Arrow keys + Page Up/Down en calendar\n• Escape cierra popover\n\n🎯 Focus:\n• Focus trap en popover\n• Hover preview de rango tentativo (Spectrum pattern)\n• Explicit Apply required (Polaris pattern)\n\nTokens: 32, prefijo drp-.\nWCAG 2.2 AA.\n\nScope: rangos de fechas (date), meses (reporting), trimestres (fiscal), años. Para single date usa DatePicker. Para ranges sin UI compleja usa dos DatePicker inputs (Atlassian pattern)."
+  },
+  "variableBindings": {
+    "drp/input/sm/h": "sizing/32",
+    "drp/input/md/h": "sizing/40",
+    "drp/input/lg/h": "sizing/48",
+    "drp/default/border": "border/default",
+    "drp/default/bg": "surface/default",
+    "drp/focused/border": "border/focus",
+    "drp/focused/ring": "focus/ring",
+    "drp/open/border": "border/focus",
+    "drp/open/shadow": "elevation/3",
+    "drp/error/border": "border/error",
+    "drp/disabled/bg": "surface/disabled",
+    "drp/disabled/opacity": "opacity/disabled",
+    "drp/preset/default/fg": "text/primary",
+    "drp/preset/hover/bg": "surface/hover",
+    "drp/preset/selected/bg": "brand/subtle",
+    "drp/preset/selected/fg": "interactive/default",
+    "drp/preset/selected/fontWeight": "type/weight-semibold",
+    "drp/preset/focused/ring": "focus/ring",
+    "drp/preset/radius": "radius/md",
+    "drp/separator/fg": "text/secondary",
+    "drp/calendar/w/sm": "sizing/560",
+    "drp/calendar/w/md": "sizing/640",
+    "drp/calendar/w/lg": "sizing/720",
+    "drp/presets/w/sm": "sizing/140",
+    "drp/presets/w/md": "sizing/160",
+    "drp/presets/w/lg": "sizing/180",
+    "drp/gap/sm": "spacing/3",
+    "drp/gap/md": "spacing/4",
+    "drp/gap/lg": "spacing/5",
+    "drp/fontSize/sm": "type/sm",
+    "drp/fontSize/md": "type/md",
+    "drp/fontSize/lg": "type/lg"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Three-zone layout (inputs + presets + calendar) — Polaris pattern", "why": "Polaris pattern doc + Ant presets convergen: start/end inputs arriba o lateral, presets panel a la izquierda (shortcut para 'Last 7 days'), calendar con 2 meses. Este layout es el más usado en dashboards analytics.", "source": "research" },
+    { "what": "Layout: inline o popover (property)", "why": "Inline para dashboards always-visible (Polaris); popover para forms y filtros compactos (M3/Ant). Property explícita genera ambos layouts.", "source": "research" },
+    { "what": "Picker: date/month/quarter/year (Ant pattern)", "why": "Enterprise reporting necesita rangos de meses (Q1-Q2), trimestres fiscales (Q1 2026 - Q4 2026), años (2024-2026). Ant cubre los 4; M3/Spectrum solo date.", "source": "research" },
+    { "what": "Calendar es slot externo (instance-swap), no embebido", "why": "Reutiliza Calendar component con Mode=range, VisibleMonths=2. Evita duplicar día-cell logic en este config. Consumer compone con Calendar actualizado.", "source": "research" },
+    { "what": "Explicit Apply button opt-in (Polaris/Ant needConfirm)", "why": "Polaris research: merchants modifican rango múltiples veces; auto-close on second pick confunde. Ant tiene `needConfirm`. Modelado como boolean Show Apply Button.", "source": "research" },
+    { "what": "Presets como sub-component PresetItem (Polaris)", "why": "Presets panel tiene state interactivo (hover/selected/focused) que merece sub-component. Lista de PresetItem verticalmente alineada. Facilita custom presets del consumer.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

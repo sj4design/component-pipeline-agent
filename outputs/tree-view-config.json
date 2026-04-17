@@ -1,0 +1,166 @@
+{
+  "version": "1.0",
+  "component": "TreeView",
+  "archetype": "hierarchical-list",
+  "language": "es",
+  "buildOrder": ["TreeNode", "TreeView"],
+  "family": [
+    {
+      "name": "TreeNode",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "TreeView",
+      "slots": [
+        { "name": "expandToggle", "type": "icon-action", "required": false, "figmaBinding": "instance-swap", "note": "chevron; visible solo en branch nodes" },
+        { "name": "checkbox", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "Checkbox component; visible si checkable" },
+        { "name": "leadingIcon", "type": "icon", "required": false, "figmaBinding": "instance-swap", "note": "file/folder icon" },
+        { "name": "label", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "trailingContent", "type": "container", "required": false, "note": "badge, actions, meta info (Jira status)" },
+        { "name": "connector", "type": "shape", "required": false, "note": "líneas de jerarquía (Ant showLine)" }
+      ],
+      "properties": {
+        "State":   ["default", "hover", "selected", "focused", "disabled"],
+        "Kind":    ["leaf", "branch-collapsed", "branch-expanded"],
+        "Level":   ["0", "1", "2", "3+"],
+        "Size":    ["sm", "md"]
+      },
+      "exclusions": [
+        "Kind=leaf + expandToggle visible (leaf no tiene children)"
+      ],
+      "sizes": {
+        "sm": {
+          "h": 28, "indent": 20, "gap": 6,
+          "fontSize": 13, "fontWeight": 400, "lineHeight": 18,
+          "iconSize": 14, "toggleSize": 14
+        },
+        "md": {
+          "h": 36, "indent": 24, "gap": 8,
+          "fontSize": 14, "fontWeight": 400, "lineHeight": 20,
+          "iconSize": 16, "toggleSize": 16
+        }
+      },
+      "stateStyles": {
+        "default":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 } },
+        "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "selected": { "bg": { "r": 0.93, "g": 0.95, "b": 1.0 }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "fontWeight": 500, "borderLeft": 3, "borderLeftColor": { "r": 0.15, "g": 0.35, "b": 0.92 } },
+        "focused":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "ring": true },
+        "disabled": { "bg": "transparent", "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "opacity": 0.6 }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Node label" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Leading Icon", "layerName": "leadingIcon", "default": "icon/folder" },
+        { "propName": "🔄 Expand Toggle", "layerName": "expandToggle", "default": "icon/chevron-right" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Show Expand Toggle", "layerName": "expandToggle" },
+        { "propName": "👁 Show Checkbox", "layerName": "checkbox" },
+        { "propName": "👁 Has Leading Icon", "layerName": "leadingIcon" },
+        { "propName": "👁 Has Trailing Content", "layerName": "trailingContent" },
+        { "propName": "👁 Show Connector", "layerName": "connector" }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 120,
+        "exclusions": 40,
+        "net": 80,
+        "note": "State(5) × Kind(3) × Level(4) × Size(2) = 120; −40 leaf+expandToggle exclusiones"
+      },
+      "grid": { "maxCols": 5, "gap": 16, "pad": 24 }
+    },
+    {
+      "name": "TreeView",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "nodes", "type": "container", "required": true, "note": "N TreeNodes anidadas" },
+        { "name": "search", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "Search input para filter" },
+        { "name": "emptyState", "type": "container", "required": false }
+      ],
+      "properties": {
+        "SelectionMode": ["none", "single", "multiple", "checkbox"],
+        "Size":          ["sm", "md"],
+        "ShowLines":     ["no", "yes"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "nodeH": 28, "padding": 4 },
+        "md": { "nodeH": 36, "padding": 8 }
+      },
+      "frameCount": {
+        "gross": 16,
+        "exclusions": 0,
+        "net": 16,
+        "note": "SelectionMode(4) × Size(2) × ShowLines(2) = 16"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "tree",
+    "role": "tree (container) + treeitem (nodes)",
+    "ariaAttributes": [
+      "Container: role='tree' + aria-label='[propósito]' + aria-multiselectable='true' (si multiple)",
+      "Node: role='treeitem' + aria-level='[n]' + aria-setsize='[n]' + aria-posinset='[n]'",
+      "Branch node: aria-expanded='true|false'",
+      "Selected node: aria-selected='true'",
+      "Checkbox mode: aria-checked='true|false|mixed' (mixed para parent con child partial)",
+      "Disabled: aria-disabled='true'",
+      "Label debe ser texto plano o tener aria-label si contiene iconos/badges"
+    ],
+    "keyboardNav": [
+      "Arrow Up/Down: navega entre nodes visibles",
+      "Arrow Right: expande branch o mueve al primer child si ya expandido",
+      "Arrow Left: colapsa branch o mueve al parent",
+      "Home/End: primer/último node",
+      "Enter/Space: selecciona (o toggle checkbox)",
+      "Type-ahead: escribir letras salta al primer match (Spectrum pattern)",
+      "* (asterisk): expande todos los siblings"
+    ],
+    "focusTechnique": "roving tabindex: focused node tabindex=0, resto -1",
+    "edgeCases": 8,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 26, "prefix": "tv", "mode": "C" },
+  "componentDescriptions": {
+    "TreeNode": "Nodo individual. Kind: leaf / branch-collapsed / branch-expanded. Level: 0-3+ (indent incremental). States: default/hover/selected/focused/disabled. Sizes: sm/md.\n\n🔑 ARIA:\n• role='treeitem' + aria-level + aria-setsize + aria-posinset\n• Branch: aria-expanded\n• Selected: aria-selected\n• Checkbox mode: aria-checked='true|false|mixed'\n\n⌨️ Keyboard:\n• Arrow Right: expande / first child\n• Arrow Left: colapsa / parent\n• Enter/Space: selecciona o toggle\n\n🎯 Focus:\n• Indent por level\n• Border-left + bg en selected (visible indicator más allá del bg)\n\nWCAG 2.2 AA.",
+    "TreeView": "Lista jerárquica con expand/collapse. SelectionMode: none/single/multiple/checkbox. Size: sm (28px, enterprise dense) / md (36px, general). ShowLines opcional (Ant pattern para file systems).\n\n🔑 ARIA:\n• role='tree' + aria-multiselectable si multiple\n• Each node aria-level/setsize/posinset\n\n⌨️ Keyboard:\n• Full WAI-ARIA TreeView pattern\n• Type-ahead navigation (Spectrum best-in-class)\n• * expande todos siblings\n\n🎯 Focus:\n• Roving tabindex\n• checkStrictly: parent/child decoupled (Ant) para permission trees\n\nTokens: 26, prefijo tv-.\nWCAG 2.2 AA.\n\nScope: file browsers, nested navigation, category trees, permission hierarchies (checkbox mode). Para flat nav usa Sidebar. Para drag-drop reorder considera custom impl (Atlassian DynamicTable isRankable pattern)."
+  },
+  "variableBindings": {
+    "tv/sm/h": "sizing/28",
+    "tv/md/h": "sizing/36",
+    "tv/sm/indent": "spacing/5",
+    "tv/md/indent": "spacing/6",
+    "tv/default/bg": "surface/default",
+    "tv/default/fg": "text/primary",
+    "tv/hover/bg": "surface/hover",
+    "tv/selected/bg": "brand/subtle",
+    "tv/selected/fg": "interactive/default",
+    "tv/selected/fontWeight": "type/weight-medium",
+    "tv/selected/borderLeft": "interactive/default",
+    "tv/focused/ring": "focus/ring",
+    "tv/disabled/fg": "text/disabled",
+    "tv/disabled/opacity": "opacity/disabled",
+    "tv/connector/color": "border/default",
+    "tv/connector/thickness": "border/1",
+    "tv/iconSize/sm": "iconSize/sm",
+    "tv/iconSize/md": "iconSize/md",
+    "tv/fontSize/sm": "type/sm",
+    "tv/fontSize/md": "type/md",
+    "tv/gap/sm": "spacing/1.5",
+    "tv/gap/md": "spacing/2",
+    "tv/padding/sm": "spacing/1",
+    "tv/padding/md": "spacing/2",
+    "tv/borderLeft/width": "border/3"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Kind property: leaf / branch-collapsed / branch-expanded (Carbon pattern)", "why": "Carbon distingue branch vs leaf estructuralmente. Expandir/colapsar son 2 visual states del mismo branch node. Property discreta permite render todos los casos sin boolean isExpanded.", "source": "research" },
+    { "what": "Level: 0/1/2/3+ para indent incremental", "why": "Figma no puede generar indent dinámico; modelar 4 niveles es suficiente para la mayoría de trees. Level=3+ representa deep nesting (Confluence page tree, permission trees).", "source": "research" },
+    { "what": "4 SelectionModes: none/single/multiple/checkbox (Ant + Spectrum)", "why": "Spectrum tiene 3 (none/single/multiple con selectionStyle); Ant tiene checkbox con checkStrictly. Nosotros modelamos 4 explícitos: 'checkbox' es distinto de 'multiple' porque renderea Checkbox visual en cada node (permission trees) mientras 'multiple' solo highlight.", "source": "research" },
+    { "what": "ShowLines como property (Ant showLine)", "why": "File system UIs se benefician de connector lines visuales entre parent y children. Opt-in via property. Consumer decide según contexto (folders vs category tree).", "source": "research" },
+    { "what": "Sin async loading ni virtualization modelados", "why": "Son runtime behaviors. loadData (Ant) y virtual scroll son patrones server-side que no se representan en Figma. Documentados en scope como referencias.", "source": "research" },
+    { "what": "Sin drag-and-drop modelado", "why": "Ant tiene draggable; Atlassian DynamicTable tiene isRankable con full keyboard a11y. DnD es interacción runtime compleja; modelar solo los visual states (default/hover/selected). Consumer implementa DnD separado.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

@@ -1,0 +1,117 @@
+{
+  "component": "Calendar",
+  "archetype": "date-grid",
+  "buildOrder": ["DayCell", "Calendar"],
+  "family": [
+    {
+      "name": "DayCell",
+      "isSubComponent": true,
+      "slots": ["dayNumber*:text", "decorator:container"],
+      "properties": {
+        "State": ["default", "hover", "selected", "today", "focused", "disabled", "other-month", "range-start", "range-end", "range-middle"],
+        "Size":  ["sm", "md"]
+      },
+      "booleans": ["Show Decorator"],
+      "exclusions": ["State=other-month + State=selected|range-*", "State=disabled + State=selected|range-*"],
+      "frameCount": 20
+    },
+    {
+      "name": "Calendar",
+      "isSubComponent": false,
+      "slots": ["header*:container", "weekdayRow*:container", "daysGrid*:container", "weekNumbers:container", "footer:container"],
+      "properties": {
+        "Mode":           ["single", "range"],
+        "Scale":          ["compact", "comfortable", "fullscreen"],
+        "VisibleMonths":  ["1", "2"],
+        "ShowWeekNumbers":["no", "yes"]
+      },
+      "booleans": [],
+      "exclusions": ["Scale=fullscreen + VisibleMonths=2", "Scale=compact + VisibleMonths=2"],
+      "frameCount": 16
+    }
+  ],
+  "a11y": {
+    "role": "grid (tabla de días)",
+    "keyboard": [
+      "Arrow keys navegan día a día",
+      "Page Up/Down mes anterior/siguiente",
+      "Shift+Page Up/Down año",
+      "Home/End inicio/fin semana",
+      "Enter/Space selecciona"
+    ],
+    "focus": "Roving tabindex: day focuseado tabindex=0, resto -1. aria-live en heading al cambiar mes."
+  },
+  "tokens": { "total": 26, "prefix": "cal" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Calendar principalmente?",
+      "options": [
+        { "value": "date-selection", "label": "Selección de fecha — standalone picker widget (Spectrum/Atlassian)" },
+        { "value": "dashboard-view", "label": "Dashboard view — calendar de eventos/availability (Ant fullscreen)" },
+        { "value": "scheduling", "label": "Scheduling — reservar slots, agendar meetings" },
+        { "value": "range-selection", "label": "Range selection — filtro de analytics/reports" }
+      ],
+      "impact": "Mode, Scale, VisibleMonths, Decorator slot",
+      "tags": ["picker", "dashboard", "scheduling", "events", "range", "analytics"]
+    },
+    {
+      "id": "mode",
+      "text": "¿Selección single o range?",
+      "options": [
+        { "value": "single", "label": "Single — una fecha" },
+        { "value": "range", "label": "Range — start + end (2 meses side-by-side default)" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "Mode property, VisibleMonths default, range-* states",
+      "tags": ["single", "range", "start-end", "period"]
+    },
+    {
+      "id": "scale",
+      "text": "¿Tamaño/contexto de uso?",
+      "options": [
+        { "value": "compact", "label": "Compact (280px) — sidebar widget" },
+        { "value": "comfortable", "label": "Comfortable (320px) — popover default en forms" },
+        { "value": "fullscreen", "label": "Fullscreen — dashboard page dedicada (leave management, availability)" },
+        { "value": "multiple", "label": "Varios scales según contexto" }
+      ],
+      "impact": "Scale property",
+      "tags": ["compact", "comfortable", "fullscreen", "sidebar", "popover", "dashboard"]
+    },
+    {
+      "id": "decorator",
+      "text": "¿Las fechas muestran indicadores (eventos, precios, dots)?",
+      "options": [
+        { "value": "none", "label": "No — solo número de día" },
+        { "value": "dot", "label": "Dot indicator — presencia de evento" },
+        { "value": "count", "label": "Count — número de eventos del día" },
+        { "value": "price", "label": "Price — booking/availability (precios por día)" },
+        { "value": "custom", "label": "Custom — flexible (badges, status, labels)" }
+      ],
+      "impact": "Show Decorator boolean, decorator slot content",
+      "tags": ["decorator", "dot", "events", "price", "badges", "indicators"]
+    },
+    {
+      "id": "week-numbers",
+      "text": "¿Necesitas ISO week numbers?",
+      "options": [
+        { "value": "no", "label": "No — uso consumer estándar" },
+        { "value": "yes", "label": "Sí — fiscal reporting, agenda laboral (Europa)" }
+      ],
+      "impact": "ShowWeekNumbers property, weekNumbers slot",
+      "tags": ["iso", "week-numbers", "fiscal", "reporting"]
+    },
+    {
+      "id": "disabled-dates",
+      "text": "¿Cómo manejas fechas no disponibles?",
+      "options": [
+        { "value": "none", "label": "No aplica — todas las fechas son seleccionables" },
+        { "value": "array", "label": "Array estático — lista de fechas específicas (feriados)" },
+        { "value": "callback", "label": "Callback dinámico — booking availability, fin de semana" },
+        { "value": "min-max", "label": "Min/max range — no permite fechas fuera del rango" }
+      ],
+      "impact": "Pattern de disabled state, edge cases a11y",
+      "tags": ["disabled", "unavailable", "callback", "min-max", "holidays", "booking"]
+    }
+  ]
+}
