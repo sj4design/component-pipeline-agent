@@ -1,0 +1,74 @@
+{
+  "component": "Image",
+  "archetype": "visual-primitive",
+  "buildOrder": ["Image"],
+  "family": [
+    {
+      "name": "Image",
+      "isSubComponent": false,
+      "slots": ["source*:image", "fallback:container", "caption:text"],
+      "properties": {
+        "AspectRatio": ["auto", "1:1", "4:3", "16:9", "21:9", "3:4"],
+        "Fit":         ["cover", "contain", "fill", "none"],
+        "Radius":      ["none", "sm", "md", "lg", "full"],
+        "State":       ["loaded", "loading", "error"]
+      },
+      "booleans": ["Has Caption"],
+      "exclusions": ["State=loading|error + AspectRatio=auto"],
+      "frameCount": 60
+    }
+  ],
+  "a11y": {
+    "role": "img (con alt) o presentation (decorativo alt='')",
+    "keyboard": ["No focusable"],
+    "focus": "none"
+  },
+  "tokens": { "total": 10, "prefix": "img" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Image?",
+      "options": [
+        { "value": "avatar-thumbnail", "label": "Avatars / thumbnails — 1:1 cover" },
+        { "value": "hero", "label": "Hero images — 16:9 cover" },
+        { "value": "product", "label": "Product photos — 4:3 contain" },
+        { "value": "logo", "label": "Logos — contain, varios ratios" },
+        { "value": "gallery", "label": "Gallery / media grid — varios ratios" }
+      ],
+      "impact": "AspectRatio default, Fit default, Radius default",
+      "tags": ["avatar", "hero", "product", "logo", "gallery", "thumbnail"]
+    },
+    {
+      "id": "aspect-ratios",
+      "text": "¿Qué aspect ratios necesitas?",
+      "options": [
+        { "value": "1-1", "label": "Solo 1:1 (avatars/squares)" },
+        { "value": "standard", "label": "1:1 + 4:3 + 16:9 (common)" },
+        { "value": "all", "label": "Todos: auto + 1:1 + 4:3 + 16:9 + 21:9 + 3:4" }
+      ],
+      "impact": "AspectRatio property",
+      "tags": ["aspect-ratio", "square", "widescreen", "portrait", "cinematic"]
+    },
+    {
+      "id": "radius",
+      "text": "¿Radius variants?",
+      "options": [
+        { "value": "none", "label": "Solo none (sharp corners)" },
+        { "value": "sm-md", "label": "sm (4) + md (8) — cards" },
+        { "value": "all", "label": "none / sm / md / lg / full (pill)" }
+      ],
+      "impact": "Radius property",
+      "tags": ["radius", "corners", "rounded", "pill", "square"]
+    },
+    {
+      "id": "loading-error",
+      "text": "¿Manejas explícitamente loading/error states?",
+      "options": [
+        { "value": "no", "label": "No — imagen aparece cuando cargada" },
+        { "value": "shimmer-placeholder", "label": "Shimmer placeholder en loading + fallback icon en error (recomendado)" }
+      ],
+      "impact": "State property values",
+      "tags": ["loading", "error", "shimmer", "placeholder", "fallback"]
+    }
+  ]
+}

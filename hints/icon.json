@@ -1,0 +1,71 @@
+{
+  "component": "Icon",
+  "archetype": "visual-primitive",
+  "buildOrder": ["Icon"],
+  "family": [
+    {
+      "name": "Icon",
+      "isSubComponent": false,
+      "slots": ["svg*:shape"],
+      "properties": {
+        "Size":  ["xs", "sm", "md", "lg", "xl"],
+        "Style": ["outlined", "filled", "two-tone"],
+        "Tone":  ["inherit", "primary", "secondary", "subdued", "success", "warning", "critical", "info"]
+      },
+      "booleans": [],
+      "exclusions": ["Style=two-tone + Tone!=primary|inherit"],
+      "frameCount": 102
+    }
+  ],
+  "a11y": {
+    "role": "img (informativo) o aria-hidden (decorativo)",
+    "keyboard": ["No focusable standalone"],
+    "focus": "Heredado del parent si wrapped en interactive"
+  },
+  "tokens": { "total": 14, "prefix": "icn" },
+  "questions": [
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños necesitas?",
+      "options": [
+        { "value": "standard", "label": "sm + md + lg (16/20/24)" },
+        { "value": "full", "label": "xs + sm + md + lg + xl (12/16/20/24/32)" }
+      ],
+      "impact": "Size property",
+      "tags": ["xs", "sm", "md", "lg", "xl"]
+    },
+    {
+      "id": "styles",
+      "text": "¿Cuántos estilos por icon?",
+      "options": [
+        { "value": "outlined-only", "label": "Solo outlined (default simple)" },
+        { "value": "outlined-filled", "label": "Outlined + filled (iOS toggle pattern)" },
+        { "value": "all", "label": "Outlined + filled + two-tone (Ant pattern completo)" }
+      ],
+      "impact": "Style property values",
+      "tags": ["outlined", "filled", "two-tone", "theme"]
+    },
+    {
+      "id": "tone",
+      "text": "¿Necesitas semantic tones (success/warning/critical)?",
+      "options": [
+        { "value": "inherit-only", "label": "Solo inherit (currentColor — Spectrum default)" },
+        { "value": "neutral-tones", "label": "Inherit + primary + secondary + subdued" },
+        { "value": "all", "label": "Full: inherit + neutros + semantic (success/warning/critical/info)" }
+      ],
+      "impact": "Tone property values",
+      "tags": ["tone", "color", "inherit", "semantic", "currentColor"]
+    },
+    {
+      "id": "icon-set",
+      "text": "¿Tamaño del icon library?",
+      "options": [
+        { "value": "curated", "label": "Curated ~100-300 icons (Polaris)" },
+        { "value": "comprehensive", "label": "~500-1000 icons (Carbon, Atlassian)" },
+        { "value": "massive", "label": "2000+ icons (M3 Material Symbols, Ant)" }
+      ],
+      "impact": "Escala del swap dropdown; no afecta frames",
+      "tags": ["library", "icon-set", "size", "massive", "curated"]
+    }
+  ]
+}

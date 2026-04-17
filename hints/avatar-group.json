@@ -1,0 +1,87 @@
+{
+  "component": "AvatarGroup",
+  "archetype": "stacked-avatars",
+  "buildOrder": ["AvatarGroup"],
+  "family": [
+    {
+      "name": "AvatarGroup",
+      "isSubComponent": false,
+      "slots": ["avatars*:container", "overflow:container"],
+      "properties": {
+        "Size":       ["xs", "sm", "md", "lg"],
+        "MaxVisible": ["3", "4", "5", "6"],
+        "Appearance": ["stack", "grid"],
+        "BorderRing": ["none", "white"]
+      },
+      "booleans": ["Show Overflow"],
+      "exclusions": [],
+      "frameCount": 64
+    }
+  ],
+  "a11y": {
+    "role": "group + aria-label",
+    "keyboard": ["Tab entre avatars interactivos", "Enter en overflow abre popover"],
+    "focus": "Ring 2px. Size enforcement en todos los avatars."
+  },
+  "tokens": { "total": 10, "prefix": "avg" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas AvatarGroup?",
+      "options": [
+        { "value": "meeting-attendees", "label": "Meeting attendees — participantes en Zoom meeting card" },
+        { "value": "team-members", "label": "Team members — Jira sprint team, channel members" },
+        { "value": "collaborators", "label": "Collaborators — en document/page (Confluence pattern)" },
+        { "value": "owners", "label": "Owners — assigned users en ticket/issue" }
+      ],
+      "impact": "Appearance, MaxVisible, Size defaults",
+      "tags": ["meeting", "team", "collaborators", "owners", "attendees"]
+    },
+    {
+      "id": "max-visible",
+      "text": "¿Cuántos avatars visibles antes del '+N' overflow?",
+      "options": [
+        { "value": "3", "label": "3 (mobile, compact cards)" },
+        { "value": "4", "label": "4 (tarjetas standard)" },
+        { "value": "5", "label": "5 (dashboard wide)" },
+        { "value": "6", "label": "6 (desktop rosters)" },
+        { "value": "variable", "label": "Variable — genera los 4 counts" }
+      ],
+      "impact": "MaxVisible property",
+      "tags": ["max-count", "overflow", "visible", "3", "4", "5", "6"]
+    },
+    {
+      "id": "size",
+      "text": "¿Qué sizes de avatar en el group?",
+      "options": [
+        { "value": "sm", "label": "Solo sm (32px) — chat/meetings compact" },
+        { "value": "md", "label": "Solo md (40px) — general" },
+        { "value": "all", "label": "xs + sm + md + lg (24/32/40/48)" }
+      ],
+      "impact": "Size property",
+      "tags": ["size", "compact", "dense", "large"]
+    },
+    {
+      "id": "appearance",
+      "text": "¿Layout?",
+      "options": [
+        { "value": "stack", "label": "Stack overlap — horizontal (default)" },
+        { "value": "grid", "label": "Grid — cuando >6 miembros y no cabe en overlap (Atlassian pattern)" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "Appearance property",
+      "tags": ["stack", "overlap", "grid", "horizontal"]
+    },
+    {
+      "id": "border-ring",
+      "text": "¿White border ring entre avatars (para separación visual)?",
+      "options": [
+        { "value": "always", "label": "Siempre — critical para overlap contrast (Atlassian)" },
+        { "value": "never", "label": "Nunca — minimal, no overlap fuerte" },
+        { "value": "optional", "label": "Configurable por instance" }
+      ],
+      "impact": "BorderRing property",
+      "tags": ["border", "ring", "white", "outline", "contrast", "a11y"]
+    }
+  ]
+}

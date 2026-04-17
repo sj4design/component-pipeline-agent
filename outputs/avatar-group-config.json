@@ -1,0 +1,99 @@
+{
+  "version": "1.0",
+  "component": "AvatarGroup",
+  "archetype": "stacked-avatars",
+  "language": "es",
+  "buildOrder": ["AvatarGroup"],
+  "family": [
+    {
+      "name": "AvatarGroup",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "avatars", "type": "container", "required": true, "note": "N instancias de Avatar component (stacked con negative margin)" },
+        { "name": "overflow", "type": "container", "required": false, "figmaBinding": "instance-swap", "note": "'+N' badge cuando count > maxVisible" }
+      ],
+      "properties": {
+        "Size":        ["xs", "sm", "md", "lg"],
+        "MaxVisible":  ["3", "4", "5", "6"],
+        "Appearance":  ["stack", "grid"],
+        "BorderRing":  ["none", "white"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "xs": { "avatarSize": 24, "overlap": -6, "overflowFontSize": 10, "borderWidth": 1 },
+        "sm": { "avatarSize": 32, "overlap": -8, "overflowFontSize": 11, "borderWidth": 2 },
+        "md": { "avatarSize": 40, "overlap": -10, "overflowFontSize": 12, "borderWidth": 2 },
+        "lg": { "avatarSize": 48, "overlap": -12, "overflowFontSize": 14, "borderWidth": 2 }
+      },
+      "appearanceStyles": {
+        "stack": { "direction": "horizontal", "overlap": "negative margin", "stackDirection": "rtl (rightmost on top)" },
+        "grid":  { "direction": "grid", "gap": 4, "cols": "auto" }
+      },
+      "overflowStyles": {
+        "bg": { "r": 0.93, "g": 0.93, "b": 0.95 },
+        "fg": { "r": 0.12, "g": 0.12, "b": 0.13 },
+        "fontWeight": 600
+      },
+      "borderRingStyles": {
+        "none":  { "color": "transparent" },
+        "white": { "color": { "r": 1.0, "g": 1.0, "b": 1.0 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Overflow Count", "layerName": "overflow", "default": "+3" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Show Overflow", "layerName": "overflow" }
+      ],
+      "frameCount": {
+        "gross": 64,
+        "exclusions": 0,
+        "net": 64,
+        "note": "Size(4) × MaxVisible(4) × Appearance(2) × BorderRing(2) = 64"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "avatar-group",
+    "role": "group",
+    "ariaAttributes": [
+      "Container: role='group' + aria-label='[propósito, ej. \"Miembros del equipo\"]'",
+      "Overflow badge: aria-label='[N] más' + optional popover dropdown listando todos",
+      "Individual avatars: mantienen su aria-label propio (nombre de usuario)",
+      "Tooltip on hover de cada avatar con nombre (Atlassian pattern)"
+    ],
+    "keyboardNav": [
+      "Tab: navega entre avatars (si interactivos)",
+      "Enter/Space en overflow: abre popover con lista completa",
+      "Escape cierra popover de overflow"
+    ],
+    "focusTechnique": "ring 2px en avatar focuseado; overflow tiene focus como button",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 10, "prefix": "avg", "mode": "C" },
+  "componentDescriptions": {
+    "AvatarGroup": "Grupo de avatares con stacking overlap + overflow badge. Size: xs/sm/md/lg. MaxVisible: 3–6 antes del '+N' badge. Appearance: stack (horizontal overlap) / grid (gap). BorderRing: white (separación visual, Atlassian pattern) / none.\n\n🔑 ARIA:\n• role='group' + aria-label\n• Overflow badge con count accesible\n• Tooltip por avatar con nombre\n\n⌨️ Keyboard:\n• Tab entre avatars interactivos\n• Enter en overflow abre popover con lista\n\n🎯 Focus:\n• Ring 2px\n• Size enforcement: todos los avatars del grupo mismo size\n\nTokens: 10, prefijo avg-.\nWCAG 2.2 AA.\n\nScope: team members, collaborators, attendees, participants."
+  },
+  "variableBindings": {
+    "avg/xs/avatar": "sizing/24",
+    "avg/sm/avatar": "sizing/32",
+    "avg/md/avatar": "sizing/40",
+    "avg/lg/avatar": "sizing/48",
+    "avg/border/white": "surface/default",
+    "avg/overflow/bg": "surface/pressed",
+    "avg/overflow/fg": "text/primary",
+    "avg/overflow/fontWeight": "type/weight-semibold",
+    "avg/grid/gap": "spacing/1",
+    "avg/overlap/scale": "sizing/negativeQuarter"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "MaxVisible como property discreta (3/4/5/6) — Atlassian maxCount", "why": "Figma no puede render count dinámico. 4 opciones cubren casos típicos (3 para mobile compact, 6 para desktop team rosters). Overflow badge muestra count calculado.", "source": "research" },
+    { "what": "White border ring como BorderRing property (Atlassian pattern)", "why": "Atlassian 2px white outline previene que avatars se fundan en overlap. Critical para a11y color contrast en overlap zones. Property explícita permite borderless (no-stack layouts).", "source": "research" },
+    { "what": "Appearance stack | grid (Atlassian)", "why": "Stack (horizontal overlap) es default; grid para cuando hay >8 miembros y no cabe en overlap. Atlassian appearance='grid' para Confluence collaborators panels.", "source": "research" },
+    { "what": "Size enforcement (todos avatars mismo size)", "why": "Spectrum + Ant + Atlassian enforcen size consistency. Mixing sizes creates visual chaos. AvatarGroup setea Size y todos children heredan.", "source": "research" },
+    { "what": "Overflow badge es slot con popover opcional", "why": "Ant+Atlassian ofrecen popover on click. Modelado como slot permite custom trigger (click/hover). Slot contiene '+N' visible; popover es runtime behavior.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

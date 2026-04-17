@@ -1,0 +1,80 @@
+{
+  "version": "1.0",
+  "component": "Container",
+  "archetype": "layout-primitive",
+  "language": "es",
+  "buildOrder": ["Container"],
+  "family": [
+    {
+      "name": "Container",
+      "isSubComponent": false,
+      "isBuildingBlock": true,
+      "slots": [
+        { "name": "children", "type": "container", "required": true, "note": "contenido envuelto" }
+      ],
+      "properties": {
+        "MaxWidth": ["sm", "md", "lg", "xl", "full"],
+        "Padding":  ["none", "sm", "md", "lg"],
+        "Centered": ["yes", "no"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm":   { "maxWidth": 672 },
+        "md":   { "maxWidth": 1056 },
+        "lg":   { "maxWidth": 1312 },
+        "xl":   { "maxWidth": 1584 },
+        "full": { "maxWidth": "100%" }
+      },
+      "paddingValues": {
+        "none": { "px": 0, "py": 0 },
+        "sm":   { "px": 16, "py": 12 },
+        "md":   { "px": 24, "py": 16 },
+        "lg":   { "px": 32, "py": 24 }
+      },
+      "frameCount": {
+        "gross": 40,
+        "exclusions": 0,
+        "net": 40,
+        "note": "MaxWidth(5) × Padding(4) × Centered(2) = 40"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "layout-primitive",
+    "role": "none (semantic landmark al consumer)",
+    "ariaAttributes": [
+      "Container es display-only — sin role propio",
+      "Consumer aplica landmark: role='main' para content area, role='navigation' para sidebars",
+      "Para landing pages: <main> tag dentro del Container"
+    ],
+    "keyboardNav": ["No focusable"],
+    "focusTechnique": "none",
+    "edgeCases": 1,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 10, "prefix": "cnt", "mode": "C" },
+  "componentDescriptions": {
+    "Container": "Wrapper de layout con max-width + centered + padding. MaxWidth: sm (672px) / md (1056px) / lg (1312px) / xl (1584px) / full. Padding: none/sm/md/lg. Centered: yes (margin auto) / no.\n\n🔑 ARIA:\n• Sin role — consumer aplica landmark apropiado\n• Para page wrapper: <main> dentro del Container\n\n⌨️ Keyboard:\n• No focusable\n\nTokens: 10, prefijo cnt-.\nWCAG 2.2 AA.\n\nScope: content containment (marketing pages, docs, admin panels). Para page-level structure con título/actions usa Polaris-style Page (no incluido). Para column-based layouts usa Grid.\n\n5 max-widths matching Carbon breakpoints (sm/md/lg/xl/max)."
+  },
+  "variableBindings": {
+    "cnt/sm/maxWidth": "sizing/672",
+    "cnt/md/maxWidth": "sizing/1056",
+    "cnt/lg/maxWidth": "sizing/1312",
+    "cnt/xl/maxWidth": "sizing/1584",
+    "cnt/full/maxWidth": "sizing/full",
+    "cnt/padding/sm/px": "spacing/4",
+    "cnt/padding/md/px": "spacing/6",
+    "cnt/padding/lg/px": "spacing/8",
+    "cnt/padding/sm/py": "spacing/3",
+    "cnt/padding/md/py": "spacing/4",
+    "cnt/padding/lg/py": "spacing/6"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Container standalone (5/6 T1 lo omiten)", "why": "M3/Spectrum/Carbon/Polaris/Atlassian no lo tienen como standalone — lo resuelven con Grid/Page/Box. Ant Layout.Content es fluid. Nosotros incluimos Container como primitive independiente de Grid para marketing pages y docs donde Grid es overkill.", "source": "research" },
+    { "what": "MaxWidth: sm/md/lg/xl/full (Carbon breakpoint scale)", "why": "Carbon 5 max-widths (672/1056/1312/1584) son el scale más completo. Matching estos values permite alineación consistente con Grid + Page layouts.", "source": "research" },
+    { "what": "Padding como property separada (no inset/outset)", "why": "Box separa maxWidth de padding (Atlassian pattern). Combinar en un solo prop limita flexibility. 4 padding values × 5 maxWidths cubre todos los casos.", "source": "research" },
+    { "what": "Centered boolean (margin auto vs left-align)", "why": "90% de casos centered=yes (marketing, docs). Casos left-align: sidebars, nested containers dentro de Grid.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

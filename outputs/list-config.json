@@ -1,0 +1,131 @@
+{
+  "version": "1.0",
+  "component": "List",
+  "archetype": "display-list",
+  "language": "es",
+  "buildOrder": ["ListItem", "List"],
+  "family": [
+    {
+      "name": "ListItem",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "List",
+      "slots": [
+        { "name": "marker", "type": "icon-or-text", "required": false, "figmaBinding": "instance-swap", "note": "bullet, number, icon o checkbox" },
+        { "name": "label", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "description", "type": "text", "required": false, "figmaBinding": "text" },
+        { "name": "trailing", "type": "container", "required": false, "note": "meta info, actions, badges" }
+      ],
+      "properties": {
+        "State":   ["default", "hover", "selected", "focused", "disabled"],
+        "Density": ["compact", "default", "comfortable"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "compact":     { "h": 32, "px": 12, "py": 6, "fontSize": 13, "lineHeight": 18, "gap": 8 },
+        "default":     { "h": 40, "px": 16, "py": 10, "fontSize": 14, "lineHeight": 20, "gap": 12 },
+        "comfortable": { "h": 56, "px": 20, "py": 14, "fontSize": 14, "lineHeight": 20, "gap": 12 }
+      },
+      "stateStyles": {
+        "default":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 } },
+        "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "selected": { "bg": { "r": 0.93, "g": 0.95, "b": 1.0 }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "fontWeight": 500 },
+        "focused":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 }, "ring": true },
+        "disabled": { "bg": "transparent", "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "opacity": 0.6 }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "List item" },
+        { "propName": "✏️ Description", "layerName": "description", "default": "Supporting text" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Marker", "layerName": "marker", "default": "bullet/disc" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Marker", "layerName": "marker" },
+        { "propName": "👁 Has Description", "layerName": "description" },
+        { "propName": "👁 Has Trailing", "layerName": "trailing" },
+        { "propName": "👁 Has Divider", "layerName": "divider" }
+      ],
+      "frameCount": {
+        "gross": 15,
+        "exclusions": 0,
+        "net": 15,
+        "note": "State(5) × Density(3) = 15"
+      }
+    },
+    {
+      "name": "List",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "items", "type": "container", "required": true, "note": "N ListItems" }
+      ],
+      "properties": {
+        "Type":      ["unordered", "ordered", "description", "nav", "action"],
+        "Density":   ["compact", "default", "comfortable"],
+        "Dividers":  ["none", "between", "all"]
+      },
+      "exclusions": [
+        "Type=nav|action + Dividers=all (decorative overkill en nav)"
+      ],
+      "frameCount": {
+        "gross": 45,
+        "exclusions": 6,
+        "net": 39,
+        "note": "Type(5) × Density(3) × Dividers(3) = 45; −6 exclusiones"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "list",
+    "role": "list (container) + listitem (items) o menu/menuitem (nav)",
+    "ariaAttributes": [
+      "Type=unordered|ordered: <ul>/<ol> + <li> native semantics",
+      "Type=description: <dl> + <dt> + <dd> native",
+      "Type=nav: role='list' dentro de <nav> + role='listitem'",
+      "Type=action: role='menu' + role='menuitem' (arrow key navigation)",
+      "Selected item: aria-selected='true' o aria-current='true'",
+      "Disabled: aria-disabled='true'"
+    ],
+    "keyboardNav": [
+      "Type=nav: Tab entre items",
+      "Type=action: Arrow keys + Enter (menu pattern)",
+      "Type=unordered|ordered|description: no focusable"
+    ],
+    "focusTechnique": "ring 2px en item interactivo (nav/action)",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 18, "prefix": "lst", "mode": "C" },
+  "componentDescriptions": {
+    "ListItem": "Item individual. States: default/hover/selected/focused/disabled. Density: compact (32) / default (40) / comfortable (56). Marker + label + description + trailing slots.\n\n🔑 ARIA:\n• <li> semantic\n• Selected: aria-selected o aria-current\n\n⌨️ Keyboard:\n• Tab (nav/action types)\n\nWCAG 2.2 AA.",
+    "List": "Lista ordenada/unordered/descripción/nav/action. Type determina semantic HTML + a11y pattern. Density: compact/default/comfortable. Dividers: none/between (entre items) / all (wrap completo).\n\n🔑 ARIA:\n• unordered/ordered: <ul>/<ol> native\n• description: <dl><dt><dd>\n• nav: role='list' dentro de <nav>\n• action: role='menu' con arrow key nav\n\n⌨️ Keyboard:\n• Dependiente del Type\n\nTokens: 18, prefijo lst-.\nWCAG 2.2 AA.\n\nScope: listas semantic (ul/ol), description lists (term/definition), navigation menus, action menus (overflow).\n\nPara tablas de datos usa DataGrid. Para listas expandibles con jerarquía usa TreeView."
+  },
+  "variableBindings": {
+    "lst/compact/h": "sizing/32",
+    "lst/default/h": "sizing/40",
+    "lst/comfortable/h": "sizing/56",
+    "lst/default/bg": "surface/default",
+    "lst/default/fg": "text/primary",
+    "lst/hover/bg": "surface/hover",
+    "lst/selected/bg": "brand/subtle",
+    "lst/selected/fg": "interactive/default",
+    "lst/selected/fontWeight": "type/weight-medium",
+    "lst/focused/ring": "focus/ring",
+    "lst/disabled/fg": "text/disabled",
+    "lst/divider/color": "border/default",
+    "lst/label/fontSize": "type/md",
+    "lst/description/fontSize": "type/sm",
+    "lst/description/fg": "text/secondary",
+    "lst/gap": "spacing/3",
+    "lst/px": "spacing/4",
+    "lst/py": "spacing/2"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "5 Types: unordered/ordered/description/nav/action", "why": "Cubre los 5 casos semantic HTML: <ul> (bullet), <ol> (numbered), <dl> (term/def), nav menu, action menu (dropdown). Type drives semantic + a11y pattern.", "source": "research" },
+    { "what": "Dividers como property (none/between/all)", "why": "'between' = dividers entre items, 'all' = + top/bottom, 'none' = sin. M3 list-level divider control evita inconsistent placement.", "source": "research" },
+    { "what": "3 densities (compact/default/comfortable) consistent con foundations.densityModes", "why": "Enterprise admin (32), general (40), touch mobile (56). Match con foundations.densityModes.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

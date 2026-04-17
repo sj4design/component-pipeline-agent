@@ -1,0 +1,87 @@
+{
+  "component": "DescriptionList",
+  "archetype": "key-value-display",
+  "buildOrder": ["DescriptionItem", "DescriptionList"],
+  "family": [
+    {
+      "name": "DescriptionItem",
+      "isSubComponent": true,
+      "slots": ["term*:text", "description*:text", "termIcon:icon"],
+      "properties": {
+        "Layout":   ["stacked", "horizontal", "inline"],
+        "Size":     ["sm", "md", "lg"],
+        "Emphasis": ["term", "description", "equal"]
+      },
+      "booleans": ["Has Term Icon"],
+      "exclusions": ["Layout=inline + Emphasis=equal"],
+      "frameCount": 24
+    },
+    {
+      "name": "DescriptionList",
+      "isSubComponent": false,
+      "slots": ["items*:container"],
+      "properties": {
+        "Columns":  ["1", "2", "3"],
+        "Dividers": ["none", "between", "all"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 9
+    }
+  ],
+  "a11y": {
+    "role": "<dl><dt><dd> native",
+    "keyboard": ["No focusable"],
+    "focus": "none"
+  },
+  "tokens": { "total": 14, "prefix": "dl" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas DescriptionList?",
+      "options": [
+        { "value": "user-details", "label": "User/profile details — Email, Phone, Role" },
+        { "value": "order-summary", "label": "Order summary — Subtotal, Tax, Total" },
+        { "value": "product-specs", "label": "Product specs — weight, dimensions, SKU" },
+        { "value": "settings-preview", "label": "Settings preview — read-only config display" },
+        { "value": "metadata", "label": "Metadata panels — card details, page info" }
+      ],
+      "impact": "Layout default, Emphasis default, Columns",
+      "tags": ["profile", "order", "specs", "settings", "metadata"]
+    },
+    {
+      "id": "layout",
+      "text": "¿Layout de term/description?",
+      "options": [
+        { "value": "stacked", "label": "Stacked — term arriba, description abajo" },
+        { "value": "horizontal", "label": "Horizontal — term | description side-by-side" },
+        { "value": "inline", "label": "Inline — 'Email: foo@bar.com' una línea" },
+        { "value": "multiple", "label": "Varios según contexto" }
+      ],
+      "impact": "Layout property",
+      "tags": ["stacked", "horizontal", "inline", "side-by-side"]
+    },
+    {
+      "id": "emphasis",
+      "text": "¿Qué recibe más peso visual?",
+      "options": [
+        { "value": "term", "label": "Term — metadata labels enfatizadas" },
+        { "value": "description", "label": "Description — settings y user details (value es lo importante)" },
+        { "value": "equal", "label": "Equal — comparison tables" }
+      ],
+      "impact": "Emphasis property",
+      "tags": ["emphasis", "term", "description", "weight"]
+    },
+    {
+      "id": "columns",
+      "text": "¿Multi-columnas?",
+      "options": [
+        { "value": "single", "label": "Single column (stacked list)" },
+        { "value": "two", "label": "2 columns — product specs sheets" },
+        { "value": "three", "label": "3 columns — dense metadata grids" }
+      ],
+      "impact": "Columns property",
+      "tags": ["columns", "grid", "multi-column"]
+    }
+  ]
+}

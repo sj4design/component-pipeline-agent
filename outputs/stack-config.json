@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "component": "Stack",
+  "archetype": "layout-primitive",
+  "language": "es",
+  "buildOrder": ["Stack"],
+  "family": [
+    {
+      "name": "Stack",
+      "isSubComponent": false,
+      "isBuildingBlock": true,
+      "slots": [
+        { "name": "children", "type": "container", "required": true, "note": "N children apilados en dirección" }
+      ],
+      "properties": {
+        "Direction": ["vertical", "horizontal"],
+        "Gap":       ["none", "xs", "sm", "md", "lg", "xl"],
+        "Align":     ["start", "center", "end", "stretch"],
+        "Justify":   ["start", "center", "end", "space-between", "space-around"],
+        "Wrap":      ["no", "yes"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "none": { "gap": 0 },
+        "xs":   { "gap": 4 },
+        "sm":   { "gap": 8 },
+        "md":   { "gap": 16 },
+        "lg":   { "gap": 24 },
+        "xl":   { "gap": 32 }
+      },
+      "frameCount": {
+        "gross": 240,
+        "exclusions": 0,
+        "net": 60,
+        "note": "Subset representativo: Direction(2) × Gap(6) × Align(4) × Justify(5) = 240 full; mostramos 60 frames combinando casos comunes"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "layout-primitive",
+    "role": "none",
+    "ariaAttributes": ["Display-only, sin ARIA"],
+    "keyboardNav": ["No focusable"],
+    "focusTechnique": "none",
+    "edgeCases": 0,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 8, "prefix": "stk", "mode": "C" },
+  "componentDescriptions": {
+    "Stack": "Flexbox layout primitive. Direction: vertical (default) / horizontal. Gap: none/xs/sm/md/lg/xl. Align: start/center/end/stretch (cross-axis). Justify: start/center/end/space-between/space-around (main-axis). Wrap: yes/no.\n\n🔑 ARIA:\n• Sin role — display primitive\n\n⌨️ Keyboard:\n• No focusable\n\nTokens: 8, prefijo stk-.\nWCAG 2.2 AA.\n\nUsar para: 1D layouts (listas, toolbars, button groups, cards side-by-side).\nPara 2D layouts usa Grid. Para max-width wrapping usa Container."
+  },
+  "variableBindings": {
+    "stk/gap/xs": "spacing/1",
+    "stk/gap/sm": "spacing/2",
+    "stk/gap/md": "spacing/4",
+    "stk/gap/lg": "spacing/6",
+    "stk/gap/xl": "spacing/8",
+    "stk/gap/none": "spacing/0"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Stack 1D primitive separado de Grid 2D (Spectrum pattern)", "why": "Spectrum distingue Flex (1D) de Grid (2D). Stack nombrado por común (M3 HorizontalArrangement, Polaris InlineStack/BlockStack). Separar reduce API complexity vs. Grid-para-todo.", "source": "research" },
+    { "what": "Direction vertical default", "why": "Vertical stacking es mayoría de casos (form fields, card content). Horizontal es opt-in. Match Polaris BlockStack default.", "source": "research" },
+    { "what": "Gap escala xs-xl matching foundations.spacingScale", "why": "6 valores cubren desde inline compact (4px) hasta section separation (32px). Token-based aligning con el resto del sistema.", "source": "research" },
+    { "what": "Align + Justify separados (flexbox pattern)", "why": "Semántica estándar: align cross-axis, justify main-axis. No unificar porque direction cambia el axis meaning.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

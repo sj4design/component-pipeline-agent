@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "component": "Divider",
+  "archetype": "layout-primitive",
+  "language": "es",
+  "buildOrder": ["Divider"],
+  "family": [
+    {
+      "name": "Divider",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "label", "type": "text", "required": false, "figmaBinding": "text", "note": "texto embebido en la línea (Ant pattern)" }
+      ],
+      "properties": {
+        "Orientation": ["horizontal", "vertical"],
+        "Thickness":   ["sm", "md", "lg"],
+        "Style":       ["solid", "dashed"],
+        "Emphasis":    ["subtle", "default"]
+      },
+      "exclusions": [
+        "Orientation=vertical + label (texto embebido solo en horizontal)"
+      ],
+      "sizes": {
+        "sm": { "thickness": 1 },
+        "md": { "thickness": 2 },
+        "lg": { "thickness": 4 }
+      },
+      "emphasisStyles": {
+        "subtle":  { "color": { "r": 0.88, "g": 0.89, "b": 0.90 } },
+        "default": { "color": { "r": 0.65, "g": 0.65, "b": 0.70 } }
+      },
+      "labelStyle": {
+        "fontSize": 13, "fontWeight": 500, "lineHeight": 18,
+        "paddingX": 12, "bg": { "r": 1.0, "g": 1.0, "b": 1.0 }, "fg": { "r": 0.42, "g": 0.45, "b": 0.50 }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Sección" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Label", "layerName": "label" }
+      ],
+      "frameCount": {
+        "gross": 48,
+        "exclusions": 12,
+        "net": 36,
+        "note": "Orientation(2) × Thickness(3) × Style(2) × Emphasis(2) = 48; −12 vertical+label"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "separator",
+    "role": "separator (structural) o decorative (aria-hidden)",
+    "ariaAttributes": [
+      "Structural: role='separator' + aria-orientation='horizontal|vertical'",
+      "Decorative: aria-hidden='true' (recomendado si solo visual)",
+      "Con label: label leído como parte del separator (sin role='heading' — Ant gap)"
+    ],
+    "keyboardNav": ["No focusable"],
+    "focusTechnique": "none",
+    "edgeCases": 2,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 8, "prefix": "div", "mode": "C" },
+  "componentDescriptions": {
+    "Divider": "Separador visual. Orientation: horizontal/vertical. Thickness: sm (1px) / md (2px) / lg (4px). Style: solid/dashed. Emphasis: subtle (low-key) / default (hierarchical). Soporta label embebido (horizontal only).\n\n🔑 ARIA:\n• role='separator' estructural o aria-hidden='true' decorativo\n• aria-orientation matches Orientation prop\n\n⌨️ Keyboard:\n• No focusable\n\nTokens: 8, prefijo div-.\nWCAG 2.2 AA.\n\nNO usar para: heading semantics (usa <h1>-<h6>). Para section headers con divider, agrega <h2> + <Divider> separados."
+  },
+  "variableBindings": {
+    "div/sm/thickness": "border/1",
+    "div/md/thickness": "border/2",
+    "div/lg/thickness": "border/4",
+    "div/subtle/color": "border/default",
+    "div/default/color": "border/hover",
+    "div/label/bg": "surface/default",
+    "div/label/fg": "text/secondary",
+    "div/label/fontSize": "type/sm",
+    "div/label/paddingX": "spacing/3"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "4 properties: Orientation + Thickness + Style + Emphasis", "why": "Spectrum 3 sizes + Ant dashed + M3 emphasis unifican. 4 axes × few values = 36 frames netos, cubre todos los casos enterprise + minimal.", "source": "research" },
+    { "what": "Label embebido solo en horizontal (Ant pattern único)", "why": "Ant es el único T1 con text label dentro del divider. Pattern útil para sección headers en forms densos. Vertical con label es edge case casi inexistente — exclusión limpia.", "source": "research" },
+    { "what": "Emphasis subtle/default en vez de múltiples colors", "why": "Atlassian usa single token color.border (zero config). Polaris token-constrained. Dos emphasis simplifica vs. colors semánticos (error divider es anti-pattern — usa Banner/Alert).", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}
