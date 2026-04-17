@@ -19,9 +19,12 @@ Flags: `--fresh` (ignore cache), `--from=spec` (skip research), `--human` (also 
 2. Read outputs/[comp]-config.json                 (~2-3K tokens)
 3. IF --max → skip to step 6
 4. IF --brief → ask user for brief, analyze it, mark answered questions
-5. Show remaining questions from hints.json pool → user answers
+5. Ask remaining questions via AskUserQuestion tool (interactive prompts, NOT markdown). Max 4 preguntas por call y max 4 options por pregunta. Si hints.json tiene >4 preguntas: hacer **2 calls en PARALELO en el mismo mensaje** (no secuencial) — priorizar las preguntas más críticas (las que más filtran el config) en el primer call. Si una pregunta tiene >4 options, consolidar la menos crítica ("Other" auto-provisto). Headers ≤12 chars. Mapear respuestas a option IDs de hints.json para filtrar config. Aplica igual a `--brief`: después de analizar el brief, las preguntas restantes van vía AskUserQuestion con el mismo patrón.
 6. Filter config.json by scope (remove out-of-scope properties/booleans)
 7. Generate outputs/[comp]-spec-completo.md (v4 format)
+   • Para la sección "Reference: how other systems do it":
+     - IF research/components/[comp].md existe → usar sus Per-System Narratives
+     - IF NO existe (comps generados fast-mode) → FALLBACK: leer component-research-agent/references/systems/compiled/[comp].md (tier-1 digest, 6 sistemas) y sintetizar inline un párrafo compact por sistema (~80 chars cada uno). NO leer tier-2/tier-3 (no worth the tokens).
 8. Save filtered config.json
 ```
 
