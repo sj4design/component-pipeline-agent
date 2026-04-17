@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "component": "Search",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": ["Search"],
+  "family": [
+    {
+      "name": "Search",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "search-icon", "type": "icon",       "required": true,  "figmaBinding": "none" },
+        { "name": "input",       "type": "text",        "required": true,  "figmaBinding": "text" },
+        { "name": "clear",       "type": "icon-action", "required": false, "figmaBinding": "bool" },
+        { "name": "loading",     "type": "icon",        "required": false, "figmaBinding": "bool" },
+        { "name": "submit-btn",  "type": "container",   "required": false, "figmaBinding": "bool" }
+      ],
+      "properties": {
+        "Size":    ["sm", "md", "lg"],
+        "Variant": ["default", "expandable"]
+      },
+      "exclusions": [
+        "Variant=expandable + Size=lg (expandable se usa en toolbars densos, siempre sm/md)"
+      ],
+      "sizes": {
+        "sm": { "h": 32, "py": 6,  "px": 8,  "fontSize": 12, "lineHeight": 16, "radius": 6,    "iconSize": 16, "gap": 6  },
+        "md": { "h": 40, "py": 8,  "px": 12, "fontSize": 14, "lineHeight": 20, "radius": 6,    "iconSize": 16, "gap": 8  },
+        "lg": { "h": 48, "py": 12, "px": 16, "fontSize": 16, "lineHeight": 24, "radius": 9999, "iconSize": 20, "gap": 8  }
+      },
+      "colors": {
+        "bg":          { "r": 1,    "g": 1,    "b": 1    },
+        "border":      { "r": 0.82, "g": 0.82, "b": 0.85 },
+        "fg":          { "r": 0.07, "g": 0.07, "b": 0.07 },
+        "placeholder": { "r": 0.55, "g": 0.55, "b": 0.60 },
+        "icon":        { "r": 0.42, "g": 0.45, "b": 0.50 },
+        "focusBorder": { "r": 0.15, "g": 0.35, "b": 0.92 }
+      },
+      "variantStyles": {
+        "default":    { "borderWidth": 1, "borderRadius": "per-size" },
+        "expandable": { "borderWidth": 0, "bgCollapsed": "transparent", "showIconOnly": true }
+      },
+      "textProperties": [
+        { "propName": "✏️ Placeholder", "layerName": "input", "default": "Buscar..." }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        { "boolName": "Has Value",      "layerName": "clear",      "defaultVisible": false },
+        { "boolName": "Has Loading",    "layerName": "loading",    "defaultVisible": false },
+        { "boolName": "Has Submit Btn", "layerName": "submit-btn", "defaultVisible": false }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": { "gross": 6, "exclusions": 1, "net": 5 },
+      "grid": { "maxCols": 5, "gap": 20, "pad": 32 }
+    }
+  ],
+  "a11y": {
+    "pattern": "search",
+    "role": "search (landmark wrapper)",
+    "ariaAttributes": [
+      "role=\"search\" en el wrapper del componente (landmark navegable)",
+      "aria-label en el wrapper (ej. 'Buscar contactos')",
+      "type=\"search\" en el input (AT anuncia 'campo de búsqueda')",
+      "aria-busy=\"true\" cuando Has Loading=true"
+    ],
+    "keyboardNav": [
+      "Enter: dispara búsqueda (onSubmit)",
+      "Escape: limpia el campo + colapsa si Variant=expandable",
+      "/ (shortcut opcional): activa campo desde fuera"
+    ],
+    "focusTechnique": "no focus trap — campo inline",
+    "edgeCases": 3,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 10, "prefix": "sch", "mode": "C" },
+  "componentDescriptions": {
+    "Search": "Campo de búsqueda especializado. Sizes: sm/md/lg. Variant: default o expandable (colapsa a ícono).\n\n🔑 ARIA:\n• role=\"search\" en wrapper (landmark)\n• type=\"search\" en input\n• aria-label descriptivo: 'Buscar [contexto]'\n• aria-busy cuando loading\n\n⌨️ Keyboard:\n• Enter: onSubmit (no onChange) — evita API calls por keystroke\n• Escape: limpia + colapsa (expandable)\n• '/': shortcut para activar (opcional)\n\n🎯 Focus:\n• onChange vs onSubmit separados (Spectrum pattern)\n• Has Value: muestra botón clear automático\n• Expandable: foco automático al expandir\n• Has Loading: spinner en lugar del ícono de búsqueda\n\nTokens: 10, prefijo sch-.\nWCAG 2.2 AA · role=search landmark."
+  },
+  "variableBindings": {
+    "sch/bg": "surface/default",
+    "sch/border": "border/default",
+    "sch/border-focus": "border/focus",
+    "sch/fg": "text/primary",
+    "sch/placeholder": "text/subtlest",
+    "sch/icon": "text/secondary",
+    "sch/radius": "radius/md",
+    "sch/submit-bg": "interactive/default",
+    "sch/submit-fg": "text/inverse",
+    "focus/ring": "border/focus"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "Componente separado de TextField (no prop type='search')", "why": "Spectrum y Polaris hacen esta separación. Search agrega onSubmit, onClear, enterKeyHint, y role=search que no pertenecen a un input de texto genérico.", "source": "research" },
+    { "what": "onChange vs onSubmit separados por comportamiento", "why": "Spectrum separa esto explícitamente — onChange para filtrado local, onSubmit para llamadas API. Mezclarlos genera el bug más común: query API call por cada keystroke.", "source": "research" },
+    { "what": "Variant=expandable colapsa a ícono (toolbar pattern)", "why": "Carbon tiene esta variante para toolbars densos. Zoom tiene toolbars en meetings y configuración donde el espacio es limitado.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

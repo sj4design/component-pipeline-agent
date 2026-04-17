@@ -1,0 +1,81 @@
+{
+  "component": "Slider",
+  "archetype": "container",
+  "buildOrder": ["Slider"],
+  "family": [
+    {
+      "name": "Slider",
+      "isSubComponent": false,
+      "slots": ["label:text", "track*:shape", "fill*:shape", "thumb*:shape", "thumb-end:shape", "value-label:text", "marks:container", "input:container"],
+      "properties": { "Type": ["single", "range"], "Size": ["sm", "md", "lg"] },
+      "booleans": ["Has Label(text)", "Has Value Label(text)", "Has Marks", "Has Input"],
+      "exclusions": [],
+      "frameCount": 6
+    }
+  ],
+  "a11y": {
+    "role": "slider",
+    "keyboard": ["←→↑↓: ±1 paso", "Shift+Arrow: ±10 pasos", "Page Up/Down: salto grande", "Home/End: límites"],
+    "focus": "Cada thumb es independientemente focusable; aria-valuetext para valores formateados"
+  },
+  "tokens": { "total": 10, "prefix": "sld" },
+  "questions": [
+    {
+      "id": "type",
+      "text": "¿El slider selecciona un valor único o un rango?",
+      "options": [
+        { "value": "single", "label": "Un valor — ej. volumen, brillo, zoom" },
+        { "value": "range",  "label": "Un rango — ej. precio entre $X y $Y, rango de fechas" },
+        { "value": "both",   "label": "Ambos según contexto" }
+      ],
+      "impact": "Type property (single | range)",
+      "tags": ["single", "range", "dual-thumb", "min-max", "price-range"]
+    },
+    {
+      "id": "value-display",
+      "text": "¿El slider muestra el valor actual?",
+      "options": [
+        { "value": "label",   "label": "Sí — label/tooltip que muestra el valor (ej. '50%')" },
+        { "value": "input",   "label": "Con input numérico sincronizado — puedo escribir el valor exacto" },
+        { "value": "both",    "label": "Ambos — label + input numérico" },
+        { "value": "none",    "label": "No — sin display de valor" }
+      ],
+      "impact": "Has Value Label + Has Input booleans",
+      "tags": ["value-label", "tooltip", "number-input", "paired-input", "exact-value"]
+    },
+    {
+      "id": "discrete",
+      "text": "¿El slider tiene pasos discretos marcados?",
+      "options": [
+        { "value": "continuous", "label": "Continuo — desliza libremente entre min y max" },
+        { "value": "discrete",   "label": "Discreto — con tick marks en posiciones específicas" },
+        { "value": "both",       "label": "Ambos según el caso" }
+      ],
+      "impact": "Has Marks boolean",
+      "tags": ["continuous", "discrete", "ticks", "marks", "steps", "snap"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños necesitas?",
+      "options": [
+        { "value": "md-only", "label": "Solo md — uso general" },
+        { "value": "sm-md",   "label": "sm + md (track más delgado / más grueso)" },
+        { "value": "all",     "label": "sm + md + lg" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "large", "compact", "track-height"]
+    },
+    {
+      "id": "context",
+      "text": "¿Para qué se usa el slider?",
+      "options": [
+        { "value": "media",      "label": "Control de media — volumen, progreso, brillo" },
+        { "value": "filter",     "label": "Filtro/rango — precio, edad, tamaño" },
+        { "value": "settings",   "label": "Configuración — threshold, sensibilidad, zoom" },
+        { "value": "multiple",   "label": "Varios casos" }
+      ],
+      "impact": "Has Marks, Has Value Label, Has Input según contexto",
+      "tags": ["volume", "brightness", "price-range", "filter", "settings", "zoom"]
+    }
+  ]
+}

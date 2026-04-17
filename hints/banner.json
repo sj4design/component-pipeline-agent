@@ -1,0 +1,82 @@
+{
+  "component": "Banner",
+  "archetype": "container",
+  "buildOrder": ["Banner"],
+  "family": [
+    {
+      "name": "Banner",
+      "isSubComponent": false,
+      "slots": ["icon:icon", "title:text", "description*:text", "action:container", "close:icon-action"],
+      "properties": {
+        "Variant":   ["info", "warning", "error", "success"],
+        "Placement": ["page", "inline"]
+      },
+      "booleans": ["Has Icon", "Has Title(text)", "Has Action", "Has Close"],
+      "exclusions": ["Variant=error + Has Close (críticos no dismissibles)"],
+      "frameCount": 8
+    }
+  ],
+  "a11y": {
+    "role": "alert (warning/error) | status (info/success)",
+    "keyboard": ["Has Close: botón ×", "Has Action: botón de acción", "Tab navega entre elementos"],
+    "focus": "Sin focus trap — inline en documento"
+  },
+  "tokens": { "total": 18, "prefix": "bnr" },
+  "questions": [
+    {
+      "id": "placement",
+      "text": "¿Dónde aparece el banner?",
+      "options": [
+        { "value": "page",   "label": "Page level — full-width en top de página (sin radius)" },
+        { "value": "inline", "label": "Inline — dentro de secciones o cards (con radius y borde izquierdo)" },
+        { "value": "both",   "label": "Ambos casos" }
+      ],
+      "impact": "Placement property values",
+      "tags": ["page-level", "inline", "section", "sticky", "full-width"]
+    },
+    {
+      "id": "variants",
+      "text": "¿Qué tipos de mensajes necesitas?",
+      "options": [
+        { "value": "error-warning", "label": "Error y warning — mensajes críticos y advertencias" },
+        { "value": "all-four",      "label": "Info, warning, error, success — set completo" },
+        { "value": "info-only",     "label": "Solo info/anuncio — banners de marketing o mantenimiento" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["info", "warning", "error", "success", "critical", "announcement"]
+    },
+    {
+      "id": "dismissible",
+      "text": "¿El banner puede cerrarse?",
+      "options": [
+        { "value": "always",    "label": "Siempre dismissible — con botón ×" },
+        { "value": "sometimes", "label": "Depende — info/success sí, error no" },
+        { "value": "never",     "label": "Nunca — siempre persistente" }
+      ],
+      "impact": "Has Close boolean",
+      "tags": ["dismissible", "persistent", "close", "non-dismissible", "critical"]
+    },
+    {
+      "id": "actions",
+      "text": "¿El banner tiene acciones (botones/links)?",
+      "options": [
+        { "value": "yes",       "label": "Sí — botón de acción ('Ver detalles', 'Resolver', 'Actualizar')" },
+        { "value": "no",        "label": "No — solo mensaje informativo" },
+        { "value": "sometimes", "label": "A veces — algunos banners tienen acción, otros no" }
+      ],
+      "impact": "Has Action boolean",
+      "tags": ["action", "cta", "button", "link", "resolve"]
+    },
+    {
+      "id": "title",
+      "text": "¿El banner siempre tiene título además del mensaje?",
+      "options": [
+        { "value": "yes",       "label": "Sí — título en bold + descripción" },
+        { "value": "no",        "label": "No — solo mensaje sin encabezado" },
+        { "value": "sometimes", "label": "A veces — depende del tipo de banner" }
+      ],
+      "impact": "Has Title boolean",
+      "tags": ["title", "heading", "structured", "one-line", "multi-line"]
+    }
+  ]
+}

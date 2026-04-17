@@ -1,0 +1,82 @@
+{
+  "component": "EmptyState",
+  "archetype": "container",
+  "buildOrder": ["EmptyState"],
+  "family": [
+    {
+      "name": "EmptyState",
+      "isSubComponent": false,
+      "slots": ["illustration:image", "title*:text", "description:text", "primaryAction:container", "secondaryAction:container"],
+      "properties": {
+        "Variant": ["default", "search", "error", "no-access"],
+        "Size":    ["sm", "lg"]
+      },
+      "booleans": ["Has Illustration", "Has Description(text)", "Has Primary Action", "Has Secondary Action"],
+      "exclusions": [],
+      "frameCount": 8
+    }
+  ],
+  "a11y": {
+    "role": "heading (h2/h3) + button pattern",
+    "keyboard": ["Tab → acciones", "Sin focus trap"],
+    "focus": "Ilustración aria-hidden. Title como heading semántico."
+  },
+  "tokens": { "total": 8, "prefix": "est" },
+  "questions": [
+    {
+      "id": "variants",
+      "text": "¿Qué tipos de estado vacío necesitas?",
+      "options": [
+        { "value": "default-only",   "label": "Solo default — primera vez sin contenido" },
+        { "value": "default-search", "label": "Default + search — también sin resultados de búsqueda" },
+        { "value": "all-four",       "label": "Default + search + error + no-access (set completo)" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["default", "search", "error", "no-access", "permissions", "empty-search"]
+    },
+    {
+      "id": "size",
+      "text": "¿En qué contextos aparece el empty state?",
+      "options": [
+        { "value": "page-only",     "label": "Solo páginas completas — lg grande con ilustración prominente" },
+        { "value": "section-only",  "label": "Solo dentro de secciones/cards — sm compacto" },
+        { "value": "both",          "label": "Ambos — páginas y dentro de tablas/paneles" }
+      ],
+      "impact": "Size property values (sm/lg)",
+      "tags": ["page", "section", "table", "card", "compact", "full-page"]
+    },
+    {
+      "id": "illustration",
+      "text": "¿El empty state siempre tiene ilustración?",
+      "options": [
+        { "value": "always",    "label": "Siempre — ilustración es parte de la identidad visual" },
+        { "value": "sometimes", "label": "Depende — páginas completas sí, tablas compactas no" },
+        { "value": "never",     "label": "Nunca — solo texto y acción" }
+      ],
+      "impact": "Has Illustration boolean (default ON/OFF)",
+      "tags": ["illustration", "image", "icon", "visual", "text-only"]
+    },
+    {
+      "id": "actions",
+      "text": "¿El empty state tiene acciones?",
+      "options": [
+        { "value": "primary-only",   "label": "Solo acción primaria — 'Crear primer X'" },
+        { "value": "primary-secondary","label": "Primaria + secundaria — ej. 'Crear' y 'Importar'" },
+        { "value": "none",           "label": "Sin acciones — solo informativo (ej. no-access, error)" }
+      ],
+      "impact": "Has Primary Action + Has Secondary Action booleans",
+      "tags": ["cta", "create", "import", "action-oriented", "no-action"]
+    },
+    {
+      "id": "description",
+      "text": "¿El empty state tiene descripción adicional al título?",
+      "options": [
+        { "value": "yes",  "label": "Sí — párrafo explicativo debajo del título" },
+        { "value": "no",   "label": "No — solo título y acción" },
+        { "value": "sometimes","label": "A veces — más detalle para error/no-access, no para default" }
+      ],
+      "impact": "Has Description boolean",
+      "tags": ["description", "explanation", "body-text", "minimal"]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "component": "Slider",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": ["Slider"],
+  "family": [
+    {
+      "name": "Slider",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "label",       "type": "text",   "required": false, "figmaBinding": "boolText" },
+        { "name": "track",       "type": "shape",  "required": true,  "figmaBinding": "none" },
+        { "name": "fill",        "type": "shape",  "required": true,  "figmaBinding": "none" },
+        { "name": "thumb",       "type": "shape",  "required": true,  "figmaBinding": "none" },
+        { "name": "thumb-end",   "type": "shape",  "required": false, "figmaBinding": "bool" },
+        { "name": "value-label", "type": "text",   "required": false, "figmaBinding": "boolText" },
+        { "name": "marks",       "type": "container","required": false,"figmaBinding": "bool" },
+        { "name": "input",       "type": "container","required": false,"figmaBinding": "bool" }
+      ],
+      "properties": {
+        "Type": ["single", "range"],
+        "Size": ["sm", "md", "lg"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "trackH": 4,  "thumbSize": 16, "thumbRadius": 9999, "fontSize": 12, "labelGap": 6,  "markSize": 4  },
+        "md": { "trackH": 6,  "thumbSize": 20, "thumbRadius": 9999, "fontSize": 14, "labelGap": 8,  "markSize": 5  },
+        "lg": { "trackH": 8,  "thumbSize": 24, "thumbRadius": 9999, "fontSize": 16, "labelGap": 10, "markSize": 6  }
+      },
+      "colors": {
+        "track":       { "r": 0.89, "g": 0.89, "b": 0.91 },
+        "fill":        { "r": 0.15, "g": 0.35, "b": 0.92 },
+        "thumb":       { "r": 1,    "g": 1,    "b": 1    },
+        "thumbBorder": { "r": 0.15, "g": 0.35, "b": 0.92 },
+        "thumbShadow": { "r": 0,    "g": 0,    "b": 0,    "a": 0.15 },
+        "markActive":  { "r": 1,    "g": 1,    "b": 1    },
+        "markInactive":{ "r": 0.82, "g": 0.82, "b": 0.85 },
+        "labelFg":     { "r": 0.42, "g": 0.45, "b": 0.50 },
+        "valueFg":     { "r": 0.07, "g": 0.07, "b": 0.07 },
+        "disabled":    { "track": { "r": 0.89, "g": 0.89, "b": 0.91 }, "fill": { "r": 0.82, "g": 0.82, "b": 0.85 }, "thumb": { "r": 0.96, "g": 0.96, "b": 0.98 } }
+      },
+      "variantStyles": {
+        "single": { "thumbCount": 1 },
+        "range":  { "thumbCount": 2, "fillBetweenThumbs": true }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label",       "layerName": "label",       "default": "Volumen"  },
+        { "propName": "✏️ Value Label", "layerName": "value-label", "default": "50%"      }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        { "boolName": "Has Label",       "layerName": "label",       "defaultVisible": true  },
+        { "boolName": "Has Value Label", "layerName": "value-label", "defaultVisible": true  },
+        { "boolName": "Has Marks",       "layerName": "marks",       "defaultVisible": false },
+        { "boolName": "Has Input",       "layerName": "input",       "defaultVisible": false }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": { "gross": 6, "exclusions": 0, "net": 6 },
+      "grid": { "maxCols": 3, "gap": 48, "pad": 40 }
+    }
+  ],
+  "a11y": {
+    "pattern": "slider",
+    "role": "slider",
+    "ariaAttributes": [
+      "role=\"slider\" (automático con type=\"range\")",
+      "aria-valuemin, aria-valuemax, aria-valuenow",
+      "aria-valuetext para valores formateados ('50%', '$200', '3 estrellas')",
+      "Type=range: cada thumb tiene aria-label 'Valor mínimo' / 'Valor máximo'",
+      "aria-label o aria-labelledby (Has Label wired a input)"
+    ],
+    "keyboardNav": [
+      "←/→ ó ↑/↓ Arrow: ±1 paso",
+      "Shift+Arrow: ±stepMultiplier (10× por defecto)",
+      "Page Up/Down: paso grande",
+      "Home/End: min/max"
+    ],
+    "focusTechnique": "cada thumb es independientemente focusable (type=range)",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 10, "prefix": "sld", "mode": "C" },
+  "componentDescriptions": {
+    "Slider": "Control de rango deslizable. Types: single (1 thumb) y range (2 thumbs). Sizes: sm/md/lg.\n\n🔑 ARIA:\n• role=\"slider\" + aria-valuemin/max/now\n• aria-valuetext para valores formateados\n• Type=range: 2 thumbs independientes con aria-label\n• Has Label wired a aria-labelledby\n\n⌨️ Keyboard:\n• ←→↑↓: ±1 paso\n• Shift+Arrow: ±10 pasos\n• Page Up/Down: salto grande\n• Home/End: límites\n\n🎯 Focus:\n• Has Marks: tick marks en posiciones discretas\n• Has Input: input numérico sincronizado (Carbon pattern)\n• Has Value Label: tooltip o label con el valor actual\n• Type=range: a11y gap en AT móvil — recomienda dual inputs\n\nTokens: 10, prefijo sld-.\nWCAG 2.2 AA · ARIA slider pattern."
+  },
+  "variableBindings": {
+    "sld/track": "border/default",
+    "sld/fill": "interactive/default",
+    "sld/thumb-bg": "surface/default",
+    "sld/thumb-border": "interactive/default",
+    "sld/mark-active": "surface/default",
+    "sld/mark-inactive": "border/default",
+    "sld/label-color": "text/secondary",
+    "sld/value-color": "text/primary",
+    "sld/disabled/fill": "border/disabled",
+    "focus/ring": "border/focus"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "Type=single|range como variant (no componentes separados)", "why": "Polaris usa un solo componente con valor type-switched. El overhead de mantener 2 imports no justifica la diferencia — la mayoría de productos tiene ambos casos.", "source": "research" },
+    { "what": "Has Input boolean (default OFF)", "why": "Carbon hace el input paired obligatorio — muy opinado. La mayoría de casos de Zoom (volume, brightness) no necesitan input numérico. Para precision-critical (ej. configuración de threshold) se activa.", "source": "research" },
+    { "what": "aria-valuetext requerido para valores formateados", "why": "Sin aria-valuetext, el SR anuncia el número crudo (50) en lugar del valor formateado ('50%' o '$50'). Ant Design lo hace per-handle. Fundamental para usabilidad con SR.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

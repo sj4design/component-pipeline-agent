@@ -1,0 +1,76 @@
+{
+  "component": "Search",
+  "archetype": "container",
+  "buildOrder": ["Search"],
+  "family": [
+    {
+      "name": "Search",
+      "isSubComponent": false,
+      "slots": ["search-icon*:icon", "input*:text", "clear:icon-action", "loading:icon", "submit-btn:container"],
+      "properties": { "Size": ["sm", "md", "lg"], "Variant": ["default", "expandable"] },
+      "booleans": ["Has Value", "Has Loading", "Has Submit Btn"],
+      "exclusions": ["Variant=expandable + Size=lg"],
+      "frameCount": 5
+    }
+  ],
+  "a11y": {
+    "role": "search (landmark wrapper)",
+    "keyboard": ["Enter: submit", "Escape: clear + colapsa expandable"],
+    "focus": "role=search landmark navegable; type=search anunciado por AT"
+  },
+  "tokens": { "total": 10, "prefix": "sch" },
+  "questions": [
+    {
+      "id": "search-behavior",
+      "text": "¿Cómo se dispara la búsqueda?",
+      "options": [
+        { "value": "live-filter",   "label": "Filtrado en tiempo real — resultados cambian por cada keystroke" },
+        { "value": "on-submit",     "label": "Al presionar Enter — para búsquedas de servidor (API calls)" },
+        { "value": "both",          "label": "Ambos — filtrado local + submit para búsqueda avanzada" }
+      ],
+      "impact": "onChange vs onSubmit behavior",
+      "tags": ["live-filter", "submit", "enter", "api", "keystroke", "debounce"]
+    },
+    {
+      "id": "variant",
+      "text": "¿El search puede colapsar a solo un ícono?",
+      "options": [
+        { "value": "always-visible", "label": "Siempre visible — input completo en todo momento" },
+        { "value": "expandable",     "label": "Expandable — colapsa a ícono en toolbars densos" }
+      ],
+      "impact": "Variant property (default | expandable)",
+      "tags": ["expandable", "toolbar", "compact", "icon-only", "space-saving"]
+    },
+    {
+      "id": "submit-button",
+      "text": "¿El search tiene botón explícito de búsqueda?",
+      "options": [
+        { "value": "no",  "label": "No — solo Enter (búsqueda implícita)" },
+        { "value": "yes", "label": "Sí — botón de búsqueda visible junto al campo" }
+      ],
+      "impact": "Has Submit Btn boolean",
+      "tags": ["submit-button", "enter-button", "explicit-search", "enterprise"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños de search necesitas?",
+      "options": [
+        { "value": "md-only",  "label": "Solo md (40px) — uso general" },
+        { "value": "sm-md",    "label": "sm + md (32/40px) — toolbars compactos" },
+        { "value": "all",      "label": "sm + md + lg (32/40/48px)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "large", "toolbar", "hero-search"]
+    },
+    {
+      "id": "loading",
+      "text": "¿El search muestra estado de carga mientras busca?",
+      "options": [
+        { "value": "yes", "label": "Sí — spinner mientras espera resultados del servidor" },
+        { "value": "no",  "label": "No — sin estado de carga visible" }
+      ],
+      "impact": "Has Loading boolean",
+      "tags": ["loading", "spinner", "async", "server-side"]
+    }
+  ]
+}

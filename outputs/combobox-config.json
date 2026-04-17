@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "component": "Combobox",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": ["Combobox"],
+  "family": [
+    {
+      "name": "Combobox",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "prefix-icon", "type": "icon",       "required": false, "figmaBinding": "bool" },
+        { "name": "input",       "type": "text",        "required": true,  "figmaBinding": "text" },
+        { "name": "clear",       "type": "icon-action", "required": false, "figmaBinding": "bool" },
+        { "name": "chevron",     "type": "icon",        "required": true,  "figmaBinding": "none" },
+        { "name": "loading",     "type": "icon",        "required": false, "figmaBinding": "bool" }
+      ],
+      "properties": {
+        "Size":  ["sm", "md", "lg"],
+        "State": ["default", "error", "disabled"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "h": 32, "py": 6,  "px": 8,  "fontSize": 12, "lineHeight": 16, "radius": 6, "iconSize": 16, "gap": 6 },
+        "md": { "h": 40, "py": 8,  "px": 12, "fontSize": 14, "lineHeight": 20, "radius": 6, "iconSize": 16, "gap": 8 },
+        "lg": { "h": 48, "py": 12, "px": 16, "fontSize": 16, "lineHeight": 24, "radius": 8, "iconSize": 20, "gap": 8 }
+      },
+      "colors": {
+        "default":  { "bg": { "r": 1, "g": 1, "b": 1 }, "border": { "r": 0.82, "g": 0.82, "b": 0.85 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "placeholder": { "r": 0.55, "g": 0.55, "b": 0.60 } },
+        "error":    { "bg": { "r": 1, "g": 1, "b": 1 }, "border": { "r": 0.86, "g": 0.15, "b": 0.15 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "placeholder": { "r": 0.55, "g": 0.55, "b": 0.60 } },
+        "disabled": { "bg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "border": { "r": 0.88, "g": 0.88, "b": 0.90 }, "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "placeholder": { "r": 0.72, "g": 0.72, "b": 0.75 } }
+      },
+      "variantStyles": {
+        "default":  { "borderWidth": 1, "focusBorderColor": { "r": 0.15, "g": 0.35, "b": 0.92 } },
+        "error":    { "borderWidth": 1, "errorIconName": "alert-circle", "errorTextColor": { "r": 0.86, "g": 0.15, "b": 0.15 } },
+        "disabled": { "borderWidth": 1, "opacity": 0.5 }
+      },
+      "textProperties": [
+        { "propName": "✏️ Placeholder", "layerName": "input", "default": "Buscar o seleccionar..." }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        { "boolName": "Has Prefix Icon", "layerName": "prefix-icon", "defaultVisible": false },
+        { "boolName": "Has Clear",       "layerName": "clear",       "defaultVisible": false },
+        { "boolName": "Has Loading",     "layerName": "loading",     "defaultVisible": false }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": { "gross": 9, "exclusions": 0, "net": 9 },
+      "grid": { "maxCols": 3, "gap": 24, "pad": 32 }
+    }
+  ],
+  "a11y": {
+    "pattern": "combobox",
+    "role": "combobox",
+    "ariaAttributes": [
+      "role=\"combobox\" en el input",
+      "aria-expanded: true/false según estado del dropdown",
+      "aria-controls → id del listbox",
+      "aria-autocomplete=\"list\"",
+      "aria-activedescendant → id de la opción resaltada",
+      "role=\"listbox\" en el dropdown",
+      "role=\"option\" en cada item del dropdown"
+    ],
+    "keyboardNav": [
+      "↓/↑: navega opciones del dropdown",
+      "Enter: selecciona opción resaltada",
+      "Escape: cierra dropdown, limpia o revierte selección",
+      "Tab: confirma y sale del campo"
+    ],
+    "focusTechnique": "aria-activedescendant (virtual focus en opciones)",
+    "edgeCases": 5,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 14, "prefix": "cbx", "mode": "C" },
+  "componentDescriptions": {
+    "Combobox": "Input con sugerencias filtradas + valor libre opcional. Sizes: sm/md/lg. States: default, error, disabled.\n\n🔑 ARIA:\n• role=\"combobox\" + aria-expanded + aria-controls → listbox\n• aria-autocomplete=\"list\" + aria-activedescendant\n• role=\"listbox\" + role=\"option\" en dropdown\n• Has Create: opción 'Crear [valor]' con role=\"option\"\n\n⌨️ Keyboard:\n• Typing: filtra opciones\n• ↓↑: navega sin mover caret\n• Enter: selecciona opción\n• Escape: cierra dropdown\n• Tab: confirma y avanza\n\n🎯 Focus:\n• allowsCustomValue=false: revierte al último valor válido en blur\n• allowsCustomValue=true: acepta cualquier texto\n• Has Loading: spinner mientras carga opciones async\n\nTokens: 14, prefijo cbx-.\nWCAG 2.2 AA · APG Combobox Pattern."
+  },
+  "variableBindings": {
+    "cbx/bg": "surface/default",
+    "cbx/border": "border/default",
+    "cbx/border-focus": "border/focus",
+    "cbx/border-error": "border/error",
+    "cbx/fg": "text/primary",
+    "cbx/placeholder": "text/subtlest",
+    "cbx/icon": "text/secondary",
+    "cbx/disabled/bg": "surface/disabled",
+    "cbx/disabled/border": "border/disabled",
+    "cbx/disabled/fg": "text/disabled",
+    "cbx/radius": "radius/md",
+    "cbx/error/fg": "status/error/fg",
+    "focus/ring": "border/focus"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "allowsCustomValue como comportamiento, no variante visual", "why": "Spectrum hace la distinción más clara: false=autocomplete (revierte en blur), true=combobox (acepta cualquier valor). Esta diferencia es semántica/comportamental, no visual — no genera frames distintos.", "source": "research" },
+    { "what": "State=error como frame variant (no solo color)", "why": "Error cambia el border color Y añade ícono de error Y puede mostrar texto de error debajo — requiere frame propio en Figma.", "source": "global-property-rules" },
+    { "what": "Has Create como boolean (default OFF)", "why": "Polaris y Atlassian tienen patrones explícitos de 'Create [value]'. Zoom puede necesitar crear tags, etiquetas, contactos. Boolean porque es opcional, no multiplica frames.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

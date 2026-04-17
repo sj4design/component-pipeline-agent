@@ -1,0 +1,103 @@
+{
+  "version": "1.0",
+  "component": "EmptyState",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": ["EmptyState"],
+  "family": [
+    {
+      "name": "EmptyState",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "illustration", "type": "image",     "required": false, "figmaBinding": "bool" },
+        { "name": "title",        "type": "text",       "required": true,  "figmaBinding": "text" },
+        { "name": "description",  "type": "text",       "required": false, "figmaBinding": "boolText" },
+        { "name": "primaryAction","type": "container",  "required": false, "figmaBinding": "bool" },
+        { "name": "secondaryAction","type": "container","required": false, "figmaBinding": "bool" }
+      ],
+      "properties": {
+        "Variant": ["default", "search", "error", "no-access"],
+        "Size":    ["sm", "lg"]
+      },
+      "exclusions": [
+        "Variant=error + Has Primary Action (errores a veces no tienen acción — solo mensaje)"
+      ],
+      "sizes": {
+        "sm": {
+          "illustrationSize": 80, "gap": 12, "px": 24, "py": 24,
+          "titleSize": 16, "titleWeight": 600, "titleLineHeight": 24,
+          "descSize": 14, "descLineHeight": 20, "maxW": 400, "layout": "centered-stacked"
+        },
+        "lg": {
+          "illustrationSize": 160, "gap": 20, "px": 40, "py": 48,
+          "titleSize": 20, "titleWeight": 600, "titleLineHeight": 28,
+          "descSize": 16, "descLineHeight": 24, "maxW": 600, "layout": "centered-stacked"
+        }
+      },
+      "colors": {
+        "bg":          { "r": 1,    "g": 1,    "b": 1    },
+        "titleFg":     { "r": 0.07, "g": 0.07, "b": 0.07 },
+        "descFg":      { "r": 0.42, "g": 0.45, "b": 0.50 },
+        "illustrationBg": { "r": 0.96, "g": 0.96, "b": 0.98 }
+      },
+      "variantStyles": {
+        "default":   { "illustrationIcon": "inbox",         "titleTemplate": "No hay [elementos] aún" },
+        "search":    { "illustrationIcon": "search-x",      "titleTemplate": "Sin resultados para '[búsqueda]'" },
+        "error":     { "illustrationIcon": "alert-triangle","titleTemplate": "Ocurrió un error" },
+        "no-access": { "illustrationIcon": "lock",          "titleTemplate": "Sin acceso a este contenido" }
+      },
+      "textProperties": [
+        { "propName": "✏️ Title",       "layerName": "title",       "default": "No hay elementos aún"          },
+        { "propName": "✏️ Description", "layerName": "description", "default": "Comienza creando tu primer elemento." }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        { "boolName": "Has Illustration",    "layerName": "illustration",    "defaultVisible": true  },
+        { "boolName": "Has Primary Action",  "layerName": "primaryAction",   "defaultVisible": true  },
+        { "boolName": "Has Secondary Action","layerName": "secondaryAction", "defaultVisible": false }
+      ],
+      "booleanTextPairs": [
+        { "boolName": "Has Description", "textPropName": "✏️ Description", "textLayerName": "description", "defaultVisible": true, "defaultText": "Comienza creando tu primer elemento." }
+      ],
+      "frameCount": { "gross": 8, "exclusions": 0, "net": 8 },
+      "grid": { "maxCols": 4, "gap": 40, "pad": 40 }
+    }
+  ],
+  "a11y": {
+    "pattern": "region",
+    "role": "none (estructura semántica vía heading + button)",
+    "ariaAttributes": [
+      "title debe ser un heading (h2/h3 según contexto del documento)",
+      "Ilustración es decorativa: aria-hidden=\"true\"",
+      "Primary action button tiene label descriptivo de acción ('Crear primer proyecto')",
+      "Secondary action puede ser un link (<a>) o button según comportamiento"
+    ],
+    "keyboardNav": [
+      "Has Primary Action: botón focusable con Tab",
+      "Has Secondary Action: botón/link focusable",
+      "No focus trap"
+    ],
+    "focusTechnique": "none — inline en documento",
+    "edgeCases": 2,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 8, "prefix": "est", "mode": "C" },
+  "componentDescriptions": {
+    "EmptyState": "Placeholder para contenido vacío o ausente. Variants: default, search, error, no-access. Sizes: sm (sección) o lg (página completa).\n\n🔑 ARIA:\n• Title es heading semántico (h2/h3 según página)\n• Ilustración: aria-hidden=\"true\" (decorativa)\n• Primary action: label de acción ('Crear primer producto')\n• Secondary action: link o button según destino\n\n⌨️ Keyboard:\n• Tab navega a las acciones\n• Sin focus trap\n\n🎯 Focus:\n• Variant=search: mensaje refleja la búsqueda actual\n• Variant=error: con opción de reintentar\n• Variant=no-access: sin acción (solo información)\n• Title orientado a acción: 'Crea tu primer X' no 'No hay X'\n\nTokens: 8, prefijo est-.\nWCAG 2.2 AA."
+  },
+  "variableBindings": {
+    "est/title-color": "text/primary",
+    "est/desc-color": "text/secondary",
+    "est/illustration-bg": "surface/subtle",
+    "est/bg": "surface/default",
+    "focus/ring": "border/focus"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "4 variants contextuales (default/search/error/no-access)", "why": "Cada uno tiene una ilustración y mensaje distintos. Ant Design tiene ConfigProvider global; Atlassian y Polaris tienen variantes implícitas por contexto. 4 es el mínimo para cubrir los casos de Zoom (tablas vacías, búsqueda sin resultados, error de carga, permisos).", "source": "research" },
+    { "what": "Title orientado a acción (no solo 'No hay X')", "why": "Polaris enforces headings que describen lo que el usuario PUEDE hacer, no el estado vacío. 'Crea tu primer proyecto' es más motivador que 'No hay proyectos'.", "source": "research" },
+    { "what": "Has Illustration boolean (default ON)", "why": "Polaris require imagen; Spectrum require SVG; Atlassian recomienda. Ilustraciones opcionales para contextos compactos (size=sm dentro de tablas o widgets).", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

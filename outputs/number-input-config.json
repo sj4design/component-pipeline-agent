@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "component": "NumberInput",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": ["NumberInput"],
+  "family": [
+    {
+      "name": "NumberInput",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "addon-before", "type": "text",       "required": false, "figmaBinding": "boolText" },
+        { "name": "input",        "type": "text",        "required": true,  "figmaBinding": "text" },
+        { "name": "addon-after",  "type": "text",        "required": false, "figmaBinding": "boolText" },
+        { "name": "decrement",    "type": "icon-action", "required": false, "figmaBinding": "bool" },
+        { "name": "increment",    "type": "icon-action", "required": false, "figmaBinding": "bool" }
+      ],
+      "properties": {
+        "Size":  ["sm", "md", "lg"],
+        "State": ["default", "error", "disabled"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "h": 32, "py": 6,  "px": 8,  "fontSize": 12, "lineHeight": 16, "radius": 6, "stepperW": 28, "iconSize": 12, "gap": 6 },
+        "md": { "h": 40, "py": 8,  "px": 12, "fontSize": 14, "lineHeight": 20, "radius": 6, "stepperW": 32, "iconSize": 14, "gap": 8 },
+        "lg": { "h": 48, "py": 12, "px": 16, "fontSize": 16, "lineHeight": 24, "radius": 8, "stepperW": 36, "iconSize": 16, "gap": 8 }
+      },
+      "colors": {
+        "default":  { "bg": { "r": 1, "g": 1, "b": 1 }, "border": { "r": 0.82, "g": 0.82, "b": 0.85 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "stepperBg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "stepperFg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "error":    { "bg": { "r": 1, "g": 1, "b": 1 }, "border": { "r": 0.86, "g": 0.15, "b": 0.15 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "stepperBg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "stepperFg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "disabled": { "bg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "border": { "r": 0.88, "g": 0.88, "b": 0.90 }, "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "stepperBg": { "r": 0.96, "g": 0.96, "b": 0.98 }, "stepperFg": { "r": 0.72, "g": 0.72, "b": 0.75 } }
+      },
+      "variantStyles": {
+        "default":  {},
+        "error":    { "errorIconName": "alert-circle", "errorTextColor": { "r": 0.86, "g": 0.15, "b": 0.15 } },
+        "disabled": { "opacity": 0.5 }
+      },
+      "textProperties": [
+        { "propName": "✏️ Value",        "layerName": "input",        "default": "0"   },
+        { "propName": "✏️ Addon Before", "layerName": "addon-before", "default": "$"   },
+        { "propName": "✏️ Addon After",  "layerName": "addon-after",  "default": "kg"  }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        { "boolName": "Has Stepper",     "layerName": "decrement",    "defaultVisible": true  },
+        { "boolName": "Has Stepper",     "layerName": "increment",    "defaultVisible": true  },
+        { "boolName": "Has Addon Before","layerName": "addon-before", "defaultVisible": false },
+        { "boolName": "Has Addon After", "layerName": "addon-after",  "defaultVisible": false }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": { "gross": 9, "exclusions": 0, "net": 9 },
+      "grid": { "maxCols": 3, "gap": 24, "pad": 32 }
+    }
+  ],
+  "a11y": {
+    "pattern": "spinbutton",
+    "role": "spinbutton",
+    "ariaAttributes": [
+      "role=\"spinbutton\" en el input (automático con type=\"number\")",
+      "aria-valuemin, aria-valuemax, aria-valuenow",
+      "aria-label en botones de stepper: 'Incrementar' / 'Decrementar'",
+      "aria-invalid=\"true\" + aria-errormessage en state=error"
+    ],
+    "keyboardNav": [
+      "↑/↓ Arrow: incrementa/decrementa 1 paso",
+      "Shift+↑/↓: incrementa/decrementa 10× (stepMultiplier)",
+      "Page Up/Down: paso grande (largeStep)",
+      "Home/End: va al mínimo/máximo"
+    ],
+    "focusTechnique": "input recibe foco — steppers son clickables pero no Tab-focusables",
+    "edgeCases": 3,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 12, "prefix": "nmi", "mode": "C" },
+  "componentDescriptions": {
+    "NumberInput": "Input numérico con botones de stepper. Sizes: sm/md/lg. States: default, error, disabled.\n\n🔑 ARIA:\n• role=\"spinbutton\" (automático con type=\"number\")\n• aria-valuemin/max/now actualizados en cada cambio\n• Steppers con aria-label: 'Incrementar'/'Decrementar'\n• State=error: aria-invalid + aria-errormessage\n\n⌨️ Keyboard:\n• ↑↓: ±1 paso\n• Shift+↑↓: ±10 pasos\n• Page Up/Down: paso grande\n• Home/End: min/max\n\n🎯 Focus:\n• Steppers solo clickables (no Tab-focusables) — Arrow keys en input\n• Has Addon: unidades o símbolo de moneda (ej. '$', 'kg', '%')\n• formatter/parser para display formateado vs. valor almacenado\n• Clamping en blur, no por keystroke\n\nTokens: 12, prefijo nmi-.\nWCAG 2.2 AA · ARIA spinbutton pattern."
+  },
+  "variableBindings": {
+    "nmi/bg": "surface/default",
+    "nmi/border": "border/default",
+    "nmi/border-focus": "border/focus",
+    "nmi/border-error": "border/error",
+    "nmi/fg": "text/primary",
+    "nmi/stepper-bg": "surface/hover",
+    "nmi/stepper-fg": "text/secondary",
+    "nmi/stepper-border": "border/default",
+    "nmi/disabled/bg": "surface/disabled",
+    "nmi/disabled/fg": "text/disabled",
+    "nmi/error/fg": "status/error/fg",
+    "nmi/radius": "radius/md",
+    "focus/ring": "border/focus"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "Steppers verticales (stacked) como default, no split mobile", "why": "Carbon tiene el split mobile (−|input|+) pero es un layout change que complica Figma. El split es para touch — en diseño desktop los steppers verticales son el patrón estándar (4/5 sistemas).", "source": "research" },
+    { "what": "Has Addon (before/after) como booleanTextPairs", "why": "Ant Design y Polaris tienen addon/prefix para unidades ('$', 'kg', '%'). Son texto que renderiza fuera del campo. Boolean porque son opcionales.", "source": "research" },
+    { "what": "Steppers no Tab-focusables", "why": "Carbon y Polaris documentan esto: Arrow keys operan el spinbutton desde el input. Steppers son conveniencia de mouse/touch. Reducir Tab stops en formularios densos.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

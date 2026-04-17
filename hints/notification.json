@@ -1,0 +1,80 @@
+{
+  "component": "Notification",
+  "archetype": "container",
+  "buildOrder": ["Notification"],
+  "family": [
+    {
+      "name": "Notification",
+      "isSubComponent": false,
+      "slots": ["icon:icon", "title*:text", "description:text", "actions:container", "close:icon-action", "avatar:image"],
+      "properties": {
+        "Variant": ["info", "success", "warning", "error", "discovery"]
+      },
+      "booleans": ["Has Icon", "Has Description(text)", "Has Actions", "Has Close", "Has Avatar"],
+      "exclusions": [],
+      "frameCount": 5
+    }
+  ],
+  "a11y": {
+    "role": "alert (warning/error) | status (info/success/discovery)",
+    "keyboard": ["Has Close: botón ×", "Has Actions: botones de acción", "Tab entre acciones"],
+    "focus": "No roba foco — live region anuncia al aparecer"
+  },
+  "tokens": { "total": 14, "prefix": "ntf" },
+  "questions": [
+    {
+      "id": "variants",
+      "text": "¿Qué tipos de notificación necesitas?",
+      "options": [
+        { "value": "four-semantic",  "label": "Info, success, warning, error — set estándar" },
+        { "value": "with-discovery", "label": "+ Discovery — para onboarding y nuevas features" },
+        { "value": "error-warning",  "label": "Solo error y warning — alertas del sistema" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["info", "success", "warning", "error", "discovery", "onboarding"]
+    },
+    {
+      "id": "content-type",
+      "text": "¿Qué tipo de contenido tiene la notificación?",
+      "options": [
+        { "value": "title-only",     "label": "Solo título — notificación breve de una línea" },
+        { "value": "title-desc",     "label": "Título + descripción — contexto adicional" },
+        { "value": "title-desc-actions","label": "Título + descripción + acciones" }
+      ],
+      "impact": "Has Description + Has Actions booleans",
+      "tags": ["title", "description", "actions", "rich", "structured"]
+    },
+    {
+      "id": "avatar",
+      "text": "¿Las notificaciones pueden mostrar el avatar del usuario que las generó?",
+      "options": [
+        { "value": "yes",  "label": "Sí — ej. 'Pedro te invitó a una reunión' con avatar" },
+        { "value": "no",   "label": "No — solo notificaciones del sistema con ícono" }
+      ],
+      "impact": "Has Avatar boolean",
+      "tags": ["avatar", "user", "social", "activity", "collaboration"]
+    },
+    {
+      "id": "actions",
+      "text": "¿Las notificaciones tienen acciones?",
+      "options": [
+        { "value": "none",     "label": "No — solo informativas" },
+        { "value": "one",      "label": "Una acción — ej. 'Ver', 'Aceptar'" },
+        { "value": "multiple", "label": "Múltiples — ej. 'Aceptar' y 'Rechazar'" }
+      ],
+      "impact": "Has Actions boolean + número de botones en footer",
+      "tags": ["actions", "cta", "accept", "reject", "view", "multiple-actions"]
+    },
+    {
+      "id": "persistence",
+      "text": "¿Las notificaciones se auto-descartan o son persistentes?",
+      "options": [
+        { "value": "auto",       "label": "Auto-dismiss — desaparecen solas (8-10 seg)" },
+        { "value": "persistent", "label": "Persistentes — se acumulan hasta que el usuario las cierra" },
+        { "value": "both",       "label": "Ambos — algunas se van solas, otras persisten" }
+      ],
+      "impact": "Has Close behavior + duración",
+      "tags": ["auto-dismiss", "persistent", "notification-center", "queue"]
+    }
+  ]
+}

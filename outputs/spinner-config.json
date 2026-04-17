@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "component": "Spinner",
+  "archetype": "indicator",
+  "language": "es",
+  "buildOrder": ["Spinner"],
+  "family": [
+    {
+      "name": "Spinner",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "label", "type": "text", "required": false, "figmaBinding": "boolText" }
+      ],
+      "properties": {
+        "Size":  ["sm", "md", "lg"],
+        "Color": ["default", "invert"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "diameter": 16, "strokeWidth": 2, "fontSize": 12, "labelGap": 6  },
+        "md": { "diameter": 24, "strokeWidth": 2, "fontSize": 14, "labelGap": 8  },
+        "lg": { "diameter": 40, "strokeWidth": 3, "fontSize": 14, "labelGap": 12 }
+      },
+      "colors": {
+        "default": { "track": { "r": 0.89, "g": 0.89, "b": 0.91 }, "indicator": { "r": 0.15, "g": 0.35, "b": 0.92 }, "labelFg": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "invert":  { "track": { "r": 1,    "g": 1,    "b": 1,    "a": 0.3 }, "indicator": { "r": 1, "g": 1, "b": 1 }, "labelFg": { "r": 1, "g": 1, "b": 1 } }
+      },
+      "variantStyles": {
+        "default": { "track": { "r": 0.89, "g": 0.89, "b": 0.91 }, "indicator": { "r": 0.15, "g": 0.35, "b": 0.92 } },
+        "invert":  { "track": { "r": 1, "g": 1, "b": 1, "a": 0.3 }, "indicator": { "r": 1, "g": 1, "b": 1 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Cargando..." }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [],
+      "booleanTextPairs": [
+        { "boolName": "Has Label", "textPropName": "✏️ Label", "textLayerName": "label", "defaultVisible": false, "defaultText": "Cargando..." }
+      ],
+      "frameCount": { "gross": 6, "exclusions": 0, "net": 6 },
+      "grid": { "maxCols": 6, "gap": 24, "pad": 32 }
+    }
+  ],
+  "a11y": {
+    "pattern": "progressbar",
+    "role": "status",
+    "ariaAttributes": [
+      "role=\"status\" crea aria-live=\"polite\" implícito",
+      "aria-label requerido si no hay Has Label visible (ej. 'Cargando configuración del proyecto')",
+      "aria-busy=\"true\" en el contenedor que está cargando",
+      "Para overlay: contenido detrás debe tener aria-hidden o inert"
+    ],
+    "keyboardNav": ["No focusable — decorativo/informativo"],
+    "focusTechnique": "none — no recibe foco",
+    "edgeCases": 3,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 8, "prefix": "spn", "mode": "C" },
+  "componentDescriptions": {
+    "Spinner": "Indicador de carga circular indeterminado. Sizes: sm(16) md(24) lg(40). Color: default (azul sobre claro) o invert (blanco sobre oscuro).\n\n🔑 ARIA:\n• role=\"status\" (aria-live implícito polite)\n• aria-label descriptivo: 'Cargando X' (no solo 'Cargando')\n• aria-busy=\"true\" en el elemento que carga\n• Overlay: contenido detrás con inert/aria-hidden\n\n⌨️ Keyboard:\n• No focusable\n• prefers-reduced-motion: detener animación (WCAG 2.3.3)\n\n🎯 Focus:\n• Color=invert: para fondos oscuros, botones primarios loading\n• Has Label=true: label visible debajo del spinner\n• delay prop (dev): 200ms antes de mostrar (evita flash)\n• lg size: para estados de carga de página completa\n\nTokens: 8, prefijo spn-.\nWCAG 2.2 AA."
+  },
+  "variableBindings": {
+    "spn/track": "border/default",
+    "spn/indicator": "interactive/default",
+    "spn/label-color": "text/secondary",
+    "spn/invert/track": "surface/default/alpha-30",
+    "spn/invert/indicator": "text/inverse",
+    "spn/invert/label": "text/inverse"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "Color=default|invert (no size multiplied by semantic variants)", "why": "Spinner no tiene semántica de estado — solo comunica 'esperando'. La única dimensión de color es el contraste de fondo: claro (default) vs oscuro (invert). Atlassian usa 'invert' como nombre semántico de contexto.", "source": "research" },
+    { "what": "role=status, no role=progressbar", "why": "role=progressbar requiere aria-valuenow/min/max. Para spinners indeterminados, role=status es más correcto (Atlassian). M3 usa progressbar pero sin los atributos requeridos — inconsistente.", "source": "research" },
+    { "what": "Has Label boolean (default OFF)", "why": "Atlassian prescribe labels descriptivos. Sin embargo en la mayoría de casos el spinner va dentro de un botón o junto a texto existente — label adicional sería redundante. Default OFF, activar cuando el contexto no es claro.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

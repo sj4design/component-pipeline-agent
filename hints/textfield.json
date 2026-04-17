@@ -1,0 +1,86 @@
+{
+  "component": "TextField",
+  "archetype": "container",
+  "buildOrder": ["TextField"],
+  "family": [
+    {
+      "name": "TextField",
+      "isSubComponent": false,
+      "slots": ["label:text", "leading-icon:icon", "input*:text", "trailing-icon:icon", "clear:icon-action", "helper-text:text", "error-text:text", "char-count:text"],
+      "properties": {
+        "Size":    ["sm", "md", "lg"],
+        "Variant": ["outlined", "filled", "subtle"],
+        "State":   ["default", "error", "disabled"]
+      },
+      "booleans": ["Has Label(text)", "Has Helper Text(text)", "Has Error Text(text)", "Has Leading Icon", "Has Trailing Icon", "Has Clear", "Has Char Count"],
+      "exclusions": ["Variant=subtle + State=error"],
+      "frameCount": 24
+    }
+  ],
+  "a11y": {
+    "role": "textbox",
+    "keyboard": ["Tab/Shift+Tab: navega", "Has Clear: botón × focusable"],
+    "focus": "<label> via htmlFor/id; aria-describedby → helper + error; aria-invalid en error"
+  },
+  "tokens": { "total": 16, "prefix": "txf" },
+  "questions": [
+    {
+      "id": "variant",
+      "text": "¿Qué estilo visual necesitas para el campo de texto?",
+      "options": [
+        { "value": "outlined",        "label": "Outlined — borde completo (estándar para formularios)" },
+        { "value": "filled",          "label": "Filled — fondo gris sin borde (estilo M3/Material)" },
+        { "value": "subtle",          "label": "Subtle — sin borde visible hasta hover/focus (inline-edit, Jira style)" },
+        { "value": "outlined-filled", "label": "Outlined + Filled (dos estilos según contexto)" },
+        { "value": "all",             "label": "Los tres estilos" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["outlined", "filled", "subtle", "borderless", "inline-edit", "material"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Qué tamaños necesitas?",
+      "options": [
+        { "value": "md-only", "label": "Solo md (40px) — uso general" },
+        { "value": "sm-md",   "label": "sm + md (32/40px) — también en toolbars" },
+        { "value": "all",     "label": "sm + md + lg (32/40/48px)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "large", "compact", "form"]
+    },
+    {
+      "id": "icons",
+      "text": "¿El campo usa íconos dentro del input?",
+      "options": [
+        { "value": "none",             "label": "No — solo texto" },
+        { "value": "leading-only",     "label": "Solo ícono izquierdo (ej. ícono de usuario, email)" },
+        { "value": "trailing-only",    "label": "Solo ícono derecho (ej. ojo para password, calendario)" },
+        { "value": "both",             "label": "Ambos lados" }
+      ],
+      "impact": "Has Leading Icon + Has Trailing Icon booleans",
+      "tags": ["icon", "leading", "trailing", "password", "calendar", "user"]
+    },
+    {
+      "id": "helper-error",
+      "text": "¿El campo muestra texto de ayuda o error debajo?",
+      "options": [
+        { "value": "helper-only",  "label": "Solo helper text — texto de apoyo siempre visible" },
+        { "value": "error-only",   "label": "Solo error text — mensaje que aparece en validación" },
+        { "value": "both",         "label": "Ambos — helper en default, error en state=error" },
+        { "value": "none",         "label": "Ninguno — campo sin texto adicional" }
+      ],
+      "impact": "Has Helper Text + Has Error Text booleans",
+      "tags": ["helper", "error", "validation", "hint", "description"]
+    },
+    {
+      "id": "char-count",
+      "text": "¿El campo muestra contador de caracteres?",
+      "options": [
+        { "value": "yes",  "label": "Sí — muestra N/max (ej. '47/100')" },
+        { "value": "no",   "label": "No" }
+      ],
+      "impact": "Has Char Count boolean",
+      "tags": ["character-count", "maxlength", "counter", "textarea-companion"]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "version": "1.0",
+  "component": "PinInput",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": ["PinInput"],
+  "family": [
+    {
+      "name": "PinInput",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "cell-1", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "cell-2", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "cell-3", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "cell-4", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "cell-5", "type": "text", "required": false, "figmaBinding": "bool" },
+        { "name": "cell-6", "type": "text", "required": false, "figmaBinding": "bool" }
+      ],
+      "properties": {
+        "Length":  ["4", "6"],
+        "State":   ["default", "error"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "default": {
+          "cellW": 48, "cellH": 48, "gap": 8, "fontSize": 20,
+          "fontWeight": 600, "lineHeight": 28, "radius": 8, "borderWidth": 1.5
+        }
+      },
+      "colors": {
+        "default": { "bg": { "r": 1, "g": 1, "b": 1 }, "border": { "r": 0.82, "g": 0.82, "b": 0.85 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "focusBorder": { "r": 0.15, "g": 0.35, "b": 0.92 }, "filledBorder": { "r": 0.42, "g": 0.45, "b": 0.50 } },
+        "error":   { "bg": { "r": 1, "g": 1, "b": 1 }, "border": { "r": 0.86, "g": 0.15, "b": 0.15 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 }, "errorText": { "r": 0.86, "g": 0.15, "b": 0.15 } },
+        "mask":    { "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } }
+      },
+      "variantStyles": {
+        "default": { "cellState": "active cell has focus border, filled cells have filled border" },
+        "error":   { "allCellsBorder": { "r": 0.86, "g": 0.15, "b": 0.15 } }
+      },
+      "textProperties": [
+        { "propName": "✏️ Cell 1", "layerName": "cell-1", "default": "·" },
+        { "propName": "✏️ Cell 2", "layerName": "cell-2", "default": "·" },
+        { "propName": "✏️ Cell 3", "layerName": "cell-3", "default": "·" },
+        { "propName": "✏️ Cell 4", "layerName": "cell-4", "default": "·" }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        { "boolName": "Has Mask", "layerName": "mask-overlay", "defaultVisible": false },
+        { "boolName": "Length 6", "layerName": "cell-5",       "defaultVisible": false },
+        { "boolName": "Length 6", "layerName": "cell-6",       "defaultVisible": false }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": { "gross": 4, "exclusions": 0, "net": 4 },
+      "grid": { "maxCols": 4, "gap": 32, "pad": 32 }
+    }
+  ],
+  "a11y": {
+    "pattern": "group-of-inputs",
+    "role": "group",
+    "ariaAttributes": [
+      "role=\"group\" con aria-label en el wrapper (ej. 'Código de verificación')",
+      "Cada celda: aria-label='Dígito N de M' (ej. 'Dígito 1 de 6')",
+      "autocomplete=\"one-time-code\" en el primer input (WebOTP API)",
+      "type=\"number\" o type=\"text\" con inputmode=\"numeric\"",
+      "State=error: aria-invalid + aria-describedby → error message"
+    ],
+    "keyboardNav": [
+      "Typing: avanza foco automáticamente a la siguiente celda",
+      "Backspace: borra y retrocede foco a la celda anterior",
+      "←/→ Arrow: navega entre celdas",
+      "Paste: distribuye caracteres en las celdas automáticamente"
+    ],
+    "focusTechnique": "auto-advance en typing, auto-retrocede en backspace",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 8, "prefix": "pin", "mode": "C" },
+  "componentDescriptions": {
+    "PinInput": "Input segmentado para códigos de verificación (OTP/PIN). Length: 4 o 6 dígitos. States: default, error.\n\n🔑 ARIA:\n• role=\"group\" + aria-label='Código de verificación'\n• Cada celda: aria-label='Dígito N de M'\n• autocomplete=\"one-time-code\" (WebOTP auto-fill desde SMS)\n• State=error: aria-invalid en todas las celdas\n\n⌨️ Keyboard:\n• Typing: auto-avanza al siguiente\n• Backspace: borra + retrocede\n• ←→: navega celdas\n• Paste: distribuye el código completo\n\n🎯 Focus:\n• Has Mask: muestra bullets en lugar de dígitos (ej. código PIN sensible)\n• auto-submit cuando todas las celdas están llenas\n• resend timer fuera del componente\n\nTokens: 8, prefijo pin-.\nWCAG 2.2 AA."
+  },
+  "variableBindings": {
+    "pin/cell-bg": "surface/default",
+    "pin/cell-border": "border/default",
+    "pin/cell-border-focus": "border/focus",
+    "pin/cell-border-filled": "border/hover",
+    "pin/cell-border-error": "border/error",
+    "pin/fg": "text/primary",
+    "pin/radius": "radius/md",
+    "pin/error/fg": "status/error/fg",
+    "focus/ring": "border/focus"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch" },
+  "_decisions": [
+    { "what": "Solo Ant Design tiene este componente entre los 6 sistemas Tier 1", "why": "Input.OTP es nuevo en Ant v5.16. Los otros 5 sistemas no lo tienen. Zoom necesita PIN para meeting passwords y OTP para 2FA — justifica componente propio.", "source": "research" },
+    { "what": "Length=4|6 como variant (no prop dinámico)", "why": "4 dígitos = PIN/code simple; 6 dígitos = OTP/verificación estándar. Son las dos longitudes más comunes. Otros valores son edge cases que el dev configura.", "source": "research" },
+    { "what": "Celda size fija (48×48px) sin variantes de tamaño", "why": "Tap target mínimo de 44×44px (WCAG 2.5.8). PinInput no necesita size variants — es siempre prominente en pantalla, nunca inline en formulario denso.", "source": "research" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

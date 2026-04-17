@@ -1,0 +1,302 @@
+{
+  "version": "1.0",
+  "component": "Popover",
+  "archetype": "container",
+  "language": "es",
+  "buildOrder": [
+    "Popover"
+  ],
+  "family": [
+    {
+      "name": "Popover",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        {
+          "name": "title",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        },
+        {
+          "name": "content",
+          "type": "container",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "footer",
+          "type": "container",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "close",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "arrow",
+          "type": "shape",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "Placement": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variant": [
+          "default",
+          "info",
+          "warning",
+          "error",
+          "success"
+        ]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": {
+          "maxW": 240,
+          "padding": 12,
+          "gap": 8,
+          "radius": 8,
+          "titleSize": 13,
+          "titleWeight": 600,
+          "titleLineHeight": 18,
+          "bodySize": 13,
+          "bodyWeight": 400,
+          "bodyLineHeight": 18,
+          "footerGap": 8,
+          "arrowSize": 8,
+          "offset": 8,
+          "shadowLevel": 2
+        },
+        "md": {
+          "maxW": 320,
+          "padding": 16,
+          "gap": 12,
+          "radius": 8,
+          "titleSize": 14,
+          "titleWeight": 600,
+          "titleLineHeight": 20,
+          "bodySize": 14,
+          "bodyWeight": 400,
+          "bodyLineHeight": 20,
+          "footerGap": 12,
+          "arrowSize": 8,
+          "offset": 8,
+          "shadowLevel": 2
+        },
+        "lg": {
+          "maxW": 480,
+          "padding": 20,
+          "gap": 16,
+          "radius": 12,
+          "titleSize": 16,
+          "titleWeight": 600,
+          "titleLineHeight": 24,
+          "bodySize": 14,
+          "bodyWeight": 400,
+          "bodyLineHeight": 20,
+          "footerGap": 12,
+          "arrowSize": 10,
+          "offset": 8,
+          "shadowLevel": 2
+        }
+      },
+      "colors": {
+        "bgSurface": { "r": 1, "g": 1, "b": 1 },
+        "border": { "r": 0.82, "g": 0.82, "b": 0.85 },
+        "titleFg": { "r": 0.07, "g": 0.07, "b": 0.07 },
+        "bodyFg": { "r": 0.42, "g": 0.45, "b": 0.50 },
+        "arrowBg": { "r": 1, "g": 1, "b": 1 },
+        "closeIconFg": { "r": 0.42, "g": 0.45, "b": 0.50 },
+        "closeIconHover": { "r": 0.07, "g": 0.07, "b": 0.07 },
+        "divider": { "r": 0.89, "g": 0.89, "b": 0.91 },
+        "focusRing": { "r": 0.25, "g": 0.39, "b": 0.95 }
+      },
+      "variantStyles": {
+        "default": {
+          "bg": { "r": 1, "g": 1, "b": 1 },
+          "border": { "r": 0.82, "g": 0.82, "b": 0.85 },
+          "accentFg": null,
+          "iconName": null
+        },
+        "info": {
+          "bg": { "r": 0.93, "g": 0.95, "b": 1.0 },
+          "border": { "r": 0.72, "g": 0.80, "b": 0.96 },
+          "accentFg": { "r": 0.15, "g": 0.35, "b": 0.92 },
+          "iconName": "info-circle"
+        },
+        "warning": {
+          "bg": { "r": 1.0, "g": 0.97, "b": 0.92 },
+          "border": { "r": 0.96, "g": 0.82, "b": 0.52 },
+          "accentFg": { "r": 0.72, "g": 0.48, "b": 0.05 },
+          "iconName": "alert-triangle"
+        },
+        "error": {
+          "bg": { "r": 1.0, "g": 0.94, "b": 0.94 },
+          "border": { "r": 0.96, "g": 0.62, "b": 0.62 },
+          "accentFg": { "r": 0.86, "g": 0.15, "b": 0.15 },
+          "iconName": "alert-circle"
+        },
+        "success": {
+          "bg": { "r": 0.93, "g": 0.99, "b": 0.95 },
+          "border": { "r": 0.60, "g": 0.90, "b": 0.68 },
+          "accentFg": { "r": 0.08, "g": 0.55, "b": 0.22 },
+          "iconName": "check-circle"
+        }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Title",
+          "layerName": "title",
+          "default": "Popover title"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "boolName": "Has Footer",
+          "layerName": "footer",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Has Close",
+          "layerName": "close",
+          "defaultVisible": false
+        },
+        {
+          "boolName": "Has Arrow",
+          "layerName": "arrow",
+          "defaultVisible": true
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "Has Title",
+          "textPropName": "✏️ Title",
+          "textLayerName": "title",
+          "defaultVisible": true,
+          "defaultText": "Popover title"
+        }
+      ],
+      "frameCount": {
+        "gross": 60,
+        "exclusions": 0,
+        "net": 60
+      },
+      "grid": {
+        "maxCols": 5,
+        "gap": 32,
+        "pad": 40
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "popover/dialog",
+    "role": "dialog",
+    "roleNonModal": "tooltip",
+    "ariaAttributes": [
+      "role=\"dialog\" on popover container (interactive content) or role=\"tooltip\" (read-only)",
+      "aria-labelledby=\"[title-id]\" when Has Title = true",
+      "aria-expanded on trigger element (true when open)",
+      "aria-controls=\"[popover-id]\" on trigger element",
+      "aria-haspopup=\"dialog\" on trigger"
+    ],
+    "keyboardNav": [
+      "Tab / Shift+Tab: navigate focus within popover (trap when modal=true)",
+      "Escape: close popover, return focus to trigger",
+      "Enter / Space: activate trigger to open",
+      "Tab (non-modal): exits popover to next document element"
+    ],
+    "focusTrap": false,
+    "focusTrapModal": true,
+    "focusOnOpen": "first-focusable",
+    "focusOnClose": "trigger",
+    "edgeCases": 5,
+    "wcagLevel": "AA",
+    "wcagCriteria": ["1.4.13 Content on Hover or Focus", "2.1.1 Keyboard", "2.4.3 Focus Order", "2.5.3 Label in Name", "4.1.2 Name, Role, Value"]
+  },
+  "tokens": {
+    "total": 22,
+    "prefix": "pop",
+    "mode": "C"
+  },
+  "componentDescriptions": {
+    "Popover": "Overlay flotante anclado a un trigger. Placement: top, bottom, left, right. Sizes: sm(240) md(320) lg(480). Variants: default, info, warning, error, success.\n\n🔑 ARIA:\n• role=\"dialog\" (contenido interactivo) o role=\"tooltip\" (solo lectura)\n• aria-labelledby → title id (cuando Has Title = true)\n• aria-expanded + aria-controls en el trigger\n• aria-haspopup=\"dialog\" en el trigger\n\n⌨️ Keyboard:\n• Enter/Space en trigger: abre popover, foco al primer elemento\n• Tab / Shift+Tab: navegar dentro del popover\n• Escape: cierra + retorna foco al trigger\n• Tab (no modal): sale naturalmente del popover\n\n🎯 Focus:\n• Al abrir: primer elemento focusable dentro\n• Al cerrar: retornar foco al trigger que lo abrió\n• Modal=true: focus trap circular\n• Modal=false: Tab sale naturalmente\n• shouldFlip=true: arrow reorienta según placement real\n\nTokens: 22, prefijo pop-.\nWCAG 2.2 AA · APG Dialog + Tooltip Patterns."
+  },
+  "variableBindings": {
+    "pop/bg": "surface/default",
+    "pop/border": "border/default",
+    "pop/radius": "radius/md",
+    "pop/title-color": "text/primary",
+    "pop/body-color": "text/secondary",
+    "pop/close-color": "text/secondary",
+    "pop/divider": "border/default",
+    "pop/arrow-bg": "surface/default",
+    "pop/info/bg": "status/info/bg",
+    "pop/info/border": "status/info/border",
+    "pop/info/accent": "status/info/fg",
+    "pop/warning/bg": "status/warning/bg",
+    "pop/warning/border": "status/warning/border",
+    "pop/warning/accent": "status/warning/fg",
+    "pop/error/bg": "status/error/bg",
+    "pop/error/border": "status/error/border",
+    "pop/error/accent": "status/error/fg",
+    "pop/success/bg": "status/success/bg",
+    "pop/success/border": "status/success/border",
+    "pop/success/accent": "status/success/fg",
+    "focus/ring": "border/focus",
+    "focus/ring-offset": "surface/default"
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec+enrich",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-17",
+    "mode": "from-scratch"
+  },
+  "_decisions": [
+    {
+      "what": "4 placements (top/bottom/left/right), not 12 or 20",
+      "why": "Tooltip in this system uses 4 positions. 12 (Ant) and 20 (Spectrum) positions are excessive for Figma variant generation. Start/end alignment is a runtime layout concern, not a visual variant. 4 directions × 3 sizes × 5 variants = 60 frames (medium complexity).",
+      "source": "research + global-property-rules"
+    },
+    {
+      "what": "Variant: default | info | warning | error | success (no 'help')",
+      "why": "0/5 popover systems use semantic variants on the container — but Zoom is enterprise and inline status popovers (e.g., field validation, contextual warnings) are common. 5 variants keep it useful without over-expanding. 'help' omitted — ContextualHelp is a composable BB, not a core variant.",
+      "source": "research"
+    },
+    {
+      "what": "Arrow as boolean (Has Arrow), not a variant dimension",
+      "why": "Binary on/off visual modifier. Does NOT multiply frames. Arrow direction is determined by Placement variant. Same rule as Tooltip component in this system.",
+      "source": "global-property-rules"
+    },
+    {
+      "what": "Has Title and Has Footer as booleans (booleanTextPair + booleanLayer)",
+      "why": "Title and footer are optional slot regions that appear/hide without changing component structure. Binary toggle = boolean per global-property-rules. Has Title defaultVisible=true (most popovers have a title); Has Footer defaultVisible=false (footer is opt-in for action patterns).",
+      "source": "global-property-rules + research"
+    },
+    {
+      "what": "modal=false default (non-modal, no focus trap)",
+      "why": "Most popover use cases (help text, contextual info, status indicators) should not trap focus. Spectrum's always-modal approach is too restrictive. Polaris's autofocusTarget=none pattern confirms non-modal as a valid accessible pattern when content is informational. Interactive popovers with forms should set modal=true.",
+      "source": "research"
+    },
+    {
+      "what": "Click as default trigger type (hover not recommended)",
+      "why": "Hover-only violates WCAG 1.4.13 for keyboard users. 4/5 systems use click as primary trigger. Ant Design's hover default is a documented a11y gap. If hover is used, focus must be a co-trigger.",
+      "source": "research"
+    }
+  ],
+  "_foundationsRef": "foundations.json"
+}

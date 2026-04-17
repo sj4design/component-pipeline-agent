@@ -1,0 +1,80 @@
+{
+  "component": "Toast",
+  "archetype": "container",
+  "buildOrder": ["Toast"],
+  "family": [
+    {
+      "name": "Toast",
+      "isSubComponent": false,
+      "slots": ["icon:icon", "message*:text", "action:text-action", "close:icon-action"],
+      "properties": {
+        "Variant": ["neutral", "info", "success", "warning", "error"]
+      },
+      "booleans": ["Has Icon", "Has Action", "Has Close"],
+      "exclusions": [],
+      "frameCount": 5
+    }
+  ],
+  "a11y": {
+    "role": "status (neutral/info/success) | alert (warning/error)",
+    "keyboard": ["Has Close: botón ×", "Has Action: botón de texto", "Auto-dismiss pausa con foco"],
+    "focus": "No roba foco — aparece sin interrumpir"
+  },
+  "tokens": { "total": 10, "prefix": "tst" },
+  "questions": [
+    {
+      "id": "variants",
+      "text": "¿Qué tipos de toast necesitas?",
+      "options": [
+        { "value": "success-error",  "label": "Success y error — confirmaciones y fallos" },
+        { "value": "four-semantic",  "label": "Info, success, warning, error" },
+        { "value": "all-five",       "label": "Neutral + info, success, warning, error (set completo)" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["neutral", "info", "success", "warning", "error", "semantic"]
+    },
+    {
+      "id": "action",
+      "text": "¿El toast puede tener acción (botón de texto)?",
+      "options": [
+        { "value": "yes",  "label": "Sí — ej. 'Deshacer', 'Ver', 'Reintentar'" },
+        { "value": "no",   "label": "No — solo mensaje informativo" }
+      ],
+      "impact": "Has Action boolean",
+      "tags": ["action", "undo", "retry", "link", "cta"]
+    },
+    {
+      "id": "close",
+      "text": "¿El toast tiene botón de cierre explícito (×)?",
+      "options": [
+        { "value": "always",        "label": "Siempre — botón × visible" },
+        { "value": "with-action",   "label": "Solo cuando tiene acción — toasts con CTA son persistentes" },
+        { "value": "never",         "label": "No — solo auto-dismiss" }
+      ],
+      "impact": "Has Close boolean",
+      "tags": ["close", "dismiss", "x-button", "persistent", "auto-dismiss"]
+    },
+    {
+      "id": "duration",
+      "text": "¿Cómo se comporta el auto-dismiss?",
+      "options": [
+        { "value": "auto",          "label": "Auto-dismiss — desaparece solo (5-10 seg)" },
+        { "value": "persistent",    "label": "Persistente — solo cierra con interacción" },
+        { "value": "configurable",  "label": "Configurable — duración ajustable por instancia" }
+      ],
+      "impact": "duration behavior y pause-on-focus",
+      "tags": ["auto-dismiss", "persistent", "duration", "timing", "wcag"]
+    },
+    {
+      "id": "stacking",
+      "text": "¿Pueden aparecer múltiples toasts al mismo tiempo?",
+      "options": [
+        { "value": "single",   "label": "Solo uno a la vez — cola de espera" },
+        { "value": "stacked",  "label": "Stack — varios apilados (máx. 3)" },
+        { "value": "replace",  "label": "Reemplaza el anterior — siempre uno visible" }
+      ],
+      "impact": "Stacking behavior y z-index management",
+      "tags": ["stack", "queue", "multiple", "concurrent", "notification-flood"]
+    }
+  ]
+}

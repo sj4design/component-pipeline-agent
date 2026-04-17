@@ -1,0 +1,85 @@
+{
+  "component": "Badge",
+  "archetype": "indicator",
+  "buildOrder": ["Badge"],
+  "family": [
+    {
+      "name": "Badge",
+      "isSubComponent": false,
+      "slots": ["count:text"],
+      "properties": {
+        "Type":    ["count", "dot", "label"],
+        "Variant": ["neutral", "info", "success", "warning", "error"],
+        "Size":    ["sm", "md"]
+      },
+      "booleans": [],
+      "exclusions": ["Type=dot no multiplica con Variant ni Size"],
+      "frameCount": 21
+    }
+  ],
+  "a11y": {
+    "role": "none (decorativo)",
+    "keyboard": ["No focusable"],
+    "focus": "Conteo expuesto via aria-label del elemento padre"
+  },
+  "tokens": { "total": 12, "prefix": "bdg" },
+  "questions": [
+    {
+      "id": "badge-type",
+      "text": "¿Qué tipo de badge necesitas?",
+      "options": [
+        { "value": "count",      "label": "Count — número sobre un ícono/avatar (notificaciones, mensajes no leídos)" },
+        { "value": "dot",        "label": "Dot — solo punto de presencia sin número" },
+        { "value": "label",      "label": "Label — texto de estado (Paid, In Progress, Active)" },
+        { "value": "count-dot",  "label": "Count + Dot — ambos modos de badge numérico" },
+        { "value": "all",        "label": "Los tres tipos" }
+      ],
+      "impact": "Type property values",
+      "tags": ["count", "dot", "label", "status", "notification", "unread", "tag"]
+    },
+    {
+      "id": "variants",
+      "text": "¿Qué variantes semánticas necesitas?",
+      "options": [
+        { "value": "neutral-only",  "label": "Solo neutral — sin semántica de color" },
+        { "value": "error-only",    "label": "Solo error/rojo — para conteos de alerta" },
+        { "value": "status-set",    "label": "Set completo — neutral, info, success, warning, error" },
+        { "value": "custom",        "label": "Solo algunos — decidir cuáles" }
+      ],
+      "impact": "Variant property values",
+      "tags": ["neutral", "info", "success", "warning", "error", "semantic", "color"]
+    },
+    {
+      "id": "sizes",
+      "text": "¿Cuántos tamaños necesitas?",
+      "options": [
+        { "value": "single", "label": "Un solo tamaño — más simple" },
+        { "value": "sm-md",  "label": "sm + md (16px y 20px)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "size", "compact"]
+    },
+    {
+      "id": "overflow",
+      "text": "¿Cómo manejas los conteos altos (ej. 150 notificaciones)?",
+      "options": [
+        { "value": "99plus",     "label": "99+ fijo — estándar" },
+        { "value": "configurable","label": "Threshold configurable (99, 999, etc.)" },
+        { "value": "exact",      "label": "Número exacto siempre" }
+      ],
+      "impact": "maxCount behavior y texto del count",
+      "tags": ["overflow", "99+", "max-count", "large-numbers"]
+    },
+    {
+      "id": "positioning",
+      "text": "¿El badge se posiciona sobre otro elemento (overlay)?",
+      "options": [
+        { "value": "standalone",  "label": "Standalone — no se ancla a otro elemento" },
+        { "value": "overlay",     "label": "Overlay — top-right de ícono, avatar o botón" },
+        { "value": "both",        "label": "Ambos casos" }
+      ],
+      "impact": "Anchor positioning y z-index handling",
+      "tags": ["anchor", "overlay", "position", "icon-button", "avatar"]
+    }
+  ]
+}
