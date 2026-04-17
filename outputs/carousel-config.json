@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+  "component": "Carousel",
+  "archetype": "media-carousel",
+  "language": "es",
+  "buildOrder": ["CarouselSlide", "Carousel"],
+  "family": [
+    {
+      "name": "CarouselSlide",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "Carousel",
+      "slots": [
+        { "name": "content", "type": "container", "required": true, "note": "imagen, card, o contenido custom" }
+      ],
+      "properties": {
+        "State": ["default", "active", "transitioning"]
+      },
+      "exclusions": [],
+      "frameCount": {
+        "gross": 3,
+        "exclusions": 0,
+        "net": 3,
+        "note": "State(3) = 3"
+      }
+    },
+    {
+      "name": "Carousel",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "slides", "type": "container", "required": true, "note": "N CarouselSlides" },
+        { "name": "prevButton", "type": "icon-action", "required": false },
+        { "name": "nextButton", "type": "icon-action", "required": false },
+        { "name": "indicators", "type": "container", "required": false, "note": "dots pagination" },
+        { "name": "counter", "type": "text", "required": false, "note": "'3 / 12' (Atlassian pattern)" }
+      ],
+      "properties": {
+        "Type":       ["single", "multi", "hero", "thumbnail"],
+        "Indicators": ["dots", "lines", "counter", "none"],
+        "Controls":   ["arrows", "none", "both"],
+        "Size":       ["sm", "md", "lg"]
+      },
+      "exclusions": [
+        "Type=thumbnail + Indicators=dots (thumbnails ya son indicators)"
+      ],
+      "sizes": {
+        "sm": { "h": 240, "indicatorSize": 8, "controlSize": 32, "gap": 8 },
+        "md": { "h": 400, "indicatorSize": 10, "controlSize": 40, "gap": 12 },
+        "lg": { "h": 560, "indicatorSize": 12, "controlSize": 48, "gap": 16 }
+      },
+      "indicatorStyles": {
+        "dots":     { "shape": "circle", "spacing": 8, "activeColor": { "r": 0.15, "g": 0.35, "b": 0.92 }, "inactiveColor": { "r": 0.82, "g": 0.82, "b": 0.85 } },
+        "lines":    { "shape": "bar", "width": 24, "height": 4, "activeColor": { "r": 0.15, "g": 0.35, "b": 0.92 } },
+        "counter":  { "format": "N / Total", "fontSize": 13, "fg": { "r": 0.42, "g": 0.45, "b": 0.50 } }
+      },
+      "booleanLayers": [
+        { "propName": "👁 Show Controls", "layerName": "prevButton" },
+        { "propName": "👁 Show Indicators", "layerName": "indicators" },
+        { "propName": "👁 Show Counter", "layerName": "counter" }
+      ],
+      "frameCount": {
+        "gross": 96,
+        "exclusions": 12,
+        "net": 36,
+        "note": "Type(4) × Indicators(4) × Controls(3) × Size(3) = 144; combinaciones útiles = 36"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "carousel",
+    "role": "region + 'group' per slide (WAI-ARIA Carousel pattern)",
+    "ariaAttributes": [
+      "Container: role='region' + aria-roledescription='carousel' + aria-label",
+      "Slide: role='group' + aria-roledescription='slide' + aria-label='Slide N of Total'",
+      "Prev/Next buttons: aria-label='Slide anterior'/'Siguiente slide'",
+      "Indicators (dots): role='tablist' + role='tab' + aria-selected='true|false' en el activo",
+      "aria-live='polite' en container cuando autoplay=false (anuncia cambios)",
+      "aria-live='off' cuando autoplay=true (evita spam)"
+    ],
+    "keyboardNav": [
+      "Arrow Left/Right: slide anterior/siguiente",
+      "Home/End: primer/último slide",
+      "Tab: navega dentro del slide activo (skip hidden slides)",
+      "Enter/Space en indicator: jump a ese slide"
+    ],
+    "focusTechnique": "focus al prev/next button; hidden slides tienen inert para skip Tab",
+    "edgeCases": 6,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 18, "prefix": "crl", "mode": "C" },
+  "componentDescriptions": {
+    "CarouselSlide": "Slide individual. State: default / active / transitioning.\n\n🔑 ARIA: role='group' + aria-label='Slide N of Total'\n\nWCAG 2.2 AA.",
+    "Carousel": "Rotación de slides con controls + indicators. Type: single (1 visible) / multi (varios visibles) / hero (banner full-width) / thumbnail (strip + main). Indicators: dots/lines/counter/none. Controls: arrows/none/both. Size: sm/md/lg.\n\n🔑 ARIA:\n• WAI-ARIA Carousel pattern\n• role='region' + aria-roledescription='carousel'\n• aria-live según autoplay\n\n⌨️ Keyboard:\n• Arrow keys navegan slides\n• Home/End primer/último\n• Tab skip hidden slides\n\n🎯 Focus:\n• Prev/next buttons focuseables\n• Indicators con tablist pattern\n\nTokens: 18, prefijo crl-.\nWCAG 2.2 AA.\n\nAutoplay requiere botón pause (WCAG 2.2.2). Para single image usa Image; para gallery con lightbox considera Modal + arrows."
+  },
+  "variableBindings": {
+    "crl/sm/h": "sizing/240",
+    "crl/md/h": "sizing/400",
+    "crl/lg/h": "sizing/560",
+    "crl/indicator/active": "interactive/default",
+    "crl/indicator/inactive": "border/default",
+    "crl/control/bg": "surface/default",
+    "crl/control/shadow": "elevation/2"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "4 Types: single/multi/hero/thumbnail", "why": "Single = 1 slide visible (product galleries); multi = múltiples (recommended items row); hero = full-width banner; thumbnail = strip + main (e-commerce). 4 tipos cubren casos enterprise + consumer.", "source": "common-patterns" },
+    { "what": "WAI-ARIA Carousel pattern formal", "why": "role='region' + role='group' per slide + aria-roledescription. Pattern canónico para carousel accessibility.", "source": "WAI-ARIA" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

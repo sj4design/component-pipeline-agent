@@ -1,0 +1,145 @@
+{
+  "version": "1.0",
+  "component": "CommandPalette",
+  "archetype": "command-launcher",
+  "language": "es",
+  "buildOrder": ["CommandItem", "CommandPalette"],
+  "family": [
+    {
+      "name": "CommandItem",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "CommandPalette",
+      "slots": [
+        { "name": "icon", "type": "icon", "required": false, "figmaBinding": "instance-swap" },
+        { "name": "label", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "description", "type": "text", "required": false, "figmaBinding": "text" },
+        { "name": "shortcut", "type": "container", "required": false, "note": "keyboard shortcut badges (ej. ⌘K)" },
+        { "name": "badge", "type": "container", "required": false, "note": "'New', 'Pro', category tag" }
+      ],
+      "properties": {
+        "State": ["default", "hover", "selected", "focused", "disabled"],
+        "Size":  ["sm", "md"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "h": 36, "px": 12, "gap": 10, "fontSize": 13, "descriptionFontSize": 12, "iconSize": 16 },
+        "md": { "h": 44, "px": 16, "gap": 12, "fontSize": 14, "descriptionFontSize": 13, "iconSize": 18 }
+      },
+      "stateStyles": {
+        "default":  { "bg": "transparent", "fg": { "r": 0.12, "g": 0.12, "b": 0.13 } },
+        "hover":    { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "fg": { "r": 0.07, "g": 0.07, "b": 0.07 } },
+        "selected": { "bg": { "r": 0.93, "g": 0.95, "b": 1.0 }, "fg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "fontWeight": 500 },
+        "focused":  { "bg": { "r": 0.97, "g": 0.97, "b": 0.98 }, "ring": false, "bgHighlight": true },
+        "disabled": { "bg": "transparent", "fg": { "r": 0.72, "g": 0.72, "b": 0.75 }, "opacity": 0.6 }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "Ir a inicio" },
+        { "propName": "✏️ Description", "layerName": "description", "default": "Abre el dashboard principal" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Icon", "layerName": "icon", "default": "icon/arrow-right" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Icon", "layerName": "icon" },
+        { "propName": "👁 Has Description", "layerName": "description" },
+        { "propName": "👁 Has Shortcut", "layerName": "shortcut" },
+        { "propName": "👁 Has Badge", "layerName": "badge" }
+      ],
+      "frameCount": {
+        "gross": 10,
+        "exclusions": 0,
+        "net": 10,
+        "note": "State(5) × Size(2) = 10"
+      }
+    },
+    {
+      "name": "CommandPalette",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "searchInput", "type": "container", "required": true, "figmaBinding": "instance-swap" },
+        { "name": "groupHeader", "type": "text", "required": false, "note": "category label entre grupos de commands" },
+        { "name": "items", "type": "container", "required": true, "note": "N CommandItems agrupados" },
+        { "name": "emptyState", "type": "container", "required": false, "note": "'No se encontraron comandos'" },
+        { "name": "footer", "type": "container", "required": false, "note": "keyboard hints: '↑↓ navegar • ↵ seleccionar • esc cerrar'" }
+      ],
+      "properties": {
+        "State":     ["default", "empty", "loading"],
+        "Size":      ["sm", "md", "lg"],
+        "HasFooter": ["no", "yes"]
+      },
+      "exclusions": [],
+      "sizes": {
+        "sm": { "w": 480, "maxH": 360, "searchH": 44 },
+        "md": { "w": 640, "maxH": 480, "searchH": 52 },
+        "lg": { "w": 720, "maxH": 560, "searchH": 56 }
+      },
+      "frameCount": {
+        "gross": 18,
+        "exclusions": 0,
+        "net": 18,
+        "note": "State(3) × Size(3) × HasFooter(2) = 18"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "command-palette",
+    "role": "dialog + combobox",
+    "ariaAttributes": [
+      "Container: role='dialog' + aria-modal='true' + aria-label='Paleta de comandos'",
+      "Search input: role='combobox' + aria-expanded='true' + aria-controls='[list-id]' + aria-activedescendant='[item-id]'",
+      "List: role='listbox' + aria-label='Resultados'",
+      "Items: role='option' + aria-selected='true|false'",
+      "Group header: role='presentation' con heading adentro",
+      "Empty state: aria-live='polite' anuncia 'No se encontraron comandos'"
+    ],
+    "keyboardNav": [
+      "Cmd/Ctrl+K (o custom): abre palette",
+      "Arrow Up/Down: navega items",
+      "Enter: ejecuta item seleccionado",
+      "Escape: cierra palette",
+      "Tab: sale del input (no entre items — combobox pattern)",
+      "Typing: filtra items (fuzzy search)"
+    ],
+    "focusTechnique": "focus al search input al abrir; return al trigger al cerrar; aria-activedescendant para highlight items sin mover focus",
+    "edgeCases": 7,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 20, "prefix": "cmd", "mode": "C" },
+  "componentDescriptions": {
+    "CommandItem": "Item individual de command palette. Icon + label + description + shortcut + badge slots. State: default/hover/selected/focused/disabled. Sizes: sm/md.\n\n🔑 ARIA:\n• role='option' + aria-selected\n• Descripción leída en aria-activedescendant\n\n⌨️ Keyboard:\n• Arrow keys seleccionan\n• Enter ejecuta\n\nWCAG 2.2 AA.",
+    "CommandPalette": "Launcher de comandos estilo Cmd+K (Raycast/Linear/Slack pattern). Search + grouped list + keyboard shortcuts. Size: sm (480) / md (640) / lg (720). State: default / empty / loading.\n\n🔑 ARIA:\n• role='dialog' + aria-modal\n• Search combobox con aria-activedescendant\n• role='listbox' + role='option'\n\n⌨️ Keyboard:\n• Cmd/Ctrl+K abre\n• Arrow Up/Down navegan\n• Enter ejecuta\n• Escape cierra\n• Typing filtra (fuzzy search)\n\n🎯 Focus:\n• Focus al search al abrir\n• aria-activedescendant para highlight (no mover focus)\n• Return focus al trigger al cerrar\n\nTokens: 20, prefijo cmd-.\nWCAG 2.2 AA.\n\nScope: app-level command launcher (navigation + actions + settings). Pattern establecido en Raycast, Linear, Slack, GitHub, Notion.\n\nFooter keyboard hints mejoran descoverabilidad (footer pattern — opt-in)."
+  },
+  "variableBindings": {
+    "cmd/w/sm": "sizing/480",
+    "cmd/w/md": "sizing/640",
+    "cmd/w/lg": "sizing/720",
+    "cmd/bg": "surface/default",
+    "cmd/border": "border/default",
+    "cmd/radius": "radius/lg",
+    "cmd/shadow": "elevation/4",
+    "cmd/search/h/sm": "sizing/44",
+    "cmd/search/h/md": "sizing/52",
+    "cmd/search/h/lg": "sizing/56",
+    "cmd/item/sm/h": "sizing/36",
+    "cmd/item/md/h": "sizing/44",
+    "cmd/item/hover/bg": "surface/hover",
+    "cmd/item/selected/bg": "brand/subtle",
+    "cmd/item/selected/fg": "interactive/default",
+    "cmd/item/selected/fontWeight": "type/weight-medium",
+    "cmd/item/disabled/opacity": "opacity/disabled",
+    "cmd/footer/bg": "surface/hover",
+    "cmd/footer/fg": "text/secondary",
+    "cmd/footer/fontSize": "type/xs",
+    "cmd/shortcut/bg": "surface/pressed"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Pattern: combobox dentro de dialog (no listbox solo)", "why": "Command palette es input + listbox linkeados — combobox ARIA pattern canónico. aria-activedescendant permite highlight items sin perder focus del input (critical para typing continuo).", "source": "common-patterns" },
+    { "what": "Grouped items con category headers", "why": "Slack/Linear agrupan por categoría ('Navegación', 'Acciones', 'Configuración'). Mejora discoverabilidad en palettes grandes.", "source": "common-patterns" },
+    { "what": "Shortcut badges inline en items", "why": "Power users necesitan ver atajos de teclado. Muestra '⌘K' al lado del label — learning affordance.", "source": "common-patterns" },
+    { "what": "Typing = fuzzy search automático", "why": "No requiere submit — typing filtra en tiempo real. aria-live='polite' anuncia result count.", "source": "common-patterns" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

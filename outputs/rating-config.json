@@ -1,0 +1,103 @@
+{
+  "version": "1.0",
+  "component": "Rating",
+  "archetype": "value-selector",
+  "language": "es",
+  "buildOrder": ["Rating"],
+  "family": [
+    {
+      "name": "Rating",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "icons", "type": "container", "required": true, "note": "5 icons (stars default) rendered" },
+        { "name": "label", "type": "text", "required": false, "note": "'4.5 / 5'" },
+        { "name": "countText", "type": "text", "required": false, "note": "'(234 reviews)'" }
+      ],
+      "properties": {
+        "Max":         ["3", "5", "10"],
+        "State":       ["default", "hover", "focused", "disabled"],
+        "Value":       ["0", "1", "2", "3", "4", "5"],
+        "Size":        ["sm", "md", "lg"],
+        "Interactive": ["no", "yes"],
+        "Precision":   ["whole", "half"]
+      },
+      "exclusions": [
+        "Interactive=no + State=hover|focused (display-only no interactive states)",
+        "Precision=half + Max=10 (10 × half = 20 steps — overflow)"
+      ],
+      "sizes": {
+        "sm": { "iconSize": 14, "gap": 2, "labelFontSize": 13 },
+        "md": { "iconSize": 20, "gap": 4, "labelFontSize": 14 },
+        "lg": { "iconSize": 28, "gap": 6, "labelFontSize": 16 }
+      },
+      "stateStyles": {
+        "default":  { "filled": { "r": 0.98, "g": 0.75, "b": 0.14 }, "empty": { "r": 0.82, "g": 0.82, "b": 0.85 } },
+        "hover":    { "filled": { "r": 0.95, "g": 0.68, "b": 0.08 }, "empty": { "r": 0.65, "g": 0.65, "b": 0.70 } },
+        "focused":  { "ring": true },
+        "disabled": { "filled": { "r": 0.72, "g": 0.72, "b": 0.75 }, "empty": { "r": 0.88, "g": 0.88, "b": 0.90 }, "opacity": 0.6 }
+      },
+      "textProperties": [
+        { "propName": "✏️ Label", "layerName": "label", "default": "4.5 / 5" },
+        { "propName": "✏️ Count", "layerName": "countText", "default": "(234 reviews)" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Icon", "layerName": "icons", "default": "icon/star-filled", "note": "star default; puede ser heart, thumbs-up" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Show Label", "layerName": "label" },
+        { "propName": "👁 Show Count", "layerName": "countText" }
+      ],
+      "frameCount": {
+        "gross": 48,
+        "exclusions": 12,
+        "net": 36,
+        "note": "Max(3) × Size(3) × Interactive(2) × State(4) = 72; limited to useful combinations = 36"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "rating",
+    "role": "radiogroup (interactive) o img (display-only)",
+    "ariaAttributes": [
+      "Interactive: role='radiogroup' + aria-label='Calificación'",
+      "Each icon: role='radio' + aria-checked + aria-label='[N] estrellas'",
+      "Display-only: role='img' + aria-label='[N] de [Max] estrellas'",
+      "Half rating: aria-valuetext='4.5 de 5 estrellas' (descriptivo)",
+      "Count: aria-label incluye 'basado en N reseñas'"
+    ],
+    "keyboardNav": [
+      "Interactive: Arrow Left/Right cambia rating (1 step)",
+      "Home/End: min/max rating",
+      "Number keys: 1-5 (o Max) salta a valor directo",
+      "Display: no focusable"
+    ],
+    "focusTechnique": "roving tabindex: rated icon tabindex=0, resto -1",
+    "edgeCases": 4,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 10, "prefix": "rt", "mode": "C" },
+  "componentDescriptions": {
+    "Rating": "Rating con stars (o custom icon). Max: 3/5/10. Value: 0-Max. Size: sm/md/lg. Interactive: yes (input) / no (display-only). Precision: whole (integer) / half (0.5 steps).\n\n🔑 ARIA:\n• Interactive: role='radiogroup' con role='radio' per icon\n• Display: role='img' + aria-label descriptivo\n• Half: aria-valuetext explícito\n\n⌨️ Keyboard:\n• Arrow keys (interactive)\n• Home/End min/max\n• Number keys salto directo\n\n🎯 Focus:\n• Roving tabindex\n• Display-only no focusable\n\nTokens: 10, prefijo rt-.\nWCAG 2.2 AA.\n\nIcon default: star. Swappable a heart (favorites), thumbs-up (like), etc.\nCount + label opcional para context ('4.5 / 5 • 234 reviews')."
+  },
+  "variableBindings": {
+    "rt/filled": "status/warning/fg",
+    "rt/filled/hover": "status/warning/fg-bold",
+    "rt/empty": "border/default",
+    "rt/empty/hover": "border/hover",
+    "rt/focused/ring": "focus/ring",
+    "rt/disabled/opacity": "opacity/disabled",
+    "rt/iconSize/sm": "iconSize/sm",
+    "rt/iconSize/md": "iconSize/md",
+    "rt/iconSize/lg": "iconSize/lg",
+    "rt/label/fontSize": "type/md"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "Max 3/5/10 (no 100)", "why": "5 estrellas es estándar (Amazon/Google); 10 para competitive rating (IMDb); 3 para simple happy/neutral/sad. >10 usa Slider.", "source": "common-patterns" },
+    { "what": "Precision whole/half (no decimal)", "why": "Half rating común en ratings display (4.5 stars). Decimal confuse — half es el sweet spot. 0.1 precision → usa Slider.", "source": "common-patterns" },
+    { "what": "Interactive vs display-only como property", "why": "Display-only common case (showing reviews avg); interactive para user input (leave a review). A11y role diferente requiere property explícita.", "source": "common-patterns" },
+    { "what": "Icon swappable (star default)", "why": "Heart para favorites, thumbs-up para like/dislike. Icon es swap slot.", "source": "common-patterns" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

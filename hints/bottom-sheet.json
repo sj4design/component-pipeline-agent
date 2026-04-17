@@ -1,0 +1,73 @@
+{
+  "component": "BottomSheet",
+  "archetype": "mobile-overlay",
+  "buildOrder": ["BottomSheet"],
+  "family": [
+    {
+      "name": "BottomSheet",
+      "isSubComponent": false,
+      "slots": ["dragHandle:shape", "header:container", "content*:container", "footer:container", "scrim:shape"],
+      "properties": {
+        "Variant": ["modal", "standard"],
+        "State":   ["collapsed", "half-expanded", "expanded"],
+        "Size":    ["sm", "md", "lg"]
+      },
+      "booleans": ["Show Drag Handle", "Show Header", "Show Footer"],
+      "exclusions": ["Variant=standard + scrim visible", "State=collapsed + footer visible"],
+      "frameCount": 12
+    }
+  ],
+  "a11y": {
+    "role": "dialog (modal) o region (standard)",
+    "keyboard": ["Escape cierra modal", "Drag handle role=slider con Arrow keys cambia snap point"],
+    "focus": "Focus trap en modal. Focus al primer focusable al open."
+  },
+  "tokens": { "total": 16, "prefix": "bs" },
+  "questions": [
+    {
+      "id": "variant",
+      "text": "¿Modal o standard?",
+      "options": [
+        { "value": "modal", "label": "Modal — scrim + blocking (file picker, settings modal)" },
+        { "value": "standard", "label": "Standard — non-modal, coexiste con content (map + location list)" },
+        { "value": "both", "label": "Ambas según contexto" }
+      ],
+      "impact": "Variant property, focus trap behavior",
+      "tags": ["modal", "standard", "scrim", "non-modal"]
+    },
+    {
+      "id": "snap-points",
+      "text": "¿Snap points habilitados?",
+      "options": [
+        { "value": "single", "label": "Single (expanded only) — no collapsed/half" },
+        { "value": "two-snap", "label": "Collapsed + expanded (no half)" },
+        { "value": "three-snap", "label": "Collapsed + half + expanded (M3 canonical)" }
+      ],
+      "impact": "State property values",
+      "tags": ["snap-points", "detents", "peek", "collapsed", "expanded"]
+    },
+    {
+      "id": "drag-handle",
+      "text": "¿Mostrar drag handle?",
+      "options": [
+        { "value": "always", "label": "Siempre — primary affordance" },
+        { "value": "modal-only", "label": "Solo en modal" },
+        { "value": "never", "label": "Nunca — buttons controlan snap" }
+      ],
+      "impact": "Show Drag Handle boolean",
+      "tags": ["drag-handle", "affordance", "gesture"]
+    },
+    {
+      "id": "use-case",
+      "text": "¿Uso principal?",
+      "options": [
+        { "value": "mobile-picker", "label": "Mobile picker (country, currency, etc.)" },
+        { "value": "mobile-settings", "label": "Mobile settings quick access" },
+        { "value": "map-overlay", "label": "Map overlay con location list (Standard variant)" },
+        { "value": "share-sheet", "label": "Share sheet / action sheet" }
+      ],
+      "impact": "Variant + Size + slots recommendation",
+      "tags": ["mobile", "picker", "settings", "map", "share", "action-sheet"]
+    }
+  ]
+}

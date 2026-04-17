@@ -1,0 +1,138 @@
+{
+  "version": "1.0",
+  "component": "Timeline",
+  "archetype": "chronological-list",
+  "language": "es",
+  "buildOrder": ["TimelineItem", "Timeline"],
+  "family": [
+    {
+      "name": "TimelineItem",
+      "isSubComponent": true,
+      "isBuildingBlock": true,
+      "parentComponent": "Timeline",
+      "slots": [
+        { "name": "marker", "type": "icon-or-shape", "required": true, "figmaBinding": "instance-swap", "note": "dot, icon, avatar (audit log), custom" },
+        { "name": "connectorLine", "type": "shape", "required": false, "note": "línea vertical que conecta markers" },
+        { "name": "timestamp", "type": "text", "required": false, "note": "'hace 2 horas', '2026-04-17 10:30'" },
+        { "name": "title", "type": "text", "required": true, "figmaBinding": "text" },
+        { "name": "description", "type": "text", "required": false, "figmaBinding": "text" },
+        { "name": "actor", "type": "container", "required": false, "note": "quién hizo la acción (avatar + nombre)" },
+        { "name": "content", "type": "container", "required": false, "note": "content expandido: attachments, comments, details" }
+      ],
+      "properties": {
+        "State":       ["default", "success", "error", "warning", "info", "disabled"],
+        "MarkerType":  ["dot", "icon", "avatar"],
+        "Size":        ["sm", "md"],
+        "IsLast":      ["no", "yes"]
+      },
+      "exclusions": [
+        "IsLast=yes + connectorLine visible (last item no tiene trailing connector)"
+      ],
+      "sizes": {
+        "sm": { "markerSize": 12, "connectorThickness": 2, "fontSize": 13, "titleFontSize": 14, "descriptionFontSize": 12, "gap": 12, "verticalGap": 16 },
+        "md": { "markerSize": 16, "connectorThickness": 2, "fontSize": 14, "titleFontSize": 16, "descriptionFontSize": 13, "gap": 16, "verticalGap": 24 }
+      },
+      "stateStyles": {
+        "default": { "markerBg": { "r": 0.82, "g": 0.82, "b": 0.85 }, "markerBorder": { "r": 0.82, "g": 0.82, "b": 0.85 }, "connectorColor": { "r": 0.88, "g": 0.89, "b": 0.90 } },
+        "success": { "markerBg": { "r": 0.08, "g": 0.55, "b": 0.22 }, "connectorColor": { "r": 0.08, "g": 0.55, "b": 0.22 } },
+        "error":   { "markerBg": { "r": 0.86, "g": 0.15, "b": 0.15 }, "connectorColor": { "r": 0.88, "g": 0.89, "b": 0.90 } },
+        "warning": { "markerBg": { "r": 0.72, "g": 0.48, "b": 0.05 }, "connectorColor": { "r": 0.88, "g": 0.89, "b": 0.90 } },
+        "info":    { "markerBg": { "r": 0.15, "g": 0.35, "b": 0.92 }, "connectorColor": { "r": 0.88, "g": 0.89, "b": 0.90 } },
+        "disabled": { "markerBg": { "r": 0.88, "g": 0.88, "b": 0.90 }, "connectorColor": { "r": 0.88, "g": 0.89, "b": 0.90 }, "opacity": 0.6 }
+      },
+      "textProperties": [
+        { "propName": "✏️ Title", "layerName": "title", "default": "Evento" },
+        { "propName": "✏️ Description", "layerName": "description", "default": "Descripción del evento" },
+        { "propName": "✏️ Timestamp", "layerName": "timestamp", "default": "hace 2 horas" }
+      ],
+      "swapSlots": [
+        { "propName": "🔄 Marker", "layerName": "marker", "default": "marker/dot" }
+      ],
+      "booleanLayers": [
+        { "propName": "👁 Has Timestamp", "layerName": "timestamp" },
+        { "propName": "👁 Has Description", "layerName": "description" },
+        { "propName": "👁 Has Actor", "layerName": "actor" },
+        { "propName": "👁 Has Content", "layerName": "content" },
+        { "propName": "👁 Show Connector", "layerName": "connectorLine" }
+      ],
+      "frameCount": {
+        "gross": 72,
+        "exclusions": 12,
+        "net": 60,
+        "note": "State(6) × MarkerType(3) × Size(2) × IsLast(2) = 72; −12 exclusiones"
+      }
+    },
+    {
+      "name": "Timeline",
+      "isSubComponent": false,
+      "isBuildingBlock": false,
+      "slots": [
+        { "name": "items", "type": "container", "required": true, "note": "N TimelineItems" }
+      ],
+      "properties": {
+        "Mode":      ["default", "alternating", "left", "right"],
+        "Size":      ["sm", "md"]
+      },
+      "exclusions": [],
+      "frameCount": {
+        "gross": 8,
+        "exclusions": 0,
+        "net": 8,
+        "note": "Mode(4) × Size(2) = 8"
+      }
+    }
+  ],
+  "a11y": {
+    "pattern": "timeline",
+    "role": "list",
+    "ariaAttributes": [
+      "Container: role='list' + aria-label='Timeline' (o descriptivo)",
+      "TimelineItem: role='listitem'",
+      "Timestamp: <time datetime='[ISO]'> native",
+      "Marker: aria-hidden='true' (decorative) — estado comunicado en title/description",
+      "State color NO es único indicador — description debe incluir estado ('Falló', 'Completado')",
+      "Actor: aria-label incluye 'por [nombre]'"
+    ],
+    "keyboardNav": [
+      "Tab si items son interactivos (audit log con detail)",
+      "Arrow keys opcional si lista grande (custom)"
+    ],
+    "focusTechnique": "ring 2px en items interactivos; items display-only no focuseables",
+    "edgeCases": 5,
+    "wcagLevel": "AA"
+  },
+  "tokens": { "total": 18, "prefix": "tl", "mode": "C" },
+  "componentDescriptions": {
+    "TimelineItem": "Item individual de timeline. MarkerType: dot (simple) / icon (event-type visual) / avatar (audit log — who). State: default/success/error/warning/info/disabled con color en marker + connector. Sizes: sm/md. IsLast: yes oculta trailing connector.\n\n🔑 ARIA:\n• role='listitem'\n• <time> semantic para timestamps\n• Marker aria-hidden (decorative)\n• Estado en texto, no solo color (WCAG 1.4.1)\n\n⌨️ Keyboard:\n• Tab si interactivo\n\nWCAG 2.2 AA.",
+    "Timeline": "Lista cronológica con markers + connectors. Mode: default (markers izq, content der) / alternating (zig-zag) / left / right. Size: sm/md.\n\n🔑 ARIA:\n• role='list'\n• Timestamps con <time datetime>\n\n⌨️ Keyboard:\n• Tab entre items interactivos\n\n🎯 Focus:\n• Alternating mode para eventos alternados izq/der\n• default mode para activity feeds/audit logs\n\nTokens: 18, prefijo tl-.\nWCAG 2.2 AA.\n\nUso: activity feeds, audit logs (Jira issue history, Confluence page changes), process tracking (Steps más estructurado), scheduling visualizations.\n\nConnector NO incluido en último item (IsLast=yes). Vertical layout por default; horizontal usa Steps en horizontal."
+  },
+  "variableBindings": {
+    "tl/marker/sm": "sizing/xs",
+    "tl/marker/md": "sizing/sm",
+    "tl/connector/color": "border/default",
+    "tl/connector/success": "status/success/border",
+    "tl/connector/thickness": "border/2",
+    "tl/default/marker": "border/default",
+    "tl/success/marker": "status/success/fg",
+    "tl/error/marker": "status/error/fg",
+    "tl/warning/marker": "status/warning/fg",
+    "tl/info/marker": "status/info/fg",
+    "tl/title/fontSize/sm": "type/sm",
+    "tl/title/fontSize/md": "type/md",
+    "tl/title/fontWeight": "type/weight-medium",
+    "tl/description/fg": "text/secondary",
+    "tl/timestamp/fg": "text/subtlest",
+    "tl/timestamp/fontSize": "type/xs",
+    "tl/gap/sm": "spacing/3",
+    "tl/gap/md": "spacing/4"
+  },
+  "_meta": { "lastUpdatedBy": "spec+enrich", "pipelineVersion": "1.0", "timestamp": "2026-04-17", "mode": "from-scratch-fast" },
+  "_decisions": [
+    { "what": "3 MarkerTypes: dot / icon / avatar", "why": "Dot para simple events (minimalist); icon para event-type semantics (bug fix, feature, deploy); avatar para audit logs (who did what).", "source": "common-patterns" },
+    { "what": "6 States con color semantic en marker + connector", "why": "Success (green), error (red), warning (amber), info (blue), default (gray), disabled. State cambia marker bg + connector color (trace del flow).", "source": "common-patterns" },
+    { "what": "Mode: default / alternating / left / right (Ant pattern)", "why": "Default (markers left, content right) es estándar; alternating para visual engagement en marketing/histórico; left/right para casos específicos de layout.", "source": "common-patterns" },
+    { "what": "IsLast boolean oculta trailing connector", "why": "Timeline termina sin línea descendente. Modelado como property en TimelineItem (similar a Step).", "source": "common-patterns" },
+    { "what": "<time datetime='[ISO]'> semantic", "why": "Standard HTML para timestamps. Permite i18n y screen readers leer fecha completa.", "source": "WCAG semantic HTML" }
+  ],
+  "_foundationsRef": "foundations.json"
+}

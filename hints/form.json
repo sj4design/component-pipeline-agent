@@ -1,0 +1,108 @@
+{
+  "component": "Form",
+  "archetype": "form-layout",
+  "buildOrder": ["FormField", "FormSection", "Form"],
+  "family": [
+    {
+      "name": "FormField",
+      "isSubComponent": true,
+      "slots": ["label*:text", "requiredIndicator:text", "helperText:text", "input*:container", "errorMessage:text", "successMessage:text", "labelIcon:icon"],
+      "properties": {
+        "State":  ["default", "focused", "error", "success", "disabled"],
+        "Size":   ["sm", "md", "lg"],
+        "Layout": ["stacked", "horizontal", "inline"]
+      },
+      "booleans": ["Has Helper Text", "Has Label Icon", "Show Required Indicator", "Show Error Message", "Show Success Message"],
+      "exclusions": ["Layout=inline + helperText visible"],
+      "frameCount": 42
+    },
+    {
+      "name": "FormSection",
+      "isSubComponent": true,
+      "slots": ["sectionTitle:text", "sectionDescription:text", "fields*:container", "divider:shape"],
+      "properties": { "Variant": ["default", "card", "inset"] },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 3
+    },
+    {
+      "name": "Form",
+      "isSubComponent": false,
+      "slots": ["title:text", "description:text", "sections*:container", "footer*:container"],
+      "properties": {
+        "Layout": ["single-column", "two-column", "horizontal"],
+        "Size":   ["sm", "md", "lg"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 9
+    }
+  ],
+  "a11y": {
+    "role": "form + fieldset (section) + label",
+    "keyboard": ["Tab navega DOM order", "Enter submit", "Escape cancela modal form"],
+    "focus": "Ring 2px. Focus al primer invalid field al submit error."
+  },
+  "tokens": { "total": 24, "prefix": "frm" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Form principalmente?",
+      "options": [
+        { "value": "settings", "label": "Settings / preferences (sectioned)" },
+        { "value": "sign-up", "label": "Sign-up / onboarding (single-column)" },
+        { "value": "data-entry", "label": "Data entry (two-column, enterprise)" },
+        { "value": "checkout", "label": "Checkout / payment (two-column con summary)" },
+        { "value": "filters", "label": "Filters — inline compact" }
+      ],
+      "impact": "Layout, Size, Section variant defaults",
+      "tags": ["settings", "sign-up", "onboarding", "checkout", "filters", "data-entry"]
+    },
+    {
+      "id": "field-layout",
+      "text": "¿Layout de FormFields?",
+      "options": [
+        { "value": "stacked", "label": "Stacked — label arriba (mobile-first, default)" },
+        { "value": "horizontal", "label": "Horizontal — label izquierda (desktop settings)" },
+        { "value": "inline", "label": "Inline — single line (compact filters)" },
+        { "value": "multiple", "label": "Varios layouts según el field" }
+      ],
+      "impact": "FormField Layout default",
+      "tags": ["stacked", "horizontal", "inline", "label-position"]
+    },
+    {
+      "id": "sections",
+      "text": "¿Agrupas fields en sections?",
+      "options": [
+        { "value": "none", "label": "No — todos fields en lista plana" },
+        { "value": "default", "label": "Default sections — con title + spacing visual" },
+        { "value": "card", "label": "Card sections — elevated (settings pattern)" },
+        { "value": "inset", "label": "Inset — bg tinted con padding" }
+      ],
+      "impact": "FormSection Variant",
+      "tags": ["sections", "grouping", "fieldset", "card", "inset"]
+    },
+    {
+      "id": "validation",
+      "text": "¿Cuándo validar?",
+      "options": [
+        { "value": "submit", "label": "Al submit — errores al enviar" },
+        { "value": "blur", "label": "On blur — inline cuando sale del field" },
+        { "value": "both", "label": "Ambos — inline on blur + summary al submit" }
+      ],
+      "impact": "Error/success message visibility patterns",
+      "tags": ["validation", "submit", "blur", "inline", "error"]
+    },
+    {
+      "id": "required",
+      "text": "¿Cómo indicas fields requeridos?",
+      "options": [
+        { "value": "asterisk", "label": "Asterisco (*) al lado del label" },
+        { "value": "optional-text", "label": "Texto '(Opcional)' en no-required (inverso)" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "requiredIndicator slot format",
+      "tags": ["required", "asterisk", "optional", "indicator"]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "component": "Rating",
+  "archetype": "value-selector",
+  "buildOrder": ["Rating"],
+  "family": [
+    {
+      "name": "Rating",
+      "isSubComponent": false,
+      "slots": ["icons*:container", "label:text", "countText:text"],
+      "properties": {
+        "Max":         ["3", "5", "10"],
+        "State":       ["default", "hover", "focused", "disabled"],
+        "Value":       ["0", "1", "2", "3", "4", "5"],
+        "Size":        ["sm", "md", "lg"],
+        "Interactive": ["no", "yes"],
+        "Precision":   ["whole", "half"]
+      },
+      "booleans": ["Show Label", "Show Count"],
+      "exclusions": ["Interactive=no + State=hover|focused", "Precision=half + Max=10"],
+      "frameCount": 36
+    }
+  ],
+  "a11y": {
+    "role": "radiogroup (interactive) o img (display)",
+    "keyboard": ["Arrow keys cambian rating", "Home/End min/max", "Number keys salto"],
+    "focus": "Roving tabindex. Display-only no focusable."
+  },
+  "tokens": { "total": 10, "prefix": "rt" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Rating?",
+      "options": [
+        { "value": "reviews", "label": "Reviews / product ratings (display-only + counter)" },
+        { "value": "user-input", "label": "User input — 'califica esta experiencia'" },
+        { "value": "nps", "label": "NPS score (Max=10)" },
+        { "value": "satisfaction", "label": "Satisfaction — emoji-based (Max=3 o 5)" }
+      ],
+      "impact": "Max, Interactive, icon choice",
+      "tags": ["reviews", "user-input", "nps", "satisfaction", "emoji"]
+    },
+    {
+      "id": "max",
+      "text": "¿Max value?",
+      "options": [
+        { "value": "3", "label": "3 — simple (happy/neutral/sad)" },
+        { "value": "5", "label": "5 — estándar (Amazon, Google)" },
+        { "value": "10", "label": "10 — competitive/NPS (IMDb)" }
+      ],
+      "impact": "Max property",
+      "tags": ["max", "3", "5", "10", "nps"]
+    },
+    {
+      "id": "interactive",
+      "text": "¿Interactive o display-only?",
+      "options": [
+        { "value": "display", "label": "Display only — muestra rating existente" },
+        { "value": "interactive", "label": "Interactive — user selects rating" },
+        { "value": "both", "label": "Ambos según contexto" }
+      ],
+      "impact": "Interactive property, a11y role",
+      "tags": ["display", "interactive", "readonly", "input"]
+    },
+    {
+      "id": "precision",
+      "text": "¿Precisión?",
+      "options": [
+        { "value": "whole", "label": "Whole — solo integers (1,2,3,4,5)" },
+        { "value": "half", "label": "Half — 0.5 steps (4.5 stars)" }
+      ],
+      "impact": "Precision property",
+      "tags": ["precision", "whole", "half", "decimal"]
+    },
+    {
+      "id": "icon",
+      "text": "¿Icon?",
+      "options": [
+        { "value": "star", "label": "Star (default)" },
+        { "value": "heart", "label": "Heart (favorites)" },
+        { "value": "thumbs", "label": "Thumbs up (like)" },
+        { "value": "custom", "label": "Custom — brand icon" }
+      ],
+      "impact": "Icon swap default",
+      "tags": ["star", "heart", "thumbs", "icon", "emoji"]
+    }
+  ]
+}

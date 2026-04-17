@@ -1,0 +1,87 @@
+{
+  "component": "TimePicker",
+  "archetype": "time-input",
+  "buildOrder": ["TimePicker"],
+  "family": [
+    {
+      "name": "TimePicker",
+      "isSubComponent": false,
+      "slots": ["label:text", "input*:container", "clockIcon:icon", "dropdown:container", "hourColumn:container", "minuteColumn:container", "secondColumn:container", "meridiemColumn:container", "nowButton:container", "okButton:container"],
+      "properties": {
+        "State":     ["default", "focused", "open", "error", "disabled"],
+        "Size":      ["sm", "md", "lg"],
+        "Format":    ["12h", "24h"],
+        "Precision": ["minute", "second"],
+        "Step":      ["1", "5", "15", "30"]
+      },
+      "booleans": ["Has Label", "Show Clock Icon", "Show Seconds", "Show Now Button"],
+      "exclusions": ["Precision=second + Step=15|30", "Format=24h + meridiemColumn"],
+      "frameCount": 96
+    }
+  ],
+  "a11y": {
+    "role": "combobox + listbox (dropdown) + spinbutton segments",
+    "keyboard": ["Arrow Up/Down cambia segment", "Arrow Left/Right entre segments", "Type digits", "Alt+Down abre dropdown"],
+    "focus": "Ring 2px. Focus trap en dropdown."
+  },
+  "tokens": { "total": 22, "prefix": "tp" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas TimePicker?",
+      "options": [
+        { "value": "meeting", "label": "Meeting scheduling — inicio + fin (step=15 o 30 min)" },
+        { "value": "reminders", "label": "Alarmas / reminders — precise time input" },
+        { "value": "log-entry", "label": "Log entry — registrar hora exacta (step=1)" },
+        { "value": "booking", "label": "Booking slots — available times (step=30/60)" },
+        { "value": "settings", "label": "Settings — quiet hours, work schedule" }
+      ],
+      "impact": "Step default, Precision, now button",
+      "tags": ["meeting", "scheduling", "alarm", "log", "booking", "settings"]
+    },
+    {
+      "id": "format",
+      "text": "¿Format?",
+      "options": [
+        { "value": "12h", "label": "12h — AM/PM (US convention)" },
+        { "value": "24h", "label": "24h — military time (Europe)" },
+        { "value": "locale", "label": "Locale-driven — auto per user region" }
+      ],
+      "impact": "Format property",
+      "tags": ["12h", "24h", "ampm", "meridiem", "locale"]
+    },
+    {
+      "id": "step",
+      "text": "¿Step granularity?",
+      "options": [
+        { "value": "1-min", "label": "1 min — log-entry level" },
+        { "value": "5-min", "label": "5 min — balance" },
+        { "value": "15-min", "label": "15 min — meetings standard" },
+        { "value": "30-min", "label": "30 min — coarse booking slots" },
+        { "value": "variable", "label": "Variable (múltiples)" }
+      ],
+      "impact": "Step property values",
+      "tags": ["step", "granularity", "1", "5", "15", "30"]
+    },
+    {
+      "id": "seconds",
+      "text": "¿Incluir seconds?",
+      "options": [
+        { "value": "no", "label": "No — solo hours + minutes" },
+        { "value": "yes", "label": "Sí — hh:mm:ss (logs, timing precise)" }
+      ],
+      "impact": "Precision property, Show Seconds boolean",
+      "tags": ["seconds", "precision", "hh-mm-ss"]
+    },
+    {
+      "id": "now-button",
+      "text": "¿'Ahora' shortcut?",
+      "options": [
+        { "value": "yes", "label": "Sí — quick 'set to current time' (booking)" },
+        { "value": "no", "label": "No" }
+      ],
+      "impact": "Show Now Button boolean",
+      "tags": ["now", "shortcut", "current-time"]
+    }
+  ]
+}

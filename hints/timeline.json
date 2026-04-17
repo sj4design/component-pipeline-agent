@@ -1,0 +1,99 @@
+{
+  "component": "Timeline",
+  "archetype": "chronological-list",
+  "buildOrder": ["TimelineItem", "Timeline"],
+  "family": [
+    {
+      "name": "TimelineItem",
+      "isSubComponent": true,
+      "slots": ["marker*:icon-or-shape", "connectorLine:shape", "timestamp:text", "title*:text", "description:text", "actor:container", "content:container"],
+      "properties": {
+        "State":      ["default", "success", "error", "warning", "info", "disabled"],
+        "MarkerType": ["dot", "icon", "avatar"],
+        "Size":       ["sm", "md"],
+        "IsLast":     ["no", "yes"]
+      },
+      "booleans": ["Has Timestamp", "Has Description", "Has Actor", "Has Content", "Show Connector"],
+      "exclusions": ["IsLast=yes + connectorLine visible"],
+      "frameCount": 60
+    },
+    {
+      "name": "Timeline",
+      "isSubComponent": false,
+      "slots": ["items*:container"],
+      "properties": {
+        "Mode": ["default", "alternating", "left", "right"],
+        "Size": ["sm", "md"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 8
+    }
+  ],
+  "a11y": {
+    "role": "list + listitem + <time>",
+    "keyboard": ["Tab si interactivos"],
+    "focus": "Marker decorative. Estado en texto, no solo color (WCAG 1.4.1)."
+  },
+  "tokens": { "total": 18, "prefix": "tl" },
+  "questions": [
+    {
+      "id": "use-case",
+      "text": "¿Para qué usas Timeline?",
+      "options": [
+        { "value": "activity-feed", "label": "Activity feed — Jira issue history, audit log" },
+        { "value": "process-tracking", "label": "Process tracking — order status, project milestones" },
+        { "value": "events", "label": "Events — notifications, changelog" },
+        { "value": "history", "label": "History visualization — company milestones, user journey" }
+      ],
+      "impact": "MarkerType, Mode, actor slot",
+      "tags": ["activity", "audit", "history", "events", "milestones", "changelog"]
+    },
+    {
+      "id": "marker-type",
+      "text": "¿Qué tipo de marker?",
+      "options": [
+        { "value": "dot", "label": "Dot — simple minimalist" },
+        { "value": "icon", "label": "Icon — event-type (bug, deploy, merge)" },
+        { "value": "avatar", "label": "Avatar — who did what (audit log)" },
+        { "value": "mixed", "label": "Mixed según item type" }
+      ],
+      "impact": "MarkerType property",
+      "tags": ["dot", "icon", "avatar", "marker", "bullet"]
+    },
+    {
+      "id": "states",
+      "text": "¿Qué states por item?",
+      "options": [
+        { "value": "neutral", "label": "Solo default (neutral)" },
+        { "value": "with-status", "label": "Con status — success/error/warning/info" },
+        { "value": "all", "label": "Todos — default + 4 semantic + disabled" }
+      ],
+      "impact": "State property values",
+      "tags": ["states", "success", "error", "warning", "info", "semantic"]
+    },
+    {
+      "id": "mode",
+      "text": "¿Layout mode?",
+      "options": [
+        { "value": "default", "label": "Default — markers left, content right" },
+        { "value": "alternating", "label": "Alternating — zig-zag (visual engagement)" },
+        { "value": "left", "label": "Left — todo alineado izquierda" },
+        { "value": "right", "label": "Right — todo alineado derecha" }
+      ],
+      "impact": "Mode property",
+      "tags": ["mode", "layout", "alternating", "zig-zag"]
+    },
+    {
+      "id": "content-density",
+      "text": "¿Densidad de info por item?",
+      "options": [
+        { "value": "minimal", "label": "Minimal — marker + title" },
+        { "value": "standard", "label": "Standard — + timestamp + description" },
+        { "value": "rich", "label": "Rich — + actor + attached content (audit log)" }
+      ],
+      "impact": "Has Timestamp / Description / Actor / Content booleans",
+      "tags": ["density", "rich", "minimal", "actor", "attachments"]
+    }
+  ]
+}

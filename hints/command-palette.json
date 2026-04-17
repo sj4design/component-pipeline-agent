@@ -1,0 +1,93 @@
+{
+  "component": "CommandPalette",
+  "archetype": "command-launcher",
+  "buildOrder": ["CommandItem", "CommandPalette"],
+  "family": [
+    {
+      "name": "CommandItem",
+      "isSubComponent": true,
+      "slots": ["icon:icon", "label*:text", "description:text", "shortcut:container", "badge:container"],
+      "properties": { "State": ["default", "hover", "selected", "focused", "disabled"], "Size": ["sm", "md"] },
+      "booleans": ["Has Icon", "Has Description", "Has Shortcut", "Has Badge"],
+      "exclusions": [],
+      "frameCount": 10
+    },
+    {
+      "name": "CommandPalette",
+      "isSubComponent": false,
+      "slots": ["searchInput*:container", "groupHeader:text", "items*:container", "emptyState:container", "footer:container"],
+      "properties": {
+        "State":     ["default", "empty", "loading"],
+        "Size":      ["sm", "md", "lg"],
+        "HasFooter": ["no", "yes"]
+      },
+      "booleans": [],
+      "exclusions": [],
+      "frameCount": 18
+    }
+  ],
+  "a11y": {
+    "role": "dialog + combobox (search) + listbox (results)",
+    "keyboard": ["Cmd/Ctrl+K abre", "Arrow Up/Down navega", "Enter ejecuta", "Escape cierra", "Type filtra"],
+    "focus": "Focus al search al open. aria-activedescendant highlight sin mover focus."
+  },
+  "tokens": { "total": 20, "prefix": "cmd" },
+  "questions": [
+    {
+      "id": "scope",
+      "text": "¿Qué acciones incluye la palette?",
+      "options": [
+        { "value": "navigation", "label": "Solo navegación — goto pages, search" },
+        { "value": "actions", "label": "Solo acciones — create, delete, settings" },
+        { "value": "everything", "label": "Everything — navigation + actions + settings (Linear/Raycast pattern)" },
+        { "value": "ai-agent", "label": "AI agent — conversational commands + tools" }
+      ],
+      "impact": "Item categories, Grouping, Shortcut hints",
+      "tags": ["navigation", "actions", "everything", "linear", "raycast", "ai"]
+    },
+    {
+      "id": "grouping",
+      "text": "¿Agrupar items por categoría?",
+      "options": [
+        { "value": "no", "label": "No — lista plana" },
+        { "value": "yes", "label": "Sí — con group headers (Navegación, Acciones, Settings)" }
+      ],
+      "impact": "groupHeader slot usage",
+      "tags": ["grouping", "categories", "headers"]
+    },
+    {
+      "id": "shortcuts",
+      "text": "¿Mostrar keyboard shortcuts en items?",
+      "options": [
+        { "value": "never", "label": "Nunca" },
+        { "value": "always", "label": "Siempre — discoverability de atajos" },
+        { "value": "common-only", "label": "Solo en acciones comunes" }
+      ],
+      "impact": "Has Shortcut boolean",
+      "tags": ["shortcuts", "keyboard", "atajos", "power-user"]
+    },
+    {
+      "id": "trigger",
+      "text": "¿Trigger principal?",
+      "options": [
+        { "value": "cmd-k", "label": "Cmd/Ctrl+K (estándar Linear/Raycast)" },
+        { "value": "cmd-p", "label": "Cmd/Ctrl+P (VS Code pattern)" },
+        { "value": "slash", "label": "'/' trigger (Slack pattern)" },
+        { "value": "button", "label": "Button click (no keyboard shortcut primary)" }
+      ],
+      "impact": "Footer hints, onboarding",
+      "tags": ["trigger", "shortcut", "cmd-k", "cmd-p", "slash"]
+    },
+    {
+      "id": "search-behavior",
+      "text": "¿Tipo de búsqueda?",
+      "options": [
+        { "value": "exact", "label": "Exact match — startsWith o includes" },
+        { "value": "fuzzy", "label": "Fuzzy search — mistypes tolerated (mejor UX)" },
+        { "value": "semantic", "label": "Semantic — AI/embeddings (avanzado)" }
+      ],
+      "impact": "Runtime behavior (no afecta Figma frames)",
+      "tags": ["search", "fuzzy", "exact", "semantic", "ai"]
+    }
+  ]
+}
