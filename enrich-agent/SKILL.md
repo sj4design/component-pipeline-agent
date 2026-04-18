@@ -361,7 +361,7 @@ WCAG 2.2 AA · APG [Pattern] Pattern.
 - Include keyboard nav from Phase 1 (not just "Tab navega")
 - Include focus management rules (on open, on close, trap)
 - Language matches user preference (Spanish by default)
-- Written in config.json so `/generate` reads and pastes into Figma `component.description`
+- Written in config.json as `component.description`
 - Building blocks: shorter description (purpose + swap mechanism + no chrome)
 - Sub-components: reference parent's keyboard nav if same ("Igual que [Parent]")
 

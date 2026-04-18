@@ -351,7 +351,7 @@ Table: pattern | description | best for | adopted by. Each with ASCII wireframe 
 **[Risk]** (HIGH/MEDIUM/LOW) — mitigation.
 
 #### "Next Steps"
-Connect to pipeline: `/spec` → `/enrich` → `/generate` → `/figma-qa`
+Connect to pipeline: `/spec` → `/enrich` → `/build [component]`
 Or use `/build [component]` for the full pipeline in one command.
 
 ### Step 5: Save Output
