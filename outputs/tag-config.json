@@ -1,0 +1,224 @@
+{
+  "version": "4.0",
+  "component": "Tag",
+  "archetype": "indicator",
+  "buildOrder": ["Tag"],
+  "language": "es",
+  "family": [
+    {
+      "name": "Tag",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "leadingIcon",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "swap",
+          "notes": "Ícono o avatar que precede al texto. Presente en 9/24 sistemas. Combinar con boolean isLeadingIconVisible para control de presencia sin multiplicar frames."
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text",
+          "notes": "Texto principal del tag. Requerido en 24/24 sistemas. Debe transportar el significado del estado independientemente del color (GOV.UK, Nord)."
+        },
+        {
+          "name": "removeButton",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "boolText",
+          "notes": "Botón de eliminación con aria-label contextual auto-generado ('Eliminar [label]'). Solo aparece cuando isRemovable=true. Slot separado y focusable independientemente del label."
+        }
+      ],
+      "properties": {
+        "Color": {
+          "type": "variant",
+          "values": ["default", "primary", "success", "warning", "error", "info", "neutral"],
+          "figmaBinding": "swap",
+          "notes": "Dimensión de variante para colores semánticos. Cada valor corresponde a un modo de variable en Figma con tokens de background, foreground y border diferenciados por color-role. No usar hex arbitrario en esta dimensión."
+        },
+        "Size": {
+          "type": "variant",
+          "values": ["sm", "md", "lg"],
+          "figmaBinding": "swap",
+          "notes": "Controla height, padding horizontal y tamaño de tipografía. sm=24px height, md=28px height, lg=32px height (alineado con controlHeights de foundations)."
+        },
+        "Variant": {
+          "type": "variant",
+          "values": ["solid", "soft", "outline"],
+          "figmaBinding": "swap",
+          "notes": "Estilo visual: solid=fondo sólido opaco, soft=fondo tenue (10–15% opacidad), outline=sin fondo con borde de color. Presente en Radix, Mantine, Chakra, Ant Design como patrón T2/T3 consolidado."
+        },
+        "State": {
+          "type": "state",
+          "values": ["default", "hover", "focus-visible", "disabled"],
+          "figmaBinding": "swap",
+          "notes": "Implementado vía interactive components de Figma. disabled cambia fills+text+effects (≥2 propiedades) → clasificado como variant per Rule 27 de global-property-rules. Estados hover/focus-visible solo cambian color de borde y fondo."
+        }
+      },
+      "booleans": [
+        {
+          "name": "isRemovable",
+          "figmaBinding": "bool",
+          "default": false,
+          "codeEquivalent": "isRemovable: boolean",
+          "notes": "Activa el slot removeButton. Patrón onRemove-as-mode-switch (Spectrum/Polaris): la presencia del handler habilita el modo removable. Mutualmente exclusivo con isDisabled."
+        },
+        {
+          "name": "isLeadingIconVisible",
+          "figmaBinding": "bool",
+          "default": false,
+          "codeEquivalent": "leadingIcon?: ReactNode",
+          "notes": "Controla presencia del slot leadingIcon. En código, la presencia del prop es suficiente; en Figma se necesita el boolean para no multiplicar frames."
+        }
+      ],
+      "exclusions": [
+        {
+          "combination": "isRemovable × isDisabled",
+          "reason": "Un tag removable deshabilitado crea ambigüedad semántica: el usuario ve el botón de eliminar pero no puede activarlo. Polaris y Spectrum excluyen esta combinación. Si el tag está deshabilitado, no debe renderizar el removeButton.",
+          "framesSaved": 0,
+          "notes": "Exclusión lógica sin impacto en frameCount porque ambas son booleans."
+        },
+        {
+          "combination": "Color(hex arbitrary)",
+          "reason": "Los colores hex arbitrarios (Ant Design pattern) requieren validación de contraste en runtime (WCAG 4.5:1). Esta dimensión solo soporta los 7 valores semánticos del sistema.",
+          "framesSaved": 0,
+          "notes": "Documentada del hints.json. Si se necesita hex, requiere capa de validación de contraste separada."
+        }
+      ],
+      "frameCount": {
+        "formula": "Color(7) × Size(3) × Variant(3) = 63",
+        "gross": 63,
+        "exclusions": 0,
+        "net": 63,
+        "notes": "Los estados (hover, focus-visible, disabled) se implementan via Figma interactive components, sin multiplicar el grid. Los booleans (isRemovable, isLeadingIconVisible) no multiplican. Color como dimensión de variante en Figma (no como Variable mode) porque cada combinación Color × Variant requiere tokens de background/foreground/border visualmente diferenciados que Figma no puede resolver solo con Variable modes dentro de una misma hoja."
+      }
+    }
+  ],
+  "foundations": {
+    "spacing": {
+      "paddingHorizontal": {
+        "sm": 6,
+        "md": 8,
+        "lg": 12
+      },
+      "paddingVertical": {
+        "sm": 2,
+        "md": 4,
+        "lg": 4
+      },
+      "gap": {
+        "sm": 4,
+        "md": 4,
+        "lg": 6
+      },
+      "notes": "Derivado del spacingScale: [0,2,4,6,8,12,16,20,24,32]. Tags son componentes de alta densidad; padding conservador respecto a controlHeights."
+    },
+    "typography": {
+      "sm": { "size": 12, "lineHeight": 16, "weight": 500 },
+      "md": { "size": 14, "lineHeight": 20, "weight": 500 },
+      "lg": { "size": 14, "lineHeight": 20, "weight": 500 },
+      "notes": "Alineado con typeScale (sm:12, md:14) y lineHeights (sm:16, md:20). weight:500 por convención de labels cortos."
+    },
+    "height": {
+      "sm": 20,
+      "md": 24,
+      "lg": 28,
+      "notes": "Por debajo del controlHeights estándar (xs:24, sm:32) porque el tag es un indicador de metadata, no un control primario. height sm=20 es apropiado para tags en tablas densas."
+    },
+    "radius": {
+      "value": 9999,
+      "token": "radius-full",
+      "notes": "Todos los tamaños usan radio completo (pill) por convención universal de Tags en 21/24 sistemas. Del radiusScale: 9999."
+    },
+    "iconSize": {
+      "sm": 12,
+      "md": 12,
+      "lg": 16,
+      "notes": "Del iconSizes: xs:12, sm:16. Tags sm/md usan 12px (xs) para mantener proporciones; lg usa 16px (sm)."
+    }
+  },
+  "a11y": {
+    "role": "none/listitem (display) | button/listitem con removeButton (dismissible)",
+    "keyboard": [
+      "Delete/Backspace: eliminar tag enfocado (en grupos con onRemove activo)",
+      "Arrow keys: navegar entre tags en el grupo",
+      "Tab: mover foco al botón de remove del tag actualmente enfocado",
+      "Enter/Space: activar removeButton cuando está enfocado"
+    ],
+    "focus": "linear",
+    "removeButtonLabel": "Eliminar [label] — generado automáticamente. Override vía removeButtonLabel prop para casos atípicos.",
+    "groupLabel": "aria-label requerido en el contenedor del grupo ('Filtros aplicados', 'Habilidades', 'Categorías')",
+    "focusManagement": "Al eliminar un tag: mover foco al siguiente tag; si era el último, al contenedor del grupo o al elemento previo.",
+    "colorOnly": "El texto del label SIEMPRE debe comunicar el significado del estado independientemente del color (WCAG 1.4.1)."
+  },
+  "tokens": {
+    "total": 20,
+    "prefix": "tag",
+    "list": [
+      { "name": "tag-bg-default-solid", "role": "background", "variant": "solid", "color": "default" },
+      { "name": "tag-bg-default-soft", "role": "background", "variant": "soft", "color": "default" },
+      { "name": "tag-bg-default-outline", "role": "background", "variant": "outline", "color": "default" },
+      { "name": "tag-fg-default", "role": "foreground", "color": "default", "notes": "Compartido entre variantes" },
+      { "name": "tag-border-default", "role": "border", "color": "default" },
+      { "name": "tag-bg-success-soft", "role": "background", "variant": "soft", "color": "success" },
+      { "name": "tag-fg-success", "role": "foreground", "color": "success" },
+      { "name": "tag-border-success", "role": "border", "color": "success" },
+      { "name": "tag-bg-warning-soft", "role": "background", "variant": "soft", "color": "warning" },
+      { "name": "tag-fg-warning", "role": "foreground", "color": "warning" },
+      { "name": "tag-border-warning", "role": "border", "color": "warning" },
+      { "name": "tag-bg-error-soft", "role": "background", "variant": "soft", "color": "error" },
+      { "name": "tag-fg-error", "role": "foreground", "color": "error" },
+      { "name": "tag-border-error", "role": "border", "color": "error" },
+      { "name": "tag-bg-info-soft", "role": "background", "variant": "soft", "color": "info" },
+      { "name": "tag-fg-info", "role": "foreground", "color": "info" },
+      { "name": "tag-border-info", "role": "border", "color": "info" },
+      { "name": "tag-fg-disabled", "role": "foreground", "state": "disabled" },
+      { "name": "tag-bg-disabled", "role": "background", "state": "disabled" },
+      { "name": "tag-border-disabled", "role": "border", "state": "disabled" }
+    ]
+  },
+  "_meta": {
+    "generatedAt": "2026-04-17",
+    "mode": "--max",
+    "sources": ["hints/tag.json", "research/components/tag.md", "foundations.json", "references/anatomy-agent/slot-decision-rules.md", "global-property-rules.md", "references/variant-optimizer-agent/optimization-techniques.md"]
+  },
+  "_decisions": [
+    {
+      "id": "color-as-variant-not-token-mode",
+      "decision": "Color es una dimensión de variante en Figma (7 valores), no un Variable mode.",
+      "why": "Cada combinación Color × Variant require tokens de background, foreground y border visualmente diferenciados. Figma Variable modes resuelven bien dark/light (mismo token, distinto valor), pero no resuelven 7 × 3 = 21 combinaciones semánticas distintas dentro del mismo canvas. La alternativa (Variable mode por color) requeriría 7 collections paralelas, lo que aumenta la complejidad de mantenimiento sin reducir frames.",
+      "tradeoff": "21 combinaciones visualmente expuestas en la paleta de Figma. Mitigado agrupando por color en el panel de variantes.",
+      "source": "hints/tag.json frameCount=63, global-property-rules.md §4 'What NEVER enters the variant matrix' (excepción cuando la estructura cambia)"
+    },
+    {
+      "id": "states-via-interactive-components",
+      "decision": "Los estados hover, focus-visible y disabled se implementan vía Figma interactive components, no como dimensión de variante que multiplique el grid.",
+      "why": "Los estados del Tag solo cambian propiedades de color (border, background, text), no la estructura del componente. Aplicando Technique 6 de optimization-techniques.md, esto reduce de 63×4=252 frames a 63 frames visibles. El estado disabled cambia ≥2 propiedades (fill + text), por eso se mantiene como variant en el component set interno, pero no multiplica el grid principal.",
+      "tradeoff": "Los diseñadores no pueden comparar estados side-by-side directamente en el canvas sin prototype. Se mitiga documentando los estados en una página de referencia separada.",
+      "source": "optimization-techniques.md Technique 6, global-property-rules.md Rule 27 (disabled nuance)"
+    },
+    {
+      "id": "removable-as-boolean",
+      "decision": "isRemovable es un boolean, no una variante. El slot removeButton solo se renderiza cuando isRemovable=true.",
+      "why": "El patrón onRemove-as-mode-switch (Spectrum, Polaris, Gestalt) es el más seguro: impide renderizar accidentalmente el botón de eliminar en tags de solo display. Como boolean, no multiplica el grid (Technique 1 de optimization-techniques.md). En código, la presencia del handler determina el modo.",
+      "tradeoff": "En Figma, el diseñador debe activar explícitamente el boolean para ver el removeButton. Documentado en el checklist de pre-build.",
+      "source": "research/components/tag.md — Spectrum 'onRemove as mode switch', Polaris 'auto-generated remove aria-label', hints/tag.json booleans"
+    },
+    {
+      "id": "remove-button-aria-label-auto",
+      "decision": "El aria-label del removeButton se auto-genera como 'Eliminar [label]', con override vía prop removeButtonLabel.",
+      "why": "El label genérico 'Eliminar' o '×' es el fallo de accesibilidad más frecuente en tags removibles (WCAG 1.3.1). En un contexto multi-tag, el lector de pantalla anuncia 'Eliminar, Eliminar, Eliminar' sin identificar cuál tag elimina cada botón. Auto-generar desde el texto del tag (patrón Polaris/Spectrum/Gestalt/Base Web) hace que el comportamiento accesible sea el default, no la excepción.",
+      "tradeoff": "El label auto-generado puede no ser apropiado cuando el tag tiene texto muy largo o formateo especial. El prop removeButtonLabel permite override explícito (patrón Atlassian).",
+      "source": "research/components/tag.md §'What Everyone Agrees On' punto 1, §'Where They Disagree' opción A"
+    },
+    {
+      "id": "three-slot-anatomy",
+      "decision": "El Tag tiene 3 slots: leadingIcon (opcional), label (requerido), removeButton (opcional-condicional).",
+      "why": "El slot consensus de 24 sistemas muestra estas tres posiciones como las únicas que aparecen en más de 5/24 sistemas. No se incluye trailing non-remove icon (no existe en ningún sistema revisado), ni badge counter (patrón distinto que pertenece a un componente Badge separado). La separación slot-decision-rules.md (Q1: ¿reemplazable externamente?) confirma leadingIcon e removeButton como slots propios.",
+      "tradeoff": "Sin soporte nativo para tag con avatar (Paste/Fluent 2 pattern). El slot leadingIcon tipo 'icon' puede recibir un Avatar component vía instance swap en Figma y ReactNode en código si se necesita en el futuro.",
+      "source": "research/components/tag.md §Slot Consensus Table, references/anatomy-agent/slot-decision-rules.md Q1-Q3 filter"
+    }
+  ]
+}
