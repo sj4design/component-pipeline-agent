@@ -373,17 +373,21 @@ Requirements: min 1500 words, decision-oriented (not feature matrix), "why" for 
 
 **Pipeline Hints are the bridge between research and spec.** The spec-agent reads these to skip re-derivation. Without them, spec must re-analyze all the same data.
 
-### Step 6: Visual HTML Report (AUTOMATIC)
+### Step 6: Visual HTML Report (ON-DEMAND via `--html-only`)
 
-**Generate automatically** after saving the markdown. No need to ask.
+**Do NOT generate automatically.** Only generate when invoked with `--html-only`:
+
+```
+/research [component] --html-only
+```
+
+This skips all research steps — reads the existing `research/components/[component].md` and generates the HTML from it. Works on any pre-generated research (including `--max` outputs).
 
 Read `component-research-agent/templates/visual-html-spec.md` for the full HTML specification.
 Use `component-research-agent/templates/visual-reference-template.html` as base template.
 Save to `research/components/[component]-visual.html`.
 
-**Language:** Use the same language as the rest of the output (detected from user's first message, or forced via `--lang=en`).
-
-**Regenerate only (existing research):** If invoked as `/research [component] --html-only`, skip all research steps and only regenerate the HTML from the existing `research/components/[component].md`. Read the markdown, then generate HTML from it.
+**Language:** Use the same language as the research markdown, or respect `--lang=en` if passed alongside `--html-only`.
 
 ---
 
@@ -396,7 +400,7 @@ Save to `research/components/[component]-visual.html`.
 5. **Min 200 words per deep-dive system** — if you can't, you haven't researched enough.
 6. **Normalize prop names** — translate to 9-axis standard before reporting. Show divergences.
 7. **Visuals = real wireframes** — never text descriptions with icons.
-8. **Visual HTML = automatic** — generate after every `/research` run. Use `--html-only` to regenerate from existing markdown.
+8. **Visual HTML = on-demand only** — only generate when `--html-only` flag is passed. Never generate automatically.
 9. **Scope-aware loading** — only deep-dive systems matching user's scope. Shallow for others.
 10. **Pipeline Hints = derived, not invented** — extract from per-system data, don't add opinions.
 11. **Equal weight** — All 24 systems have equal weight in consensus counts. No tier weighting.
@@ -412,5 +416,5 @@ Save to `research/components/[component]-visual.html`.
 | `component-research-agent/references/systems/compiled/[component].md` | System digests part 1 (6 systems) | Always |
 | `component-research-agent/references/systems/compiled-tier2/[component].md` | System digests part 2 (8 systems) | Always |
 | `component-research-agent/references/systems/compiled-tier3/[component].md` | System digests part 3 (10 systems) | Always |
-| `component-research-agent/templates/visual-html-spec.md` | Full HTML report spec | Every research run |
-| `component-research-agent/templates/visual-reference-template.html` | HTML base template | Every research run |
+| `component-research-agent/templates/visual-html-spec.md` | Full HTML report spec | `--html-only` only |
+| `component-research-agent/templates/visual-reference-template.html` | HTML base template | `--html-only` only |
