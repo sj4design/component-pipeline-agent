@@ -1,0 +1,207 @@
+{
+  "version": "1.0",
+  "component": "InlineEdit",
+  "archetype": "form-control",
+  "buildOrder": ["InlineEdit"],
+  "language": "es",
+  "family": [
+    {
+      "name": "InlineEdit",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "readView",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "editTrigger",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "editInput",
+          "type": "text-input",
+          "required": false,
+          "figmaBinding": "slot"
+        },
+        {
+          "name": "confirmButton",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "cancelButton",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "validationMessage",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {
+        "State": ["view", "edit", "saving", "error", "disabled"],
+        "TriggerVariant": ["hover-reveal", "always-visible"],
+        "Size": ["sm", "md", "lg"]
+      },
+      "booleans": [
+        "SubmitOnBlur",
+        "StartWithEditOpen",
+        "IsRequired",
+        "IsPreviewFocusable",
+        "SelectAllOnFocus",
+        "Disabled"
+      ],
+      "exclusions": [
+        {
+          "combination": "State=saving × TriggerVariant=hover-reveal",
+          "reason": "Saving state implies edit just confirmed; trigger is hidden during async save"
+        },
+        {
+          "combination": "State=saving × TriggerVariant=always-visible",
+          "reason": "Edit trigger is suppressed during saving; spinner replaces it"
+        },
+        {
+          "combination": "State=disabled × State=edit",
+          "reason": "Disabled blocks all interaction; edit mode is unreachable from disabled state"
+        },
+        {
+          "combination": "State=error × State=view",
+          "reason": "Error only manifests in edit mode with inline validation; view state shows last valid value"
+        },
+        {
+          "combination": "SubmitOnBlur=true × IsRequired=true",
+          "reason": "Blur-to-save with required conflicts: tabbing away from empty field would silently fail or block navigation"
+        }
+      ],
+      "sizes": {
+        "sm": { "h": 32, "fontSize": 12, "iconSize": 16, "py": 4, "px": 8, "gap": 8, "radius": 4 },
+        "md": { "h": 40, "fontSize": 14, "iconSize": 16, "py": 8, "px": 12, "gap": 8, "radius": 4 },
+        "lg": { "h": 48, "fontSize": 16, "iconSize": 20, "py": 12, "px": 16, "gap": 8, "radius": 4 }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Read Value",
+          "layerName": "readView",
+          "default": "Valor de campo"
+        },
+        {
+          "propName": "✏️ Validation Message",
+          "layerName": "validationMessage",
+          "default": "Este campo es obligatorio"
+        }
+      ],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "propName": "Show Edit Trigger",
+          "layerName": "editTrigger",
+          "defaultVisible": false
+        },
+        {
+          "propName": "Show Confirm",
+          "layerName": "confirmButton",
+          "defaultVisible": false
+        },
+        {
+          "propName": "Show Cancel",
+          "layerName": "cancelButton",
+          "defaultVisible": false
+        },
+        {
+          "propName": "Disabled",
+          "layerName": "_inline-edit-root",
+          "defaultVisible": true
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "Show Validation",
+          "textName": "✏️ Validation Message",
+          "layerName": "validationMessage",
+          "defaultVisible": false,
+          "default": "Este campo es obligatorio"
+        }
+      ],
+      "frameCount": {
+        "gross": 15,
+        "exclusions": 3,
+        "net": 12
+      },
+      "grid": { "maxCols": 3, "gap": 20, "pad": 30 },
+      "_decisions": [
+        {
+          "what": "State as variant with 5 values: view, edit, saving, error, disabled",
+          "why": "Each state changes the component structure substantially: view shows readView, edit shows input+buttons, saving shows spinner, error shows validation message, disabled shows locked readView — all ≥2 visual property changes → variant required",
+          "source": "global-property-rules"
+        },
+        {
+          "what": "Disabled is a boolean AND a State value",
+          "why": "Disabled changes structural layout (locked indicator replaces edit trigger, removes interaction affordances) — ≥2 visual properties change → variant per Rule 27. Boolean is also retained for code interface alignment (isDisabled prop)",
+          "source": "global-property-rules"
+        },
+        {
+          "what": "TriggerVariant kept as variant dimension (not boolean)",
+          "why": "hover-reveal vs. always-visible changes the layout of the readView slot (pencil icon always present vs. hidden until hover) — structural difference visible in Figma frames",
+          "source": "spec"
+        },
+        {
+          "what": "ConfirmModel (explicit / blur-to-save) removed from variant matrix",
+          "why": "ConfirmModel is a behavioral/config prop, not a visual structural difference; both models show the same confirm/cancel buttons in edit state — managed as SubmitOnBlur boolean",
+          "source": "global-property-rules"
+        },
+        {
+          "what": "validationMessage uses boolText binding",
+          "why": "Validation message slot needs both a visibility toggle (Show Validation bool) and editable text content — boolText is the correct figmaBinding for paired bool+text",
+          "source": "spec"
+        },
+        {
+          "what": "editInput slot uses 'slot' figmaBinding",
+          "why": "editInput is a composed text-input sub-component (not plain text); it's an instance swap region that accepts a TextField instance, not a raw text layer",
+          "source": "spec"
+        },
+        {
+          "what": "confirmButton and cancelButton use bool figmaBinding",
+          "why": "These are simple icon-action buttons that appear/disappear based on State; their visibility is toggled as boolean layers",
+          "source": "spec"
+        },
+        {
+          "what": "frame net=12 within simple-to-medium boundary",
+          "why": "5 states × 3 sizes = 15 gross; minus 3 invalid state×size combos = 12 net; InlineEdit is a simple single-slot form control despite its state machine complexity",
+          "source": "spec"
+        },
+        {
+          "what": "radius=4 (not pill) for all sizes",
+          "why": "InlineEdit is a form-control archetype; input-like components use rectangular radius (4px) not pill shape",
+          "source": "spec"
+        },
+        {
+          "what": "SubmitOnBlur defaults to false per a11y consensus",
+          "why": "Blur-to-save is an accessibility risk for keyboard and switch users; Atlassian and Polaris both recommend explicit confirmation as default",
+          "source": "research"
+        }
+      ]
+    }
+  ],
+  "foundations": {
+    "spacingScale": [0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80],
+    "typeScale": { "xs": 10, "sm": 12, "md": 14, "lg": 16, "xl": 20 },
+    "lineHeights": { "xs": 14, "sm": 16, "md": 20, "lg": 24, "xl": 28 },
+    "radiusScale": [0, 2, 4, 6, 8, 12, 16, 28, 9999],
+    "controlHeights": { "xs": 24, "sm": 32, "md": 40, "lg": 48, "xl": 56 },
+    "iconSizes": { "xs": 12, "sm": 16, "md": 20, "lg": 24, "xl": 32 }
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-17",
+    "mode": "max"
+  }
+}
