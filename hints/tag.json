@@ -1,0 +1,99 @@
+{
+  "component": "Tag",
+  "archetype": "indicator",
+  "buildOrder": ["Tag"],
+  "family": [
+    {
+      "name": "Tag",
+      "isSubComponent": false,
+      "slots": ["leadingIcon:icon", "label:text", "removeButton:icon-action"],
+      "properties": {
+        "Color": ["default", "primary", "success", "warning", "error", "info", "neutral"],
+        "Size": ["sm", "md", "lg"],
+        "Variant": ["solid", "soft", "outline"],
+        "State": ["default", "hover", "focus-visible", "disabled"]
+      },
+      "booleans": [
+        "Removable(removeButton)",
+        "Disabled(label)"
+      ],
+      "exclusions": [
+        "Removable × Disabled",
+        "Color (hex arbitrary) requires contrast validation at runtime"
+      ],
+      "frameCount": 63
+    }
+  ],
+  "a11y": {
+    "role": "none/listitem (display) | button/listitem with remove button (dismissible)",
+    "keyboard": [
+      "Delete/Backspace: eliminar tag enfocado (en grupos con onRemove)",
+      "Arrow keys: navegar entre tags en el grupo",
+      "Tab: navegar hacia el botón de remove del tag enfocado"
+    ],
+    "focus": "linear"
+  },
+  "tokens": { "total": 20, "prefix": "tag" },
+  "questions": [
+    {
+      "id": "tag-interaction",
+      "text": "¿Cuál es el comportamiento principal del tag en tu producto?",
+      "options": [
+        { "value": "display-only", "label": "Solo display — etiquetas informativas no interactivas (ej. estado de pedido, categoría de ítem)" },
+        { "value": "removable", "label": "Removible — el usuario puede eliminar el tag (ej. filtros aplicados, etiquetas de producto)" },
+        { "value": "navigable", "label": "Navegable — el tag lleva a una vista filtrada (ej. label de GitHub, tag de categoría con href)" },
+        { "value": "display-removable", "label": "Display + Removable — algunos tags son estáticos, otros eliminables según contexto" }
+      ],
+      "impact": "Removable boolean; removeButton slot; href vs. button rendering; aria-label auto-generation",
+      "tags": ["display", "removable", "navigable", "interaction", "close"]
+    },
+    {
+      "id": "tag-color",
+      "text": "¿Cómo se asignan los colores de los tags?",
+      "options": [
+        { "value": "semantic-only", "label": "Solo semánticos — success, warning, error, info, neutral (para estados de sistema)" },
+        { "value": "palette", "label": "Paleta fija — un conjunto de colores predefinidos sin semántica obligatoria (para categorías)" },
+        { "value": "user-defined", "label": "Colores definidos por usuario — hex arbitrario desde base de datos (para tags creados por usuarios)" },
+        { "value": "semantic-palette", "label": "Semánticos + paleta — estados del sistema con colores fijos, más categorías con colores flexibles" }
+      ],
+      "impact": "Color property values; hex support; contrast validation requirement; token count",
+      "tags": ["color", "semantic", "palette", "hex", "status", "category"]
+    },
+    {
+      "id": "tag-size",
+      "text": "¿Cuántos tamaños necesitas para los tags?",
+      "options": [
+        { "value": "md-only", "label": "Solo md — un tamaño estándar para todos los usos" },
+        { "value": "sm-md", "label": "sm + md — compacto para tablas densas, estándar para formularios y listas" },
+        { "value": "sm-md-lg", "label": "sm + md + lg — desde tablas compactas hasta tags destacados en tarjetas" }
+      ],
+      "impact": "Size property values; frameCount",
+      "tags": ["size", "compact", "density", "table"]
+    },
+    {
+      "id": "tag-leading",
+      "text": "¿Qué contenido puede preceder al texto del tag?",
+      "options": [
+        { "value": "none", "label": "Solo texto — sin ícono ni avatar" },
+        { "value": "icon", "label": "Ícono — para indicar tipo o categoría (ej. ícono de estado, categoría)" },
+        { "value": "avatar", "label": "Avatar — para tags de personas/usuarios (ej. asignado, mencionado)" },
+        { "value": "icon-avatar", "label": "Ícono o avatar — soporte para ambos según el tipo de contenido" }
+      ],
+      "impact": "leadingIcon slot type (icon vs. media); avatar integration; slot count",
+      "tags": ["icon", "avatar", "leading", "slot", "person"]
+    },
+    {
+      "id": "tag-variant",
+      "text": "¿Qué estilos visuales necesitas para los tags?",
+      "options": [
+        { "value": "solid-only", "label": "Solo solid — fondo sólido de color (mayor énfasis)" },
+        { "value": "soft-only", "label": "Solo soft — color tenue de fondo (énfasis moderado, muy común)" },
+        { "value": "outline-only", "label": "Solo outline — solo borde sin relleno (mínimo énfasis)" },
+        { "value": "solid-soft", "label": "Solid + Soft — para distintos niveles de énfasis en el mismo sistema" },
+        { "value": "all", "label": "Solid + Soft + Outline — rango completo de énfasis" }
+      ],
+      "impact": "Variant property values; token count (background, border, text per variant)",
+      "tags": ["solid", "soft", "outline", "variant", "emphasis"]
+    }
+  ]
+}
