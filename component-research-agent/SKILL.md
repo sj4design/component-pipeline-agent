@@ -373,13 +373,21 @@ Requirements: min 1500 words, decision-oriented (not feature matrix), "why" for 
 
 **Pipeline Hints are the bridge between research and spec.** The spec-agent reads these to skip re-derivation. Without them, spec must re-analyze all the same data.
 
-### Step 6: Visual HTML Report (ON-DEMAND ONLY)
+### Step 6: Visual HTML Report (ON-DEMAND via `--html-only`)
 
-**Do NOT generate automatically.** After saving markdown, ask:
-> **Research guardado en `research/components/[component].md`. ¿Quieres el reporte visual HTML?**
+**Do NOT generate automatically.** Only generate when invoked with `--html-only`:
 
-If yes: read `component-research-agent/templates/visual-html-spec.md` for the full HTML specification.
+```
+/research [component] --html-only
+```
+
+This skips all research steps — reads the existing `research/components/[component].md` and generates the HTML from it. Works on any pre-generated research (including `--max` outputs).
+
+Read `component-research-agent/templates/visual-html-spec.md` for the full HTML specification.
 Use `component-research-agent/templates/visual-reference-template.html` as base template.
+Save to `research/components/[component]-visual.html`.
+
+**Language:** Use the same language as the research markdown, or respect `--lang=en` if passed alongside `--html-only`.
 
 ---
 
@@ -392,7 +400,7 @@ Use `component-research-agent/templates/visual-reference-template.html` as base 
 5. **Min 200 words per deep-dive system** — if you can't, you haven't researched enough.
 6. **Normalize prop names** — translate to 9-axis standard before reporting. Show divergences.
 7. **Visuals = real wireframes** — never text descriptions with icons.
-8. **Visual HTML = on-demand only** — never generate unless user asks.
+8. **Visual HTML = on-demand only** — only generate when `--html-only` flag is passed. Never generate automatically.
 9. **Scope-aware loading** — only deep-dive systems matching user's scope. Shallow for others.
 10. **Pipeline Hints = derived, not invented** — extract from per-system data, don't add opinions.
 11. **Equal weight** — All 24 systems have equal weight in consensus counts. No tier weighting.
@@ -408,5 +416,5 @@ Use `component-research-agent/templates/visual-reference-template.html` as base 
 | `component-research-agent/references/systems/compiled/[component].md` | System digests part 1 (6 systems) | Always |
 | `component-research-agent/references/systems/compiled-tier2/[component].md` | System digests part 2 (8 systems) | Always |
 | `component-research-agent/references/systems/compiled-tier3/[component].md` | System digests part 3 (10 systems) | Always |
-| `component-research-agent/templates/visual-html-spec.md` | Full HTML report spec | On-demand visual |
-| `component-research-agent/templates/visual-reference-template.html` | HTML base template | On-demand visual |
+| `component-research-agent/templates/visual-html-spec.md` | Full HTML report spec | `--html-only` only |
+| `component-research-agent/templates/visual-reference-template.html` | HTML base template | `--html-only` only |

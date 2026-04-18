@@ -10,7 +10,7 @@ Pipeline: research → spec → enrich → spec-completo.md
 | Brief | `/build [comp] --brief` | User pastes context → analyze → show fewer questions → filter config → spec-completo |
 | Max | `/build [comp] --max` | Use pre-generated config as-is → spec-completo |
 
-Flags: `--fresh` (ignore cache), `--from=spec` (skip research), `--human` (also save separate .md files)
+Flags: `--fresh` (ignore cache), `--from=spec` (skip research), `--human` (also save separate .md files), `--lang=en` (force English output)
 
 ## Flow: Customize (when pre-generated data exists)
 
@@ -102,4 +102,4 @@ After each step:
 3. foundations.json is shared — read ONCE per session
 4. Fail fast — report error and stop, don't continue with incomplete data
 5. Write files immediately after each step
-6. Language: detect from user's first message. Write ALL output (spec-completo sections, questions, responses) in detected language. Default: Spanish. Config.json keys always in English.
+6. Language: detect from user's first message. Write ALL output (spec-completo sections, questions, responses) in detected language. Default: Spanish. Config.json keys always in English. `--lang=en` overrides detection and forces English regardless of conversation language.
