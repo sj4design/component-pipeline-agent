@@ -1,0 +1,191 @@
+{
+  "version": "1.0",
+  "component": "Chip",
+  "archetype": "inline-action",
+  "buildOrder": ["Chip"],
+  "language": "es",
+  "family": [
+    {
+      "name": "Chip",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "leadingIcon",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "checkmark",
+          "type": "icon",
+          "required": false,
+          "figmaBinding": "bool"
+        },
+        {
+          "name": "removeButton",
+          "type": "icon-action",
+          "required": false,
+          "figmaBinding": "bool"
+        }
+      ],
+      "properties": {
+        "Type": ["filter", "input", "display"],
+        "Size": ["sm", "md", "lg"],
+        "Variant": ["filled", "outlined", "elevated"],
+        "State": ["default", "hover", "focus-visible", "selected"]
+      },
+      "booleans": [
+        "Selected",
+        "Removable",
+        "Elevated",
+        "Disabled"
+      ],
+      "exclusions": [
+        {
+          "combination": "Type=display × State=selected",
+          "reason": "Display chips are non-interactive; no toggle state"
+        },
+        {
+          "combination": "Type=display × State=hover",
+          "reason": "Display chips are non-interactive; no hover state"
+        },
+        {
+          "combination": "Type=display × State=focus-visible",
+          "reason": "Display chips are non-interactive; not in tab order"
+        },
+        {
+          "combination": "Type=input × State=selected",
+          "reason": "Input chips represent entities (removable tokens), not toggleable filters"
+        },
+        {
+          "combination": "Elevated=true × Variant=outlined",
+          "reason": "Elevated variant conflicts with outlined; elevated implies filled surface"
+        },
+        {
+          "combination": "Type=filter × Removable=true",
+          "reason": "Filter chips toggle selection; they do not represent user-entered entities that can be removed"
+        },
+        {
+          "combination": "Type=display × Removable=true",
+          "reason": "Display chips are static status labels; removal is not applicable"
+        }
+      ],
+      "sizes": {
+        "sm": { "h": 32, "fontSize": 12, "iconSize": 16, "py": 4, "px": 8, "gap": 8, "radius": 9999 },
+        "md": { "h": 40, "fontSize": 14, "iconSize": 16, "py": 8, "px": 12, "gap": 8, "radius": 9999 },
+        "lg": { "h": 48, "fontSize": 16, "iconSize": 20, "py": 12, "px": 16, "gap": 8, "radius": 9999 }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Label",
+          "layerName": "label",
+          "default": "Chip"
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "Show Leading Icon",
+          "swapName": "Leading Icon",
+          "layerName": "leadingIcon",
+          "defaultVisible": false
+        }
+      ],
+      "booleanLayers": [
+        {
+          "propName": "Show Checkmark",
+          "layerName": "checkmark",
+          "defaultVisible": false
+        },
+        {
+          "propName": "Show Remove",
+          "layerName": "removeButton",
+          "defaultVisible": false
+        },
+        {
+          "propName": "Disabled",
+          "layerName": "_chip-root",
+          "defaultVisible": true
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 36,
+        "exclusions": 12,
+        "net": 24
+      },
+      "grid": { "maxCols": 4, "gap": 20, "pad": 30 },
+      "_decisions": [
+        {
+          "what": "State=selected kept as variant row (not boolean)",
+          "why": "Selected changes fill color, checkmark visibility, and border simultaneously — ≥2 visual properties change, requiring a variant frame rather than a boolean opacity toggle per global-property-rules Rule 27",
+          "source": "global-property-rules"
+        },
+        {
+          "what": "Disabled is a boolean layer, not a State variant",
+          "why": "Disabled on chip only changes opacity (0.4) without structural fill/border changes — ≤1 property → boolean per global-property-rules disabled decision tree",
+          "source": "global-property-rules"
+        },
+        {
+          "what": "Selected, Removable, Elevated, Disabled as boolean properties",
+          "why": "All are binary on/off configuration toggles set by parent or system; they do not multiply the variant matrix",
+          "source": "global-property-rules"
+        },
+        {
+          "what": "leadingIcon uses BOOL+SWAP pattern",
+          "why": "Presence is boolean (Show Leading Icon), content is instance swap (Leading Icon) — 80-95% reduction vs. per-icon variants",
+          "source": "spec"
+        },
+        {
+          "what": "checkmark uses bool figmaBinding",
+          "why": "Checkmark is only relevant for filter type in selected state; visibility toggled via boolean property",
+          "source": "spec"
+        },
+        {
+          "what": "removeButton uses bool figmaBinding",
+          "why": "Remove button presence is controlled by Removable boolean; only applies to input type",
+          "source": "spec"
+        },
+        {
+          "what": "radius=9999 (pill shape) for all sizes",
+          "why": "18/18 systems with chip use pill/full-radius shape; chip is semantically distinct from rectangular badges",
+          "source": "research"
+        },
+        {
+          "what": "Type=display excluded from hover/focus-visible/selected states",
+          "why": "Display chips are non-interactive (Carbon read-only tab-unreachable rationale); no pointer cursor, no toggle state, no tab stop in dense table contexts",
+          "source": "research"
+        },
+        {
+          "what": "Type=input excluded from State=selected",
+          "why": "Input chips represent removable entity tokens, not toggleable selectors; conflating them causes ARIA role mismatch (aria-pressed vs. remove button semantics)",
+          "source": "research"
+        },
+        {
+          "what": "frame net=24 within simple budget (10-30)",
+          "why": "3 types × 3 sizes × 4 states = 36 gross minus 12 excluded combinations = 24 net; fits simple component budget",
+          "source": "spec"
+        }
+      ]
+    }
+  ],
+  "foundations": {
+    "spacingScale": [0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80],
+    "typeScale": { "xs": 10, "sm": 12, "md": 14, "lg": 16, "xl": 20 },
+    "lineHeights": { "xs": 14, "sm": 16, "md": 20, "lg": 24, "xl": 28 },
+    "radiusScale": [0, 2, 4, 6, 8, 12, 16, 28, 9999],
+    "controlHeights": { "xs": 24, "sm": 32, "md": 40, "lg": 48, "xl": 56 },
+    "iconSizes": { "xs": 12, "sm": 16, "md": 20, "lg": 24, "xl": 32 }
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-17",
+    "mode": "max"
+  }
+}

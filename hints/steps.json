@@ -1,0 +1,114 @@
+{
+  "component": "Steps",
+  "archetype": "nav-content",
+  "buildOrder": ["Steps", "Step"],
+  "family": [
+    {
+      "name": "Steps",
+      "isSubComponent": false,
+      "slots": ["label:text"],
+      "properties": {
+        "Orientation": ["horizontal", "vertical"],
+        "Size": ["sm", "md", "lg"],
+        "IndicatorType": ["number", "icon", "dot"]
+      },
+      "booleans": [
+        "Interactive(label)",
+        "SpaceEqually(label)"
+      ],
+      "exclusions": [
+        "IndicatorType=dot × Size=sm (legibilidad)",
+        "Orientation=horizontal × más de 7 Steps (recomendar vertical)"
+      ],
+      "frameCount": 18
+    },
+    {
+      "name": "Step",
+      "isSubComponent": true,
+      "slots": ["indicator:icon", "label:text", "description:text"],
+      "properties": {
+        "Status": ["wait", "process", "finish", "error", "warning"],
+        "IndicatorType": ["number", "check", "error-icon", "custom-icon", "dot"]
+      },
+      "booleans": [
+        "Disabled(indicator)",
+        "HasDescription(description)"
+      ],
+      "exclusions": [
+        "Status=error × Status=warning (mutuamente excluyentes en el mismo step)",
+        "Status=wait × Disabled (Disabled implica locked, wait es simplemente no alcanzado)",
+        "Interactive=true × Disabled=true (step bloqueado no debería ser clickeable)"
+      ],
+      "frameCount": 35
+    }
+  ],
+  "a11y": {
+    "role": "nav (aria-label requerido) | ol (display-only)",
+    "keyboard": [
+      "Tab: navegar entre steps interactivos",
+      "Enter/Space: activar step en modo interactivo",
+      "aria-current=step: en el step activo"
+    ],
+    "focus": "linear"
+  },
+  "tokens": { "total": 30, "prefix": "stp" },
+  "questions": [
+    {
+      "id": "steps-navigation",
+      "text": "¿El usuario puede navegar libremente entre steps o el flujo es lineal?",
+      "options": [
+        { "value": "display-only", "label": "Solo indicador visual — no clickeable, muestra progreso sin navegación (ej. progreso de onboarding)" },
+        { "value": "visited-navigable", "label": "Steps visitados son navegables — el usuario puede regresar a cualquier step alcanzado (ej. wizard de configuración)" },
+        { "value": "linear", "label": "Lineal estricto — solo avanzar, no se puede regresar una vez enviado (ej. flujo de pago, formulario regulatorio)" },
+        { "value": "free-nav", "label": "Navegación libre — todos los steps son clickeables como tabs (ej. proceso de referencia, documentación de pasos)" }
+      ],
+      "impact": "Interactive boolean; onChange prop; Disabled boolean per Step; <a> vs <button> vs <span> rendering",
+      "tags": ["navigation", "linear", "visited", "interactive", "wizard", "free"]
+    },
+    {
+      "id": "steps-error-model",
+      "text": "¿Qué modelo de error necesitas por step?",
+      "options": [
+        { "value": "none", "label": "Sin estados de error — indicador simple de progreso (wait/process/finish)" },
+        { "value": "error-only", "label": "Solo error bloqueante — el step falló y requiere corrección antes de continuar" },
+        { "value": "error-warning", "label": "Error + Warning — error bloqueante y advertencia no bloqueante (el usuario puede continuar con warnings)" }
+      ],
+      "impact": "Status property values (error, warning); Step indicator icon (error-icon); token count",
+      "tags": ["error", "warning", "validation", "invalid", "blocking"]
+    },
+    {
+      "id": "steps-orientation",
+      "text": "¿En qué orientación aparecen los steps?",
+      "options": [
+        { "value": "horizontal", "label": "Solo horizontal — encabezado de wizard estándar (3-6 steps con labels cortos)" },
+        { "value": "vertical", "label": "Solo vertical — navegación lateral en formularios largos (7+ steps)" },
+        { "value": "both", "label": "Ambas — horizontal para desktop, vertical para paneles laterales o mobile" }
+      ],
+      "impact": "Orientation property; connector line rendering; SpaceEqually boolean; mobile compact fallback",
+      "tags": ["horizontal", "vertical", "orientation", "layout", "sidebar"]
+    },
+    {
+      "id": "steps-indicator",
+      "text": "¿Qué tipo de indicador visual muestra cada step?",
+      "options": [
+        { "value": "number", "label": "Número — muestra el número del step (1, 2, 3); reemplazado por ✓ al completar" },
+        { "value": "icon", "label": "Ícono personalizado — cada step tiene un ícono de dominio (ej. usuario, tarjeta, confirmación)" },
+        { "value": "dot", "label": "Dot — punto minimalista; más compacto, útil cuando los labels dan suficiente contexto" },
+        { "value": "number-icon", "label": "Número por defecto + ícono opcional — el consumidor puede pasar ícono o dejar el número" }
+      ],
+      "impact": "IndicatorType property; Step.indicator slot; frameCount",
+      "tags": ["indicator", "number", "icon", "dot", "checkmark"]
+    },
+    {
+      "id": "steps-description",
+      "text": "¿Los steps necesitan descripción o subtítulo adicional?",
+      "options": [
+        { "value": "label-only", "label": "Solo label — nombre del step, nada más (UI compacta)" },
+        { "value": "with-description", "label": "Label + descripción — texto de apoyo bajo el label (ej. 'Completa tu perfil profesional')" },
+        { "value": "with-subtitle", "label": "Label + subtítulo opcional — texto secundario al lado del label (ej. tiempo estimado)" }
+      ],
+      "impact": "HasDescription boolean; description slot; Step layout height; horizontal overflow handling",
+      "tags": ["description", "subtitle", "label", "text", "context"]
+    }
+  ]
+}

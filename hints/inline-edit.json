@@ -1,0 +1,103 @@
+{
+  "component": "InlineEdit",
+  "archetype": "form-control",
+  "buildOrder": ["InlineEdit"],
+  "family": [
+    {
+      "name": "InlineEdit",
+      "isSubComponent": false,
+      "slots": ["readView:text", "editTrigger:icon-action", "editInput:text-input", "confirmButton:icon-action", "cancelButton:icon-action", "validationMessage:text"],
+      "properties": {
+        "State": ["view", "edit", "saving", "error", "disabled"],
+        "ConfirmModel": ["explicit", "blur-to-save"],
+        "TriggerVariant": ["hover-reveal", "always-visible"],
+        "Size": ["sm", "md", "lg"]
+      },
+      "booleans": [
+        "SubmitOnBlur(editInput)",
+        "StartWithEditOpen(editInput)",
+        "IsRequired(validationMessage)",
+        "IsPreviewFocusable(readView)",
+        "SelectAllOnFocus(editInput)",
+        "Disabled(readView)"
+      ],
+      "exclusions": [
+        "State=saving × ConfirmModel=blur-to-save",
+        "State=disabled × State=edit",
+        "SubmitOnBlur × IsRequired (conflicto: blur vacío bloquearía confirmación)"
+      ],
+      "frameCount": 40
+    }
+  ],
+  "a11y": {
+    "role": "button (readView wrapper: role=button + tabIndex=0)",
+    "keyboard": [
+      "Enter/Space: activar modo edición desde readView",
+      "Enter: confirmar en editView",
+      "Escape: cancelar y regresar a readView",
+      "Tab: navegar a botones confirm/cancel (no debe guardar en blur)"
+    ],
+    "focus": "linear"
+  },
+  "tokens": { "total": 22, "prefix": "ine" },
+  "questions": [
+    {
+      "id": "inline-edit-confirmation",
+      "text": "¿Cómo confirma el usuario los cambios al editar un valor en línea?",
+      "options": [
+        { "value": "explicit", "label": "Explícito — botones ✓ Confirmar y ✕ Cancelar visibles (seguro, recomendado para contextos con consecuencias)" },
+        { "value": "blur-save", "label": "Blur-to-save — guardar al perder el foco (rápido, para ediciones de bajo riesgo como nombres de ítems)" },
+        { "value": "enter-only", "label": "Enter para confirmar, Escape para cancelar — sin botones visuales (eficiente para usuarios power)" },
+        { "value": "both", "label": "Configurable — el consumidor elige el modelo por instancia" }
+      ],
+      "impact": "ConfirmModel property; SubmitOnBlur boolean; confirmButton/cancelButton slot rendering",
+      "tags": ["confirmation", "blur", "explicit", "submit", "save"]
+    },
+    {
+      "id": "inline-edit-trigger",
+      "text": "¿Cómo descubre el usuario que un campo es editable?",
+      "options": [
+        { "value": "hover-reveal", "label": "Ícono de lápiz al hover/focus — limpio para interfaces CRM con muchos campos editables" },
+        { "value": "always-visible", "label": "Ícono de lápiz siempre visible — más accesible, recomendado para interfaces generales" },
+        { "value": "click-on-text", "label": "Click directo en el texto activa la edición — sin ícono, máxima densidad" },
+        { "value": "edit-button", "label": "Botón 'Editar' textual visible — máxima claridad para usuarios no técnicos" }
+      ],
+      "impact": "TriggerVariant property; editTrigger slot type (icon-action vs. none); focus-visible fallback required",
+      "tags": ["trigger", "pencil", "hover", "affordance", "discoverability"]
+    },
+    {
+      "id": "inline-edit-states",
+      "text": "¿Qué estados adicionales necesita el campo editable?",
+      "options": [
+        { "value": "basic", "label": "Básico — solo view y edit (sin saving ni error inline)" },
+        { "value": "with-saving", "label": "Con estado saving — spinner mientras se guarda en servidor (para APIs async)" },
+        { "value": "with-validation", "label": "Con validación inline — mensaje de error dentro del modo edit sin salir del campo" },
+        { "value": "full", "label": "Completo — view, edit, saving, error, disabled" }
+      ],
+      "impact": "State property values (saving, error); validationMessage slot; IsRequired boolean",
+      "tags": ["saving", "error", "validation", "disabled", "state", "async"]
+    },
+    {
+      "id": "inline-edit-scope",
+      "text": "¿Qué tipo de valor se edita en línea?",
+      "options": [
+        { "value": "single-text", "label": "Texto de una línea — títulos, nombres, etiquetas (input text)" },
+        { "value": "multiline", "label": "Texto multilínea — descripciones, notas (textarea con autoSize)" },
+        { "value": "mixed", "label": "Ambos — campos simples y áreas de texto en el mismo sistema" }
+      ],
+      "impact": "editInput slot type; autoSize support; ConfirmModel (Shift+Enter para multiline)",
+      "tags": ["text", "textarea", "multiline", "input", "scope"]
+    },
+    {
+      "id": "inline-edit-size",
+      "text": "¿Cuántos tamaños necesitas para el campo editable?",
+      "options": [
+        { "value": "md-only", "label": "Solo md — un tamaño estándar para todos los contextos" },
+        { "value": "sm-md", "label": "sm + md — compacto para tablas, estándar para formularios" },
+        { "value": "sm-md-lg", "label": "sm + md + lg — desde celdas de tabla hasta títulos de página grandes" }
+      ],
+      "impact": "Size property values; frameCount",
+      "tags": ["size", "compact", "heading", "table", "density"]
+    }
+  ]
+}

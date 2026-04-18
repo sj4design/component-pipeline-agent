@@ -1,0 +1,103 @@
+{
+  "component": "Chip",
+  "archetype": "inline-action",
+  "buildOrder": ["Chip"],
+  "family": [
+    {
+      "name": "Chip",
+      "isSubComponent": false,
+      "slots": ["leadingIcon:icon", "label:text", "checkmark:icon", "removeButton:icon-action"],
+      "properties": {
+        "Type": ["filter", "input", "display"],
+        "Size": ["sm", "md", "lg"],
+        "Variant": ["filled", "outlined", "elevated"],
+        "State": ["default", "hover", "focus-visible", "selected", "disabled", "error"]
+      },
+      "booleans": [
+        "Selected(label)",
+        "Removable(removeButton)",
+        "Elevated(label)",
+        "Disabled(label)"
+      ],
+      "exclusions": [
+        "Type=display × Selected",
+        "Type=display × Removable",
+        "Type=filter × Removable",
+        "Elevated × Variant=outlined",
+        "State=selected × Type=input"
+      ],
+      "frameCount": 54
+    }
+  ],
+  "a11y": {
+    "role": "button (filter: aria-pressed) | listitem (input: removable token)",
+    "keyboard": [
+      "Space/Enter: toggle selected (filter type)",
+      "Delete/Backspace: remove chip (input type)",
+      "Arrow keys: navigate within chip group"
+    ],
+    "focus": "roving"
+  },
+  "tokens": { "total": 28, "prefix": "chp" },
+  "questions": [
+    {
+      "id": "chip-type",
+      "text": "¿Qué tipo de chip necesitas en tu producto?",
+      "options": [
+        { "value": "filter", "label": "Filter — toggle seleccionable en grupos de filtros (ej. filtros de categoría, tags de lenguajes)" },
+        { "value": "input", "label": "Input — tokens removibles que representan entidades ingresadas (ej. destinatarios de email, etiquetas seleccionadas)" },
+        { "value": "display", "label": "Display — etiquetas informativas no interactivas (ej. estado, categoría)" },
+        { "value": "filter-input", "label": "Filter + Input — ambos tipos para distintos contextos del producto" },
+        { "value": "all", "label": "Los tres tipos" }
+      ],
+      "impact": "Type property values; ARIA role (aria-pressed vs. remove button); keyboard behavior",
+      "tags": ["filter", "input", "display", "toggle", "removable", "token"]
+    },
+    {
+      "id": "chip-selection-model",
+      "text": "Para chips de filtro, ¿cuál es el modelo de selección?",
+      "options": [
+        { "value": "multi", "label": "Multi-select — varios chips pueden estar seleccionados simultáneamente (ej. filtrar por múltiples categorías)" },
+        { "value": "single", "label": "Single-select — solo un chip activo a la vez (ej. selector de modo)" },
+        { "value": "independent", "label": "Toggles independientes — sin relación de grupo entre chips" }
+      ],
+      "impact": "Selected boolean; group role (role=group + aria-label); selection state visual (checkmark vs. filled)",
+      "tags": ["multi-select", "single-select", "group", "toggle", "selection"]
+    },
+    {
+      "id": "chip-size",
+      "text": "¿Cuántos tamaños necesitas?",
+      "options": [
+        { "value": "md-only", "label": "Solo md — más simple, un tamaño para todos los contextos" },
+        { "value": "sm-md", "label": "sm + md — compacto para tablas densas, estándar para filtros" },
+        { "value": "sm-md-lg", "label": "sm + md + lg — rango completo para diferentes densidades de UI" }
+      ],
+      "impact": "Size property values; frameCount",
+      "tags": ["size", "compact", "density"]
+    },
+    {
+      "id": "chip-leading-slot",
+      "text": "¿Qué contenido puede aparecer antes del label?",
+      "options": [
+        { "value": "none", "label": "Solo texto — chips simples sin ícono ni avatar" },
+        { "value": "icon", "label": "Ícono de contexto — categoría o tipo (ej. ícono de idioma, ícono de estado)" },
+        { "value": "avatar", "label": "Avatar — para chips de personas/usuarios (ej. asignados, destinatarios)" },
+        { "value": "icon-avatar", "label": "Ambos — ícono para categorías, avatar para personas" }
+      ],
+      "impact": "leadingIcon slot (icon vs. media type); Removable + avatar combination",
+      "tags": ["icon", "avatar", "leading", "slot", "media"]
+    },
+    {
+      "id": "chip-variant",
+      "text": "¿Qué variantes visuales necesitas para el chip?",
+      "options": [
+        { "value": "filled-only", "label": "Solo filled — relleno sólido para el estado seleccionado" },
+        { "value": "outlined", "label": "Outlined — borde sin relleno, más sutil" },
+        { "value": "filled-outlined", "label": "Filled + Outlined — para distintos niveles de énfasis" },
+        { "value": "elevated", "label": "Con elevated — necesito chips que floten sobre fondos (ej. mapas, imágenes)" }
+      ],
+      "impact": "Variant property values; Elevated boolean; token count",
+      "tags": ["filled", "outlined", "elevated", "variant", "visual"]
+    }
+  ]
+}

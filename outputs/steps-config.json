@@ -1,0 +1,280 @@
+{
+  "version": "1.0",
+  "component": "Steps",
+  "archetype": "nav-content",
+  "buildOrder": ["Steps", "Step"],
+  "language": "es",
+  "family": [
+    {
+      "name": "Steps",
+      "isSubComponent": false,
+      "slots": [
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "none"
+        },
+        {
+          "name": "stepItems",
+          "type": "slot",
+          "required": true,
+          "figmaBinding": "slot"
+        }
+      ],
+      "properties": {
+        "Orientation": ["horizontal", "vertical"],
+        "Size": ["sm", "md", "lg"],
+        "IndicatorType": ["number", "icon", "dot"]
+      },
+      "booleans": [
+        "Interactive",
+        "SpaceEqually"
+      ],
+      "exclusions": [
+        {
+          "combination": "IndicatorType=dot × Size=sm",
+          "reason": "Dot indicators at sm size (32px height) are too small for legibility; minimum is md"
+        },
+        {
+          "combination": "Orientation=horizontal × IndicatorType=dot × Size=sm",
+          "reason": "Double exclusion: both constraints apply; horizontal dot at sm is illegible"
+        }
+      ],
+      "sizes": {
+        "sm": { "h": 32, "fontSize": 12, "iconSize": 16, "py": 4, "px": 0, "gap": 8, "radius": 9999 },
+        "md": { "h": 40, "fontSize": 14, "iconSize": 20, "py": 8, "px": 0, "gap": 8, "radius": 9999 },
+        "lg": { "h": 48, "fontSize": 16, "iconSize": 24, "py": 12, "px": 0, "gap": 8, "radius": 9999 }
+      },
+      "textProperties": [],
+      "swapSlots": [],
+      "booleanLayers": [
+        {
+          "propName": "Interactive",
+          "layerName": "_steps-interactive-mode",
+          "defaultVisible": false
+        },
+        {
+          "propName": "SpaceEqually",
+          "layerName": "_steps-equal-spacing",
+          "defaultVisible": false
+        }
+      ],
+      "booleanTextPairs": [],
+      "frameCount": {
+        "gross": 18,
+        "exclusions": 2,
+        "net": 16
+      },
+      "grid": { "maxCols": 4, "gap": 20, "pad": 30 },
+      "_decisions": [
+        {
+          "what": "Steps is a navigation indicator only, not a wizard container",
+          "why": "10/14 systems use indicator-only architecture; wizard containers couple step content with metadata making conditional/branching steps hard. Consumers wire step content and focus management independently.",
+          "source": "research"
+        },
+        {
+          "what": "Orientation as variant dimension (not boolean)",
+          "why": "horizontal vs. vertical produce structurally different layouts (row vs. column, horizontal vs. vertical connector line) — structural change → variant required",
+          "source": "spec"
+        },
+        {
+          "what": "IndicatorType as variant dimension",
+          "why": "number / icon / dot show different indicator shapes and content — structural change requiring distinct Figma frames",
+          "source": "spec"
+        },
+        {
+          "what": "Interactive and SpaceEqually as booleans",
+          "why": "Interactive toggles whether step items use <button>/<a> vs. <span> — no structural layout change; SpaceEqually changes flex distribution — both are binary config toggles, not structural changes",
+          "source": "global-property-rules"
+        },
+        {
+          "what": "stepItems slot uses 'slot' figmaBinding",
+          "why": "Steps is a container; its content is composed of Step sub-component instances. The slot holds repeated Step instances.",
+          "source": "spec"
+        },
+        {
+          "what": "radius=9999 (circle) for indicator circles at all sizes",
+          "why": "Step indicators are circular (number circle, dot); pill/full-radius is the standard shape across all 14 systems with the component",
+          "source": "research"
+        },
+        {
+          "what": "frame net=16 within medium budget (30-80) for container",
+          "why": "2 orientations × 3 sizes × 3 indicatorTypes = 18 gross minus 2 excluded dot×sm combos = 16 net; Steps container itself is simple — complexity lives in the Step sub-component",
+          "source": "spec"
+        }
+      ]
+    },
+    {
+      "name": "Step",
+      "isSubComponent": true,
+      "slots": [
+        {
+          "name": "indicator",
+          "type": "icon",
+          "required": true,
+          "figmaBinding": "swap"
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "figmaBinding": "text"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false,
+          "figmaBinding": "boolText"
+        }
+      ],
+      "properties": {
+        "Status": ["wait", "process", "finish", "error", "warning"],
+        "IndicatorType": ["number", "check", "error-icon", "custom-icon", "dot"]
+      },
+      "booleans": [
+        "Disabled",
+        "HasDescription"
+      ],
+      "exclusions": [
+        {
+          "combination": "Status=error × Status=warning",
+          "reason": "Error and warning are mutually exclusive on the same step; a step cannot simultaneously be blocking and non-blocking"
+        },
+        {
+          "combination": "Status=wait × Disabled=true",
+          "reason": "Disabled implies locked (cannot be reached); wait simply means not-yet-reached — these are semantically overlapping; use Disabled for locked steps, wait for unreached steps"
+        },
+        {
+          "combination": "Status=finish × IndicatorType=number",
+          "reason": "Finished steps replace the number with a checkmark — IndicatorType=check is the correct indicator for finish status"
+        },
+        {
+          "combination": "Status=error × IndicatorType=number",
+          "reason": "Error steps replace the number with an error icon — IndicatorType=error-icon is the correct indicator for error status"
+        },
+        {
+          "combination": "Status=error × IndicatorType=check",
+          "reason": "Error and check/finish indicators are mutually exclusive"
+        },
+        {
+          "combination": "Status=finish × IndicatorType=error-icon",
+          "reason": "Finish and error indicators are mutually exclusive"
+        }
+      ],
+      "sizes": {
+        "sm": { "h": 32, "fontSize": 12, "iconSize": 16, "py": 4, "px": 0, "gap": 8, "radius": 9999 },
+        "md": { "h": 40, "fontSize": 14, "iconSize": 20, "py": 8, "px": 0, "gap": 8, "radius": 9999 },
+        "lg": { "h": 48, "fontSize": 16, "iconSize": 24, "py": 12, "px": 0, "gap": 8, "radius": 9999 }
+      },
+      "textProperties": [
+        {
+          "propName": "✏️ Label",
+          "layerName": "label",
+          "default": "Paso"
+        },
+        {
+          "propName": "✏️ Description",
+          "layerName": "description",
+          "default": "Descripción del paso"
+        }
+      ],
+      "swapSlots": [
+        {
+          "boolName": "Show Custom Icon",
+          "swapName": "Indicator Icon",
+          "layerName": "indicator",
+          "defaultVisible": false
+        }
+      ],
+      "booleanLayers": [
+        {
+          "propName": "Disabled",
+          "layerName": "_step-root",
+          "defaultVisible": true
+        }
+      ],
+      "booleanTextPairs": [
+        {
+          "boolName": "HasDescription",
+          "textName": "✏️ Description",
+          "layerName": "description",
+          "defaultVisible": false,
+          "default": "Descripción del paso"
+        }
+      ],
+      "frameCount": {
+        "gross": 25,
+        "exclusions": 6,
+        "net": 19
+      },
+      "grid": { "maxCols": 5, "gap": 20, "pad": 30 },
+      "_decisions": [
+        {
+          "what": "Step is a sub-component with isSubComponent=true",
+          "why": "4+ systems (Carbon, Atlassian, Ant Design, Mantine) use named Step child items. Step has its own states (Status), its own indicator slot (indicator), and its own optional description — sub-component detection rule applies",
+          "source": "spec"
+        },
+        {
+          "what": "Status as variant dimension (not boolean or state)",
+          "why": "Status is SYSTEM feedback — each value (wait/process/finish/error/warning) communicates a system/data condition. Status changes fill color, icon, connector color, and text weight — ≥2 visual properties → variant per global-property-rules",
+          "source": "global-property-rules"
+        },
+        {
+          "what": "IndicatorType as variant dimension on Step (not just Steps container)",
+          "why": "Step's IndicatorType controls the content of the indicator slot — number shows a digit, check shows a checkmark icon, error-icon shows ⚠, custom-icon swaps with instance, dot shows a circle. Structural content change → variant",
+          "source": "spec"
+        },
+        {
+          "what": "Disabled as boolean on Step",
+          "why": "Disabled on a step (locked non-navigable step) changes opacity + cursor + removes interactive affordance. ≤1 structural property change → boolean per global-property-rules disabled decision tree",
+          "source": "global-property-rules"
+        },
+        {
+          "what": "HasDescription as boolean",
+          "why": "Description is optional text below the label. Its presence is a binary on/off toggle without structural layout change beyond height — boolean extraction per Technique 1",
+          "source": "spec"
+        },
+        {
+          "what": "indicator slot uses BOOL+SWAP for custom-icon IndicatorType",
+          "why": "When IndicatorType=custom-icon, the indicator content is an instance swap accepting any icon; boolean Show Custom Icon controls visibility, swap Indicator Icon controls which icon",
+          "source": "spec"
+        },
+        {
+          "what": "description uses boolText binding",
+          "why": "Description needs both a visibility boolean (HasDescription) and an editable text layer — boolText is the correct pairing",
+          "source": "spec"
+        },
+        {
+          "what": "Status=finish mapped to IndicatorType=check (exclusion of number)",
+          "why": "Universal DS consensus: completed steps replace the step number with a checkmark icon. Number stays only for wait/process statuses.",
+          "source": "research"
+        },
+        {
+          "what": "frame net=19 within medium budget",
+          "why": "5 statuses × 5 indicatorTypes = 25 gross minus 6 logically impossible status×indicator combos = 19 net; Step sub-component is a medium-complexity atomic element",
+          "source": "spec"
+        },
+        {
+          "what": "Family total net = 16 + 19 = 35 frames",
+          "why": "Within medium component budget (30-80); Steps container focuses on layout/orientation while Step carries status/indicator complexity",
+          "source": "spec"
+        }
+      ]
+    }
+  ],
+  "foundations": {
+    "spacingScale": [0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80],
+    "typeScale": { "xs": 10, "sm": 12, "md": 14, "lg": 16, "xl": 20 },
+    "lineHeights": { "xs": 14, "sm": 16, "md": 20, "lg": 24, "xl": 28 },
+    "radiusScale": [0, 2, 4, 6, 8, 12, 16, 28, 9999],
+    "controlHeights": { "xs": 24, "sm": 32, "md": 40, "lg": 48, "xl": 56 },
+    "iconSizes": { "xs": 12, "sm": 16, "md": 20, "lg": 24, "xl": 32 }
+  },
+  "_meta": {
+    "lastUpdatedBy": "spec",
+    "pipelineVersion": "1.0",
+    "timestamp": "2026-04-17",
+    "mode": "max"
+  }
+}

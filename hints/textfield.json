@@ -1,28 +1,57 @@
 {
   "component": "TextField",
-  "archetype": "container",
+  "archetype": "form-control",
   "buildOrder": ["TextField"],
   "family": [
     {
       "name": "TextField",
       "isSubComponent": false,
-      "slots": ["label:text", "leading-icon:icon", "input*:text", "trailing-icon:icon", "clear:icon-action", "helper-text:text", "error-text:text", "char-count:text"],
+      "slots": [
+        "label*:text",
+        "required-indicator:text",
+        "prefix-icon:icon",
+        "prefix-text:text",
+        "input*:text-input",
+        "trailing-icon:icon",
+        "clear-button:icon-action",
+        "status-icon:icon",
+        "helper-text:text",
+        "error-text:text",
+        "char-count:text"
+      ],
       "properties": {
         "Size":    ["sm", "md", "lg"],
         "Variant": ["outlined", "filled", "subtle"],
-        "State":   ["default", "error", "disabled"]
+        "State":   ["default", "hover", "focus", "disabled"],
+        "Status":  ["none", "error", "warning"]
       },
-      "booleans": ["Has Label(text)", "Has Helper Text(text)", "Has Error Text(text)", "Has Leading Icon", "Has Trailing Icon", "Has Clear", "Has Char Count"],
-      "exclusions": ["Variant=subtle + State=error"],
-      "frameCount": 24
+      "booleans": [
+        "Has Label(text)",
+        "Required(text)",
+        "Has Prefix Icon(icon)",
+        "Has Prefix Text(text)",
+        "Has Trailing Icon(icon)",
+        "Has Clear(icon-action)",
+        "Has Status Icon(icon)",
+        "Has Helper Text(text)",
+        "Has Error Text(text)",
+        "Has Char Count(text)"
+      ],
+      "exclusions": [
+        "disabled × error",
+        "disabled × warning",
+        "Variant=subtle × Status=error",
+        "Status=warning × Has Status Icon (only error gets icon by default)"
+      ],
+      "frameCount": 90
     }
   ],
   "a11y": {
     "role": "textbox",
-    "keyboard": ["Tab/Shift+Tab: navega", "Has Clear: botón × focusable"],
-    "focus": "<label> via htmlFor/id; aria-describedby → helper + error; aria-invalid en error"
+    "keyboard": ["Tab/Shift+Tab: navega", "Escape: clear si Has Clear activo"],
+    "focus": "<label> via htmlFor/id; aria-describedby → helper + error; aria-invalid en error; aria-required en Required"
   },
-  "tokens": { "total": 16, "prefix": "txf" },
+  "tokens": { "total": 62, "prefix": "txf" },
   "questions": [
     {
       "id": "variant",
@@ -38,46 +67,67 @@
       "tags": ["outlined", "filled", "subtle", "borderless", "inline-edit", "material"]
     },
     {
-      "id": "sizes",
-      "text": "¿Qué tamaños necesitas?",
+      "id": "addons",
+      "text": "¿El campo necesita prefijos o sufijos (íconos o texto)?",
       "options": [
-        { "value": "md-only", "label": "Solo md (40px) — uso general" },
-        { "value": "sm-md",   "label": "sm + md (32/40px) — también en toolbars" },
-        { "value": "all",     "label": "sm + md + lg (32/40/48px)" }
+        { "value": "none",         "label": "No — campo limpio sin addons" },
+        { "value": "icons",        "label": "Solo íconos — búsqueda, email, password toggle, calendario" },
+        { "value": "text",         "label": "Solo texto — '$', 'https://', '.com'" },
+        { "value": "both",         "label": "Íconos y texto según el campo" }
       ],
-      "impact": "Size property values",
-      "tags": ["small", "medium", "large", "compact", "form"]
+      "impact": "Has Prefix Icon, Has Prefix Text, Has Trailing Icon booleans",
+      "tags": ["prefix", "suffix", "addon", "icon", "currency", "url", "search", "password"]
     },
     {
-      "id": "icons",
-      "text": "¿El campo usa íconos dentro del input?",
+      "id": "clearable",
+      "text": "¿El campo necesita botón de limpiar (clear)?",
       "options": [
-        { "value": "none",             "label": "No — solo texto" },
-        { "value": "leading-only",     "label": "Solo ícono izquierdo (ej. ícono de usuario, email)" },
-        { "value": "trailing-only",    "label": "Solo ícono derecho (ej. ojo para password, calendario)" },
-        { "value": "both",             "label": "Ambos lados" }
+        { "value": "yes", "label": "Sí — botón × para vaciar el campo" },
+        { "value": "no",  "label": "No — el usuario borra manualmente" }
       ],
-      "impact": "Has Leading Icon + Has Trailing Icon booleans",
-      "tags": ["icon", "leading", "trailing", "password", "calendar", "user"]
+      "impact": "Has Clear boolean",
+      "tags": ["clear", "clearable", "reset", "search"]
     },
     {
-      "id": "helper-error",
-      "text": "¿El campo muestra texto de ayuda o error debajo?",
+      "id": "validation",
+      "text": "¿Qué niveles de validación visual necesitas?",
       "options": [
-        { "value": "helper-only",  "label": "Solo helper text — texto de apoyo siempre visible" },
-        { "value": "error-only",   "label": "Solo error text — mensaje que aparece en validación" },
-        { "value": "both",         "label": "Ambos — helper en default, error en state=error" },
-        { "value": "none",         "label": "Ninguno — campo sin texto adicional" }
+        { "value": "error-only",    "label": "Solo error — rojo con mensaje" },
+        { "value": "error-warning", "label": "Error + warning — dos niveles de severidad" },
+        { "value": "none",          "label": "Sin validación visual" }
+      ],
+      "impact": "Status property values y Has Status Icon boolean",
+      "tags": ["validation", "error", "warning", "form-validation"]
+    },
+    {
+      "id": "supporting-text",
+      "text": "¿El campo muestra texto de soporte (helper/error) debajo?",
+      "options": [
+        { "value": "helper-only",  "label": "Solo helper text — descripción siempre visible" },
+        { "value": "error-only",   "label": "Solo error text — aparece en validación" },
+        { "value": "both",         "label": "Ambos — helper en default, error en Status=error" },
+        { "value": "none",         "label": "Ninguno" }
       ],
       "impact": "Has Helper Text + Has Error Text booleans",
       "tags": ["helper", "error", "validation", "hint", "description"]
     },
     {
+      "id": "sizes",
+      "text": "¿Qué tamaños necesitas?",
+      "options": [
+        { "value": "md-only", "label": "Solo md (40px) — uso general" },
+        { "value": "sm-md",   "label": "sm + md (32/40px) — también en toolbars y tablas" },
+        { "value": "all",     "label": "sm + md + lg (32/40/48px)" }
+      ],
+      "impact": "Size property values",
+      "tags": ["small", "medium", "large", "compact", "form", "table"]
+    },
+    {
       "id": "char-count",
       "text": "¿El campo muestra contador de caracteres?",
       "options": [
-        { "value": "yes",  "label": "Sí — muestra N/max (ej. '47/100')" },
-        { "value": "no",   "label": "No" }
+        { "value": "yes", "label": "Sí — muestra N/max (ej. '47/100')" },
+        { "value": "no",  "label": "No" }
       ],
       "impact": "Has Char Count boolean",
       "tags": ["character-count", "maxlength", "counter", "textarea-companion"]
