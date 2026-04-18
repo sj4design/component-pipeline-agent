@@ -28,11 +28,10 @@
       "id": "badge-type",
       "text": "¿Qué tipo de badge necesitas?",
       "options": [
-        { "value": "count",      "label": "Count — número sobre un ícono/avatar (notificaciones, mensajes no leídos)" },
-        { "value": "dot",        "label": "Dot — solo punto de presencia sin número" },
-        { "value": "label",      "label": "Label — texto de estado (Paid, In Progress, Active)" },
-        { "value": "count-dot",  "label": "Count + Dot — ambos modos de badge numérico" },
-        { "value": "all",        "label": "Los tres tipos" }
+        { "value": "count",      "label": "Count", "description": "Número sobre ícono/avatar (ej. notificaciones no leídas en campana)" },
+        { "value": "dot",        "label": "Dot", "description": "Solo punto de presencia sin número (ej. indicador de estado online)" },
+        { "value": "label",      "label": "Label", "description": "Texto de estado inline (ej. 'Paid', 'In Progress', 'Active' en tablas)" },
+        { "value": "all",        "label": "Los tres tipos", "description": "Count + Dot + Label; cubre notificaciones, presencia y estados de entidad" }
       ],
       "impact": "Type property values",
       "tags": ["count", "dot", "label", "status", "notification", "unread", "tag"]

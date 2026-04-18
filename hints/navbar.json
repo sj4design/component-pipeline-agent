@@ -137,10 +137,10 @@
       "id": "context",
       "text": "¿En qué tipo de producto se usará la navbar?",
       "options": [
-        { "value": "webapp", "label": "Web app — dashboard, herramienta SaaS" },
-        { "value": "marketing", "label": "Marketing — landing page, sitio corporativo" },
-        { "value": "docs", "label": "Documentación — sitio de docs técnicos" },
-        { "value": "general", "label": "Uso general — múltiples tipos de producto" }
+        { "value": "webapp", "label": "Web app / SaaS", "description": "Dashboard o herramienta SaaS — con avatar, search y CTAs de acciones" },
+        { "value": "marketing", "label": "Marketing / landing page", "description": "Sitio corporativo o landing — CTAs prominentes (Sign Up, Get Started), hamburger en mobile" },
+        { "value": "docs", "label": "Documentación técnica", "description": "Sitio de docs — con búsqueda global y toggle de tema dark/light" },
+        { "value": "general", "label": "Uso general — múltiples tipos", "description": "SaaS, marketing y docs en la misma suite; incluir todos los slots opcionales" }
       ],
       "impact": "Priorización de elementos y estilo",
       "tags": ["webapp", "SaaS", "landing", "documentation", "corporate", "enterprise"]

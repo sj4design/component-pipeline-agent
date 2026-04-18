@@ -139,10 +139,10 @@
       "id": "context",
       "text": "¿En qué tipo de aplicación se usará el sidebar?",
       "options": [
-        { "value": "dashboard", "label": "Dashboard — admin panel, analytics" },
-        { "value": "email-docs", "label": "Email/Docs — app tipo Gmail, Notion, Slack" },
-        { "value": "settings", "label": "Configuración — panel de settings" },
-        { "value": "general", "label": "Uso general — múltiples tipos de app" }
+        { "value": "dashboard", "label": "Dashboard / admin panel", "description": "Navigation principal de admin + analytics — colapsable, badges de notificación" },
+        { "value": "email-docs", "label": "Email/Docs — Gmail, Notion, Slack style", "description": "Lista de items densos con buscador interno y estado de lectura" },
+        { "value": "settings", "label": "Panel de configuración", "description": "Settings con secciones anidadas — navigation vertical de sub-páginas" },
+        { "value": "general", "label": "Uso general — múltiples tipos de app", "description": "Dashboard, docs y settings en la misma app; incluir features completas" }
       ],
       "impact": "Priorización de features y profundidad de navegación",
       "tags": ["dashboard", "admin", "SaaS", "email", "docs", "settings", "enterprise"]

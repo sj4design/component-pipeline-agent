@@ -88,10 +88,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usará el skeleton?",
       "options": [
-        { "value": "cards", "label": "Cards — placeholders de contenido de cards" },
-        { "value": "tables", "label": "Tablas — filas placeholder mientras carga datos" },
-        { "value": "pages", "label": "Páginas completas — skeleton de layout completo" },
-        { "value": "general", "label": "Uso general — múltiples contextos" }
+        { "value": "cards", "label": "Cards", "description": "Placeholders de contenido de card — rectangular + text lines (ej. feed loading)" },
+        { "value": "tables", "label": "Tablas", "description": "Filas placeholder mientras carga datos tabulares (ej. 5 filas skeleton en DataGrid)" },
+        { "value": "pages", "label": "Páginas completas", "description": "Skeleton de layout completo al navegar (ej. dashboard, profile page con sidebar)" },
+        { "value": "general", "label": "Uso general — múltiples contextos", "description": "Cards, tablas y páginas en la misma app; incluir todos los primitivos y presets" }
       ],
       "impact": "Priorización de variantes y presets",
       "tags": ["cards", "tables", "pages", "lists", "dashboard", "loading"]

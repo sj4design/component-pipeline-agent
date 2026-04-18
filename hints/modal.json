@@ -58,11 +58,10 @@
       "id": "purpose",
       "text": "¿Para qué se usa el modal en tu caso?",
       "options": [
-        { "value": "confirmation", "label": "Confirmación simple — '¿Estás seguro?' + 2 botones" },
-        { "value": "form", "label": "Formulario — crear/editar datos dentro del modal" },
-        { "value": "content", "label": "Contenido rico — imágenes, listas, detalles expandidos" },
-        { "value": "wizard", "label": "Flujo paso a paso — proceso multi-step" },
-        { "value": "multiple", "label": "Varios propósitos según contexto" }
+        { "value": "confirmation", "label": "Confirmación simple", "description": "'¿Estás seguro?' + 2 botones — modal sm sin body libre (ej. eliminar registro)" },
+        { "value": "form", "label": "Formulario", "description": "Crear/editar datos dentro del modal — md/lg con footer de acciones (ej. nuevo usuario)" },
+        { "value": "content", "label": "Contenido rico", "description": "Imágenes, listas, detalles expandidos — body libre sin footer de acciones fijo" },
+        { "value": "multiple", "label": "Varios propósitos según contexto", "description": "Confirmaciones, formularios y contenido en la misma app; incluir variants completas" }
       ],
       "impact": "Anatomía del body y slots necesarios",
       "tags": ["confirmation", "form", "wizard", "multi-step", "detail-view"]
@@ -93,10 +92,10 @@
       "id": "footer-actions",
       "text": "¿Cómo se estructuran las acciones del modal?",
       "options": [
-        { "value": "primary-cancel", "label": "Acción primaria + cancelar — 2 botones estándar" },
-        { "value": "close-only", "label": "Solo cerrar — modales informativos" },
-        { "value": "multiple", "label": "3+ acciones — guardar borrador, publicar, cancelar" },
-        { "value": "variable", "label": "Variable — configurable según caso" }
+        { "value": "primary-cancel", "label": "Acción primaria + cancelar", "description": "2 botones estándar — el patrón más común (ej. 'Guardar' + 'Cancelar')" },
+        { "value": "close-only", "label": "Solo cerrar", "description": "Modales informativos sin acción destructiva (ej. vista de detalle, ayuda)" },
+        { "value": "multiple", "label": "3+ acciones", "description": "Guardar borrador, publicar, cancelar — footer más complejo con acciones separadas" },
+        { "value": "variable", "label": "Variable según caso", "description": "Algunos modales con 2 acciones, otros solo cerrar; controlar con booleans" }
       ],
       "impact": "Has Footer boolean y estructura del footer",
       "tags": ["actions", "footer", "confirm", "cancel", "save", "multiple-actions"]

@@ -131,10 +131,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usará el avatar?",
       "options": [
-        { "value": "profile", "label": "Perfiles — headers, settings, páginas de usuario" },
-        { "value": "lists", "label": "Listas — comentarios, chats, tablas de usuarios" },
-        { "value": "navigation", "label": "Navegación — navbar, sidebar, menú de usuario" },
-        { "value": "general", "label": "Uso general — múltiples contextos" }
+        { "value": "profile", "label": "Perfiles", "description": "Headers, settings, páginas de usuario (ej. xl en profile page)" },
+        { "value": "lists", "label": "Listas", "description": "Comentarios, chats, tablas de usuarios (ej. sm/md en list rows)" },
+        { "value": "navigation", "label": "Navegación", "description": "Navbar, sidebar, menú de usuario (ej. md fijo en topbar)" },
+        { "value": "general", "label": "Uso general — múltiples contextos", "description": "Se usa en perfiles, listas y navegación; incluir rango completo de tamaños" }
       ],
       "impact": "Priorización de tamaños y features",
       "tags": ["profile", "comments", "chat", "navbar", "table", "enterprise"]

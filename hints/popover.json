@@ -51,12 +51,10 @@
       "id": "use-case",
       "text": "¿Para qué se usa el popover principalmente?",
       "options": [
-        { "value": "contextual-help", "label": "Ayuda contextual — '?' junto a campos o features" },
-        { "value": "confirmation", "label": "Confirmación inline — antes de acciones destructivas" },
-        { "value": "status", "label": "Estado de campo — errores, warnings, validación anclada" },
-        { "value": "preview", "label": "Preview / detalle — info adicional de un elemento" },
-        { "value": "form", "label": "Formulario inline — editar datos sin salir del flujo" },
-        { "value": "multiple", "label": "Varios propósitos" }
+        { "value": "contextual-help", "label": "Ayuda contextual", "description": "'?' junto a campos o features — non-modal, no roba foco (ej. tooltips ricos)" },
+        { "value": "confirmation", "label": "Confirmación inline", "description": "Antes de acciones destructivas — con footer Confirmar/Cancelar (ej. 'Eliminar este elemento?')" },
+        { "value": "form", "label": "Formulario inline", "description": "Editar datos sin salir del flujo — modal con focus trap (ej. edit de nombre en tabla)" },
+        { "value": "multiple", "label": "Varios propósitos", "description": "Ayuda, confirmación y formularios inline en la misma app; incluir todas las variantes" }
       ],
       "impact": "Variant, Has Title, Has Footer, Has Close, Size",
       "tags": ["help", "confirmation", "validation", "error", "preview", "form", "inline-edit"]

@@ -61,11 +61,10 @@
       "id": "use-case",
       "text": "¿Qué tipo de data grid necesitas?",
       "options": [
-        { "value": "resource-list", "label": "Lista de recursos — users, orders, files con selección + bulk actions (Polaris IndexTable)" },
-        { "value": "data-display", "label": "Display de datos — analytics, reports, sin mucha interacción" },
-        { "value": "editable", "label": "Editable — inline editing de celdas (MUI DataGrid, Lightning)" },
-        { "value": "hierarchical", "label": "Jerárquica — tree data con expandable rows (Ant)" },
-        { "value": "moderate-list", "label": "Lista moderada — 50–500 filas con sort + selection + pagination (Carbon)" }
+        { "value": "resource-list", "label": "Lista de recursos", "description": "Users, orders, files con selección + bulk actions (Polaris IndexTable pattern)" },
+        { "value": "data-display", "label": "Display de datos", "description": "Analytics, reports sin mucha interacción — foco en lectura (ej. reporting dashboard)" },
+        { "value": "editable", "label": "Editable", "description": "Inline editing de celdas (ej. CRM con campos editables inline, presupuesto por ítem)" },
+        { "value": "enterprise", "label": "Enterprise completo", "description": "Tree data + editable + bulk actions + row grouping (Ant DataGrid pattern completo)" }
       ],
       "impact": "Toolbar, batch actions, inline edit, tree data scope",
       "tags": ["list", "display", "editable", "tree", "analytics", "bulk-actions"]
@@ -98,10 +97,10 @@
       "id": "features",
       "text": "¿Qué features necesitas?",
       "options": [
-        { "value": "basic", "label": "Básico — sort + pagination" },
-        { "value": "standard", "label": "Estándar — + selection + bulk actions + zebra stripes" },
-        { "value": "advanced", "label": "Avanzado — + expandable rows + sticky header + column filters" },
-        { "value": "enterprise", "label": "Enterprise — + tree data + sub-totals + row grouping (Ant completo)" }
+        { "value": "basic", "label": "Básico — sort + pagination", "description": "Ordenar por columna y paginar resultados — suficiente para listas de lectura" },
+        { "value": "standard", "label": "Estándar — + selection + bulk actions + zebra", "description": "Agrega selección de filas, acciones bulk y zebra stripes para admin panels" },
+        { "value": "advanced", "label": "Avanzado — + expandable rows + sticky header + column filters", "description": "Para datasets complejos con filas anidadas y filtrado por columna" },
+        { "value": "enterprise", "label": "Enterprise completo — + tree data + sub-totals + row grouping", "description": "Ant DataGrid completo con grouping y totales (ej. ERP, reportes financieros)" }
       ],
       "impact": "Booleans StickyHeader/ZebraStripes, slot footer, expand button",
       "tags": ["sort", "pagination", "expandable", "filters", "grouping", "totals"]

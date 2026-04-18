@@ -61,10 +61,10 @@
       "id": "context",
       "text": "¿Dónde se usa el spinner principalmente?",
       "options": [
-        { "value": "button",   "label": "Dentro de botones — reemplaza el ícono/texto al cargar" },
-        { "value": "section",  "label": "En secciones — mientras carga contenido de una región" },
-        { "value": "overlay",  "label": "Full-page overlay — bloquea la interfaz durante operaciones" },
-        { "value": "multiple", "label": "En varios contextos" }
+        { "value": "button",   "label": "Dentro de botones", "description": "Reemplaza el ícono/texto del botón al enviar un form o acción async — sm (16px)" },
+        { "value": "section",  "label": "En secciones de contenido", "description": "Mientras carga el contenido de una región de la página — md (24px) centrado" },
+        { "value": "overlay",  "label": "Full-page overlay", "description": "Bloquea la interfaz durante operaciones críticas (ej. guardando, procesando pago) — lg (40px)" },
+        { "value": "multiple", "label": "En varios contextos", "description": "Botones, secciones y overlays en la misma app; incluir sm + md + lg y color invert" }
       ],
       "impact": "Size apropiado + overlay behavior",
       "tags": ["button", "section", "overlay", "page-block", "inline"]

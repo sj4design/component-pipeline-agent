@@ -178,10 +178,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usará el radio?",
       "options": [
-        { "value": "forms", "label": "Formularios — selección de opciones en forms" },
-        { "value": "settings", "label": "Configuración — preferencias, ajustes" },
-        { "value": "pricing", "label": "Pricing — selección de plan o producto" },
-        { "value": "general", "label": "Uso general" }
+        { "value": "forms", "label": "Formularios", "description": "Selección de una opción en forms — radio items verticales estándar (ej. género, método de pago)" },
+        { "value": "settings", "label": "Configuración / preferencias", "description": "Ajustes de comportamiento — radio items horizontal o vertical (ej. frecuencia de email)" },
+        { "value": "pricing", "label": "Pricing / plan selection", "description": "Selección de plan o producto — radio cards con precio y features (ej. Starter/Pro/Enterprise)" },
+        { "value": "general", "label": "Uso general", "description": "Formularios, settings y pricing en la misma app; incluir radio items y radio cards" }
       ],
       "impact": "Priorización de sub-componentes y anatomía",
       "tags": ["forms", "settings", "pricing", "plans", "onboarding", "survey"]

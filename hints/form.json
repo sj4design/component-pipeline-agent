@@ -49,11 +49,10 @@
       "id": "use-case",
       "text": "¿Para qué usas Form principalmente?",
       "options": [
-        { "value": "settings", "label": "Settings / preferences (sectioned)" },
-        { "value": "sign-up", "label": "Sign-up / onboarding (single-column)" },
-        { "value": "data-entry", "label": "Data entry (two-column, enterprise)" },
-        { "value": "checkout", "label": "Checkout / payment (two-column con summary)" },
-        { "value": "filters", "label": "Filters — inline compact" }
+        { "value": "settings", "label": "Settings / preferences", "description": "Secciones de ajustes con card sections y horizontal layout (ej. página de settings)" },
+        { "value": "sign-up", "label": "Sign-up / onboarding", "description": "Single-column, pasos cortos, mobile-first (ej. registro de usuario)" },
+        { "value": "data-entry", "label": "Data entry enterprise", "description": "Two-column denso con muchos campos (ej. CRM lead form, formulario de facturación)" },
+        { "value": "general", "label": "Uso general — varios contextos", "description": "Settings, sign-up y data entry en la misma app; incluir todos los layouts" }
       ],
       "impact": "Layout, Size, Section variant defaults",
       "tags": ["settings", "sign-up", "onboarding", "checkout", "filters", "data-entry"]

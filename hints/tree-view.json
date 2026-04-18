@@ -49,11 +49,10 @@
       "id": "use-case",
       "text": "¿Para qué usas TreeView?",
       "options": [
-        { "value": "file-browser", "label": "File browser — folders + files (Ant DirectoryTree)" },
-        { "value": "navigation", "label": "Navigation — sidebar con secciones anidadas (Confluence page tree)" },
-        { "value": "permissions", "label": "Permissions tree — checkbox con parent/child cascade (Ant checkStrictly)" },
-        { "value": "category-hierarchy", "label": "Category hierarchy — productos, taxonomy" },
-        { "value": "multiple", "label": "Varios casos" }
+        { "value": "file-browser", "label": "File browser", "description": "Folders + files con folder/file icons y showLines (ej. Ant DirectoryTree, VS Code explorer)" },
+        { "value": "navigation", "label": "Navigation sidebar", "description": "Secciones anidadas — single selection, sin showLines (ej. Confluence page tree)" },
+        { "value": "permissions", "label": "Permissions tree", "description": "Checkbox con cascade parent/child — bulk operations (ej. admin roles, ACL editor)" },
+        { "value": "multiple", "label": "Varios casos", "description": "File browser, navigation y permissions en la misma app; incluir todos los SelectionMode" }
       ],
       "impact": "SelectionMode, ShowLines, Checkbox inclusion",
       "tags": ["file-browser", "navigation", "permissions", "category", "taxonomy", "hierarchy"]

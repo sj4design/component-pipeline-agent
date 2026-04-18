@@ -37,11 +37,10 @@
       "id": "use-case",
       "text": "¿Para qué usas FileUpload?",
       "options": [
-        { "value": "avatar", "label": "Avatar upload — single image (button-only pattern)" },
-        { "value": "document", "label": "Document upload — PDFs, Word (dropzone)" },
-        { "value": "media", "label": "Media — images/video batch (dropzone + preview)" },
-        { "value": "csv-import", "label": "CSV import — 1 file con validation" },
-        { "value": "attachments", "label": "Attachments — emails, tickets (compact inline)" }
+        { "value": "avatar", "label": "Avatar upload", "description": "Single image — button-only pattern sin dropzone (ej. foto de perfil)" },
+        { "value": "document", "label": "Document upload", "description": "PDFs, Word — dropzone con validación de tipo y lista de archivos" },
+        { "value": "media", "label": "Media batch", "description": "Imágenes/video en lote — dropzone + preview thumbnail (ej. galería de producto)" },
+        { "value": "attachments", "label": "Attachments inline", "description": "Emails, tickets, comentarios — compact con file list (ej. Jira attachment)" }
       ],
       "impact": "Variant, Size, validation defaults",
       "tags": ["avatar", "document", "media", "csv", "attachments"]

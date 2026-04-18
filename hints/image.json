@@ -29,11 +29,10 @@
       "id": "use-case",
       "text": "¿Para qué usas Image?",
       "options": [
-        { "value": "avatar-thumbnail", "label": "Avatars / thumbnails — 1:1 cover" },
-        { "value": "hero", "label": "Hero images — 16:9 cover" },
-        { "value": "product", "label": "Product photos — 4:3 contain" },
-        { "value": "logo", "label": "Logos — contain, varios ratios" },
-        { "value": "gallery", "label": "Gallery / media grid — varios ratios" }
+        { "value": "avatar-thumbnail", "label": "Avatars / thumbnails", "description": "1:1 cover — fotos de perfil pequeñas o miniaturas en listas" },
+        { "value": "hero", "label": "Hero / banner images", "description": "16:9 cover — cabeceras de páginas, banners de marketing" },
+        { "value": "product", "label": "Product / content photos", "description": "4:3 contain — catálogos, posts de blog con imagen editorial" },
+        { "value": "general", "label": "Uso general — todos los contextos", "description": "Avatars, heroes y productos en la misma app; incluir set completo de ratios" }
       ],
       "impact": "AspectRatio default, Fit default, Radius default",
       "tags": ["avatar", "hero", "product", "logo", "gallery", "thumbnail"]

@@ -40,11 +40,10 @@
       "id": "use-case",
       "text": "¿Para qué usas DescriptionList?",
       "options": [
-        { "value": "user-details", "label": "User/profile details — Email, Phone, Role" },
-        { "value": "order-summary", "label": "Order summary — Subtotal, Tax, Total" },
-        { "value": "product-specs", "label": "Product specs — weight, dimensions, SKU" },
-        { "value": "settings-preview", "label": "Settings preview — read-only config display" },
-        { "value": "metadata", "label": "Metadata panels — card details, page info" }
+        { "value": "user-details", "label": "User/profile details", "description": "Email, Phone, Role — horizontal layout (ej. detalle de usuario en admin panel)" },
+        { "value": "order-summary", "label": "Order summary / invoice", "description": "Subtotal, Tax, Total — stacked alineado a la derecha (ej. checkout sidebar)" },
+        { "value": "product-specs", "label": "Product specs / metadata", "description": "Weight, dimensions, SKU — multi-column (ej. ficha técnica de producto)" },
+        { "value": "general", "label": "Uso general — varios contextos", "description": "Profile details, order summaries y specs en la misma app" }
       ],
       "impact": "Layout default, Emphasis default, Columns",
       "tags": ["profile", "order", "specs", "settings", "metadata"]

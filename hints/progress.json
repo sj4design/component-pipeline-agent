@@ -110,10 +110,10 @@
       "id": "context",
       "text": "¿En qué contexto se usará el progress?",
       "options": [
-        { "value": "upload", "label": "Uploads — progreso de archivos, media" },
-        { "value": "steps", "label": "Pasos — progreso de un wizard/onboarding" },
-        { "value": "loading", "label": "Carga — loading general de la app" },
-        { "value": "general", "label": "Uso general — múltiples contextos" }
+        { "value": "upload", "label": "Uploads / file operations", "description": "Progreso de archivos y media — determinate con porcentaje y estados success/error" },
+        { "value": "steps", "label": "Pasos de wizard / onboarding", "description": "Indicador '2 de 5 pasos' — bar determinate con label contextual" },
+        { "value": "loading", "label": "Carga general de la app", "description": "Loading de secciones o página — circular indeterminate (ej. skeleton complementario)" },
+        { "value": "general", "label": "Uso general — múltiples contextos", "description": "Uploads, wizard steps y loading general; incluir bar + circular, determinate + indeterminate" }
       ],
       "impact": "Priorización de variantes y labels",
       "tags": ["upload", "wizard", "onboarding", "loading", "download", "processing"]

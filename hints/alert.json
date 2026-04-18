@@ -58,9 +58,9 @@
       "id": "status-types",
       "text": "¿Qué tipos de alerta necesitas en tu sistema?",
       "options": [
-        { "value": "basic", "label": "Solo info y error — los más comunes" },
-        { "value": "standard", "label": "Info, success, warning, error — set estándar" },
-        { "value": "extended", "label": "Estándar + neutral/tip — alertas sin severidad" }
+        { "value": "basic", "label": "Solo info y error", "description": "Los dos más comunes — suficiente para apps simples" },
+        { "value": "standard", "label": "Info, success, warning, error", "description": "Set estándar de 4 estados semánticos (mayoría de design systems)" },
+        { "value": "extended", "label": "Estándar + neutral/tip", "description": "Incluye alertas sin severidad para tips y anuncios informativos" }
       ],
       "impact": "Status property values",
       "tags": ["info", "success", "warning", "error", "neutral", "severity"]
@@ -124,10 +124,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usarán las alertas?",
       "options": [
-        { "value": "forms", "label": "Formularios — validación, errores de campo" },
-        { "value": "system", "label": "Sistema — estados de la aplicación, mantenimiento" },
-        { "value": "notifications", "label": "Notificaciones — feedback de acciones del usuario" },
-        { "value": "general", "label": "Uso general — múltiples contextos" }
+        { "value": "forms", "label": "Formularios", "description": "Validación, errores de campo, confirmaciones de envío" },
+        { "value": "system", "label": "Sistema", "description": "Estados de la aplicación, banners de mantenimiento o degradación" },
+        { "value": "notifications", "label": "Notificaciones", "description": "Feedback de acciones del usuario (guardar, eliminar, importar)" },
+        { "value": "general", "label": "Uso general — múltiples contextos", "description": "Se usa en formularios, sistema y notificaciones; priorizar set completo" }
       ],
       "impact": "Priorización de variantes y anatomía",
       "tags": ["forms", "validation", "system", "notifications", "enterprise", "dashboard"]

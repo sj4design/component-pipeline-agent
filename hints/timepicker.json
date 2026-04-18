@@ -30,11 +30,10 @@
       "id": "use-case",
       "text": "¿Para qué usas TimePicker?",
       "options": [
-        { "value": "meeting", "label": "Meeting scheduling — inicio + fin (step=15 o 30 min)" },
-        { "value": "reminders", "label": "Alarmas / reminders — precise time input" },
-        { "value": "log-entry", "label": "Log entry — registrar hora exacta (step=1)" },
-        { "value": "booking", "label": "Booking slots — available times (step=30/60)" },
-        { "value": "settings", "label": "Settings — quiet hours, work schedule" }
+        { "value": "meeting", "label": "Meeting scheduling", "description": "Inicio + fin de reunión — step=15 o 30 min, formato 12h/24h (ej. Zoom meeting scheduler)" },
+        { "value": "log-entry", "label": "Log entry / registro exacto", "description": "Registrar hora precisa — step=1, incluir segundos (ej. timesheet, audit log)" },
+        { "value": "booking", "label": "Booking / slots disponibles", "description": "Slots pre-definidos — step=30/60, posiblemente disabled slots no disponibles" },
+        { "value": "general", "label": "Uso general — varios contextos", "description": "Meetings, logs y settings en la misma app; incluir step variable y formatos" }
       ],
       "impact": "Step default, Precision, now button",
       "tags": ["meeting", "scheduling", "alarm", "log", "booking", "settings"]
@@ -54,11 +53,10 @@
       "id": "step",
       "text": "¿Step granularity?",
       "options": [
-        { "value": "1-min", "label": "1 min — log-entry level" },
-        { "value": "5-min", "label": "5 min — balance" },
-        { "value": "15-min", "label": "15 min — meetings standard" },
-        { "value": "30-min", "label": "30 min — coarse booking slots" },
-        { "value": "variable", "label": "Variable (múltiples)" }
+        { "value": "1-min", "label": "1 min", "description": "Log-entry / timesheet — mayor precisión" },
+        { "value": "15-min", "label": "15 min", "description": "Meetings estándar — el más común en calendarios" },
+        { "value": "30-min", "label": "30 min", "description": "Booking coarse — slots de cita médica, salon" },
+        { "value": "variable", "label": "Variable — generar 1, 5, 15 y 30 min", "description": "Todos los steps para cubrir cualquier uso en la misma app" }
       ],
       "impact": "Step property values",
       "tags": ["step", "granularity", "1", "5", "15", "30"]

@@ -46,10 +46,10 @@
       "id": "use-case",
       "text": "¿Para qué usas Tabs principalmente?",
       "options": [
-        { "value": "content-sections", "label": "Secciones de contenido — páginas/vistas con contenido distinto (ej. Overview, Settings, Members)" },
-        { "value": "filtered-views", "label": "Vistas filtradas — listas con filtros predefinidos (ej. All / Active / Archived)" },
-        { "value": "document-tabs", "label": "Tabs tipo browser — documentos abiertos simultáneos, closable/addable" },
-        { "value": "multiple", "label": "Varios casos" }
+        { "value": "content-sections", "label": "Secciones de contenido", "description": "Páginas/vistas con contenido distinto (ej. Overview, Settings, Members en detalle de team)" },
+        { "value": "filtered-views", "label": "Vistas filtradas", "description": "Listas con filtros predefinidos (ej. All / Active / Archived en tabla de tickets)" },
+        { "value": "document-tabs", "label": "Tabs tipo browser", "description": "Documentos abiertos simultáneos, closable/addable (ej. editor multi-tab, IDE)" },
+        { "value": "multiple", "label": "Varios casos", "description": "Secciones de contenido y vistas filtradas en la misma app" }
       ],
       "impact": "Type (line/contained), Closable boolean, Badge boolean",
       "tags": ["content", "sections", "filters", "views", "documents", "closable"]

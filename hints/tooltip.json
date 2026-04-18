@@ -117,10 +117,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usará el tooltip?",
       "options": [
-        { "value": "icon-labels", "label": "Labels de íconos — describir icon buttons y acciones" },
-        { "value": "truncated", "label": "Texto truncado — mostrar texto completo al hover" },
-        { "value": "help", "label": "Ayuda contextual — explicaciones de campos o features" },
-        { "value": "general", "label": "Uso general" }
+        { "value": "icon-labels", "label": "Labels de íconos", "description": "Describir icon buttons y acciones — texto de una línea, trigger hover+focus obligatorio" },
+        { "value": "truncated", "label": "Texto truncado", "description": "Mostrar texto completo al hover sobre labels con ellipsis (ej. tabla de nombres largos)" },
+        { "value": "help", "label": "Ayuda contextual", "description": "Explicaciones de campos o features — puede requerir title + description (rich tooltip)" },
+        { "value": "general", "label": "Uso general", "description": "Icon labels, texto truncado y ayuda contextual; incluir placement automático" }
       ],
       "impact": "Priorización de features y contenido",
       "tags": ["icon-label", "truncated-text", "help", "contextual", "toolbar"]

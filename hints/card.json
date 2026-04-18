@@ -143,11 +143,10 @@
       "id": "content-type",
       "text": "¿Qué tipo de contenido va dentro de la card?",
       "options": [
-        { "value": "text-only", "label": "Solo texto — títulos, descripciones, metadata" },
-        { "value": "image-text", "label": "Imagen + texto — blog, producto, perfil" },
-        { "value": "data", "label": "Data/Métricas — KPIs, gráficas, dashboards" },
-        { "value": "interactive", "label": "Interactivo — formularios, inputs dentro de la card" },
-        { "value": "any", "label": "Cualquier combinación — slot libre" }
+        { "value": "text-only", "label": "Solo texto", "description": "Títulos, descripciones, metadata (ej. feature card en landing page)" },
+        { "value": "image-text", "label": "Imagen + texto", "description": "Blog, producto, perfil (ej. card de catálogo e-commerce)" },
+        { "value": "data", "label": "Data/Métricas", "description": "KPIs, gráficas, dashboards (ej. widget de revenue en dashboard)" },
+        { "value": "any", "label": "Cualquier combinación — slot libre", "description": "Sin estructura fija; el consumidor define el contenido por instancia" }
       ],
       "impact": "Sub-componentes a incluir (.ContentMedia, .ContentBody, etc.)",
       "tags": ["media", "image", "data", "metrics", "dashboard", "product", "blog"]
@@ -156,11 +155,10 @@
       "id": "interaction",
       "text": "¿La card es interactiva? ¿Qué hace al interactuar?",
       "options": [
-        { "value": "static", "label": "No interactiva — solo display informativo" },
-        { "value": "navigates", "label": "Click navega a detalle" },
-        { "value": "opens-panel", "label": "Click abre panel o modal" },
-        { "value": "selectable", "label": "Seleccionable — checkbox, estado selected" },
-        { "value": "draggable", "label": "Drag & drop — kanban, reordenamiento" }
+        { "value": "static", "label": "No interactiva", "description": "Solo display informativo — sin hover ni click (ej. stat card de dashboard)" },
+        { "value": "navigates", "label": "Click navega a detalle", "description": "Toda la card es clickeable como link (ej. blog post card, product card)" },
+        { "value": "selectable", "label": "Seleccionable", "description": "Checkbox + estado selected para selección múltiple (ej. kanban, file picker)" },
+        { "value": "configurable", "label": "Configurable — varía por instancia", "description": "Algunas cards navegan, otras son estáticas; usar booleans por instancia" }
       ],
       "impact": "Is Clickable, Is Selected booleans y states hover/pressed",
       "tags": ["clickable", "selectable", "draggable", "kanban", "navigation", "link"]

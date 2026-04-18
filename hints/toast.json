@@ -26,9 +26,9 @@
       "id": "variants",
       "text": "¿Qué tipos de toast necesitas?",
       "options": [
-        { "value": "success-error",  "label": "Success y error — confirmaciones y fallos" },
-        { "value": "four-semantic",  "label": "Info, success, warning, error" },
-        { "value": "all-five",       "label": "Neutral + info, success, warning, error (set completo)" }
+        { "value": "success-error",  "label": "Success y error", "description": "Los dos más esenciales — confirmaciones de acción y mensajes de fallo" },
+        { "value": "four-semantic",  "label": "Info, success, warning, error", "description": "Set semántico estándar para la mayoría de sistemas de diseño" },
+        { "value": "all-five",       "label": "Set completo (neutral + 4 semánticos)", "description": "Incluye neutral para notificaciones sin severidad (ej. 'Enlace copiado')" }
       ],
       "impact": "Variant property values",
       "tags": ["neutral", "info", "success", "warning", "error", "semantic"]

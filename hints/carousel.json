@@ -38,11 +38,10 @@
       "id": "use-case",
       "text": "¿Para qué usas Carousel?",
       "options": [
-        { "value": "product-gallery", "label": "Product image gallery (single o thumbnail)" },
-        { "value": "hero-banner", "label": "Hero banner rotativo (landing pages)" },
-        { "value": "feature-highlight", "label": "Feature highlight en onboarding" },
-        { "value": "testimonials", "label": "Testimonials / quotes" },
-        { "value": "content-scroll", "label": "Content scroll (recommended items, related cards)" }
+        { "value": "product-gallery", "label": "Product image gallery", "description": "Single slide o thumbnail strip para fotos de producto (ej. e-commerce PDP)" },
+        { "value": "hero-banner", "label": "Hero banner rotativo", "description": "Full-width slides en landing pages o homepage con autoplay opcional" },
+        { "value": "feature-highlight", "label": "Feature highlight / onboarding", "description": "Pasos de onboarding o features destacadas con indicators de progreso" },
+        { "value": "content-scroll", "label": "Content scroll horizontal", "description": "Fila de cards recomendadas (ej. 'Related articles', 'You may also like')" }
       ],
       "impact": "Type, Controls, Indicators default",
       "tags": ["gallery", "hero", "banner", "feature", "testimonials", "scroll"]
@@ -51,10 +50,10 @@
       "id": "type",
       "text": "¿Layout?",
       "options": [
-        { "value": "single", "label": "Single — 1 slide visible" },
-        { "value": "multi", "label": "Multi — varios visibles (cards row)" },
-        { "value": "hero", "label": "Hero — full-width banner" },
-        { "value": "thumbnail", "label": "Thumbnail — main + strip de previews (e-commerce)" }
+        { "value": "single", "label": "Single — 1 slide visible", "description": "Un slide a la vez con prev/next (ej. onboarding steps, testimonials)" },
+        { "value": "multi", "label": "Multi — varios visibles", "description": "Fila de cards parcialmente visibles (ej. related products row)" },
+        { "value": "hero", "label": "Hero — full-width banner", "description": "Ocupa todo el ancho, ideal para banners de marketing" },
+        { "value": "thumbnail", "label": "Thumbnail — main + strip", "description": "Imagen grande + miniaturas seleccionables abajo (ej. galería de producto PDP)" }
       ],
       "impact": "Type property",
       "tags": ["single", "multi", "hero", "thumbnail", "strip"]

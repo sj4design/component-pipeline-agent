@@ -40,12 +40,10 @@
       "id": "list-type",
       "text": "¿Qué tipo de List necesitas?",
       "options": [
-        { "value": "unordered", "label": "Unordered — bullets, features list" },
-        { "value": "ordered", "label": "Ordered — numbered steps, ranking" },
-        { "value": "description", "label": "Description (<dl>) — key/value metadata (usa DescriptionList)" },
-        { "value": "nav", "label": "Nav — navigation menu items" },
-        { "value": "action", "label": "Action — overflow menu con arrow keys" },
-        { "value": "multiple", "label": "Varios types" }
+        { "value": "unordered", "label": "Unordered — bullets, features list", "description": "Lista con bullets para features, opciones o items sin orden (ej. lista de características)" },
+        { "value": "ordered", "label": "Ordered — numbered steps, ranking", "description": "Lista numerada para pasos, instrucciones o rankings" },
+        { "value": "nav", "label": "Nav / action — navigation o overflow menu", "description": "Items de navegación (tab order) o acciones de menú (arrow keys)" },
+        { "value": "multiple", "label": "Varios tipos", "description": "Se necesitan unordered, ordered y nav en la misma app" }
       ],
       "impact": "Type property, a11y pattern",
       "tags": ["unordered", "ordered", "description", "nav", "action", "menu"]

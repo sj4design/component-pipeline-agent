@@ -86,11 +86,10 @@
       "id": "tag-variant",
       "text": "¿Qué estilos visuales necesitas para los tags?",
       "options": [
-        { "value": "solid-only", "label": "Solo solid — fondo sólido de color (mayor énfasis)" },
-        { "value": "soft-only", "label": "Solo soft — color tenue de fondo (énfasis moderado, muy común)" },
-        { "value": "outline-only", "label": "Solo outline — solo borde sin relleno (mínimo énfasis)" },
-        { "value": "solid-soft", "label": "Solid + Soft — para distintos niveles de énfasis en el mismo sistema" },
-        { "value": "all", "label": "Solid + Soft + Outline — rango completo de énfasis" }
+        { "value": "soft-only", "label": "Solo soft", "description": "Color tenue de fondo — énfasis moderado; el más versátil y común (ej. GitHub issue labels)" },
+        { "value": "solid-soft", "label": "Solid + Soft", "description": "Para distintos niveles de énfasis (ej. solid para estados críticos, soft para categorías)" },
+        { "value": "outline-only", "label": "Solo outline", "description": "Solo borde sin relleno — mínimo énfasis, no interfiere con densidad de UI" },
+        { "value": "all", "label": "Solid + Soft + Outline — rango completo", "description": "Los tres estilos para cubrir cualquier nivel de énfasis en el sistema" }
       ],
       "impact": "Variant property values; token count (background, border, text per variant)",
       "tags": ["solid", "soft", "outline", "variant", "emphasis"]

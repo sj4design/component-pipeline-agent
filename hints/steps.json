@@ -57,10 +57,10 @@
       "id": "steps-navigation",
       "text": "¿El usuario puede navegar libremente entre steps o el flujo es lineal?",
       "options": [
-        { "value": "display-only", "label": "Solo indicador visual — no clickeable, muestra progreso sin navegación (ej. progreso de onboarding)" },
-        { "value": "visited-navigable", "label": "Steps visitados son navegables — el usuario puede regresar a cualquier step alcanzado (ej. wizard de configuración)" },
-        { "value": "linear", "label": "Lineal estricto — solo avanzar, no se puede regresar una vez enviado (ej. flujo de pago, formulario regulatorio)" },
-        { "value": "free-nav", "label": "Navegación libre — todos los steps son clickeables como tabs (ej. proceso de referencia, documentación de pasos)" }
+        { "value": "display-only", "label": "Solo indicador visual", "description": "No clickeable — muestra progreso sin navegación (ej. barra de progreso de onboarding)" },
+        { "value": "visited-navigable", "label": "Steps visitados son navegables", "description": "El usuario puede regresar a cualquier step ya alcanzado (ej. wizard de configuración multi-sección)" },
+        { "value": "linear", "label": "Lineal estricto", "description": "Solo avanzar, no regresar una vez enviado (ej. flujo de pago, formulario regulatorio con firma)" },
+        { "value": "free-nav", "label": "Navegación libre (tabs)", "description": "Todos los steps son clickeables — funciona como tabs por sección (ej. documentación de pasos)" }
       ],
       "impact": "Interactive boolean; onChange prop; Disabled boolean per Step; <a> vs <button> vs <span> rendering",
       "tags": ["navigation", "linear", "visited", "interactive", "wizard", "free"]

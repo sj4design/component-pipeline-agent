@@ -187,10 +187,10 @@
       "id": "context",
       "text": "¿En qué contexto se usará la tabla?",
       "options": [
-        { "value": "admin", "label": "Admin panel — gestión de registros CRUD" },
-        { "value": "analytics", "label": "Analytics — datos financieros, reportes" },
-        { "value": "lists", "label": "Listados — usuarios, productos, pedidos" },
-        { "value": "general", "label": "Uso general" }
+        { "value": "admin", "label": "Admin panel", "description": "Gestión de registros CRUD — con selección, bulk actions y acciones por fila" },
+        { "value": "analytics", "label": "Analytics / reportes", "description": "Datos financieros read-only con sorting y zebra stripes — sin selección" },
+        { "value": "lists", "label": "Listados de recursos", "description": "Usuarios, productos, pedidos — con pagination, sorting y search básico" },
+        { "value": "general", "label": "Uso general", "description": "Admin, analytics y listas en la misma app; incluir features configurables" }
       ],
       "impact": "Priorización de features",
       "tags": ["admin", "CRUD", "analytics", "reports", "enterprise", "dashboard"]

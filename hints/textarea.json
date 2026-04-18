@@ -141,10 +141,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usará el textarea?",
       "options": [
-        { "value": "forms", "label": "Formularios — comentarios, descripciones, notas" },
-        { "value": "editor", "label": "Editor — bloques de texto largo, contenido" },
-        { "value": "chat", "label": "Chat/Messaging — input de mensajes" },
-        { "value": "general", "label": "Uso general" }
+        { "value": "forms", "label": "Formularios", "description": "Comentarios, descripciones, notas — altura fija o vertical-resize, con character count" },
+        { "value": "editor", "label": "Editor de contenido", "description": "Bloques de texto largo — auto-grow, sin character count (ej. CMS description field)" },
+        { "value": "chat", "label": "Chat / Messaging", "description": "Input de mensajes — auto-grow pequeño, Enter envía, Shift+Enter salto de línea" },
+        { "value": "general", "label": "Uso general", "description": "Formularios, editor y chat en la misma app; incluir todos los comportamientos de resize" }
       ],
       "impact": "Priorización de features (auto-grow para chat, etc.)",
       "tags": ["forms", "editor", "chat", "messaging", "comments", "notes"]

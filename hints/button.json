@@ -93,9 +93,9 @@
       "id": "variants",
       "text": "¿Qué jerarquías de botón necesitas en tu sistema?",
       "options": [
-        { "value": "basic", "label": "Primary + Secondary — lo mínimo" },
-        { "value": "standard", "label": "Primary, Secondary, Outline, Ghost — set estándar" },
-        { "value": "full", "label": "Todas + Danger — sistema completo" }
+        { "value": "basic", "label": "Primary + Secondary", "description": "Lo mínimo para apps simples — acción principal y acción secundaria" },
+        { "value": "standard", "label": "Primary, Secondary, Outline, Ghost", "description": "Set estándar de 4 variantes — cubre la mayoría de jerarquías de acción" },
+        { "value": "full", "label": "Todas las variantes + Danger", "description": "Sistema completo incluyendo acciones destructivas (eliminar, confirmar riesgo)" }
       ],
       "impact": "Variant property values",
       "tags": ["primary", "secondary", "ghost", "outline", "danger", "destructive", "hierarchy"]
@@ -104,10 +104,10 @@
       "id": "icon-usage",
       "text": "¿Cómo se usan los íconos en los botones?",
       "options": [
-        { "value": "text-only", "label": "Solo texto — sin íconos" },
-        { "value": "icon-text", "label": "Ícono + texto — refuerzan el significado" },
-        { "value": "icon-only", "label": "Solo ícono — toolbars, acciones compactas" },
-        { "value": "both", "label": "Ambos — icon+text y icon-only según contexto" }
+        { "value": "text-only", "label": "Solo texto", "description": "Sin íconos — suficiente para apps con espacio amplio y CTAs descriptivos" },
+        { "value": "icon-text", "label": "Ícono + texto", "description": "Refuerzan el significado — ej. ícono de Download antes de 'Descargar'" },
+        { "value": "icon-only", "label": "Solo ícono", "description": "Toolbars y acciones compactas — requiere .IconButton con aria-label (ej. barra de editor)" },
+        { "value": "both", "label": "Ambos según contexto", "description": "icon+text en botones primarios, icon-only en toolbars; incluir .IconButton" }
       ],
       "impact": "Incluir .IconButton y booleans hasIconBefore/After",
       "tags": ["icon", "icon-only", "toolbar", "FAB", "icon-button"]
@@ -159,10 +159,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usarán los botones?",
       "options": [
-        { "value": "forms", "label": "Formularios — submit, cancel, acciones de form" },
-        { "value": "navigation", "label": "Navegación — CTAs, links de navegación" },
-        { "value": "toolbars", "label": "Toolbars — barras de acciones, editores" },
-        { "value": "general", "label": "Uso general — todos los contextos" }
+        { "value": "forms", "label": "Formularios", "description": "Submit, cancel, acciones de form — priorizar primary/secondary en tamaño md-lg" },
+        { "value": "navigation", "label": "Navegación", "description": "CTAs en landing pages, links de navegación — priorizar primary prominente" },
+        { "value": "toolbars", "label": "Toolbars / editores", "description": "Barras de acciones, editores — priorizar ghost/icon-only en tamaño sm" },
+        { "value": "general", "label": "Uso general — todos los contextos", "description": "Formularios, CTAs y toolbars; incluir set completo de variantes y tamaños" }
       ],
       "impact": "Priorización de variantes y estados",
       "tags": ["forms", "CTA", "toolbar", "editor", "landing", "enterprise"]

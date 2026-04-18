@@ -45,11 +45,10 @@
       "id": "use-case",
       "text": "¿Para qué usas DateRangePicker principalmente?",
       "options": [
-        { "value": "analytics-filter", "label": "Filtro de analytics/reports — presets + calendar popover" },
-        { "value": "booking", "label": "Booking/reservas — inline calendar con visible disponibilidad" },
-        { "value": "billing-period", "label": "Billing period — meses/quarters (Picker=month|quarter)" },
-        { "value": "campaign-dates", "label": "Campaign dates — start/end con validación y presets" },
-        { "value": "multiple", "label": "Varios casos" }
+        { "value": "analytics-filter", "label": "Filtro de analytics/reports", "description": "Con presets (Last 7/30 days) + calendar popover — el caso más común" },
+        { "value": "booking", "label": "Booking/reservas", "description": "Inline calendar con disponibilidad visible — check-in/check-out de hotel" },
+        { "value": "billing-period", "label": "Billing period / fiscal", "description": "Meses o quarters completos (ej. Q1 2026 — Picker=month|quarter)" },
+        { "value": "multiple", "label": "Varios casos", "description": "Se usa en analytics, billing y booking; generar variantes completas" }
       ],
       "impact": "Layout, Picker, presets inclusion",
       "tags": ["analytics", "booking", "billing", "campaign", "reports", "filter"]

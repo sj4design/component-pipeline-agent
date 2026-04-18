@@ -41,11 +41,9 @@
       "id": "max-visible",
       "text": "¿Cuántos avatars visibles antes del '+N' overflow?",
       "options": [
-        { "value": "3", "label": "3 (mobile, compact cards)" },
-        { "value": "4", "label": "4 (tarjetas standard)" },
-        { "value": "5", "label": "5 (dashboard wide)" },
-        { "value": "6", "label": "6 (desktop rosters)" },
-        { "value": "variable", "label": "Variable — genera los 4 counts" }
+        { "value": "3", "label": "3", "description": "Mobile o compact cards — mínimo visible (ej. chip de participantes en notificación)" },
+        { "value": "4-5", "label": "4–5", "description": "Tarjetas estándar y dashboards (ej. Jira sprint board, Zoom meeting card)" },
+        { "value": "variable", "label": "Variable — genera los 4 counts (3, 4, 5, 6)", "description": "Incluir todos los valores MaxVisible para uso general" }
       ],
       "impact": "MaxVisible property",
       "tags": ["max-count", "overflow", "visible", "3", "4", "5", "6"]

@@ -57,11 +57,10 @@
       "id": "variant",
       "text": "¿Qué estilo visual necesitas para el campo de texto?",
       "options": [
-        { "value": "outlined",        "label": "Outlined — borde completo (estándar para formularios)" },
-        { "value": "filled",          "label": "Filled — fondo gris sin borde (estilo M3/Material)" },
-        { "value": "subtle",          "label": "Subtle — sin borde visible hasta hover/focus (inline-edit, Jira style)" },
-        { "value": "outlined-filled", "label": "Outlined + Filled (dos estilos según contexto)" },
-        { "value": "all",             "label": "Los tres estilos" }
+        { "value": "outlined",        "label": "Outlined", "description": "Borde completo — estándar para formularios explícitos (ej. sign-up, checkout)" },
+        { "value": "filled",          "label": "Filled", "description": "Fondo gris sin borde — estilo M3/Material (ej. campos de búsqueda, Google Workspace)" },
+        { "value": "subtle",          "label": "Subtle", "description": "Sin borde hasta hover/focus — inline-edit y UIs densas (ej. Jira field, Notion)" },
+        { "value": "all",             "label": "Los tres estilos", "description": "Outlined, filled y subtle para distintos contextos en la misma app" }
       ],
       "impact": "Variant property values",
       "tags": ["outlined", "filled", "subtle", "borderless", "inline-edit", "material"]

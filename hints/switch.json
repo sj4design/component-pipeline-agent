@@ -110,10 +110,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usará el switch?",
       "options": [
-        { "value": "settings", "label": "Configuración — activar/desactivar features" },
-        { "value": "forms", "label": "Formularios — campos booleanos en forms" },
-        { "value": "tables", "label": "Tablas — toggle en filas de datos" },
-        { "value": "general", "label": "Uso general" }
+        { "value": "settings", "label": "Configuración / preferencias", "description": "Activar/desactivar features y notificaciones — el uso más común del switch" },
+        { "value": "forms", "label": "Formularios", "description": "Campos booleanos inline en forms — junto a otros form controls (ej. 'Recordarme', 'Público')" },
+        { "value": "tables", "label": "Tablas / listas", "description": "Toggle de estado en filas de datos — sm, sin label visible (ej. habilitar/deshabilitar usuario)" },
+        { "value": "general", "label": "Uso general", "description": "Settings, forms y tablas en la misma app; incluir tamaños sm/md/lg y loading state" }
       ],
       "impact": "Priorización de features y tamaños",
       "tags": ["settings", "forms", "tables", "preferences", "toggles", "enterprise"]

@@ -61,9 +61,9 @@
       "id": "format",
       "text": "¿Formato(s) de input?",
       "options": [
-        { "value": "hex-only", "label": "Solo hex (#RRGGBB) — developers" },
-        { "value": "hex-rgb", "label": "Hex + RGB" },
-        { "value": "all", "label": "Hex + RGB + HSL (tabs)" }
+        { "value": "hex-only", "label": "Solo hex (#RRGGBB)", "description": "Para developers y theming — el más familiar en web" },
+        { "value": "hex-rgb", "label": "Hex + RGB", "description": "Dos formatos accesibles para web y diseño" },
+        { "value": "all", "label": "Hex + RGB + HSL (tabs)", "description": "Set completo con tabs para cambiar entre formatos — máxima flexibilidad" }
       ],
       "impact": "Format property",
       "tags": ["hex", "rgb", "hsl", "format"]

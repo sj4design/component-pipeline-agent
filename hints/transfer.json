@@ -58,11 +58,10 @@
       "id": "use-case",
       "text": "¿Para qué usas Transfer?",
       "options": [
-        { "value": "user-assignment", "label": "Asignar users/members a groups/teams/channels" },
-        { "value": "permissions", "label": "Asignar permissions/roles/policies" },
-        { "value": "field-selection", "label": "Seleccionar campos/columns visibles en un report" },
-        { "value": "resource-allocation", "label": "Asignar resources (devices, rooms) a owners" },
-        { "value": "other", "label": "Otro — describir en --brief" }
+        { "value": "user-assignment", "label": "Asignar usuarios a grupos/equipos", "description": "Members → groups/teams/channels — items como personas con avatar + email" },
+        { "value": "permissions", "label": "Asignar permisos/roles/policies", "description": "Permissions tree — con cascade parent/child o checkStrictly (Ant pattern)" },
+        { "value": "field-selection", "label": "Seleccionar columnas/campos visibles", "description": "Report column picker — fields disponibles → fields seleccionados (ej. table configurator)" },
+        { "value": "general", "label": "Uso general — varios casos", "description": "User assignment, permisos y field selection en la misma app" }
       ],
       "impact": "OneWay default, custom render slots (avatar), search inclusion",
       "tags": ["assignment", "permissions", "fields", "resources", "enterprise", "users"]

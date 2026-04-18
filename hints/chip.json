@@ -91,10 +91,10 @@
       "id": "chip-variant",
       "text": "¿Qué variantes visuales necesitas para el chip?",
       "options": [
-        { "value": "filled-only", "label": "Solo filled — relleno sólido para el estado seleccionado" },
-        { "value": "outlined", "label": "Outlined — borde sin relleno, más sutil" },
-        { "value": "filled-outlined", "label": "Filled + Outlined — para distintos niveles de énfasis" },
-        { "value": "elevated", "label": "Con elevated — necesito chips que floten sobre fondos (ej. mapas, imágenes)" }
+        { "value": "filled-only", "label": "Solo filled", "description": "Relleno sólido para estado seleccionado — énfasis máximo (ej. filter chips activos)" },
+        { "value": "outlined", "label": "Solo outlined", "description": "Borde sin relleno, más sutil para UIs densas (ej. filtros en toolbars)" },
+        { "value": "filled-outlined", "label": "Filled + Outlined", "description": "Distintos niveles de énfasis en el mismo sistema (ej. selected=filled, unselected=outlined)" },
+        { "value": "all", "label": "Todas las variantes (filled, outlined, elevated)", "description": "Incluye elevated para chips que flotan sobre fondos como mapas o imágenes" }
       ],
       "impact": "Variant property values; Elevated boolean; token count",
       "tags": ["filled", "outlined", "elevated", "variant", "visual"]

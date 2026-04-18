@@ -137,11 +137,10 @@
       "id": "option-structure",
       "text": "¿Las opciones tienen estructura visual especial?",
       "options": [
-        { "value": "simple", "label": "Lista plana simple — solo texto" },
-        { "value": "grouped", "label": "Agrupadas por categoría — con headers de grupo" },
-        { "value": "with-icons", "label": "Con ícono o avatar — elemento visual por opción" },
-        { "value": "with-description", "label": "Con descripción — subtexto bajo el label" },
-        { "value": "rich", "label": "Completas — íconos, descripciones, badges" }
+        { "value": "simple", "label": "Lista plana simple — solo texto", "description": "Sin íconos ni grupos — suficiente para listas cortas de opciones" },
+        { "value": "grouped", "label": "Agrupadas por categoría", "description": "Con headers de grupo (ej. 'Americas', 'Europe' en selector de país)" },
+        { "value": "with-icons", "label": "Con ícono o avatar", "description": "Elemento visual por opción (ej. avatar de usuario, ícono de tipo de archivo)" },
+        { "value": "rich", "label": "Completas — íconos + descripción", "description": "Íconos + subtexto por opción (ej. plan selector con precio y features)" }
       ],
       "impact": "Booleans showIcon, showDescription en .SelectOption",
       "tags": ["icons", "avatars", "grouped", "categories", "description", "rich-options"]
@@ -182,10 +181,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usará el select?",
       "options": [
-        { "value": "forms", "label": "Formularios — campos de selección en forms" },
-        { "value": "filters", "label": "Filtros — sidebar de filtros, toolbar" },
-        { "value": "tables", "label": "Tablas — edición inline en celdas" },
-        { "value": "general", "label": "Uso general" }
+        { "value": "forms", "label": "Formularios", "description": "Campos de selección en forms — md/lg, outlined, con label y helper text" },
+        { "value": "filters", "label": "Filtros en toolbar/sidebar", "description": "Selects compactos con clear button — sm/md, borderless acceptable" },
+        { "value": "tables", "label": "Tablas — inline edit", "description": "Edición inline en celdas — sm, borderless/subtle, sin label (ej. status cell)" },
+        { "value": "general", "label": "Uso general", "description": "Formularios, filtros y tablas en la misma app; incluir tamaños y variantes completos" }
       ],
       "impact": "Priorización de features y tamaños",
       "tags": ["forms", "filters", "tables", "inline-edit", "enterprise", "dashboard"]

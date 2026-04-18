@@ -47,10 +47,10 @@
       "id": "use-case",
       "text": "¿Para qué usas Calendar principalmente?",
       "options": [
-        { "value": "date-selection", "label": "Selección de fecha — standalone picker widget (Spectrum/Atlassian)" },
-        { "value": "dashboard-view", "label": "Dashboard view — calendar de eventos/availability (Ant fullscreen)" },
-        { "value": "scheduling", "label": "Scheduling — reservar slots, agendar meetings" },
-        { "value": "range-selection", "label": "Range selection — filtro de analytics/reports" }
+        { "value": "date-selection", "label": "Selección de fecha", "description": "Standalone picker widget en popover — comfortable scale (ej. Spectrum/Atlassian DatePicker)" },
+        { "value": "dashboard-view", "label": "Dashboard view", "description": "Calendar de eventos/availability a pantalla completa — fullscreen scale (ej. leave management)" },
+        { "value": "scheduling", "label": "Scheduling", "description": "Reservar slots, agendar meetings — con decorator de disponibilidad y range support" },
+        { "value": "range-selection", "label": "Range selection", "description": "Filtro de analytics/reports — 2 meses side-by-side, range states (ej. date filter en dashboard)" }
       ],
       "impact": "Mode, Scale, VisibleMonths, Decorator slot",
       "tags": ["picker", "dashboard", "scheduling", "events", "range", "analytics"]

@@ -24,11 +24,10 @@
       "id": "use-case",
       "text": "¿Para qué se usa el input numérico?",
       "options": [
-        { "value": "quantity",    "label": "Cantidad — stock, items, participantes (enteros positivos)" },
-        { "value": "currency",    "label": "Dinero — precios, límites, presupuestos (con formato $)" },
-        { "value": "percentage",  "label": "Porcentaje — valores 0-100%" },
-        { "value": "measurement", "label": "Medidas — px, rem, segundos, MB (con unidades)" },
-        { "value": "general",     "label": "Uso general — cualquier número" }
+        { "value": "quantity",    "label": "Cantidad", "description": "Stock, items, participantes — enteros positivos sin addon de unidad (ej. qty en carrito)" },
+        { "value": "currency",    "label": "Dinero", "description": "Precios, límites, presupuestos — addon '$' o '€' antes del valor" },
+        { "value": "measurement", "label": "Medidas con unidades", "description": "px, rem, segundos, MB — addon de unidad después del valor (ej. design tools, configuración)" },
+        { "value": "general",     "label": "Uso general — cualquier número", "description": "Se usa para cantidades, dinero y medidas; incluir soporte de addon configurable" }
       ],
       "impact": "Has Addon (unidades), formatter/parser, min/max values",
       "tags": ["quantity", "currency", "percentage", "units", "measurement"]

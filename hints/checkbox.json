@@ -186,10 +186,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usará el checkbox?",
       "options": [
-        { "value": "forms", "label": "Formularios — opciones múltiples, preferencias" },
-        { "value": "tables", "label": "Tablas — selección de filas, bulk actions" },
-        { "value": "filters", "label": "Filtros — sidebar de filtros, faceted search" },
-        { "value": "general", "label": "Uso general — múltiples contextos" }
+        { "value": "forms", "label": "Formularios", "description": "Opciones múltiples y preferencias — grupos con legend y validación (ej. suscripciones, permisos)" },
+        { "value": "tables", "label": "Tablas / listas", "description": "Selección de filas y bulk actions — requiere indeterminate para 'select all'" },
+        { "value": "filters", "label": "Filtros", "description": "Sidebar de filtros, faceted search — checkboxes compactos sin grupo formal" },
+        { "value": "general", "label": "Uso general — múltiples contextos", "description": "Formularios, tablas y filtros en la misma app; incluir indeterminate y todos los tamaños" }
       ],
       "impact": "Priorización de features (indeterminate para tablas, etc.)",
       "tags": ["forms", "tables", "filters", "settings", "enterprise", "permissions"]

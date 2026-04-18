@@ -72,11 +72,11 @@
       "id": "content-type",
       "text": "¿Qué tipo de contenido va dentro de cada panel del accordion?",
       "options": [
-        { "value": "text-only", "label": "Solo texto — párrafos, FAQ, descripciones" },
-        { "value": "mixed-media", "label": "Texto + imágenes — documentación, guías" },
-        { "value": "forms", "label": "Formularios — inputs, selects dentro del panel" },
-        { "value": "complex", "label": "Componentes complejos — tabs, tablas, accordions anidados" },
-        { "value": "any", "label": "Cualquier contenido — slot libre" }
+        { "value": "text-only", "label": "Solo texto", "description": "Párrafos, FAQ, descripciones (ej. preguntas frecuentes de soporte)" },
+        { "value": "mixed-media", "label": "Texto + imágenes", "description": "Documentación, guías con capturas de pantalla" },
+        { "value": "forms", "label": "Formularios", "description": "Inputs, selects dentro del panel (ej. sección de filtros avanzados)" },
+        { "value": "complex", "label": "Componentes complejos", "description": "Tabs, tablas, accordions anidados (ej. configuración enterprise)" },
+        { "value": "any", "label": "Cualquier contenido — slot libre", "description": "Sin restricciones; el consumidor decide el contenido por instancia" }
       ],
       "impact": "Define profundidad del slot content y si necesita scroll interno",
       "tags": ["content", "forms", "nested", "rich-content", "FAQ", "documentation"]
@@ -153,11 +153,10 @@
       "id": "context",
       "text": "¿En qué contexto principal se usará el accordion?",
       "options": [
-        { "value": "faq", "label": "FAQ o ayuda — preguntas frecuentes" },
-        { "value": "settings", "label": "Configuración — secciones de ajustes" },
-        { "value": "filters", "label": "Filtros — filtros colapsables en sidebar" },
-        { "value": "navigation", "label": "Navegación — menú expandible" },
-        { "value": "general", "label": "Uso general — múltiples contextos" }
+        { "value": "faq", "label": "FAQ o ayuda", "description": "Preguntas frecuentes de soporte, help centers" },
+        { "value": "settings", "label": "Configuración", "description": "Secciones de ajustes colapsadas en settings panels" },
+        { "value": "filters", "label": "Filtros", "description": "Filtros colapsables en sidebar de catálogo o búsqueda" },
+        { "value": "general", "label": "Uso general — múltiples contextos", "description": "Se usa en FAQ, settings y filtros; priorizar variante default" }
       ],
       "impact": "Priorización de variantes y comportamiento de apertura",
       "tags": ["FAQ", "settings", "filters", "sidebar", "navigation", "mobile", "enterprise"]
