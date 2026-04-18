@@ -39,7 +39,7 @@
         "Status=wait × Disabled (Disabled implica locked, wait es simplemente no alcanzado)",
         "Interactive=true × Disabled=true (step bloqueado no debería ser clickeable)"
       ],
-      "frameCount": 35
+      "frameCount": 19
     }
   ],
   "a11y": {
