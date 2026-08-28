@@ -40,7 +40,7 @@
           "name": "arrow",
           "type": "shape",
           "required": false,
-          "figmaBinding": "bool"
+          "figmaBinding": "none"
         }
       ],
       "properties": {
@@ -175,11 +175,6 @@
           "boolName": "Has Close",
           "layerName": "close",
           "defaultVisible": false
-        },
-        {
-          "boolName": "Has Arrow",
-          "layerName": "arrow",
-          "defaultVisible": true
         }
       ],
       "booleanTextPairs": [
@@ -206,22 +201,20 @@
   "a11y": {
     "pattern": "popover/dialog",
     "role": "dialog",
-    "roleNonModal": "tooltip",
     "ariaAttributes": [
-      "role=\"dialog\" on popover container (interactive content) or role=\"tooltip\" (read-only)",
+      "role=\"dialog\" on popover container (always — modal is fixed on for this scope)",
+      "aria-modal=\"true\" on popover container",
       "aria-labelledby=\"[title-id]\" when Has Title = true",
       "aria-expanded on trigger element (true when open)",
       "aria-controls=\"[popover-id]\" on trigger element",
       "aria-haspopup=\"dialog\" on trigger"
     ],
     "keyboardNav": [
-      "Tab / Shift+Tab: navigate focus within popover (trap when modal=true)",
+      "Tab / Shift+Tab: navigate focus within popover (circular focus trap, always on)",
       "Escape: close popover, return focus to trigger",
-      "Enter / Space: activate trigger to open",
-      "Tab (non-modal): exits popover to next document element"
+      "Enter / Space: activate trigger to open"
     ],
-    "focusTrap": false,
-    "focusTrapModal": true,
+    "focusTrap": true,
     "focusOnOpen": "first-focusable",
     "focusOnClose": "trigger",
     "edgeCases": 5,
@@ -234,7 +227,7 @@
     "mode": "C"
   },
   "componentDescriptions": {
-    "Popover": "Overlay flotante anclado a un trigger. Placement: top, bottom, left, right. Sizes: sm(240) md(320) lg(480). Variants: default, info, warning, error, success.\n\n🔑 ARIA:\n• role=\"dialog\" (contenido interactivo) o role=\"tooltip\" (solo lectura)\n• aria-labelledby → title id (cuando Has Title = true)\n• aria-expanded + aria-controls en el trigger\n• aria-haspopup=\"dialog\" en el trigger\n\n⌨️ Keyboard:\n• Enter/Space en trigger: abre popover, foco al primer elemento\n• Tab / Shift+Tab: navegar dentro del popover\n• Escape: cierra + retorna foco al trigger\n• Tab (no modal): sale naturalmente del popover\n\n🎯 Focus:\n• Al abrir: primer elemento focusable dentro\n• Al cerrar: retornar foco al trigger que lo abrió\n• Modal=true: focus trap circular\n• Modal=false: Tab sale naturalmente\n• shouldFlip=true: arrow reorienta según placement real\n\nTokens: 22, prefijo pop-.\nWCAG 2.2 AA · APG Dialog + Tooltip Patterns."
+    "Popover": "Overlay flotante anclado a un trigger. Placement: top, bottom, left, right. Sizes: sm(240) md(320) lg(480). Variants: default, info, warning, error, success. Scope de este build: modal=siempre, flecha=siempre visible.\n\n🔑 ARIA:\n• role=\"dialog\" + aria-modal=\"true\" (siempre — modal fijo en este scope)\n• aria-labelledby → title id (cuando Has Title = true)\n• aria-expanded + aria-controls en el trigger\n• aria-haspopup=\"dialog\" en el trigger\n\n⌨️ Keyboard:\n• Enter/Space en trigger: abre popover, foco al primer elemento\n• Tab / Shift+Tab: ciclo circular dentro del popover (focus trap siempre activo)\n• Escape: cierra + retorna foco al trigger\n\n🎯 Focus:\n• Al abrir: primer elemento focusable dentro\n• Al cerrar: retornar foco al trigger que lo abrió\n• Focus trap circular siempre activo (modal=true fijo)\n• shouldFlip=true: arrow reorienta según placement real (la flecha siempre está visible)\n\nTokens: 22, prefijo pop-.\nWCAG 2.2 AA · APG Dialog Pattern."
   },
   "variableBindings": {
     "pop/bg": "surface/default",
@@ -261,10 +254,10 @@
     "focus/ring-offset": "surface/default"
   },
   "_meta": {
-    "lastUpdatedBy": "spec+enrich",
+    "lastUpdatedBy": "build-guided",
     "pipelineVersion": "1.0",
-    "timestamp": "2026-04-17",
-    "mode": "from-scratch"
+    "timestamp": "2026-08-10",
+    "mode": "guided-customize"
   },
   "_decisions": [
     {
@@ -278,9 +271,9 @@
       "source": "research"
     },
     {
-      "what": "Arrow as boolean (Has Arrow), not a variant dimension",
-      "why": "Binary on/off visual modifier. Does NOT multiply frames. Arrow direction is determined by Placement variant. Same rule as Tooltip component in this system.",
-      "source": "global-property-rules"
+      "what": "Arrow fixed always-visible (no toggle) — scope answer: 'siempre'",
+      "why": "User scope selected arrow=always for this build, so the Has Arrow boolean was removed; the arrow layer is permanently visible and not exposed in the Figma properties panel. Direction is still determined by Placement.",
+      "source": "guided-scope"
     },
     {
       "what": "Has Title and Has Footer as booleans (booleanTextPair + booleanLayer)",
@@ -288,9 +281,9 @@
       "source": "global-property-rules + research"
     },
     {
-      "what": "modal=false default (non-modal, no focus trap)",
-      "why": "Most popover use cases (help text, contextual info, status indicators) should not trap focus. Spectrum's always-modal approach is too restrictive. Polaris's autofocusTarget=none pattern confirms non-modal as a valid accessible pattern when content is informational. Interactive popovers with forms should set modal=true.",
-      "source": "research"
+      "what": "modal=true fijo (focus trap siempre activo) — scope answer: 'siempre'",
+      "why": "User scope selected modal=always for this build — covers help/confirmation/forms use cases under one consistent accessible behavior (Spectrum's always-modal approach). role=\"dialog\" always; no role=\"tooltip\" alt-path needed.",
+      "source": "guided-scope"
     },
     {
       "what": "Click as default trigger type (hover not recommended)",
