@@ -20,6 +20,7 @@ Flags: `--fresh` (ignore cache), `--from=spec` (skip research), `--human` (also 
 3. IF --max → skip to step 6
 4. IF --brief → ask user for brief, analyze it, mark answered questions
 5. Ask remaining questions via AskUserQuestion tool (interactive prompts, NOT markdown). Max 4 preguntas por call y max 4 options por pregunta. Si hints.json tiene >4 preguntas: hacer **2 calls en PARALELO en el mismo mensaje** (no secuencial) — priorizar las preguntas más críticas (las que más filtran el config) en el primer call. Si una pregunta tiene >4 options, consolidar la menos crítica ("Other" auto-provisto). Headers ≤12 chars. Mapear respuestas a option IDs de hints.json para filtrar config. Aplica igual a `--brief`: después de analizar el brief, las preguntas restantes van vía AskUserQuestion con el mismo patrón.
+   - **Excepción visual:** si alguna pregunta de hints.json es sobre un *patrón/uso visualmente distinto* (no un boolean ni un enum simple — ej. "para qué se usa" con opciones tipo ayuda contextual/confirmación/formulario), invocar la skill `visual-pattern-picker` para esa pregunta puntual en vez de AskUserQuestion. La skill misma verifica si `mcp__visualize__show_widget` está disponible y cae a AskUserQuestion si no lo está — no bloquear el flujo por esto. El resto de las preguntas (tamaños, booleans, variantes simples) siguen por AskUserQuestion normal.
 6. Filter config.json by scope (remove out-of-scope properties/booleans)
 7. Generate outputs/[comp]-spec-completo.md (v4 format)
    • Para la sección "Reference: how other systems do it":

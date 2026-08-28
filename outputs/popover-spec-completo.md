@@ -41,9 +41,10 @@ Toggles (show/hide parts — do NOT generate extra variants):
 ```
 Has Title   → muestra/oculta la región de título
 Has Footer  → muestra/oculta la región de acciones
-Has Arrow   → muestra/oculta la flecha de anclaje
 Has Close   → muestra/oculta el botón de cierre (×)
 ```
+
+**Scope de este build** (respuestas guiadas): uso múltiple (ayuda + confirmación + formularios) · tamaños sm+md+lg · variantes default+info+warning+error+success · placement 4 direcciones · regiones Título+Footer+Cierre disponibles · **flecha siempre visible** (no es un toggle) · **modal siempre activo** (focus trap permanente).
 
 ### Figma properties panel
 
@@ -63,7 +64,6 @@ Has Close   → muestra/oculta el botón de cierre (×)
 │  ─ Booleans ────────────────────────────── │
 │  Has Title   ○──●  (default: ON)            │
 │  Has Footer  ●──○  (default: OFF)           │
-│  Has Arrow   ○──●  (default: ON)            │
 │  Has Close   ●──○  (default: OFF)           │
 │                                             │
 │  ─ Text ────────────────────────────────── │
@@ -145,11 +145,13 @@ El `shouldFlip` (runtime) invierte automáticamente si el placement preferido no
 ### Combinaciones de booleans
 
 ```
-Popover minimal:     Has Title=OFF, Has Footer=OFF, Has Arrow=ON
+Popover minimal:     Has Title=OFF, Has Footer=OFF
 Popover completo:    Has Title=ON,  Has Footer=ON,  Has Close=ON
-ContextualHelp:      Has Title=ON,  Has Footer=OFF, Has Arrow=ON,  Size=sm, Variant=info
-Confirmación:        Has Title=ON,  Has Footer=ON,  Has Arrow=ON,  Has Close=OFF
+ContextualHelp:      Has Title=ON,  Has Footer=OFF, Size=sm, Variant=info
+Confirmación:        Has Title=ON,  Has Footer=ON,  Has Close=OFF
 ```
+
+(La flecha está siempre visible en todos los casos — no forma parte de la combinatoria de booleans.)
 
 ---
 
@@ -163,9 +165,13 @@ Spectrum usa 20 posiciones; Ant Design usa 12. Para Figma, se eligieron 4 direcc
 
 0/5 sistemas de referencia implementan variantes semánticas en el popover mismo — pero Zoom es un producto enterprise con validación de formularios inline, estados de campo y alertas contextuales ancladas a elementos. Los variantes de color permiten comunicar el tipo de información sin que el diseñador tenga que componer un Alert dentro de cada popover.
 
-### modal=false por defecto (non-modal)
+### modal=true fijo (scope de este build)
 
-Spectrum hace todos los popovers modales (focus trap). Polaris usa `autofocusTarget="none"` para non-modal. La mayoría de usos de popover (ayuda, info, estado) no deben atrapar foco — interferirían con el flujo del usuario. Los popovers con formularios o acciones críticas deben activar `modal=true` explícitamente.
+Para este build se definió `modal=true` siempre (focus trap activo en todos los casos) — cubre ayuda, confirmación y formularios bajo un único comportamiento accesible consistente, siguiendo el enfoque de Spectrum. `role="dialog"` en todos los casos (no hay variante `role="tooltip"` para este scope).
+
+### Flecha siempre visible (scope de este build)
+
+Se definió `Has Arrow=siempre` para este build — el layer de flecha queda fijo y visible en los 60 frames, sin exponerse como boolean en el panel de Figma. La dirección de la flecha sigue determinada por Placement.
 
 ### Click como trigger por defecto
 
@@ -176,7 +182,6 @@ Hover-only viola WCAG 1.4.13 para usuarios de teclado. El caso de Ant Design (ho
 ```
 trigger=hover (sin focus co-trigger)  →  WCAG 1.4.13 violation (no implementar)
 size=sm + Has Footer + 2 botones      →  overflow de contenido (preferir md)
-Variant=error/warning + modal=false   →  mensajes críticos deben ser modales (reconsiderar)
 ```
 
 ---
@@ -188,8 +193,7 @@ Variant=error/warning + modal=false   →  mensajes críticos deben ser modales 
 - **Apertura:** El trigger muestra `aria-expanded="true"` y el popover aparece anclado al trigger con la dirección indicada por Placement.
 - **Cierre:** Escape siempre cierra y retorna foco al trigger. Click fuera del popover también cierra (light dismiss). Has Close=ON ofrece botón explícito de cierre.
 - **Flip:** Si el placement preferido colisiona con el viewport, el popover se invierte al lado opuesto. El arrow reorienta automáticamente para apuntar al trigger.
-- **Non-modal (default):** Tab puede salir del popover naturalmente — el foco no está atrapado.
-- **Modal (opt-in):** Tab hace ciclo circular dentro del popover hasta que se cierra.
+- **Modal (fijo, siempre activo):** Tab hace ciclo circular dentro del popover hasta que se cierra — el foco nunca sale del popover mientras está abierto.
 - **Z-index:** El popover renderiza en portal (fuera del DOM de su parent) para evitar colisiones con sticky headers, sidebars y modales. Tier de z-index: por encima de elementos sticky, por debajo de modales.
 
 ### Accessibility (ARIA)
@@ -197,7 +201,7 @@ Variant=error/warning + modal=false   →  mensajes críticos deben ser modales 
 | Part | Role | Attributes | Why it matters |
 |------|------|------------|----------------|
 | Trigger | — | `aria-expanded`, `aria-controls="[popover-id]"`, `aria-haspopup="dialog"` | Comunica estado abierto/cerrado al screen reader |
-| Popover container | `dialog` (interactivo) / `tooltip` (solo lectura) | `aria-labelledby="[title-id]"` (si Has Title=true), `id="[popover-id]"` | Identifica el overlay como región nombrada |
+| Popover container | `dialog` (siempre — modal fijo en este scope) | `aria-modal="true"`, `aria-labelledby="[title-id]"` (si Has Title=true), `id="[popover-id]"` | Identifica el overlay como región nombrada y modal |
 | Title | `heading` (h2 recomendado) | `id="[title-id]"` | Referenciado por `aria-labelledby` del container |
 | Close button | `button` | `aria-label="Cerrar"` | Screen reader puede identificar la acción |
 | Footer actions | `button` | Nombres descriptivos de acción | Permite activar acciones con teclado |
@@ -209,9 +213,8 @@ Primary interactions (affect design):
 ```
 Trigger activo + Enter/Space  →  Abre popover, foco → primer elemento focusable
 Escape                         →  Cierra popover, foco → trigger
-Tab (modal=false)              →  Navega hacia adelante (puede salir del popover)
-Tab (modal=true)               →  Ciclo circular dentro del popover
-Shift+Tab                      →  Navega hacia atrás (misma lógica que Tab)
+Tab                            →  Ciclo circular dentro del popover (focus trap siempre activo)
+Shift+Tab                      →  Navega hacia atrás (mismo ciclo circular)
 ```
 
 Secondary interactions (dev reference):
@@ -247,7 +250,7 @@ Anatomía
 
 Variants
  □ 4 Placement × 3 Size × 5 Variant = 60 frames
- □ Arrow layer visible en todos los frames (Has Arrow toggle es layer control)
+ □ Arrow layer siempre visible en los 60 frames (fijo, no es un boolean)
  □ Variant=info/warning/error/success con ícono acento visible en header
 
 Espaciado
@@ -258,10 +261,10 @@ Espaciado
 
 A11y
  □ Trigger tiene aria-expanded + aria-controls + aria-haspopup="dialog"
- □ Container tiene role="dialog" + aria-labelledby (si Has Title=true)
+ □ Container tiene role="dialog" + aria-modal="true" + aria-labelledby (si Has Title=true)
  □ Close button tiene aria-label="Cerrar"
  □ Escape cierra y retorna foco al trigger
- □ focus trap sólo cuando modal=true
+ □ focus trap siempre activo (modal=true fijo en este build)
 
 Tokens
  □ Colores mapeados a variables de sistema (surface/border/text/status)
